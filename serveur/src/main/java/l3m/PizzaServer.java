@@ -9,9 +9,6 @@ import org.eclipse.jetty.util.thread.QueuedThreadPool;
 
 
 public class PizzaServer extends HttpServlet {
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private Server server;
 
@@ -31,6 +28,7 @@ public class PizzaServer extends HttpServlet {
         server.setHandler(servletHandler);
 
         servletHandler.addServletWithMapping(BlockingServlet.class, "/status");
+        servletHandler.addServletWithMapping(ClientAuthentificationServlet.class, "/authentification");
         
         server.start();
     }
