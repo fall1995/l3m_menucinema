@@ -3,6 +3,7 @@ import {TmdbService} from './tmdb.service';
 import {MovieResponse} from './tmdb-data/Movie';
 import {environment} from '../environments/environment';
 
+// Je suis passé par l'itération 0...
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
