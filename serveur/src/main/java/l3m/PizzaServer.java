@@ -28,7 +28,7 @@ public class PizzaServer extends HttpServlet {
         server.setHandler(servletHandler);
 
         servletHandler.addServletWithMapping(BlockingServlet.class, "/status");
-        servletHandler.addServletWithMapping(ClientAuthentificationServlet.class, "/authentification");
+        servletHandler.addServletWithMapping(ClientAuthentificationServlet.class, "/api/authentification");
         
         server.start();
     }

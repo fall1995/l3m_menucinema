@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {MovieQuery, MovieResponse} from './tmdb-data/Movie';
-import {HttpClient, HttpResponse} from '@angular/common/http';
+import {HttpClient, HttpParams, HttpResponse} from '@angular/common/http';
 import {PersonQuery, PersonResponse} from './tmdb-data/Person';
 import {SearchMovieQuery, SearchMovieResponse} from './tmdb-data/searchMovie';
 import {SearchPeopleQuery, SearchPeopleResponse} from './tmdb-data/SearchPeople';
@@ -32,7 +32,7 @@ export class TmdbService {
     }).toPromise();
   }
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   init(key: string): this {
     this.apiKey = key;
