@@ -2,4 +2,5 @@
 Utilisez MAVEN pour compiler et exécuter ce serveur.
 
 mvn compile
+
 mvn exec:java
