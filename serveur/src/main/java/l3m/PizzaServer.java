@@ -29,7 +29,7 @@ public class PizzaServer extends HttpServlet {
 
         servletHandler.addServletWithMapping(BlockingServlet.class, "/status");
         servletHandler.addServletWithMapping(ClientAuthentificationServlet.class, "/api/authentification");
-        
+
         server.start();
     }
 
@@ -40,7 +40,7 @@ public class PizzaServer extends HttpServlet {
 
 	public static void main(String[] args) throws Exception {
 		PizzaServer server = new PizzaServer();
-		
+
 		server.start();
 	}
 
