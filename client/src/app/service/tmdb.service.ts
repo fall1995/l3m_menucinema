@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
-import {MovieQuery, MovieResponse} from './tmdb-data/Movie';
+import {MovieQuery, MovieResponse} from '../tmdb-data/Movie';
 import {HttpClient, HttpParams, HttpResponse} from '@angular/common/http';
-import {PersonQuery, PersonResponse} from './tmdb-data/Person';
-import {SearchMovieQuery, SearchMovieResponse} from './tmdb-data/searchMovie';
-import {SearchPeopleQuery, SearchPeopleResponse} from './tmdb-data/SearchPeople';
-import {TVQuery, TVResponse} from './tmdb-data/TV';
-import {SearchTVQuery, SearchTVResponse} from './tmdb-data/SearchTV';
+import {PersonQuery, PersonResponse} from '../tmdb-data/Person';
+import {SearchMovieQuery, SearchMovieResponse} from '../tmdb-data/searchMovie';
+import {SearchPeopleQuery, SearchPeopleResponse} from '../tmdb-data/SearchPeople';
+import {TVQuery, TVResponse} from '../tmdb-data/TV';
+import {SearchTVQuery, SearchTVResponse} from '../tmdb-data/SearchTV';
 
 const tmdbApi = 'https://api.themoviedb.org/3';
 type HTTP_METHOD = 'GET' | 'POST' | 'DELETE' | 'PUT';
@@ -39,7 +39,27 @@ export class TmdbService {
     return this;
   }
 
-  // _______________________________________________________________________________________________________________________________________
+    /**
+     * Authentification auprès du serveur
+     * avec l'envoie des informations du client au serveur avec la méthode post
+     */
+    /*
+    async  login(url, params: {[key: string]: string}): Promise<HttpResponse<string>> {
+        const P = new HttpParams( {fromObject: params} );
+        console.log(params, P, P.toString());
+        return http.post( url, P, {
+            observe: 'response',
+            responseType: 'text',
+            headers: {'content-type': 'application/x-www-form-urlencoded'}
+        }).toPromise();
+    }
+    async send_auth(params: {[key: string]: string}): Promise<HttpResponse<string>>{
+    const url = `api/authentification`;
+    const res = await thi
+    }
+  */
+
+    // _______________________________________________________________________________________________________________________________________
   // Movies ________________________________________________________________________________________________________________________________
   // _______________________________________________________________________________________________________________________________________
   async getMovie(id: number, options?: MovieQuery): Promise<MovieResponse> {

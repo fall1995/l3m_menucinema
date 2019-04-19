@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {TmdbService} from './tmdb.service';
+import {TmdbService} from './service/tmdb.service';
 import {MovieResponse} from './tmdb-data/Movie';
 import {environment} from '../environments/environment';
 
