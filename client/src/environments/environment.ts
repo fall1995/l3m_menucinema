@@ -6,3 +6,4 @@ export const environment = {
   production: false,
   tmdbKey: 'VOTRE CLEF developpeur TheMovieDataBase'
 };
+
