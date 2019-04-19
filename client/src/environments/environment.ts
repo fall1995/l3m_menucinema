@@ -4,6 +4,14 @@
 
 export const environment = {
   production: false,
-  tmdbKey: '01c01bed25e3029b13b92f6175342fbf'
+  tmdbKey: '01c01bed25e3029b13b92f6175342fbf',
+    firebase: {
+        apiKey: "AIzaSyBzKesPb4pcnljPTVDuXBC_1rISWTrfMnM",
+        authDomain: "l3menucinema-70ac8.firebaseapp.com",
+        databaseURL: "https://l3menucinema-70ac8.firebaseio.com",
+        projectId: "l3menucinema-70ac8",
+        storageBucket: "l3menucinema-70ac8.appspot.com",
+        messagingSenderId: "10568079403"
+    }
 };
 
