@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+
+<xsd:schema version="1.0"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            targetNamespace="http://chez.mario.fr/ingredient"
+            xmlns="http://chez.mario.fr/ingredient"
+            elementFormDefault="qualified">
+    <xsd:element name="ingredient" type="Ingredient"/> 
+    <xsd:simpleType name="Ingredient ">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="jambon"/>
+            <xsd:enumeration value="saumon"/>
+            <xsd:enumeration value="thon"/>
+            <xsd:enumeration value="poulet"/>
+            <xsd:enumeration value="mozza"/>
+            <xsd:enumeration value="chèvre"/>
+            <xsd:enumeration value="roquefort"/>
+            <xsd:enumeration value="gruyère"/>
+            <xsd:enumeration value="champignons"/>
+            <xsd:enumeration value="poivrons"/>
+            <xsd:enumeration value="aubergine"/>
+            <xsd:enumeration value="ananas"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+</xsd:schema>
