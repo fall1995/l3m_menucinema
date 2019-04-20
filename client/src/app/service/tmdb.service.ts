@@ -6,6 +6,7 @@ import {SearchMovieQuery, SearchMovieResponse} from '../tmdb-data/searchMovie';
 import {SearchPeopleQuery, SearchPeopleResponse} from '../tmdb-data/SearchPeople';
 import {TVQuery, TVResponse} from '../tmdb-data/TV';
 import {SearchTVQuery, SearchTVResponse} from '../tmdb-data/SearchTV';
+import {Observable} from 'rxjs';
 
 const tmdbApi = 'https://api.themoviedb.org/3';
 type HTTP_METHOD = 'GET' | 'POST' | 'DELETE' | 'PUT';
@@ -39,33 +40,28 @@ export class TmdbService {
     return this;
   }
 
-    /**
-     * Authentification auprès du serveur
-     * avec l'envoie des informations du client au serveur avec la méthode post
-     */
-    /*
-    async  login(url, params: {[key: string]: string}): Promise<HttpResponse<string>> {
-        const P = new HttpParams( {fromObject: params} );
-        console.log(params, P, P.toString());
-        return http.post( url, P, {
-            observe: 'response',
-            responseType: 'text',
-            headers: {'content-type': 'application/x-www-form-urlencoded'}
-        }).toPromise();
-    }
-    async send_auth(params: {[key: string]: string}): Promise<HttpResponse<string>>{
-    const url = `api/authentification`;
-    const res = await thi
-    }
-  */
-
     // _______________________________________________________________________________________________________________________________________
   // Movies ________________________________________________________________________________________________________________________________
   // _______________________________________________________________________________________________________________________________________
-  async getMovie(id: number, options?: MovieQuery): Promise<MovieResponse> {
+    /**
+     * recuperation de film ar id
+     * @param id
+     * @param options
+     */
+    async getMovie(id: number, options?: MovieQuery): Promise<MovieResponse> {
     const url = `${tmdbApi}/movie/${id}`;
     const res = await this.get<MovieResponse>(url, options);
     return res.body;
+  }
+
+    /**
+     * Ici on recupère tous les meilleurs films de 2010
+     * @param options
+     */
+    async getAllMovie(options?: MovieQuery): Promise<MovieResponse> {
+      const url = `${tmdbApi}/discover/movie?primary_release_year=2010&sort_by=vote_average.desc`;
+      const res = await this.get<MovieResponse>(url, options);
+      return res.body;
   }
 
   async searchMovie(query: SearchMovieQuery): Promise<SearchMovieResponse> {
