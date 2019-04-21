@@ -1,6 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import {TmdbService} from './service/tmdb.service';
@@ -21,8 +20,8 @@ import {AuthService} from './service/auth.service';
 import {MenuService} from './service/menu.service';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { SingleMovieComponent } from './single-movie/single-movie.component';
-
-
+import * as firebase from 'firebase';
+import {AngularFontAwesomeModule} from 'angular-font-awesome';
 @NgModule({
     declarations: [
         AppComponent,
@@ -37,6 +36,7 @@ import { SingleMovieComponent } from './single-movie/single-movie.component';
         BrowserModule,
         FormsModule,
         ReactiveFormsModule,
+        AngularFontAwesomeModule,
         AppRoutingModule,
         HttpClientModule,
         AngularFireStorageModule,
@@ -44,7 +44,7 @@ import { SingleMovieComponent } from './single-movie/single-movie.component';
         AngularFireAuthModule,
         AngularFireDatabaseModule,
         AngularFirestoreModule,
-        AngularFireModule.initializeApp(environment.firebase, 'SigninComponent')
+        AngularFireModule.initializeApp(environment.firebase,'app-signup')
     ],
     providers: [TmdbService,AuthService,MenuService],
     bootstrap: [AppComponent]

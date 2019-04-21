@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import {Observable} from 'rxjs';
 import {HttpClient, HttpParams, HttpResponse} from '@angular/common/http';
+import * as firebase from 'firebase';
 
 function AlxToObjectString(data?: object): {[key: string]: string} {
     const res = {};
@@ -43,6 +44,53 @@ export class AuthService {
         };
         let body = JSON.stringify(data);
         return this.http.post(`/api/authentification`, body)
+    }
+
+    /**
+     * creation d'un nouvel utilisateur avec son :
+     * @param email
+     * @param password
+     */
+    createNewUser(email : string, password :string){
+        return new Promise(
+            ((resolve, reject) => {
+                firebase.auth().createUserWithEmailAndPassword(email, password).then(
+                    ()=>{
+                        resolve();
+                    },
+                    (error) =>{
+                        reject(error);
+                    }
+                );
+            })
+        );
+    }
+
+    /**
+     * Connexion d'un utilisateur qui existe
+     * @param email
+     * @param password
+     */
+    signUser(email : string, password :string){
+        return new Promise(
+            ((resolve, reject) => {
+                firebase.auth().signInWithEmailAndPassword(email, password).then(
+                    ()=>{
+                        resolve();
+                    },
+                    (error) =>{
+                        reject(error);
+                    }
+                );
+            })
+        );
+    }
+
+    /**
+     * deconnexion de l'utilisateur
+     */
+    signOut(){
+        firebase.auth().signOut();
     }
 
 }
