@@ -12,12 +12,15 @@
         <li routerLinkActive="active">
             <a routerLink="menus">Menu (Plats)</a>
         </li>
-      <li routerLinkActive="active">
+      <li routerLinkActive="active" *ngIf="!isAuth">
         <a routerLink="authentification/signup">Créer un compte</a>
       </li>
-      <li routerLinkActive="active">
+      <li routerLinkActive="active" *ngIf="!isAuth">
         <a routerLink="authentification/signin">Connexion</a>
       </li>
+        <li>
+            <a (click)="onSignOut()" *ngIf="isAuth" style="cursor:pointer">Déconnexion</a>
+        </li>
 
     </ul>
   </div>

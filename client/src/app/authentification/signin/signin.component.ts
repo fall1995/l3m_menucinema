@@ -14,6 +14,7 @@ export class SigninComponent implements OnInit {
 
     signInForm : FormGroup;
     errorMessage : string;
+    isAuth : boolean;
 
   constructor(private afAuth: AngularFireAuth, private authService : AuthService,
               private formBuilder: FormBuilder, private route: Router) {
@@ -22,13 +23,29 @@ export class SigninComponent implements OnInit {
 
     ngOnInit() {
         this.initForm();
+        this.afAuth.auth.onAuthStateChanged(
+            (user) =>{
+                if (user){
+                    this.isAuth = true;
+                } else {
+                    this.isAuth = false;
+                }
+            }
+        );
     }
 
     /**
      * login with Google acompt
      */
     loginGoogle() {
-        this.afAuth.auth.signInWithPopup(new auth.GoogleAuthProvider());
+        this.afAuth.auth.signInWithPopup(new auth.GoogleAuthProvider()).then(
+            () => {
+                this.route.navigate(['/films']);
+            },
+            (error) => {
+                this.errorMessage = error;
+            }
+        );
         // this.verificationServeur();
     }
 
@@ -55,6 +72,9 @@ export class SigninComponent implements OnInit {
         });
     }
 
+    /**
+     * methode de connexion avec l'email et le mot de pass
+     */
     onSubmit() {
         const email = this.signInForm.get('email').value;
         const password = this.signInForm.get('password').value;

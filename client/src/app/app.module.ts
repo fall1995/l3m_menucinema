@@ -22,6 +22,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { SingleMovieComponent } from './single-movie/single-movie.component';
 import * as firebase from 'firebase';
 import {AngularFontAwesomeModule} from 'angular-font-awesome';
+import {AuthGuardService} from './service/auth-guard.service';
 @NgModule({
     declarations: [
         AppComponent,
@@ -46,7 +47,7 @@ import {AngularFontAwesomeModule} from 'angular-font-awesome';
         AngularFirestoreModule,
         AngularFireModule.initializeApp(environment.firebase,'app-signup')
     ],
-    providers: [TmdbService,AuthService,MenuService],
+    providers: [TmdbService,AuthService,MenuService, AuthGuardService],
     bootstrap: [AppComponent]
 })
 export class AppModule {

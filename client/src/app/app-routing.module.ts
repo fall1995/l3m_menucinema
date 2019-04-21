@@ -5,13 +5,16 @@ import {SignupComponent} from './authentification/signup/signup.component';
 import {FilmsComponent} from './films/films.component';
 import {MenusComponent} from './menus/menus.component';
 import {SingleMovieComponent} from './single-movie/single-movie.component';
+import {AuthGuardService} from './service/auth-guard.service';
 
 const routes: Routes = [
     {path: 'authentification/signin', component: SigninComponent},
     {path: 'authentification/signup', component: SignupComponent},
-    {path: 'films', component: FilmsComponent},
-    {path: 'menus', component: MenusComponent},
+    {path: 'films',canActivate:[AuthGuardService], component: FilmsComponent},
+    {path: 'menus',canActivate:[AuthGuardService], component: MenusComponent},
     {path: 'films/view/:id', component: SingleMovieComponent},
+    {path: '', redirectTo:'films', pathMatch:'full'},
+    {path: '**', redirectTo: 'films'}
 ];
 
 @NgModule({
