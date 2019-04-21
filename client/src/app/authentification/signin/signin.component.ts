@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import {AngularFireAuth} from '@angular/fire/auth';
 import {auth} from 'firebase';
-import {TmdbService} from '../service/tmdb.service';
-import {AuthService} from '../service/auth.service';
+import {TmdbService} from '../../service/tmdb.service';
+import {AuthService} from '../../service/auth.service';
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  selector: 'signin',
+  templateUrl: './signin.component.html',
+  styleUrls: ['./signin.component.scss']
 })
-export class LoginComponent implements OnInit {
+export class SigninComponent implements OnInit {
 
   constructor(private afAuth: AngularFireAuth, private authService : AuthService) {
       afAuth.user.subscribe(u => console.log("L'utilisateur est ", u));
