@@ -4,6 +4,9 @@ import {auth} from 'firebase';
 import {AuthService} from '../../service/auth.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
+import {TmdbService} from '../../service/tmdb.service';
+import {environment} from '../../../environments/environment';
+import {MovieResponse} from '../../tmdb-data/Movie';
 
 @Component({
   selector: 'signin',
@@ -15,9 +18,10 @@ export class SigninComponent implements OnInit {
     signInForm : FormGroup;
     errorMessage : string;
     isAuth : boolean;
+    listeMovie: MovieResponse;
 
   constructor(private afAuth: AngularFireAuth, private authService : AuthService,
-              private formBuilder: FormBuilder, private route: Router) {
+              private formBuilder: FormBuilder, private route: Router, private tmdbService : TmdbService) {
       afAuth.user.subscribe(u => console.log("L'utilisateur est ", u));
   }
 
@@ -30,6 +34,18 @@ export class SigninComponent implements OnInit {
                 } else {
                     this.isAuth = false;
                 }
+            }
+        );
+        this.init();
+    }
+
+    async init() {
+        this.tmdbService.init( environment.tmdbKey );
+        this.tmdbService.getAllMovie().then(
+            data =>{
+                this.listeMovie = data;
+            }, error =>{
+                console.log(error);
             }
         );
     }
@@ -61,9 +77,9 @@ export class SigninComponent implements OnInit {
 
                 this.authService.login(utilisateur.uid).subscribe(data =>{
                 });
-                console.log("verification avec le serveur", utilisateur.emailVerified)
+                console.log("verification avec le serveur", utilisateur.emailVerified);
             }
-        })
+        });
     }
     initForm() {
         this.signInForm = this.formBuilder.group({

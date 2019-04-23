@@ -23,6 +23,7 @@ import { SingleMovieComponent } from './single-movie/single-movie.component';
 import * as firebase from 'firebase';
 import {AngularFontAwesomeModule} from 'angular-font-awesome';
 import {AuthGuardService} from './service/auth-guard.service';
+import { UserProfilComponent } from './user-profil/user-profil.component';
 @NgModule({
     declarations: [
         AppComponent,
@@ -32,6 +33,7 @@ import {AuthGuardService} from './service/auth-guard.service';
         MenusComponent,
         HeaderComponent,
         SingleMovieComponent,
+        UserProfilComponent,
     ],
     imports: [
         BrowserModule,

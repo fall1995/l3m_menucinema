@@ -46,8 +46,5 @@ export class FilmsComponent implements OnInit {
     get film(): MovieResponse {
         return this.listeMovie;
     }
-    getPhotoURL() {
-        return "https://api.themoviedb.org/3"+this.listeMovie.results;
-    }
 
 }

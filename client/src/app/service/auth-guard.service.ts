@@ -9,7 +9,7 @@ import {AngularFireAuth} from '@angular/fire/auth';
 export class AuthGuardService implements CanActivate{
 
   constructor(private router : Router, private afAuth: AngularFireAuth,) { }
-  canActivate():Observable<boolean> | Promise<boolean> | boolean {
+  canActivate(): Observable<boolean> | Promise<boolean> | boolean {
     return new Promise(
         (resolve, reject) => {
             this.afAuth.auth.onAuthStateChanged(
@@ -17,8 +17,8 @@ export class AuthGuardService implements CanActivate{
                   if (user){
                     resolve(true);
                   } else {
-                    this.router.navigate(['/authentification','signin']);
-                    resolve(false);
+                    this.router.navigate(['/authentification', 'signin']);
+                    reject(false);
                   }
                 }
             );

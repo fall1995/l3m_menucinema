@@ -15,8 +15,8 @@ export class HeaderComponent implements OnInit {
   ngOnInit() {
 
     this.afAuth.auth.onAuthStateChanged(
-        (user) =>{
-          if (user){
+        (user) => {
+          if (user) {
             this.isAuth = true;
           } else {
             this.isAuth = false;
@@ -24,7 +24,7 @@ export class HeaderComponent implements OnInit {
         }
     );
   }
-  onSignOut(){
+  onSignOut() {
     this.afAuth.auth.signOut();
   }
 
