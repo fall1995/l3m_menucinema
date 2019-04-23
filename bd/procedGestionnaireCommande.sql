@@ -1,25 +1,4 @@
 
-create or replace procedure enregistrerCommande(
-    idCommande Commande.idCommande%type,
-    idClient Commande.idClient%type,
-    idPlats varchar2,
-    idFilms varchar2,
-    dateCommande Commande.dateCommande%type,
-    prix Commande.prix%type,
-    adresseLivraison Commande.adresseLivraison%type
-    )
-    is
-    begin
-        insert into Commande values ( idCommande , idClient , idPlats , idFilms , dateCommande , prix , lower(adresseLivraison) );
-        commit;
-        
-    exception        
-        when OTHERS then
-            raise_application_error(-20001,'L''enregistrement a échoué - ' || SQLCODE || ' -ERROR- ' || SQLERRM );  
-        
-    end;
-/
-
 create or replace function getCommande(
     idCommande_ Commande.idCommande%type
     )
@@ -131,7 +110,7 @@ create or replace procedure enregistrerCommande(
                 idFilms_,
                 dateCommande,
                 prix,
-                adresseLivraison
+                lower(adresseLivraison)
             );
         end if;
         
