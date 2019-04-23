@@ -24,6 +24,8 @@ function AlxToObjectString(data?: object): {[key: string]: string} {
   providedIn: 'root'
 })
 export class TmdbService {
+  // image url
+  public host = 'https://image.tmdb.org/t/p/original/';
   private apiKey: string;
 
   private async get<T>(url: string, data: object): Promise<HttpResponse<T>> {
@@ -59,7 +61,7 @@ export class TmdbService {
      * @param options
      */
     async getAllMovie(options?: MovieQuery): Promise<MovieResponse> {
-      const url = `${tmdbApi}/discover/movie?primary_release_year=2010&sort_by=vote_average.desc`;
+      const url = `${tmdbApi}/discover/movie?sort_by=popularity.desc`;
       const res = await this.get<MovieResponse>(url, options);
       return res.body;
   }

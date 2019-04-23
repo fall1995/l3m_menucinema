@@ -13,20 +13,41 @@ export class FilmsComponent implements OnInit {
     idFilm: MovieResponse;
     listeMovie: MovieResponse;
 
-  constructor(private tmdb: TmdbService) {
-      this.init();
+  constructor(private tmdbService: TmdbService) {
+
   }
 
   ngOnInit() {
+      this.init();
   }
+    /*
+    async getMovies(){
+      this.tmdbService.getAllMovie().then(
+          data =>{
+              this.films = data;
+          }, error => {
+              console.log(error);
+      }
+      );
+  }
+  */
     async init() {
-        this.tmdb.init( environment.tmdbKey );
-        this.idFilm = await this.tmdb.getMovie(14);
-        this.listeMovie = await this.tmdb.getAllMovie();
+        this.tmdbService.init( environment.tmdbKey );
+        this.idFilm = await this.tmdbService.getMovie(14);
+        this.tmdbService.getAllMovie().then(
+            data =>{
+                this.listeMovie = data;
+            }, error =>{
+                console.log(error);
+            }
+        );
     }
 
     get film(): MovieResponse {
-        return this.idFilm;
+        return this.listeMovie;
+    }
+    getPhotoURL() {
+        return "https://api.themoviedb.org/3"+this.listeMovie.results;
     }
 
 }
