@@ -15,14 +15,15 @@ create table Client(
     adresse varchar2(120) not null,
     
     constraint Client_C0 primary key (idClient),
-    constraint Client_C1 unique (email)
+    constraint Client_C1 unique (email),
+    constraint Client_C2 unique (nom,prenom)
 );
 
 create table Commande(
     idCommande varchar2(8),
     idClient varchar2(8) not null,
-    idPlats varchar2(4) not null, 
-    idFilms varchar2(8) not null,
+    idPlats varchar2(4), 
+    idFilms varchar2(8),
     dateCommande date not null,
     prix number(4,2),
     adresseLivraison varchar2(120),
@@ -32,7 +33,7 @@ create table Commande(
 );
 
 create table Plat(
-    idPlats varchar2(4),
+    idPlats number(8),
     idPlat varchar2(4),
     quantite number(2),
     
@@ -41,8 +42,8 @@ create table Plat(
 );
 
 create table Film(
-    idFilms varchar2(4),
-    idFilm varchar2(4),
+    idFilms number(8),
+    idFilm varchar2(8),
     
     constraint Film_C0 primary key (idFilms, idFilm)
 );
