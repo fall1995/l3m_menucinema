@@ -57,6 +57,7 @@ export class SigninComponent implements OnInit {
         this.afAuth.auth.signInWithPopup(new auth.GoogleAuthProvider()).then(
             () => {
                 this.route.navigate(['/profil']);
+                window.location.reload();
             },
             (error) => {
                 this.errorMessage = error;
@@ -69,7 +70,12 @@ export class SigninComponent implements OnInit {
      * login with Facebook acompt
      */
     loginFacebook(){
-        this.afAuth.auth.signInWithPopup(new auth.FacebookAuthProvider());
+        this.afAuth.auth.signInWithPopup(new auth.FacebookAuthProvider()).then(u =>{
+
+        }, (erro) =>{
+            this.errorMessage = erro;
+            console.log(erro);
+        });
     }
     verificationServeur(){
         this.afAuth.user.subscribe(utilisateur =>{

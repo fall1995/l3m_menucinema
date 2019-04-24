@@ -25,6 +25,12 @@ import {AngularFontAwesomeModule} from 'angular-font-awesome';
 import {AuthGuardService} from './service/auth-guard.service';
 import { UserProfilComponent } from './user-profil/user-profil.component';
 import { HomeComponent } from './home/home.component';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {MatButtonModule, MatCheckboxModule} from '@angular/material';
+import {MatCardModule} from '@angular/material/card';
+import {MatTabsModule} from '@angular/material/tabs';
+
+import 'hammerjs';
 @NgModule({
     declarations: [
         AppComponent,
@@ -49,7 +55,12 @@ import { HomeComponent } from './home/home.component';
         AngularFireAuthModule,
         AngularFireDatabaseModule,
         AngularFirestoreModule,
-        AngularFireModule.initializeApp(environment.firebase,'app-signup')
+        AngularFireModule.initializeApp(environment.firebase,'app-signup'),
+        BrowserAnimationsModule,
+        MatButtonModule,
+        MatCheckboxModule,
+        MatCardModule,
+        MatTabsModule,
     ],
     providers: [TmdbService,AuthService,MenuService, AuthGuardService],
     bootstrap: [AppComponent]

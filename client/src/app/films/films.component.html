@@ -1,4 +1,4 @@
-
+<!--
 <div *ngIf="listeMovie">
   <div *ngFor="let f of listeMovie?.results">
     <div class="col-md-4">
@@ -9,7 +9,6 @@
           <tr>
             <td>
               <img  height="360" width="360" src="{{this.tmdbService.host+f?.poster_path}}">
-
             </td>
           </tr>
         </table>
@@ -17,7 +16,37 @@
     </div>
     </div>
   </div>
-
 </div>
+-->
+<mat-tab-group mat-stretch-tabs class="example-stretched-tabs mat-elevation-z4">
+    <mat-tab label="Films">
+        <mat-card class="example-card col-md-4" style="margin-left: 20px; margin-top: 10px;" tabindex="0" role="group"
+                  layout="row" layout-align="center center" *ngFor="let f of listeMovie?.results">
+            <div>
+                <mat-card-header>
+                    <div mat-card-avatar class="example-header-image">
+                    </div>
+                    <mat-card-title>{{f.title}}</mat-card-title>
+                    <mat-card-subtitle>{{f.original_language}}</mat-card-subtitle>
+                </mat-card-header>
+                <img height="500" width="360" mat-card-image src="{{this.tmdbService.host+f?.poster_path}}"
+                     alt="Photo of a Shiba Inu">
+                <mat-card-content>
+                    <p>
+
+                    </p>
+                </mat-card-content>
+                <mat-card-actions>
+                    <button mat-button>LIKE</button>
+                    <button mat-button>SHARE</button>
+                </mat-card-actions>
+            </div>
+        </mat-card>
+    </mat-tab>
+    <mat-tab label="Chaine TV"> Content 2</mat-tab>
+    <mat-tab label="Personnes"> Content 3</mat-tab>
+</mat-tab-group>
+
+
 
 
