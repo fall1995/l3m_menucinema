@@ -1,3 +1,8 @@
-<p>
-  user-profil works!
-</p>
+<div class="container">
+    <div class="jumbotron">
+        <p>Welcome</p>
+        <p *ngIf="user.nom">{{user.nom}}</p>
+        <p>{{user.email}}</p>
+    </div>
+
+</div>

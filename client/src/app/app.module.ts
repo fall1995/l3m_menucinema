@@ -24,6 +24,7 @@ import * as firebase from 'firebase';
 import {AngularFontAwesomeModule} from 'angular-font-awesome';
 import {AuthGuardService} from './service/auth-guard.service';
 import { UserProfilComponent } from './user-profil/user-profil.component';
+import { HomeComponent } from './home/home.component';
 @NgModule({
     declarations: [
         AppComponent,
@@ -34,6 +35,7 @@ import { UserProfilComponent } from './user-profil/user-profil.component';
         HeaderComponent,
         SingleMovieComponent,
         UserProfilComponent,
+        HomeComponent,
     ],
     imports: [
         BrowserModule,

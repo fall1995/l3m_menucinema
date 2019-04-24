@@ -56,7 +56,7 @@ export class SigninComponent implements OnInit {
     loginGoogle() {
         this.afAuth.auth.signInWithPopup(new auth.GoogleAuthProvider()).then(
             () => {
-                this.route.navigate(['/films']);
+                this.route.navigate(['/profil']);
             },
             (error) => {
                 this.errorMessage = error;
@@ -96,7 +96,7 @@ export class SigninComponent implements OnInit {
         const password = this.signInForm.get('password').value;
         this.afAuth.auth.signInWithEmailAndPassword(email,password).then(
             () => {
-                this.route.navigate(['/films']);
+                this.route.navigate(['/profil']);
             },
             (error) => {
                 this.errorMessage = error;

@@ -7,6 +7,7 @@ import {MenusComponent} from './menus/menus.component';
 import {SingleMovieComponent} from './single-movie/single-movie.component';
 import {AuthGuardService} from './service/auth-guard.service';
 import {UserProfilComponent} from './user-profil/user-profil.component';
+import {HomeComponent} from './home/home.component';
 
 const routes: Routes = [
     {path: 'authentification/signin', component: SigninComponent},
@@ -14,6 +15,7 @@ const routes: Routes = [
     {path: 'films', canActivate: [AuthGuardService], component: FilmsComponent},
     {path: 'menus', canActivate: [AuthGuardService], component: MenusComponent},
     {path: 'profil', component: UserProfilComponent },
+    {path: '', component: HomeComponent },
     {path: 'films/view/:id', component: SingleMovieComponent},
     {path: '', redirectTo: 'films', pathMatch: 'full'},
     //{path: '**', redirectTo: 'films'}
