@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 
 node_modules/
 .idea/
@@ -48,3 +49,7 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
+=======
+node_modules/
+serveur/target/
+>>>>>>> bdIteration1
