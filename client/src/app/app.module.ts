@@ -29,6 +29,9 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatButtonModule, MatCheckboxModule} from '@angular/material';
 import {MatCardModule} from '@angular/material/card';
 import {MatTabsModule} from '@angular/material/tabs';
+import {CardModule} from 'primeng/card';
+import {ButtonModule} from 'primeng/button';
+
 
 import 'hammerjs';
 @NgModule({
@@ -61,6 +64,9 @@ import 'hammerjs';
         MatCheckboxModule,
         MatCardModule,
         MatTabsModule,
+        CardModule,
+        ButtonModule,
+
     ],
     providers: [TmdbService,AuthService,MenuService, AuthGuardService],
     bootstrap: [AppComponent]

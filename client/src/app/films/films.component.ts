@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {environment} from '../../environments/environment';
 import {MovieResponse} from '../tmdb-data/Movie';
 import {TmdbService} from '../service/tmdb.service';
+import {TVResponse} from '../tmdb-data/TV';
 
 @Component({
   selector: 'app-films',
@@ -12,6 +13,8 @@ export class FilmsComponent implements OnInit {
 
     idFilm: MovieResponse;
     listeMovie: MovieResponse;
+    listeMovieDram : MovieResponse;
+    listeMovieHightRatet : MovieResponse;
 
   constructor(private tmdbService: TmdbService) {
 
@@ -41,6 +44,8 @@ export class FilmsComponent implements OnInit {
                 console.log(error);
             }
         );
+        this.listeMovieDram = await this.tmdbService.getAllDrama();
+        this.listeMovieHightRatet = await this.tmdbService.getAllHightRated();
     }
 
     get film(): MovieResponse {
