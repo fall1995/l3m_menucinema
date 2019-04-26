@@ -7,9 +7,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 /**
- * @author Groupe6
- * la classe SQLAble permet gerer la connection a la base oracle et l'excecution
- * des requete
+ * @author Groupe6 la classe SQLAble permet gerer la connection a la base oracle
+ * et l'excecution des requete
  */
 public abstract class SQLAble implements DataBaseAble {
 
@@ -31,6 +30,17 @@ public abstract class SQLAble implements DataBaseAble {
         System.out.print("Connecting to the database... ");
         conn = DriverManager.getConnection(CONN_URL, USER, PASSWD);
         System.out.println("connected");
+        /* 
+        if (conn == null || conn.isClosed()) {
+            try {
+                Class.forName("oracle.jdbc.driver.OracleDriver");
+            } catch (ClassNotFoundException e) {
+                throw new SQLException(e);
+            }
+            conn = DriverManager.getConnection(
+                    CONN_URL, USER, PASSWD);
+        }
+        **/
     }
 
     /**
@@ -38,7 +48,10 @@ public abstract class SQLAble implements DataBaseAble {
      */
     @Override
     public void disconnect() throws SQLException {
-        conn.close();
+        if (conn != null && !conn.isClosed()) {
+            conn.close();
+        }
+
     }
 
     /**
