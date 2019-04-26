@@ -143,8 +143,7 @@ public class ClientEnregistreServlet extends HttpServlet {
         try {
             GestionnaireClient gestionClient = new GestionnaireClient(idClient,
                     nom, prenom);
-            //La methode pour mettre tout les infos a jours
-            gestionClient.editAdresse(adresse);
+            gestionClient.editClientDB();
         } catch (SQLException ex) {
             Logger.getLogger(ClientEnregistreServlet.class.getName()).log(Level.SEVERE, null, ex);
         }

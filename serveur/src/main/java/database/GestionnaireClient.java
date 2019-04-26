@@ -163,6 +163,30 @@ public class GestionnaireClient extends SQLAble {
     }
 
     /**
+     * Methode permet de mettre à jour les info sur un client encours s'il 
+     * existe, sinon elle fait rien Cette méthode catch la SQLException si cette
+     * dernière est lévée par la procédure PL SQL editClient
+     * @throws java.sql.SQLException
+     */
+    public void editClientDB() throws SQLException {
+        boolean exist = existsClientDB();
+        if (exist) {
+            try {
+                CallableStatement cstmt;
+                cstmt = conn.prepareCall("{ = call editClient(?,?,?,?,?) }");
+                cstmt.setString(1, client.getId());
+                cstmt.setString(2, client.getPhoto());
+                cstmt.setString(3, client.getEmail());
+                cstmt.setString(4, client.getTel());
+                cstmt.setString(5, client.getAdresse());
+                cstmt.execute();
+                cstmt.close();
+            } catch (SQLException e) {
+            }
+        }
+    }
+
+    /**
      * Methode qui permet d'optenir l'id du client avec le nom et prenom passé
      *
      * @param nom
