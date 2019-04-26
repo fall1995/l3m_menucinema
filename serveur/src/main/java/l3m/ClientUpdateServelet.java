@@ -31,7 +31,7 @@ public class ClientUpdateServelet {
         request.setAttribute("photo", photo);
         request.setAttribute("tel", tel);
         request.setAttribute("adresse", adresse);
-        Connection conn = BD_Connection.getConnection();
+        //Connection conn = BD_Connection.getConnection();
         String sql = "{editClient(?,?,?,?,?,?,?)}";
         CallableStatement cstmt;
         try {

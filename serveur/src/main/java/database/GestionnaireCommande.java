@@ -12,7 +12,7 @@ import java.util.ArrayList;
  * @author Groupe6
  * La clase GestionnaireCommande  pour la gestion des commandes
  */
-public class GestionnaireCommande extends SQLAble {
+public class GestionnaireCommande  {
     private Commande commande;
 
     /**

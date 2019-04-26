@@ -16,27 +16,18 @@ import java.sql.ResultSet;
 public abstract class SQLAble {
 
     /**
-     *Methode permert de se connecter la base de donnee oracle
+     * Methode abstraite permert de se connecter la base de donnee oracle
      */
-    public void connectToDataBase(){
-        
-    }
+    public abstract void connectToDataBase();
 
     /**
-     *Methode permet de se deconnecter a la base de donner oracle
+     * Methode abstraite permet de se deconnecter a la base de donner oracle
      */
-    public void disconnect(){
-        
-    }
+    public abstract void disconnect();
 
     /**
-     *Methode qui permet d'execute une requete passer en parametre
-     * @param requete
-     * @return res qui contient le resultat du requete excecute
+     * Methode abstraite qui permet d'execute une requete passer en parametre
      */
-    public ResultSet request(String requete){
-        ResultSet res=null;
-        return res;
-    }
+    public abstract ResultSet request(String requete);
     
 }
