@@ -19,7 +19,7 @@ and open the template in the editor.
             <xsd:element name="id"                type="xsd:string"/>
             <xsd:element name="type"              type="type:TypeDePlat"/>
             <xsd:element name="prix"              type="xsd:double"/>
-            <xsd:element name="ingredients"       type="ingre:Ingredient"/>
+            <xsd:element name="ingredients"       type="ingre:Ingredient" minOccurs="1" maxOccurs="unbounded"/>
         </xsd:sequence>  
     </xsd:complexeType> 
   
