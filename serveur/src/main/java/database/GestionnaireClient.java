@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package database;
 
 import java.sql.CallableStatement;
@@ -17,27 +12,32 @@ import oracle.jdbc.OracleCallableStatement;
 import oracle.jdbc.OracleTypes;
 
 /**
- * @author Groupe6 
- * Classe GestionnaireClient qui permet de gerer un client
+ * @author Groupe6 Classe GestionnaireClient qui permet de gerer un client
  */
 public class GestionnaireClient extends SQLAble {
 
     private Client client;
+
     /**
      * Constructeur qui prend en parametre en l'id, le nom et prenom et il
      * modifie les id, nom et prenom du client courrant
+     *
      * @param id
      * @param nom
      * @param premon
      */
     public GestionnaireClient(String id, String nom, String premon) throws SQLException {
+        this.client = new Client();
         client.setId(id);
         client.setNom(nom);
         client.setPrenom(premon);
+        connectToDatabase();
 
     }
+
     /**
      * Methode qui permet de re-envoyer le nom
+     *
      * @return nom
      */
     public String getNom() {
@@ -46,6 +46,7 @@ public class GestionnaireClient extends SQLAble {
 
     /**
      * Methode qui permet d'envoyer le prenom
+     *
      * @return prenom
      */
     public String getPrenom() {
@@ -54,6 +55,7 @@ public class GestionnaireClient extends SQLAble {
 
     /**
      * Methode qui permet d'envoyer la photo
+     *
      * @return photo
      */
     public String getPhoto() {
@@ -62,6 +64,7 @@ public class GestionnaireClient extends SQLAble {
 
     /**
      * Methode qui permet d'envoyer l'adresse
+     *
      * @return adresse
      */
     public String getAdresse() {
@@ -70,6 +73,7 @@ public class GestionnaireClient extends SQLAble {
 
     /**
      * Methode qui permet de modifier l'email
+     *
      * @param email
      */
     public void editEmail(String email) {
@@ -78,6 +82,7 @@ public class GestionnaireClient extends SQLAble {
 
     /**
      * Methode qui permet de modifier l'adresse
+     *
      * @param adresse
      */
     public void editAdresse(String adresse) {
@@ -86,6 +91,7 @@ public class GestionnaireClient extends SQLAble {
 
     /**
      * Methode qui permet de modifier le numero de tel
+     *
      * @param tel
      */
     public void editTel(String tel) {
@@ -94,6 +100,7 @@ public class GestionnaireClient extends SQLAble {
 
     /**
      * Methode qui permet de modifier la photo
+     *
      * @param photo
      */
     public void editPhoto(String photo) {
@@ -102,14 +109,15 @@ public class GestionnaireClient extends SQLAble {
 
     /**
      * Methode qui permet d'ajouter un client
+     *
      * @return true si oui si non il retourne false
      */
-    public boolean enregistreClientDB() {
-      
+    public boolean enregistreClientDB() throws SQLException {
         boolean exist = existsClientDB();
         boolean res = false;
         if (!exist) {
             try {
+                
                 CallableStatement cstmt;
                 cstmt = conn.prepareCall("{ = call enregistrerClient(?,?,?) }");
                 cstmt.setString(1, client.getId());
@@ -127,15 +135,16 @@ public class GestionnaireClient extends SQLAble {
 
     /**
      * Methode qui permet de verifier si un le client existe
+     *
      * @return true si oui si non il retourne false
      */
-    protected boolean existsClientDB() {
+    protected boolean existsClientDB() throws SQLException {
         boolean res = false;
         try {
             OracleCallableStatement ocstmt;
             ocstmt = (OracleCallableStatement) conn.prepareCall("{ ? = call existsClient(?) }");
             ocstmt.registerOutParameter(1, OracleTypes.NUMBER);
-            ocstmt.setString(2, client.getId());
+            ocstmt.setString(2, "10");
             ocstmt.execute();
 
             int ret = ocstmt.getInt(1);
@@ -145,11 +154,13 @@ public class GestionnaireClient extends SQLAble {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+       
         return res;
     }
 
     /**
      * Methode qui permet d'optenir l'id du client avec le nom et prenom passé
+     *
      * @param nom
      * @param prenom
      * @return id
@@ -175,6 +186,7 @@ public class GestionnaireClient extends SQLAble {
 
     /**
      * Methode qui permet de suppimer un client dont id est passe en parametre
+     *
      * @param id
      * @return true si oui si non il retourne false
      */
@@ -213,9 +225,10 @@ public class GestionnaireClient extends SQLAble {
 
     /**
      * Methode qui permet d'optenir la liste des commande
+     *
      * @return list
      */
-    public List<String> getListeCommandes() {
+    public List<String> getListeCommandes() throws SQLException {
         boolean exist = existsClientDB();
         List<String> list = new ArrayList<String>();
 

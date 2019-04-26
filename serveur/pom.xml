@@ -73,6 +73,32 @@
           <mainClass>l3m.PizzaServer</mainClass>
         </configuration>
       </plugin>
+      <plugin>
+        <groupId>org.jvnet.jaxb2.maven2</groupId>
+        <artifactId>maven-jaxb2-plugin</artifactId>
+        <version>0.12.0</version>
+        <executions>
+          <execution>
+            <goals>
+              <goal>generate</goal>
+            </goals>
+            <configuration>
+              <schemaIncludes>
+                <include>jaxb/text/*.xsd</include>
+              </schemaIncludes>
+              <episodeFile>${project.build.directory}/generated-sources/xjc/META-INF/jaxb-text.episode</episodeFile>
+            </configuration>
+            <id>jaxb-generate-text</id>
+          </execution>
+        </executions>
+        <configuration>
+          <catalog>src/main/resources/jaxb/catalog.xml</catalog>
+          <catalogResolver>org.jvnet.jaxb2.maven2.resolver.tools.ClasspathCatalogResolver</catalogResolver>
+          <forceRegenerate>true</forceRegenerate>
+          <generateDirectory>${project.build.directory}/generated-sources/xjc</generateDirectory>
+          <verbose>true</verbose>
+        </configuration>
+      </plugin>
     </plugins>
   </build>
   

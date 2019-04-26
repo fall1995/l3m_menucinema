@@ -29,7 +29,7 @@ public class PizzaServer extends HttpServlet {
 
         servletHandler.addServletWithMapping(BlockingServlet.class, "/status");
         servletHandler.addServletWithMapping(ClientAuthentificationServlet.class, "/api/authentification");
-
+        servletHandler.addServletWithMapping(ClientEnregistreServlet.class, "/api/enregistreNouveauClient");
         server.start();
     }
 

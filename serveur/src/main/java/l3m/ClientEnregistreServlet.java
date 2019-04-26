@@ -21,6 +21,13 @@ public class ClientEnregistreServlet extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
 
+    /**
+     *
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException
+     */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
     }
@@ -30,14 +37,24 @@ public class ClientEnregistreServlet extends HttpServlet {
         //To change body of generated methods, choose Tools | Templates.
     }
 
+    /**
+     *
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException
+     */
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         String idClient = request.getParameter("idClient");
         String nom = request.getParameter("nom");
         String prenom = request.getParameter("prenom");
+        System.out.print(idClient);
         try {
             GestionnaireClient gestionClient = new GestionnaireClient(idClient, nom, prenom);
+              System.out.print(gestionClient.getNom());
             gestionClient.enregistreClientDB();
+            
         } catch (SQLException ex) {
             Logger.getLogger(ClientEnregistreServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
