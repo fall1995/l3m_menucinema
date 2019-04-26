@@ -1,30 +1,24 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package database;
 
 import java.util.ArrayList;
 
 /**
- *
- * @author Groupe6
- * La clase GestionnaireCommande  pour la gestion des commandes
+ * @author Groupe6 La clase GestionnaireCommande pour la gestion des commandes
  */
-public class GestionnaireCommande  {
+public class GestionnaireCommande extends SQLAble {
+
     private Commande commande;
 
     /**
-     *Constructeur qui prend en parametre idclient, liste des IdPlats, liste des
-     * idFilms,et adresse de livraisons et les modifie
+     * Constructeur qui prend en parametre idclient, liste des IdPlats, liste
+     * des idFilms,et adresse de livraisons et les modifie
      * @param idClient
      * @param idPlat
      * @param idFilms
      * @param adresseLivraison
      */
-    public GestionnaireCommande(String idClient,ArrayList<String> idPlat,
-            ArrayList<String> idFilms,String adresseLivraison) {
+    public GestionnaireCommande(String idClient, ArrayList<String> idPlat,
+            ArrayList<String> idFilms, String adresseLivraison) {
         commande.setId(idClient);
         commande.setIdplats(idPlat);
         commande.setIdFilms(idFilms);
@@ -32,8 +26,7 @@ public class GestionnaireCommande  {
     }
 
     /**
-     *Methode qui permet d'initialiser le id  et prend en parametre le nouveau
-     * id
+     * Methode qui permet d'initialiser le id et prend en parametre le nouveau
      * @param id
      */
     public GestionnaireCommande(String id) {
@@ -41,22 +34,19 @@ public class GestionnaireCommande  {
     }
 
     /**
-     *Methode qui permet d'enregistre une commander
+     * Methode qui permet d'enregistre une commander
      */
-    public void enregistreCommanderDB(){
-        
+    public void enregistreCommanderDB() {
+
     }
 
     /**
-     *Methode qui renvoye une commande grace à id passe en parametre
+     * Methode qui renvoye une commande grace à id passe en parametre
      * @param id
      * @return commande
      */
     public Commande getCommande(String id) {
         return commande;
     }
-    
-    
-    
-    
+
 }

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package l3m;
+package PoubelleTmp;
 
 import database.SQLAble;
 import java.beans.Statement;

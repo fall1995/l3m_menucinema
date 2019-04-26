@@ -10,18 +10,19 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import l3m.BD_Connection;
+import PoubelleTmp.BD_Connection;
+import database.Client;
+import database.SQLAble;
 import oracle.jdbc.OracleCallableStatement;
 import oracle.jdbc.OracleTypes;
 
 /**
- *
- * @author Groupe6 Classe GestionnaireClient qui permet de gerer un client
+ * @author Groupe6 
+ * Classe GestionnaireClient qui permet de gerer un client
  */
-public class GestionnaireClient extends BD_Connection {
+public class GestionnaireClient extends SQLAble {
 
     private Client client;
-
     /**
      * Constructeur qui prend en parametre en l'id, le nom et prenom et il
      * modifie les id, nom et prenom du client courrant
@@ -35,10 +36,8 @@ public class GestionnaireClient extends BD_Connection {
         client.setPrenom(premon);
 
     }
-
     /**
      * Methode qui permet de re-envoyer le nom
-     *
      * @return nom
      */
     public String getNom() {
@@ -47,7 +46,6 @@ public class GestionnaireClient extends BD_Connection {
 
     /**
      * Methode qui permet d'envoyer le prenom
-     *
      * @return prenom
      */
     public String getPrenom() {
@@ -56,7 +54,6 @@ public class GestionnaireClient extends BD_Connection {
 
     /**
      * Methode qui permet d'envoyer la photo
-     *
      * @return photo
      */
     public String getPhoto() {
@@ -65,7 +62,6 @@ public class GestionnaireClient extends BD_Connection {
 
     /**
      * Methode qui permet d'envoyer l'adresse
-     *
      * @return adresse
      */
     public String getAdresse() {
@@ -74,7 +70,6 @@ public class GestionnaireClient extends BD_Connection {
 
     /**
      * Methode qui permet de modifier l'email
-     *
      * @param email
      */
     public void editEmail(String email) {
@@ -83,7 +78,6 @@ public class GestionnaireClient extends BD_Connection {
 
     /**
      * Methode qui permet de modifier l'adresse
-     *
      * @param adresse
      */
     public void editAdresse(String adresse) {
@@ -92,7 +86,6 @@ public class GestionnaireClient extends BD_Connection {
 
     /**
      * Methode qui permet de modifier le numero de tel
-     *
      * @param tel
      */
     public void editTel(String tel) {
@@ -101,7 +94,6 @@ public class GestionnaireClient extends BD_Connection {
 
     /**
      * Methode qui permet de modifier la photo
-     *
      * @param photo
      */
     public void editPhoto(String photo) {
@@ -110,11 +102,10 @@ public class GestionnaireClient extends BD_Connection {
 
     /**
      * Methode qui permet d'ajouter un client
-     *
      * @return true si oui si non il retourne false
      */
     public boolean enregistreClientDB() {
-        connectToDataBase();
+      
         boolean exist = existsClientDB();
         boolean res = false;
         if (!exist) {
@@ -136,7 +127,6 @@ public class GestionnaireClient extends BD_Connection {
 
     /**
      * Methode qui permet de verifier si un le client existe
-     *
      * @return true si oui si non il retourne false
      */
     protected boolean existsClientDB() {
@@ -160,8 +150,6 @@ public class GestionnaireClient extends BD_Connection {
 
     /**
      * Methode qui permet d'optenir l'id du client avec le nom et prenom passé
-     * en parametre
-     *
      * @param nom
      * @param prenom
      * @return id
@@ -187,7 +175,6 @@ public class GestionnaireClient extends BD_Connection {
 
     /**
      * Methode qui permet de suppimer un client dont id est passe en parametre
-     *
      * @param id
      * @return true si oui si non il retourne false
      */
@@ -226,7 +213,6 @@ public class GestionnaireClient extends BD_Connection {
 
     /**
      * Methode qui permet d'optenir la liste des commande
-     *
      * @return list
      */
     public List<String> getListeCommandes() {

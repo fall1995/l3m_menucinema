@@ -1,5 +1,6 @@
 package l3m;
 
+import database.GestionnaireClient;
 import java.io.IOException;
 import java.sql.CallableStatement;
 import java.sql.Connection;
@@ -12,6 +13,8 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  * @author Groupe6
+ * ClientUpdateServelet permet de mettre a jour les informations consernant un 
+ * client
  */
 public class ClientUpdateServelet {
 
@@ -24,30 +27,13 @@ public class ClientUpdateServelet {
         String email = request.getParameter("email");
         String tel = request.getParameter("tel");
         String adresse = request.getParameter("adresse");
-
-        request.setAttribute("idClient", idClient);
-        request.setAttribute("nom", nom);
-        request.setAttribute("prenom", prenom);
-        request.setAttribute("photo", photo);
-        request.setAttribute("tel", tel);
-        request.setAttribute("adresse", adresse);
-        //Connection conn = BD_Connection.getConnection();
-        String sql = "{editClient(?,?,?,?,?,?,?)}";
-        CallableStatement cstmt;
         try {
-            cstmt = conn.prepareCall(sql);
-            cstmt.setString(1, idClient);
-            cstmt.setString(2, nom);
-            cstmt.setString(3, prenom);
-            cstmt.setString(4, photo);
-            cstmt.setString(5, email);
-            cstmt.setString(6, tel);
-            cstmt.setString(7, adresse);
-            cstmt.execute();
-            cstmt.close();
+            GestionnaireClient gestionClient = new GestionnaireClient(idClient, nom, prenom);
+            gestionClient.editAdresse(adresse);
         } catch (SQLException ex) {
             Logger.getLogger(ClientEnregistreServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
+     
 
     }
 
