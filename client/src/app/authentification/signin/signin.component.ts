@@ -80,8 +80,11 @@ export class SigninComponent implements OnInit {
     verificationServeur(){
         this.afAuth.user.subscribe(utilisateur =>{
             if (utilisateur.uid){
-
-                this.authService.login(utilisateur.uid).subscribe(data =>{
+                this.authService.authentificate({
+                    idClient: utilisateur.uid,
+                    nom: utilisateur.displayName,
+                    prenom: utilisateur.displayName}).then(data =>{
+                    console.log("verification: "+data);
                 });
                 console.log("verification avec le serveur", utilisateur.emailVerified);
             }
