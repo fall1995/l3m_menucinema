@@ -26,17 +26,27 @@ public class ClientAuthentificationServlet extends HttpServlet  {
 	 * It sends back a HTTP code 500 error if a problem occured when accessing to the database
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.setContentType("text/plain");
-		// Extract userId from HTTP parameters
+        System.out.println("doPost");
+        response.setContentType("text/plain");
+        // Extract userId from HTTP parameters
         String userId = null;
+        userId = request.getParameter("userId");
         // Call the database and return result
-        try {
-	        String res = BdAccess.authentifyUser(userId);
-	        response.setStatus(HttpServletResponse.SC_OK);
-	        response.getWriter().println( res  + ". " + processQueryTest(request) );
-        } catch (SQLException e) {
-			response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-			response.getWriter().println( e.toString() );
+        if (userId != null || !userId.equals("")) {
+            // CAS HTTP code 200
+            try {
+                String res = BdAccess.authentifyUser(userId);
+                response.setStatus(HttpServletResponse.SC_OK);
+                response.getWriter().println(res + ". " + processQueryTest(request));
+            } // CAS HTTP code 500
+            catch (SQLException e) {
+                response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+                response.getWriter().println(e.toString());
+            }
+        } // CAS HTTP code 401
+        else {
+            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+            response.getWriter().println("userId n'est pas specifiee");
         }
     }
 
