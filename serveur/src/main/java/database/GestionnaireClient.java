@@ -5,9 +5,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import PoubelleTmp.BD_Connection;
-import database.Client;
-import database.SQLAble;
 import oracle.jdbc.OracleCallableStatement;
 import oracle.jdbc.OracleTypes;
 
@@ -20,11 +17,12 @@ public class GestionnaireClient extends SQLAble {
 
     /**
      * Constructeur qui prend en parametre en l'id, le nom et prenom et il
-     * modifie les id, nom et prenom du client courrant
+     * modifie les id, nom et prenom du client courran
      *
      * @param id
      * @param nom
      * @param premon
+     * @throws java.sql.SQLException
      */
     public GestionnaireClient(String id, String nom, String premon) throws SQLException {
         this.client = new Client();
@@ -33,6 +31,12 @@ public class GestionnaireClient extends SQLAble {
         client.setPrenom(premon);
         connectToDatabase();
 
+    }
+
+    public GestionnaireClient(String id) throws SQLException {
+        this.client = new Client();
+        client.setId(id);
+        connectToDatabase();
     }
 
     /**
@@ -111,13 +115,14 @@ public class GestionnaireClient extends SQLAble {
      * Methode qui permet d'ajouter un client
      *
      * @return true si oui si non il retourne false
+     * @throws java.sql.SQLException
      */
     public boolean enregistreClientDB() throws SQLException {
         boolean exist = existsClientDB();
         boolean res = false;
         if (!exist) {
             try {
-                
+
                 CallableStatement cstmt;
                 cstmt = conn.prepareCall("{ = call enregistrerClient(?,?,?) }");
                 cstmt.setString(1, client.getId());
@@ -127,7 +132,6 @@ public class GestionnaireClient extends SQLAble {
                 cstmt.close();
                 res = true;
             } catch (SQLException e) {
-                e.printStackTrace();
             }
         }
         return res;
@@ -137,6 +141,7 @@ public class GestionnaireClient extends SQLAble {
      * Methode qui permet de verifier si un le client existe
      *
      * @return true si oui si non il retourne false
+     * @throws java.sql.SQLException
      */
     protected boolean existsClientDB() throws SQLException {
         boolean res = false;
@@ -152,10 +157,33 @@ public class GestionnaireClient extends SQLAble {
                 res = true;
             }
         } catch (SQLException e) {
-            e.printStackTrace();
         }
-       
+
         return res;
+    }
+
+    /**
+     * Methode permet de mettre à jour les info sur un client encours s'il 
+     * existe, sinon elle fait rien Cette méthode catch la SQLException si cette
+     * dernière est lévée par la procédure PL SQL editClient
+     * @throws java.sql.SQLException
+     */
+    public void editClientDB() throws SQLException {
+        boolean exist = existsClientDB();
+        if (exist) {
+            try {
+                CallableStatement cstmt;
+                cstmt = conn.prepareCall("{ = call editClient(?,?,?,?,?) }");
+                cstmt.setString(1, client.getId());
+                cstmt.setString(2, client.getPhoto());
+                cstmt.setString(3, client.getEmail());
+                cstmt.setString(4, client.getTel());
+                cstmt.setString(5, client.getAdresse());
+                cstmt.execute();
+                cstmt.close();
+            } catch (SQLException e) {
+            }
+        }
     }
 
     /**
@@ -179,7 +207,6 @@ public class GestionnaireClient extends SQLAble {
             cstmt.close();
 
         } catch (SQLException e) {
-            e.printStackTrace();
         }
         return idClient;
     }
@@ -217,7 +244,6 @@ public class GestionnaireClient extends SQLAble {
             }
 
         } catch (SQLException e) {
-            e.printStackTrace();
         }
 
         return res;
@@ -227,6 +253,7 @@ public class GestionnaireClient extends SQLAble {
      * Methode qui permet d'optenir la liste des commande
      *
      * @return list
+     * @throws java.sql.SQLException
      */
     public List<String> getListeCommandes() throws SQLException {
         boolean exist = existsClientDB();
@@ -246,7 +273,6 @@ public class GestionnaireClient extends SQLAble {
                 rset.close();
                 ocstmt.close();
             } catch (SQLException e) {
-                e.printStackTrace();
             }
         }
 
