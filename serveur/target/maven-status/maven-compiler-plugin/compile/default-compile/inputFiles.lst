@@ -2,12 +2,12 @@
 /home/kadidiatou/Projet_Fin_Annee/l3m_menucinema/serveur/src/main/java/database/UplodPhoto.java
 /home/kadidiatou/Projet_Fin_Annee/l3m_menucinema/serveur/src/main/java/l3m/ClientEnregistreServlet.java
 /home/kadidiatou/Projet_Fin_Annee/l3m_menucinema/serveur/src/main/java/database/GestionnaireCommande.java
+/home/kadidiatou/Projet_Fin_Annee/l3m_menucinema/serveur/src/main/java/l3m/ClientServelet.java
 /home/kadidiatou/Projet_Fin_Annee/l3m_menucinema/serveur/src/main/java/database/TypeDePlat.java
 /home/kadidiatou/Projet_Fin_Annee/l3m_menucinema/serveur/src/main/java/database/Plats.java
 /home/kadidiatou/Projet_Fin_Annee/l3m_menucinema/serveur/src/main/java/PoubelleTmp/BD_Connection.java
 /home/kadidiatou/Projet_Fin_Annee/l3m_menucinema/serveur/src/main/java/testClass/Test.java
 /home/kadidiatou/Projet_Fin_Annee/l3m_menucinema/serveur/src/main/java/servelet/ClientData.java
-/home/kadidiatou/Projet_Fin_Annee/l3m_menucinema/serveur/src/main/java/l3m/ClientUpdateServelet.java
 /home/kadidiatou/Projet_Fin_Annee/l3m_menucinema/serveur/src/main/java/l3m/PizzaServer.java
 /home/kadidiatou/Projet_Fin_Annee/l3m_menucinema/serveur/src/main/java/database/Plat.java
 /home/kadidiatou/Projet_Fin_Annee/l3m_menucinema/serveur/src/main/java/database/DataBaseAble.java

@@ -9,7 +9,8 @@ import oracle.jdbc.OracleCallableStatement;
 import oracle.jdbc.OracleTypes;
 
 /**
- * @author Groupe6 Classe GestionnaireClient qui permet de gerer un client
+ * @author Groupe6 
+ * Classe GestionnaireClient qui permet de gerer un client
  */
 public class GestionnaireClient extends SQLAble {
 

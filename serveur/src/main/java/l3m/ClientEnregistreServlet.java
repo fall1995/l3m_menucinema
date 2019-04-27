@@ -148,4 +148,5 @@ public class ClientEnregistreServlet extends HttpServlet {
             Logger.getLogger(ClientEnregistreServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
 }

@@ -16,6 +16,7 @@ public class PizzaServer extends HttpServlet {
         int maxThreads = 100;
         int minThreads = 10;
         int idleTimeout = 120;
+        
 
         QueuedThreadPool threadPool = new QueuedThreadPool(maxThreads, minThreads, idleTimeout);
 
@@ -30,6 +31,8 @@ public class PizzaServer extends HttpServlet {
         servletHandler.addServletWithMapping(BlockingServlet.class, "/status");
         servletHandler.addServletWithMapping(ClientAuthentificationServlet.class, "/api/authentification");
         servletHandler.addServletWithMapping(ClientEnregistreServlet.class, "/api/enregistreNouveauClient");
+        servletHandler.addServletWithMapping(ClientServelet.class,"/api/client");
+          
         server.start();
     }
 
