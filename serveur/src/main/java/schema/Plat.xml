@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+
+
+<plat
+    xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+    xmlns='http://chez.mario.fr/plat'
+    xsi:schemaLocation='http://chez.mario.fr/plat Plat.xsd'>
+    <id>TT4</id>
+    <type> entree</type>
+    <prix>12.3</prix>
+    <ingredients>poulet</ingredients>
+    <ingredients>poivrons</ingredients>
+    <ingredients>aubergine</ingredients>
+    
+    </plat>
