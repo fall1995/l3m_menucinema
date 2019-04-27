@@ -57,7 +57,7 @@ export class SigninComponent implements OnInit {
         this.afAuth.auth.signInWithPopup(new auth.GoogleAuthProvider()).then(
             () => {
                 this.route.navigate(['/profil']);
-                window.location.reload();
+                this.verificationServeur();
             },
             (error) => {
                 this.errorMessage = error;
@@ -103,6 +103,7 @@ export class SigninComponent implements OnInit {
         this.afAuth.auth.signInWithEmailAndPassword(email,password).then(
             () => {
                 this.route.navigate(['/profil']);
+                this.verificationServeur();
             },
             (error) => {
                 this.errorMessage = error;

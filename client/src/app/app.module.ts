@@ -26,14 +26,16 @@ import {AuthGuardService} from './service/auth-guard.service';
 import { UserProfilComponent } from './user-profil/user-profil.component';
 import { HomeComponent } from './home/home.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {MatButtonModule, MatCheckboxModule} from '@angular/material';
+import {MatButtonModule, MatCheckboxModule, MatIconModule,} from '@angular/material';
 import {MatCardModule} from '@angular/material/card';
 import {MatTabsModule} from '@angular/material/tabs';
 import {CardModule} from 'primeng/card';
 import {ButtonModule} from 'primeng/button';
+import {DialogModule} from 'primeng/dialog';
 
 
 import 'hammerjs';
+import { UserDialogComponent } from './user-profil/user-dialog/user-dialog.component';
 @NgModule({
     declarations: [
         AppComponent,
@@ -45,6 +47,7 @@ import 'hammerjs';
         SingleMovieComponent,
         UserProfilComponent,
         HomeComponent,
+        UserDialogComponent,
     ],
     imports: [
         BrowserModule,
@@ -58,14 +61,16 @@ import 'hammerjs';
         AngularFireAuthModule,
         AngularFireDatabaseModule,
         AngularFirestoreModule,
-        AngularFireModule.initializeApp(environment.firebase,'app-signup'),
+        AngularFireModule.initializeApp(environment.firebase),
         BrowserAnimationsModule,
         MatButtonModule,
         MatCheckboxModule,
         MatCardModule,
         MatTabsModule,
         CardModule,
+        DialogModule,
         ButtonModule,
+        MatIconModule,
 
     ],
     providers: [TmdbService,AuthService,MenuService, AuthGuardService],

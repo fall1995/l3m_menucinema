@@ -18,6 +18,7 @@ function AlxToObjectString(data?: object): {[key: string]: string} {
 export class AuthService {
 
     private apiKey: string;
+    public host = 'http://localhost:8090/';
 
     private async get<T>(url: string, data: object): Promise<HttpResponse<T>> {
         return this.http.get<T>( url, {
@@ -43,48 +44,10 @@ export class AuthService {
             userId : userId,
         };
         let body = JSON.stringify(data);
-        return this.http.post(`/api/authentification`, body)
+        return this.http.post(`/api/authentification`, body);
     }
 
-    /**
-     * creation d'un nouvel utilisateur avec son :
-     * @param email
-     * @param password
-     */
-    createNewUser(email : string, password :string){
-        return new Promise(
-            ((resolve, reject) => {
-                firebase.auth().createUserWithEmailAndPassword(email, password).then(
-                    ()=>{
-                        resolve();
-                    },
-                    (error) =>{
-                        reject(error);
-                    }
-                );
-            })
-        );
-    }
 
-    /**
-     * Connexion d'un utilisateur qui existe
-     * @param email
-     * @param password
-     */
-    signUser(email : string, password :string){
-        return new Promise(
-            ((resolve, reject) => {
-                firebase.auth().signInWithEmailAndPassword(email, password).then(
-                    ()=>{
-                        resolve();
-                    },
-                    (error) =>{
-                        reject(error);
-                    }
-                );
-            })
-        );
-    }
 
     /**
      * deconnexion de l'utilisateur
