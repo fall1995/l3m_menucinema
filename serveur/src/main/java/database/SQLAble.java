@@ -7,7 +7,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 /**
- * @author Groupe6 la classe SQLAble permet gerer la connection a la base oracle
+ * @author Groupe6 
+ * la classe SQLAble permet gerer la connection a la base oracle
  * et l'excecution des requete
  */
 public abstract class SQLAble implements DataBaseAble {
@@ -16,6 +17,7 @@ public abstract class SQLAble implements DataBaseAble {
 
     /**
      * Methode permert de se connecter la base de donnee oracle
+     * @throws java.sql.SQLException
      */
     @Override
     public void connectToDatabase() throws SQLException {
@@ -45,6 +47,7 @@ public abstract class SQLAble implements DataBaseAble {
 
     /**
      * Methode permet de se deconnecter a la base de donner oracle
+     * @throws java.sql.SQLException
      */
     @Override
     public void disconnect() throws SQLException {
@@ -59,6 +62,7 @@ public abstract class SQLAble implements DataBaseAble {
      *
      * @param requete
      * @return res qui contient le resultat du requete excecute
+     * @throws java.sql.SQLException
      */
     public ResultSet request(String requete) throws SQLException {
         Statement stmt = conn.createStatement();
