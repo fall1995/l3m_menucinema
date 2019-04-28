@@ -7,16 +7,23 @@ import org.eclipse.jetty.server.Connector;
 import org.eclipse.jetty.servlet.ServletHandler;
 import org.eclipse.jetty.util.thread.QueuedThreadPool;
 
-
+/**
+ * @author Groupe6
+ * PizzaServer
+ */
 public class PizzaServer extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private Server server;
+        
+    /**
+     *Methode qui permet de demarrer le server
+     * @throws Exception
+     */
 
     void start() throws Exception {
         int maxThreads = 100;
         int minThreads = 10;
         int idleTimeout = 120;
-
         QueuedThreadPool threadPool = new QueuedThreadPool(maxThreads, minThreads, idleTimeout);
 
         server = new Server(threadPool);
@@ -30,17 +37,25 @@ public class PizzaServer extends HttpServlet {
         servletHandler.addServletWithMapping(BlockingServlet.class, "/status");
         servletHandler.addServletWithMapping(ClientAuthentificationServlet.class, "/api/authentification");
         servletHandler.addServletWithMapping(ClientEnregistreServlet.class, "/api/enregistreNouveauClient");
+        servletHandler.addServletWithMapping(UpdateClientServlet.class, "/api/updateClient");
         server.start();
     }
 
+    /**
+     *Methode  qui permet d' arreter le server
+     * @throws Exception
+     */
     void stop() throws Exception {
         System.out.println("Server stop");
     	server.stop();
     }
-
-	public static void main(String[] args) throws Exception {
+    /**
+     *Methode main qui permet de demarrer le server
+     * @param args
+     * @throws Exception
+     */
+    public static void main(String[] args) throws Exception {
 		PizzaServer server = new PizzaServer();
-
 		server.start();
 	}
 

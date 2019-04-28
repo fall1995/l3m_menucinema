@@ -20,9 +20,9 @@ public class ClientEnregistreServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     /**
-     * Methode qui permet enregistre un nouveau client en prenant en parametre
-     * la requete envoyee par le client et la reponse de retour de la part du
-     * server
+     * Methode qui permet d'afficher la liste des commandes concernant un client
+     * en prenant en parametre la requete envoyee par le client et la reponse de
+     * retour de la part du server
      *
      * @param request
      * @param response
@@ -30,33 +30,25 @@ public class ClientEnregistreServlet extends HttpServlet {
      * @throws IOException
      */
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String action = request.getServletPath();
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        String idClient = request.getParameter("idClient");
+        String nom = request.getParameter("nom");
+        String prenom = request.getParameter("prenom");
 
         try {
-            switch (action) {
-                case "/updateClient":
-                    updateClient(request, response);
-                    break;
-                case "/listeCommandeClient":
-                    listeCommandePourClient(request, response);
-                    break;
-                case "/deleteClient":
-                    deleteClient(request, response);
-                    break;
-                default:
-                    listeCommandePourClient(request, response);
-                    break;
-            }
+            GestionnaireClient gestionClient = new GestionnaireClient(idClient, nom, prenom);
+            List<String> listeCommandes = gestionClient.getListeCommandes();
         } catch (SQLException ex) {
-            throw new ServletException(ex);
+            Logger.getLogger(ClientEnregistreServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
-
     }
+
     /**
      * Methode qui permet enregistrer un nouveau client en prenant en parametre
      * la requete envoyee par le client et la reponse de retour de la part du
      * server
+     *
      * @param request
      * @param response
      * @throws ServletException
@@ -83,6 +75,7 @@ public class ClientEnregistreServlet extends HttpServlet {
     /**
      * Methode qui permet supprimer client en prenant en parametre la requete
      * envoyee par le client et la reponse de retour de la part du server
+     *
      * @param request
      * @param response
      * @throws ServletException
@@ -95,33 +88,6 @@ public class ClientEnregistreServlet extends HttpServlet {
         gestionclientsup.deleteClientId(idClient);
         //response.sendRedirect("list");
     }
-
-    /**
-     * Methode qui permet d'afficher la liste des commandes concernant un client
-     * en prenant en parametre la requete envoyee par le client et la reponse de
-     * retour de la part du server
-     *
-     * @param request
-     * @param response
-     * @throws ServletException
-     * @throws IOException
-     */
-    private void listeCommandePourClient(HttpServletRequest request,
-            HttpServletResponse response) throws SQLException, IOException,
-            ServletException {
-        String idClient = request.getParameter("idClient");
-        String nom = request.getParameter("nom");
-        String prenom = request.getParameter("prenom");
-
-        try {
-            GestionnaireClient gestionClient = new GestionnaireClient(idClient, nom, prenom);
-            List<String> listeCommandes = gestionClient.getListeCommandes();
-        } catch (SQLException ex) {
-            Logger.getLogger(ClientEnregistreServlet.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-    }
-
     /**
      * Methode qui permet de mettre a les info d'un client en prenant en
      * parametre la requete envoyee par le client et la reponse de retour de la
@@ -132,7 +98,9 @@ public class ClientEnregistreServlet extends HttpServlet {
      * @throws ServletException
      * @throws IOException
      */
-    private void updateClient(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException {
+    @Override
+    protected void doPut(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
         String idClient = request.getParameter("idClient");
         String nom = request.getParameter("nom");
         String prenom = request.getParameter("prenom");
@@ -143,9 +111,30 @@ public class ClientEnregistreServlet extends HttpServlet {
         try {
             GestionnaireClient gestionClient = new GestionnaireClient(idClient,
                     nom, prenom);
+            gestionClient.editPhoto(photo);
+            gestionClient.editEmail(email);
+            gestionClient.enregistreClientDB();
+            gestionClient.editAdresse(adresse);
+            
             gestionClient.editClientDB();
         } catch (SQLException ex) {
             Logger.getLogger(ClientEnregistreServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
+    @Override
+    protected void doDelete(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        String idClient = request.getParameter("idClient");
+
+        GestionnaireClient gestionclientsup;
+        try {
+            gestionclientsup = new GestionnaireClient(idClient);
+            gestionclientsup.deleteClientId(idClient);
+        } catch (SQLException ex) {
+            Logger.getLogger(ClientEnregistreServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+
 }
