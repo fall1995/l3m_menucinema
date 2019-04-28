@@ -143,13 +143,13 @@ public class GestionnaireClient extends SQLAble {
      * @return true si oui si non il retourne false
      * @throws java.sql.SQLException
      */
-    protected boolean existsClientDB() throws SQLException {
+        protected boolean existsClientDB() throws SQLException {
         boolean res = false;
         try {
             OracleCallableStatement ocstmt;
             ocstmt = (OracleCallableStatement) conn.prepareCall("{ ? = call existsClient(?) }");
             ocstmt.registerOutParameter(1, OracleTypes.NUMBER);
-            ocstmt.setString(2, "10");
+            ocstmt.setString(2, client.getId());
             ocstmt.execute();
 
             int ret = ocstmt.getInt(1);
@@ -277,5 +277,9 @@ public class GestionnaireClient extends SQLAble {
         }
 
         return list;
+    }
+    
+    public void setClient(Client client) {
+        this.client = client;
     }
 }
