@@ -11,10 +11,9 @@ and open the template in the editor.
     xmlns='http://chez.mario.fr/plat'
     xsi:schemaLocation='http://chez.mario.fr/plat Plat.xsd'>
     <id>TT4</id>
-    <type> entree</type>
+    <type>entree</type>
     <prix>12.3</prix>
     <ingredients>poulet</ingredients>
     <ingredients>poivrons</ingredients>
     <ingredients>aubergine</ingredients>
-    
     </plat>

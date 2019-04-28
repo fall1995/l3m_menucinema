@@ -10,8 +10,8 @@ and open the template in the editor.
             targetNamespace="http://chez.mario.fr/ingredient"
             xmlns="http://chez.mario.fr/ingredient"
             elementFormDefault="qualified">
-    <xs:element name="ingredient" type="Ingredient" /> 
-    <xs:simpleType name="Ingredient">
+    <xs:element name="ingredient"> 
+    <xs:simpleType>
         <xs:restriction base="xs:string">
             <xs:enumeration value="jambon"/>
             <xs:enumeration value="saumon"/>
@@ -27,4 +27,5 @@ and open the template in the editor.
             <xs:enumeration value="ananas"/>
         </xs:restriction>
     </xs:simpleType>
+    </xs:element>
 </xs:schema>

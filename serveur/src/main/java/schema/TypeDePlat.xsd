@@ -5,18 +5,19 @@ Le schema du  type de plat
 -->
 
 <xsd:schema version="1.0"
-           xmlns:xsd="http://www.w3.org/2001/XMLSchema"
-           targetNamespace="http://chez.mario.fr/typeDePlat"
-           xmlns="http://chez.mario.fr/typeDePlat"
-           elementFormDefault="qualified">
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            targetNamespace="http://chez.mario.fr/typeDePlat"
+            xmlns="http://chez.mario.fr/typeDePlat"
+            elementFormDefault="qualified">
     
-     <xsd:element name="typeDePlat" type="TypeDePlat"/> 
-    <xsd:simpleType name="typeDePlat">
-        <xsd:restriction base="xsd:string">
-            <xsd:enumeration value="entree"/>
-            <xsd:enumeration value="plat"/>
-            <xsd:enumeration value="dessert"/>
-            <xsd:enumeration value="boisson"/>
-        </xsd:restriction>
-  </xsd:simpleType>
+    <xsd:element name="typeDePlat"> 
+        <xsd:simpleType>
+            <xsd:restriction base="xsd:string">
+                <xsd:enumeration value="entree"/>
+                <xsd:enumeration value="plat"/>
+                <xsd:enumeration value="dessert"/>
+                <xsd:enumeration value="boisson"/>
+            </xsd:restriction>
+        </xsd:simpleType>
+    </xsd:element>
 </xsd:schema>
