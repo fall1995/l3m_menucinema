@@ -45,6 +45,9 @@ public class UpdateClientServlet extends HttpServlet {
 
     @Override
     protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        /**
+         * authorisation de la connection avec les plateformes exterieur 
+         */
         response.setContentType("application/json");
         response.addHeader("Access-Control-Allow-Origin", "*");
         response.addHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, PUT, DELETE, HEAD");
@@ -69,7 +72,12 @@ public class UpdateClientServlet extends HttpServlet {
         client.setPhoto(parametres.get(photo));
         client.setTel(parametres.get(tel));
         client.setAdresse(parametres.get(adresse));
-
+        
+        /**
+         * try :si toute les valeurs sont ok modification ok et reponse du serveur ok,
+         * catch : si non le serveur return le msg d'erreur
+         * else : parametre non complets
+         */
         if (putValide(parametres)) {
             try {
                 //mise à jour
@@ -90,13 +98,18 @@ public class UpdateClientServlet extends HttpServlet {
         }
 
     }
-
+    /**
+     * renvoie vraie si les clefs valeur sont correct 
+     * @param parametres
+     * @return 
+     */
     boolean putValide(HashMap<String, String> parametres) {
         boolean res = false;
-
+        //on verifie si le parametre contient une clé
         if (parametres.containsKey(id) && parametres.containsKey(nom) && parametres.containsKey(prenom)
                 && parametres.containsKey(email) && parametres.containsKey(tel) && parametres.containsKey(photo)
                 && parametres.containsKey(adresse)) {
+            //verification si les valeurs ne sont pas null
             if (parametres.get(id) != null && parametres.get(nom) != null && parametres.get(prenom) != null
                     && parametres.get(email) != null && parametres.get(tel) != null && parametres.get(photo) != null
                     && parametres.get(adresse) != null) {
