@@ -27,6 +27,4 @@ and open the template in the editor.
             <xsd:element name="ingredients"       type="ingre:Ingredient" minOccurs="1" maxOccurs="unbounded"/>
         </xsd:sequence>  
     </xsd:complexType> 
-  
-
 </xsd:schema>

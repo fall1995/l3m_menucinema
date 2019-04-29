@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog" prefer="system">
+    <system systemId="file:/home/kadidiatou/Projet_Fin_Annee/l3m_menucinema/serveur/src/main/java/schema/Plats.xsd" uri="src/main/resources/jaxb/okk/Plats.xsd"/>
+    <system systemId="file:/home/kadidiatou/Projet_Fin_Annee/l3m_menucinema/serveur/src/main/java/schema/Plat.xsd" uri="src/main/resources/jaxb/okk/Plat.xsd"/>
+    <system systemId="file:/home/kadidiatou/Projet_Fin_Annee/l3m_menucinema/serveur/src/main/java/schema/Client.xsd" uri="src/main/resources/jaxb/text/Client.xsd"/>
+</catalog>

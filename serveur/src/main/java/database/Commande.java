@@ -142,4 +142,12 @@ public class Commande {
         this.adresseLivraison = adresseLivraison;
     }
 
+    void setIdFilms(String idFilms) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    void setIdplats(String idplats) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+     
 }
