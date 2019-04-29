@@ -128,6 +128,20 @@ public class Client {
     public void setEmail(String email) {
         this.email = email;
     }
+    public String toString() {
+        String res = "{\n";
+                res = "{";
+        res += "id: "+ this.id + ",\"\n ";
+        res += "nom:"+ this.nom + ",\"\n ";
+        res += "prenom:"+ this.prenom + "\n ";
+        res += "photoUrl:"+ this.photo + "\", ";
+        res += "email:"+ this.email + ",\"\n ";
+        res += "tel:"+ this.tel + "\", \n";
+        res += "adresse:"+ this.adresse + ",\"\n";
+        res += "}\n";
+        res += "}";
+        return res;
+    }
     
     
     

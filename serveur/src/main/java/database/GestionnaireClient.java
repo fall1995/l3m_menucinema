@@ -22,12 +22,13 @@ public class GestionnaireClient extends SQLAble {
         client.setId(id);
         client.setNom(nom);
         client.setPrenom(premon);
+        connectToDatabase();
         init();
+
     }
 
+    protected void init() {
 
-    protected void init(){
-        
         try {
             OracleCallableStatement ocstmt;
             ocstmt = (OracleCallableStatement) conn.prepareCall("{ ? = call getClient(?) }");
@@ -50,12 +51,10 @@ public class GestionnaireClient extends SQLAble {
             e.printStackTrace();
         }
     }
-    
-    
+
     public String getNom() {
         return client.getNom();
     }
-
 
     /**
      * Methode qui permet d'envoyer le prenom
@@ -66,7 +65,6 @@ public class GestionnaireClient extends SQLAble {
         return client.getPrenom();
     }
 
-
     /**
      * Methode qui permet d'envoyer la photo
      *
@@ -75,7 +73,6 @@ public class GestionnaireClient extends SQLAble {
     public String getPhoto() {
         return client.getPhoto();
     }
-
 
     /**
      * Methode qui permet d'envoyer l'adresse
@@ -86,7 +83,6 @@ public class GestionnaireClient extends SQLAble {
         return client.getAdresse();
     }
 
-
     /**
      * Methode qui permet de modifier l'email
      *
@@ -95,7 +91,6 @@ public class GestionnaireClient extends SQLAble {
     public void editEmail(String email) {
         client.setEmail(email);
     }
-
 
     /**
      * Methode qui permet de modifier l'adresse
@@ -106,7 +101,6 @@ public class GestionnaireClient extends SQLAble {
         client.setAdresse(adresse);
     }
 
-
     /**
      * Methode qui permet de modifier le numero de tel
      *
@@ -115,7 +109,6 @@ public class GestionnaireClient extends SQLAble {
     public void editTel(String tel) {
         client.setTel(tel);
     }
-
 
     /**
      * Methode qui permet de modifier la photo
@@ -126,82 +119,104 @@ public class GestionnaireClient extends SQLAble {
         client.setPhoto(photo);
     }
 
-
     /**
      * Methode qui permet d'ajouter un client dans la BD
+     *
      * @return true si l'enregistrement a eu lieu, sinon il retourne false
      */
-    public boolean enregistreClientDB() {
+    public boolean enregistreClientDB() throws SQLException {
         boolean exist = existsClientDB();
         boolean res = false;
+        CallableStatement cstmt = null;
         if (!exist) {
             try {
-                CallableStatement cstmt;
-                cstmt = conn.prepareCall("{ = call enregistrerClient(?,?,?) }");
+                connectToDatabase();
+                cstmt = conn.prepareCall("{ call enregistrerClient(?,?,?) }");
                 cstmt.setString(1, client.getId());
                 cstmt.setString(2, client.getNom());
                 cstmt.setString(3, client.getPrenom());
                 cstmt.execute();
-                cstmt.close();
                 res = true;
             } catch (SQLException e) {
-                e.printStackTrace();
+                System.out.println("Message erreur: " + e.getMessage());
+            } finally {
+                if (cstmt != null) {
+                    cstmt.close();
+
+                }
+                if (conn != null) {
+                    disconnect();
+                }
             }
+        }else{
+            // si le client existe on le selectionne
+            res = true;
         }
         return res;
     }
 
-
     /**
-     * Methode qui permet de verifier si un client existe
-     * Cette méthode fait appel à la procedure PL SQL existsClient qui prend en paramètre
-     * idClient et qui retoune 1 si ce client existe, sinon il retoune 0
+     * Methode qui permet de verifier si un client existe Cette méthode fait
+     * appel à la procedure PL SQL existsClient qui prend en paramètre idClient
+     * et qui retoune 1 si ce client existe, sinon il retoune 0
+     *
      * @return true si le client est déja dans la BD, sinon il retourne false
      */
-    protected boolean existsClientDB(){
+    public boolean existsClientDB() throws SQLException {
         boolean res = false;
+        OracleCallableStatement ocstmt = null;
+        ResultSet rs = null;
         try {
-            OracleCallableStatement ocstmt;
+            connectToDatabase();
             ocstmt = (OracleCallableStatement) conn.prepareCall("{ ? = call existsClient(?) }");
             ocstmt.registerOutParameter(1, OracleTypes.NUMBER);
-            ocstmt.setString( 2 , client.getId() );
+            ocstmt.setString(2, client.getId());
             ocstmt.execute();
 
             int ret = ocstmt.getInt(1);
-            if (ret == 1) {
+            if (ret > 0) {
                 res = true;
             }
+
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println("client exists dans la base");
+            System.out.println(e.getMessage());
+        } finally {
+            if (ocstmt != null) {
+                ocstmt.close();
+
+            }
+            if (conn != null) {
+                disconnect();
+            }
         }
-       
+
         return res;
     }
 
-
-    public void editClientDB(){
-        boolean exist = existsClientDB();
-        if (exist) {
-            try {
-                CallableStatement cstmt;
-                cstmt = conn.prepareCall("{ = call editclientDB(?,?,?,?,?) }");
-                cstmt.setString(1, client.getId());
-                cstmt.setString(2, client.getPhoto());
-                cstmt.setString(3, client.getEmail());
-                cstmt.setString(4, client.getTel());
-                cstmt.setString(5, client.getAdresse());
-                cstmt.execute();
-                cstmt.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
+    public void editClientDB() {
+        //boolean exist = existsClientDB();
+        //if (exist) {
+        try {
+            CallableStatement cstmt;
+            cstmt = conn.prepareCall("{ = call editclientDB(?,?,?,?,?) }");
+            cstmt.setString(1, client.getId());
+            cstmt.setString(2, client.getPhoto());
+            cstmt.setString(3, client.getEmail());
+            cstmt.setString(4, client.getTel());
+            cstmt.setString(5, client.getAdresse());
+            cstmt.execute();
+            cstmt.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
+        //}
     }
 
-
     /**
-     * Methode qui permet d'optenir l'id du client avec le nom et le prenom passés
-     * en paramètres
+     * Methode qui permet d'optenir l'id du client avec le nom et le prenom
+     * passés en paramètres
+     *
      * @param nom
      * @param prenom
      * @return id
@@ -229,18 +244,19 @@ public class GestionnaireClient extends SQLAble {
      * Methode qui permet de suppimer un client dont id est passe en paramètre
      * Cette méthode utilise la procedure PL SQL deleteClient, qui lève une
      * exception si aucune suppression n'a été effectuée.
+     *
      * @param id
-     * @return 
+     * @return
      */
     public static boolean deleteClientDB(String id) {
         boolean res = false;
         try {
-                CallableStatement cstmt;
-                cstmt = conn.prepareCall("{ = call deleteClient(?) }");
-                cstmt.setString(1, id);
-                cstmt.execute();
-                res = true;
-                cstmt.close();
+            CallableStatement cstmt;
+            cstmt = conn.prepareCall("{ = call deleteClient(?) }");
+            cstmt.setString(1, id);
+            cstmt.execute();
+            res = true;
+            cstmt.close();
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -251,6 +267,7 @@ public class GestionnaireClient extends SQLAble {
 
     /**
      * Methode qui permet d'optenir la liste des commandes du client encours
+     *
      * @return list
      */
     public List<String> getListeCommandes() throws SQLException {
@@ -263,7 +280,7 @@ public class GestionnaireClient extends SQLAble {
             ocstmt.execute();
 
             ResultSet rset = (ResultSet) (ocstmt.getObject(1));
-            while ( rset != null && rset.next() ) {
+            while (rset != null && rset.next()) {
                 list.add(rset.getString("idCommande"));
             }
             rset.close();
@@ -275,9 +292,8 @@ public class GestionnaireClient extends SQLAble {
         return list;
     }
 
-
-    public void setClient(Client client){
-    	this.client = client;
+    public void setClient(Client client) {
+        this.client = client;
     }
-    
+
 }

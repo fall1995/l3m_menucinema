@@ -86,6 +86,7 @@ public class ClientEnregistreServlet extends HttpServlet {
      * @throws ServletException
      * @throws IOException
      */
+    /*
     private void deleteClient(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException {
         String idClient = request.getParameter("idClient");
 
@@ -93,6 +94,7 @@ public class ClientEnregistreServlet extends HttpServlet {
         gestionclientsup.deleteClientId(idClient);
         //response.sendRedirect("list");
     }
+    */
     /**
      * Methode qui permet de mettre a les info d'un client en prenant en
      * parametre la requete envoyee par le client et la reponse de retour de la
@@ -127,6 +129,7 @@ public class ClientEnregistreServlet extends HttpServlet {
         }
     }
 
+    /*
     @Override
     protected void doDelete(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -141,5 +144,6 @@ public class ClientEnregistreServlet extends HttpServlet {
         }
 
     }
+*/
 
 }

@@ -3,6 +3,7 @@ package database;
 import java.sql.CallableStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import oracle.jdbc.OracleCallableStatement;
 import oracle.jdbc.OracleTypes;
@@ -18,8 +19,8 @@ public class GestionnaireCommande extends SQLAble {
     public GestionnaireCommande(String idClient, List<String> idPlats , List<String> idFilms , String adresseLivraison) {
         commande = new Commande();
         commande.setId(idClient);
-        commande.setIdPlats(idPlats);
-        commande.setIdFilms(idFilms);
+        commande.setIdplats((ArrayList<String>) idPlats);
+        commande.setIdFilms((ArrayList<String>) idFilms);
         commande.setAdresseLivraison(adresseLivraison);
     }
 
@@ -34,7 +35,7 @@ public class GestionnaireCommande extends SQLAble {
      */
     public void enregistrerCommandeDB() throws Exception {
         try {
-            List<String> listIdPlats = commande.getIdPlats();
+            List<String> listIdPlats = commande.getIdplats();
             List<String> listIdFilms = commande.getIdFilms();
             String adrLivr = commande.getAdresseLivraison();
             
@@ -73,7 +74,7 @@ public class GestionnaireCommande extends SQLAble {
     public static Commande getCommande(String id) {
         Commande commande = new Commande();
         commande.setId(id);
-        List<String> platsCommandes = commande.getIdPlats();
+        List<String> platsCommandes = commande.getIdplats();
         List<String> filmsCommandes = commande.getIdFilms();
         
         try {

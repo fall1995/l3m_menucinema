@@ -35,7 +35,24 @@ public class UpdateClientServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        response.setContentType("application/json");
+        response.addHeader("Access-Control-Allow-Origin", "*");
+        response.addHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, PUT, DELETE, HEAD");
+        response.addHeader("Access-Control-Allow-Headers", "X-PINGOTHER, Origin, X-Requested-With, Content-Type, Accept");
+        response.addHeader("Access-Control-Max-Age", "1728000");
+        
+        Enumeration<String> P = request.getParameterNames();
+        HashMap<String, String> parametres = new HashMap();
+        Client client = new Client();
+        
+        while (P.hasMoreElements()) {
+            String p = P.nextElement();
+            parametres.put(p, request.getParameter((String) p));
+        }
+        
+        response.setContentType("application/json");
+        response.setStatus(HttpServletResponse.SC_OK);
+         response.getWriter().println(client.toString());
     }
 
     @Override

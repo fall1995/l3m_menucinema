@@ -13,7 +13,7 @@ import java.sql.Statement;
  */
 public abstract class SQLAble implements DataBaseAble {
 
-    Connection conn;
+    public static Connection conn;
 
     /**
      * Methode permert de se connecter la base de donnee oracle
@@ -22,8 +22,8 @@ public abstract class SQLAble implements DataBaseAble {
     @Override
     public void connectToDatabase() throws SQLException {
         String CONN_URL = "jdbc:oracle:thin:@im2ag-oracle.e.ujf-grenoble.fr:1521:im2ag";
-        String USER = "coulibka";
-        String PASSWD = "Yah123456";
+        String USER = "sagarai";
+        String PASSWD = "Sagara1992";
         System.out.print("Loading Oracle driver... ");
         DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
         System.out.println("loaded");
