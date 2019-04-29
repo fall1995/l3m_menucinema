@@ -16,7 +16,6 @@ public class GestionnaireCommande extends SQLAble {
     /**
      * Constructeur qui prend en parametre idclient, liste des IdPlats, liste
      * des idFilms,et adresse de livraisons et les modifie
-     *
      * @param idClient
      * @param idPlat
      * @param idFilms
@@ -41,10 +40,11 @@ public class GestionnaireCommande extends SQLAble {
 
     /**
      * Methode qui permet d'enregistre une commander
+     * @throws java.sql.SQLException
      */
     public void enregistreCommanderDB() throws SQLException {
         CallableStatement cstmt;
-        cstmt = conn.prepareCall("{ = call enregistrerClient(?,?,?) }");
+        cstmt = conn.prepareCall("{ = call enregistrerCommande(?,?,?) }");
         cstmt.setString(1, commande.getId());
         cstmt.setString(2, commande.getIdClient());
         cstmt.setString(3, " ");
@@ -66,7 +66,7 @@ public class GestionnaireCommande extends SQLAble {
      */
     public Commande getCommande(String id) throws SQLException {
         Commande res = new Commande();
-        String requete = "{ ? = call getClientId(?,?) }";
+        String requete = "{ ? = call getCommande(?,?) }";
         ResultSet reslreq = request(requete);
         while (reslreq.next()) {
             String idCommande = reslreq.getString("id");
@@ -96,6 +96,9 @@ public class GestionnaireCommande extends SQLAble {
      */
     public void setCommande(Commande commande) {
         this.commande = commande;
+    }
+     public Commande getCommande() {
+        return commande;
     }
 
 }

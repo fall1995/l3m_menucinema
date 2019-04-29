@@ -12,6 +12,7 @@ and open the template in the editor.
            xmlns:type="http://chez.mario.fr/typeDePlat"
            xmlns:ingre="http://chez.mario.fr/ingredient"
            elementFormDefault="qualified">
+     <xsd:import namespace="http://chez.mario.fr/plat" schemaLocation="Ingredient.xsd"/>
     <xsd:element name="plat" type="Plat"/>
     <!--    declarartion du complexe type plat-->
     <xsd:complexeType name="Plat">
