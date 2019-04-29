@@ -41,6 +41,20 @@ public class GestionnaireMenu  extends XMLAble{
      */
     public GestionnaireMenu(ArrayList<String> idPlats) {
         // RECUPERER TOUS LES PLATS AVEC id DANS idPlats
+        ArrayList<Plat> plats = getCartesDB();
+        this.menu = new ArrayList<Plat>();
+        int i = 0;
+        for(String id : idPlats){
+            if(existPlatDB(id){
+            i = 0;
+            while(!id.equals(plats.get(i).getId() || i < plats.length()){
+                i++;
+            }
+            if(id.equals(plats.get(i).getId()){
+                menu.add(plats.get(i));
+            }
+            }
+        }
         
     }
 
@@ -51,8 +65,12 @@ public class GestionnaireMenu  extends XMLAble{
      * @return res
      */
     protected boolean existPlatDB(String id) {
-        boolean res = false;
-        return res;
+        for(Plat p : getCartesDB()){
+            if(p.getId().equals(id)){
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
@@ -75,6 +93,7 @@ public class GestionnaireMenu  extends XMLAble{
      *Methode qui permet de recuperer le menu
      * @return menu
      */
+     ????????????????Besoin de param - identificateur de menu specifique
     public ArrayList<Plat> getMenu() {
         return menu;
     }
