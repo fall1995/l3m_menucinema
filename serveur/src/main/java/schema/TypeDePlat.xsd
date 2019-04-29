@@ -5,12 +5,11 @@ Le schema du  type de plat
 -->
 
 <xsd:schema version="1.0"
-           xmlns:xsd="http://www.w3.org/2001/XMLSchema"
-           targetNamespace="http://classesGen/typeDePlat"
-           xmlns="http://classesGen/typeDePlat"
-           elementFormDefault="qualified">
-    
-     <xsd:element name="typeDePlat" type="TypeDePlat"/> 
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            targetNamespace="http://classesGen/typeDePlat"
+            xmlns="http://classesGen/typeDePlat"
+            elementFormDefault="qualified">
+    <xsd:element name="typeDePlat" type="TypeDePlat"/> 
     <xsd:simpleType name="TypeDePlat">
         <xsd:restriction base="xsd:string">
             <xsd:enumeration value="entree"/>
@@ -18,5 +17,5 @@ Le schema du  type de plat
             <xsd:enumeration value="dessert"/>
             <xsd:enumeration value="boisson"/>
         </xsd:restriction>
-  </xsd:simpleType>
+    </xsd:simpleType>
 </xsd:schema>

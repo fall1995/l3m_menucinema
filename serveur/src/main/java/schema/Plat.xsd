@@ -11,12 +11,9 @@ and open the template in the editor.
            xmlns="http://classesGen/plat"
            xmlns:type="http://classesGen/typeDePlat"
            xmlns:ingre="http://classesGen/ingredient"
-           elementFormDefault="qualified">
-    
-    
+           elementFormDefault="qualified">     
     <xsd:import namespace="http://classesGen/typeDePlat" schemaLocation="TypeDePlat.xsd"/>
     <xsd:import namespace="http://classesGen/ingredient" schemaLocation="Ingredient.xsd"/>
-    
     <xsd:element name="plat" type="Plat"/>
     <!--    declarartion du complexe type plat-->
     <xsd:complexType name="Plat">

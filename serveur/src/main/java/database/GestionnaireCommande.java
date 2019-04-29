@@ -1,10 +1,11 @@
 package database;
 
+import classesgen.commande.Commande;
 import java.sql.CallableStatement;
 import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author Groupe6 La clase GestionnaireCommande pour la gestion des commandes
@@ -22,10 +23,10 @@ public class GestionnaireCommande extends SQLAble {
      * @param idFilms
      * @param adresseLivraison
      */
-    public GestionnaireCommande(String idClient, ArrayList<String> idPlat,
-            ArrayList<String> idFilms, String adresseLivraison) {
+    public GestionnaireCommande(String idClient, List<String> idPlat,
+            List<String> idFilms, String adresseLivraison) {
         commande.setId(idClient);
-        commande.setIdplats(idPlat);
+        //commande.setIdplats(idplats);
         commande.setIdFilms(idFilms);
         commande.setAdresseLivraison(adresseLivraison);
     }
@@ -41,14 +42,16 @@ public class GestionnaireCommande extends SQLAble {
 
     /**
      * Methode qui permet d'enregistre une commander
+     *
+     * @throws java.sql.SQLException
      */
     public void enregistreCommanderDB() throws SQLException {
         CallableStatement cstmt;
-        cstmt = conn.prepareCall("{ = call enregistrerClient(?,?,?) }");
+        cstmt = conn.prepareCall("{ = call enregistrerCommande(?,?,?) }");
         cstmt.setString(1, commande.getId());
         cstmt.setString(2, commande.getIdClient());
         cstmt.setString(3, " ");
-        cstmt.setString(4," " );
+        cstmt.setString(4, " ");
         cstmt.setString(5, commande.getDate());
         cstmt.setDouble(6, commande.getPrix());
         cstmt.setString(7, commande.getAdresseLivraison());
@@ -60,13 +63,14 @@ public class GestionnaireCommande extends SQLAble {
 
     /**
      * Methode qui renvoye une commande grace à id passe en parametre
+     *
      * @param id
      * @return commande
      * @throws java.sql.SQLException
      */
     public Commande getCommande(String id) throws SQLException {
         Commande res = new Commande();
-        String requete = "{ ? = call getClientId(?,?) }";
+        String requete = "{ ? = call getCommande(?,?) }";
         ResultSet reslreq = request(requete);
         while (reslreq.next()) {
             String idCommande = reslreq.getString("id");
@@ -79,8 +83,8 @@ public class GestionnaireCommande extends SQLAble {
 
             res.setId(id);
             res.setIdClient(idClient);
-            res.setIdFilms(idFilms);
-            res.setIdplats(idplats);
+            //res.setIdFilms(idFilms);
+            //res.setIdplats(idplats);
             res.setAdresseLivraison(adresseLivraison);
             res.setPrix(price);
         }
@@ -88,14 +92,18 @@ public class GestionnaireCommande extends SQLAble {
         return res;
     }
 
-    
     /**
-     * Methode qui modifier une commande  en prenant en parametre la nouvelle 
+     * Methode qui modifier une commande en prenant en parametre la nouvelle
      * commande
+     *
      * @param commande
      */
     public void setCommande(Commande commande) {
         this.commande = commande;
+    }
+
+    public Commande getCommande() {
+        return commande;
     }
 
 }
