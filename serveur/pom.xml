@@ -8,6 +8,7 @@
   <name>pizzaserverstudent</name>
   <url>http://maven.apache.org</url>
   
+  
   <properties>
        <!-- https://maven.apache.org/general.html#encoding-warning -->
        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -18,6 +19,9 @@
    </properties>
 
   <dependencies>
+      
+      
+      
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
@@ -34,7 +38,6 @@
     	<artifactId>jetty-servlet</artifactId>
     	<version>${jettyServletVersion}</version>
     </dependency>
-    
     <dependency>
         <groupId>com.oracle</groupId>
         <artifactId>ojdbc8</artifactId>
@@ -46,15 +49,36 @@
 		<artifactId>mysql-connector-java</artifactId>
 		<version>8.0.15</version>
 	</dependency>
-    
+     -->
+
     <dependency>
         <groupId>com.googlecode.json-simple</groupId>
 		<artifactId>json-simple</artifactId>
 		<version>1.1.1</version>
     </dependency>
-    -->
+    
+<!-- https://mvnrepository.com/artifact/com.sun.xml.bind/jaxb-impl -->
+<dependency>
+  <groupId>javax.xml.bind</groupId>
+  <artifactId>jaxb-api</artifactId>
+  <version>2.3.0</version>
+</dependency>
+<dependency>
+  <groupId>com.sun.xml.bind</groupId>
+  <artifactId>jaxb-core</artifactId>
+  <version>2.3.0</version>
+</dependency>
+<dependency>
+  <groupId>com.sun.xml.bind</groupId>
+  <artifactId>jaxb-impl</artifactId>
+  <version>2.3.0</version>
+</dependency>
+
+
+
+
   </dependencies>
-	
+
   <build>
     <plugins>
       <plugin>
@@ -70,31 +94,5 @@
       </plugin>
     </plugins>
   </build>
-<!--
- <profiles>
-  <profile>
-    <id>traverse</id>
-    <activation>
-      <property>
-        <name>traverse</name>
-      </property>
-    </activation>
-    <build>
-    <plugins>
-      <plugin>
-        <groupId>org.codehaus.mojo</groupId>
-        <artifactId>exec-maven-plugin</artifactId>
-        <version>1.1</version>
-        <executions>
-          <execution><goals><goal>java</goal></goals></execution>
-        </executions>
-        <configuration>
-          <mainClass>l3m.PizzaServer</mainClass>
-        </configuration>
-      </plugin>
-    </plugins>
-  </build>
-  </profile>
-</profiles>
--->
+  
 </project>

@@ -7,11 +7,11 @@ and open the template in the editor.
 
 <xsd:schema version="1.0"
             xmlns:xsd="http://www.w3.org/2001/XMLSchema"
-            targetNamespace="http://chez.mario.fr/ingredient"
-            xmlns="http://chez.mario.fr/ingredient"
+            targetNamespace="http://classesGen/ingredient"
+            xmlns="http://classesGen/ingredient"
             elementFormDefault="qualified">
     <xsd:element name="ingredient" type="Ingredient"/> 
-    <xsd:simpleType name="Ingredient ">
+    <xsd:simpleType name="Ingredient">
         <xsd:restriction base="xsd:string">
             <xsd:enumeration value="jambon"/>
             <xsd:enumeration value="saumon"/>

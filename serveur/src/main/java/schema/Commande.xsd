@@ -7,22 +7,22 @@ and open the template in the editor.
 
 <xsd:schema version="1.0"
            xmlns:xsd="http://www.w3.org/2001/XMLSchema"
-           targetNamespace="http://chez.mario.fr/commande"
-           xmlns="http://chez.mario.fr/commande"
-           xmlns:plats="http://chez.mario.fr/plats"
-           xmlns:clt="http://chez.mario.fr/client"
+           targetNamespace="http://classesGen/commande"
+           xmlns="http://classesGen/commande"
+           xmlns:plats="http://classesGen/plats"
+           xmlns:clt="classesGen/client"
            elementFormDefault="qualified">
     
-    <xsd:import namespace="http://chez.mario.fr/plats" schemaLocation="Plats.xsd"/>
-    <xsd:import namespace="http://chez.mario.fr/client" schemaLocation="client.xsd"/>
+    <xsd:import namespace="http://classesGen/plats" schemaLocation="Plats.xsd"/>
+    <xsd:import namespace="classesGen/client" schemaLocation="Client.xsd"/>
      
-    <xsd:element name="commande" type="cmd:Commande"/>
+    <xsd:element name="commande" type="Commande"/>
  
     <xsd:complexType name="Commande">
         <xsd:sequence>
         <xsd:element name="client" type="clt:Client"/>
         <xsd:element name="plats"  type="plats:Plats" minOccurs="1" maxOccurs="unbounded"/>
-        <xsd:element name="film"  type="Film" minOccurs="1" maxOccurs="unbounded"/>
+        <xsd:element name="film"  type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
         </xsd:sequence>
         <xsd:attribute name="adresseLivraison" type="xsd:string"/>
         <xsd:attribute name="date"   type="xsd:string"/>
