@@ -22,6 +22,9 @@
             <xsd:enumeration value="poivrons"/>
             <xsd:enumeration value="aubergine"/>
             <xsd:enumeration value="ananas"/>
+            <xsd:enumeration value="coca"/>
+            <xsd:enumeration value="bananes"/>
+            <xsd:enumeration value="melon"/>
         </xsd:restriction>
     </xsd:simpleType>
 </xsd:schema>

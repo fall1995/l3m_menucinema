@@ -67,4 +67,45 @@ and open the template in the editor.
         <ns2:ingredients>aubergine</ns2:ingredients>           
     </ns1:plat>
     
+    <ns1:plat>
+        <ns2:id>plat4</ns2:id>
+        <ns2:image>./images/plat.jpeg</ns2:image>
+        <ns2:type>plat</ns2:type>
+        <ns2:prix>13.5</ns2:prix>
+        <ns2:ingredients>thon</ns2:ingredients>
+        <ns2:ingredients>champignons</ns2:ingredients>   
+        <ns2:ingredients>mozza</ns2:ingredients> 
+        <ns2:ingredients>aubergine</ns2:ingredients>
+        <ns2:ingredients>roquefort</ns2:ingredients>           
+    </ns1:plat>
+    
+    <ns1:plat>
+        <ns2:id>plat5</ns2:id>
+        <ns2:image>./images/plat.jpeg</ns2:image>
+        <ns2:type>plat</ns2:type>
+        <ns2:prix>13.5</ns2:prix>
+        <ns2:ingredients>jambon</ns2:ingredients>
+        <ns2:ingredients>champignons</ns2:ingredients>   
+        <ns2:ingredients>mozza</ns2:ingredients> 
+        <ns2:ingredients>aubergine</ns2:ingredients>
+        <ns2:ingredients>roquefort</ns2:ingredients>  
+        <ns2:ingredients>chèvre</ns2:ingredients> 
+                 
+    </ns1:plat>
+    <ns1:plat>
+        <ns2:id>bois2</ns2:id>
+        <ns2:image>./images/banane.jpg</ns2:image>
+        <ns2:type>boisson</ns2:type>
+        <ns2:prix>4.5</ns2:prix>
+        <ns2:ingredients>bananes</ns2:ingredients>
+        <ns2:ingredients>ananas</ns2:ingredients>
+    </ns1:plat>
+    <ns1:plat>
+        <ns2:id>bois3</ns2:id>
+        <ns2:image>./images/melon.jpg</ns2:image>
+        <ns2:type>boisson</ns2:type>
+        <ns2:prix>2.5</ns2:prix>
+        <ns2:ingredients>melon</ns2:ingredients>
+        
+    </ns1:plat>
 </ns1:plats>
