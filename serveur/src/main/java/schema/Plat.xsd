@@ -22,6 +22,7 @@ and open the template in the editor.
     <xsd:complexType name="Plat">
         <xsd:sequence>
             <xsd:element name="id"                type="xsd:string"/>
+            <xsd:element name="image"             type="xsd:string"/>
             <xsd:element name="type"              type="type:TypeDePlat"/>
             <xsd:element name="prix"              type="xsd:double"/>
             <xsd:element name="ingredients"       type="ingre:Ingredient" minOccurs="1" maxOccurs="unbounded"/>
