@@ -6,9 +6,10 @@ and open the template in the editor.
 -->
 
 
-<ingredient
+<ns1:ingredient
     xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
-    xmlns='http://chez.mario.fr/ingredient'
-    xsi:schemaLocation='http://chez.mario.fr/ingredient file:/home/kadidiatou/Projet_Fin_Annee/l3m_menucinema/serveur/src/main/java/schema/Ingredient.xsd'>
-    
-</ingredient>
+
+    xmlns:ns1='http://chez.mario.fr/ingredient'
+    xsi:schemaLocation='http://chez.mario.fr/ingredient Ingredient.xsd'>poulet</ns1:ingredient>
+
+

@@ -1,6 +1,7 @@
 package l3m;
 
-import database.Client;
+
+import classesgen.client.Client;
 import database.GestionnaireClient;
 import java.io.IOException;
 import java.sql.SQLException;
@@ -63,7 +64,7 @@ public class UpdateClientServlet extends HttpServlet {
         client.setPrenom(parametres.get(prenom));
         client.setEmail(parametres.get(email));
         client.setPhoto(parametres.get(photo));
-        client.setTel(parametres.get(tel));
+        client.setTelephone(parametres.get(tel));
         client.setAdresse(parametres.get(adresse));
         
         /**

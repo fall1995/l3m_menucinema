@@ -1,5 +1,7 @@
 package database;
 
+
+import classesgen.client.Client;
 import java.sql.CallableStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -82,7 +84,7 @@ public class GestionnaireClient extends SQLAble {
      * @param email
      */
     public void editEmail(String email) {
-        client.setEmail(email);
+        client.setTelephone(email);
     }
 
     /**
@@ -100,7 +102,7 @@ public class GestionnaireClient extends SQLAble {
      * @param tel
      */
     public void editTel(String tel) {
-        client.setTel(tel);
+        client.setTelephone(tel);
     }
 
     /**
@@ -178,7 +180,7 @@ public class GestionnaireClient extends SQLAble {
                 cstmt.setString(1, client.getId());
                 cstmt.setString(2, client.getPhoto());
                 cstmt.setString(3, client.getEmail());
-                cstmt.setString(4, client.getTel());
+                cstmt.setString(4, client.getTelephone());
                 cstmt.setString(5, client.getAdresse());
                 cstmt.execute();
                 cstmt.close();

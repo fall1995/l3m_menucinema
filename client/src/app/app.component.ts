@@ -1,7 +1,4 @@
 import { Component } from '@angular/core';
-import {TmdbService} from './service/tmdb.service';
-import {MovieResponse} from './tmdb-data/Movie';
-import {environment} from '../environments/environment';
 
 // Je suis passé par l'itération 0...
 @Component({
@@ -10,19 +7,7 @@ import {environment} from '../environments/environment';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  pFilm: MovieResponse;
 
-  constructor(private tmdb: TmdbService) {
-    this.init();
+  constructor() {
   }
-
-  async init() {
-    this.tmdb.init( environment.tmdbKey );
-    this.pFilm = await this.tmdb.getMovie(14);
-  }
-
-  get film(): MovieResponse {
-    return this.pFilm;
-  }
-
 }
