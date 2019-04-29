@@ -23,12 +23,18 @@ export class UserDialogComponent implements OnInit {
     ngOnInit() {
     }
 
-    creerProfile() {
-        this.afAuth.authState.subscribe( auth =>{
-            this.afDatabase.object(`user/${this.user.id}`).set(this.user).then( () =>{
-                this.onHide();
-                this.route.navigate(['/profil']);
-            });
+    cupdateProfile() {
+        this.afAuth.authState.subscribe( user =>{
+            if (user.uid){
+                this.authService.modification({
+                   idClient : user.uid,
+                });
+            }
+            this.onHide();
+            this.route.navigate(['/profil']);
+            //this.afDatabase.object(`user/${this.user.id}`).set(this.user).then( () =>{
+
+            //});
         });
     }
 

@@ -78,31 +78,4 @@ export class AuthService {
     }
 
 
-
-    //fonction pull des données du document XML
-    async getData(url: string): Promise<User> {
-        return new Promise<User>(((resolve, reject) => {
-            this.http.get(url, {responseType: 'text'}).toPromise().then(
-                res => {
-                    this.doc = this.domParser.parseFromString(res, 'text/xml');
-
-                    this.client = {
-                        id: this.doc.querySelector( "id" ).textContent,
-                        nom: this.doc.querySelector( "nom" ).textContent,
-                        prenom: this.doc.querySelector( "prenom" ).textContent,
-                        photo: this.doc.querySelector( "photo" ).textContent,
-                        email: this.doc.querySelector( "email" ).textContent,
-                        tel: this.doc.querySelector( "tel" ).textContent,
-                        adresse: this.doc.querySelector( "adresse" ).textContent
-                    };
-
-                    resolve(this.client);
-                }, rej => {
-                    reject(rej);
-                }
-            );
-        }));
-    }
-
-
 }
