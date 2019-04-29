@@ -4,6 +4,7 @@ import {AngularFireAuth} from '@angular/fire/auth';
 import {AngularFireDatabase} from '@angular/fire/database';
 import {Router} from '@angular/router';
 import {FirebaseListObservable} from '@angular/fire/database-deprecated';
+import {AuthService} from '../../service/auth.service';
 
 @Component({
     selector: 'app-user-dialog',
@@ -13,7 +14,7 @@ import {FirebaseListObservable} from '@angular/fire/database-deprecated';
 export class UserDialogComponent implements OnInit {
 
     constructor(private afAuth: AngularFireAuth, private afDatabase : AngularFireDatabase,
-                private route: Router) {
+                private route: Router, private authService: AuthService) {
         this.afAuth.authState.subscribe(user =>{
             if (user) { this.user.id = user.uid; }
         });

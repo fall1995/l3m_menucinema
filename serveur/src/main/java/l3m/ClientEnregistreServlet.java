@@ -61,8 +61,13 @@ public class ClientEnregistreServlet extends HttpServlet {
         String nom = request.getParameter("nom");
         String prenom = request.getParameter("prenom");
         System.out.print(idClient);
+        
+        System.out.println();
         try {
             GestionnaireClient gestionClient = new GestionnaireClient(idClient, nom, prenom);
+            gestionClient.connectToDatabase();
+            System.out.println("------");
+            
             System.out.print(gestionClient.getNom());
             gestionClient.enregistreClientDB();
 

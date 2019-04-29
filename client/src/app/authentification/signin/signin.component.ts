@@ -57,13 +57,12 @@ export class SigninComponent implements OnInit {
         this.afAuth.auth.signInWithPopup(new auth.GoogleAuthProvider()).then(
             () => {
                 this.route.navigate(['/profil']);
-                this.verificationServeur();
+                this.sendServeur();
             },
             (error) => {
                 this.errorMessage = error;
             }
         );
-        // this.verificationServeur();
     }
 
     /**
@@ -77,14 +76,15 @@ export class SigninComponent implements OnInit {
             console.log(erro);
         });
     }
-    verificationServeur(){
+    sendServeur(){
         this.afAuth.user.subscribe(utilisateur =>{
             if (utilisateur.uid){
                 this.authService.authentificate({
+                    // variable que le serveur s'attend a recevoir
                     idClient: utilisateur.uid,
                     nom: utilisateur.displayName,
                     prenom: utilisateur.displayName}).then(data =>{
-                    console.log("verification: "+data);
+                    console.log("envoie au serveur ok");
                 });
                 console.log("verification avec le serveur", utilisateur.emailVerified);
             }
@@ -96,7 +96,6 @@ export class SigninComponent implements OnInit {
             password: ['', [Validators.required, Validators.pattern(/[0-9a-zA-Z]{6,}/)]]
         });
     }
-
     /**
      * methode de connexion avec l'email et le mot de pass
      */
@@ -106,14 +105,11 @@ export class SigninComponent implements OnInit {
         this.afAuth.auth.signInWithEmailAndPassword(email,password).then(
             () => {
                 this.route.navigate(['/profil']);
-                this.verificationServeur();
+                this.sendServeur();
             },
             (error) => {
                 this.errorMessage = error;
             }
         );
     }
-
-
-
 }
