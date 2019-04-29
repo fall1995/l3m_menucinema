@@ -2,7 +2,7 @@
 // Ce fichier a été généré par l'implémentation de référence JavaTM Architecture for XML Binding (JAXB), v2.2.8-b130911.1802 
 // Voir <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
 // Toute modification apportée à ce fichier sera perdue lors de la recompilation du schéma source. 
-// Généré le : 2019.04.29 à 01:19:35 PM CEST 
+// Généré le : 2019.04.29 à 05:39:04 PM CEST 
 //
 
 
@@ -33,6 +33,9 @@ import javax.xml.bind.annotation.XmlType;
  *     &lt;enumeration value="poivrons"/>
  *     &lt;enumeration value="aubergine"/>
  *     &lt;enumeration value="ananas"/>
+ *     &lt;enumeration value="coca"/>
+ *     &lt;enumeration value="bananes"/>
+ *     &lt;enumeration value="melon"/>
  *   &lt;/restriction>
  * &lt;/simpleType>
  * </pre>
@@ -65,7 +68,13 @@ public enum Ingredient {
     @XmlEnumValue("aubergine")
     AUBERGINE("aubergine"),
     @XmlEnumValue("ananas")
-    ANANAS("ananas");
+    ANANAS("ananas"),
+    @XmlEnumValue("coca")
+    COCA("coca"),
+    @XmlEnumValue("bananes")
+    BANANES("bananes"),
+    @XmlEnumValue("melon")
+    MELON("melon");
     private final String value;
 
     Ingredient(String v) {

@@ -5,7 +5,14 @@
  */
 package database;
 
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.sql.ResultSet;
+import javax.xml.stream.XMLEventReader;
+import javax.xml.stream.XMLInputFactory;
+import javax.xml.stream.XMLStreamConstants;
+import javax.xml.stream.events.StartElement;
+import javax.xml.stream.events.XMLEvent;
 
 /**
  *
@@ -18,8 +25,10 @@ public abstract class XMLAble {
       /**
      *Methode permert de se connecter la base de donnee XML
      */
-    public void connectToDataBase(){
+    public void connectToDataBase() throws FileNotFoundException{
         
+        
+     
     }
 
     /**

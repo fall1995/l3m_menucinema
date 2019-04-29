@@ -80,8 +80,8 @@ public class CommandesServlet extends HttpServlet {
            idCommande = request.getParameter("idCommande");
            
            GestionnaireCommande gComm = new GestionnaireCommande(this.idCommande);
-           Commande comm = gComm.getCommande(this.idCommande);
-           comm.getPlat().add(###FIND PLAT FROM idPlat);
+           //Commande comm = gComm.getCommande(this.idCommande);
+           //comm.getPlat().add(###FIND PLAT FROM idPlat);
 
     }
 

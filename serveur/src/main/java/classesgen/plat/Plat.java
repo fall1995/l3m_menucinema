@@ -2,7 +2,7 @@
 // Ce fichier a été généré par l'implémentation de référence JavaTM Architecture for XML Binding (JAXB), v2.2.8-b130911.1802 
 // Voir <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
 // Toute modification apportée à ce fichier sera perdue lors de la recompilation du schéma source. 
-// Généré le : 2019.04.29 à 01:19:35 PM CEST 
+// Généré le : 2019.04.29 à 05:39:04 PM CEST 
 //
 
 
@@ -30,6 +30,7 @@ import classesgen.typedeplat.TypeDePlat;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
  *         &lt;element name="id" type="{http://www.w3.org/2001/XMLSchema}string"/>
+ *         &lt;element name="image" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *         &lt;element name="type" type="{http://classesGen/typeDePlat}TypeDePlat"/>
  *         &lt;element name="prix" type="{http://www.w3.org/2001/XMLSchema}double"/>
  *         &lt;element name="ingredients" type="{http://classesGen/ingredient}Ingredient" maxOccurs="unbounded"/>
@@ -44,6 +45,7 @@ import classesgen.typedeplat.TypeDePlat;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Plat", propOrder = {
     "id",
+    "image",
     "type",
     "prix",
     "ingredients"
@@ -52,6 +54,8 @@ public class Plat {
 
     @XmlElement(required = true)
     protected String id;
+    @XmlElement(required = true)
+    protected String image;
     @XmlElement(required = true)
     @XmlSchemaType(name = "string")
     protected TypeDePlat type;
@@ -82,6 +86,30 @@ public class Plat {
      */
     public void setId(String value) {
         this.id = value;
+    }
+
+    /**
+     * Obtient la valeur de la propriété image.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getImage() {
+        return image;
+    }
+
+    /**
+     * Définit la valeur de la propriété image.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setImage(String value) {
+        this.image = value;
     }
 
     /**
