@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package database;
+package PoubelleTmp;
 
+import PoubelleTmp.Plat;
 import java.util.ArrayList;
 
 /**

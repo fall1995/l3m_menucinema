@@ -5,6 +5,7 @@
  */
 package database;
 
+import PoubelleTmp.Plats;
 import java.util.ArrayList;
 
 /**
@@ -18,7 +19,8 @@ public class GestionnaireMenu  extends XMLAble{
     /**
      * Constructeur par defaut
      */
-    public GestionnaireMenu() {
+    public GestionnaireMenu() { 
+        menu.getPlats();
     }
 
     /**
@@ -27,7 +29,7 @@ public class GestionnaireMenu  extends XMLAble{
      * @param idPlats
      */
     public GestionnaireMenu(ArrayList<String> idPlats) {
-
+        
     }
 
     /**

@@ -10,11 +10,8 @@ and open the template in the editor.
              targetNamespace="http://classesGen/plats"
             xmlns="http://classesGen/plats"
             xmlns:plat="http://classesGen/plat"
-            elementFormDefault="qualified">
-    
-    
+            elementFormDefault="qualified">  
     <xsd:import namespace="http://classesGen/plat" schemaLocation="Plat.xsd"/>
-
     <xsd:element name="plats" type="Plats"/>
     <xsd:complexType name="Plats">
         <xsd:sequence>

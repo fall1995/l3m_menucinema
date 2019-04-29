@@ -39,7 +39,8 @@ public class CommandesServlet extends HttpServlet {
      * @throws IOException
      */
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) 
+            throws ServletException, IOException {
         response.setContentType("application/json");
         id = request.getParameter("id");
         GestionnaireCommande gestonCommande;
@@ -53,7 +54,8 @@ public class CommandesServlet extends HttpServlet {
     }
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) 
+            throws ServletException, IOException {
         idClient = request.getParameter("idClient");
         id = request.getParameter("id");
         idPlats = request.getParameter("idPlat");
@@ -80,7 +82,7 @@ public class CommandesServlet extends HttpServlet {
            GestionnaireCommande gComm = new GestionnaireCommande(this.idCommande);
            Commande comm = gComm.getCommande(this.idCommande);
            comm.getPlat().add(###FIND PLAT FROM idPlat);
-           
+
     }
 
     @Override

@@ -1,8 +1,5 @@
 <?xml version="1.0"?>
 <!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
 -->
 
 <xsd:schema version="1.0"
@@ -25,6 +22,9 @@ and open the template in the editor.
             <xsd:enumeration value="poivrons"/>
             <xsd:enumeration value="aubergine"/>
             <xsd:enumeration value="ananas"/>
+            <xsd:enumeration value="coca"/>
+            <xsd:enumeration value="bananes"/>
+            <xsd:enumeration value="melon"/>
         </xsd:restriction>
     </xsd:simpleType>
 </xsd:schema>

@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+
+
+<ns1:plats
+    xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+    xmlns:ns1='http://classesGen/plats'
+    xmlns:ns2='http://classesGen/plat'
+    xsi:schemaLocation='http://classesGen/plats Plats.xsd'>
+    <ns1:plat>
+        <ns2:id>plat1</ns2:id>
+        <ns2:image>./images/poulet.jpeg</ns2:image>
+        <ns2:type>entree</ns2:type>
+        <ns2:prix>10.3</ns2:prix>
+        <ns2:ingredients>poulet</ns2:ingredients>
+        <ns2:ingredients>poivrons</ns2:ingredients>
+    </ns1:plat>
+    
+    <ns1:plat>
+        <ns2:id>des1</ns2:id>
+        <ns2:image>./images/dessert.jpeg</ns2:image>
+        <ns2:type>dessert</ns2:type>
+        <ns2:prix>7.5</ns2:prix>
+        <ns2:ingredients>ananas</ns2:ingredients>
+        <ns2:ingredients>mozza</ns2:ingredients>
+    </ns1:plat>
+    
+    <ns1:plat>
+        <ns2:id>des2</ns2:id>
+        <ns2:image>./images/dessert.jpeg</ns2:image>
+        <ns2:type>dessert</ns2:type>
+        <ns2:prix>7.5</ns2:prix>
+        <ns2:ingredients>ananas</ns2:ingredients>
+        <ns2:ingredients>mozza</ns2:ingredients>
+    </ns1:plat>
+    
+    <ns1:plat>
+        <ns2:id>de3</ns2:id>
+        <ns2:image>./images/dessert.jpeg</ns2:image>
+        <ns2:type>dessert</ns2:type>
+        <ns2:prix>3.5</ns2:prix>
+        <ns2:ingredients>ananas</ns2:ingredients>
+    </ns1:plat>
+    
+    <ns1:plat>
+        <ns2:id>plat2</ns2:id>
+        <ns2:image>./images/plat.jpeg</ns2:image>
+        <ns2:type>plat</ns2:type>
+        <ns2:prix>10.0</ns2:prix>
+        <ns2:ingredients>saumon</ns2:ingredients>
+        <ns2:ingredients>champignons</ns2:ingredients>
+        <ns2:ingredients>poivrons</ns2:ingredients>
+    </ns1:plat>
+    
+    <ns1:plat>
+        <ns2:id>plat3</ns2:id>
+        <ns2:image>./images/plat.jpeg</ns2:image>
+        <ns2:type>plat</ns2:type>
+        <ns2:prix>12.5</ns2:prix>
+        <ns2:ingredients>thon</ns2:ingredients>
+        <ns2:ingredients>champignons</ns2:ingredients>   
+        <ns2:ingredients>mozza</ns2:ingredients> 
+        <ns2:ingredients>aubergine</ns2:ingredients>           
+    </ns1:plat>
+    
+    <ns1:plat>
+        <ns2:id>plat4</ns2:id>
+        <ns2:image>./images/plat.jpeg</ns2:image>
+        <ns2:type>plat</ns2:type>
+        <ns2:prix>13.5</ns2:prix>
+        <ns2:ingredients>thon</ns2:ingredients>
+        <ns2:ingredients>champignons</ns2:ingredients>   
+        <ns2:ingredients>mozza</ns2:ingredients> 
+        <ns2:ingredients>aubergine</ns2:ingredients>
+        <ns2:ingredients>roquefort</ns2:ingredients>           
+    </ns1:plat>
+    
+    <ns1:plat>
+        <ns2:id>plat5</ns2:id>
+        <ns2:image>./images/plat.jpeg</ns2:image>
+        <ns2:type>plat</ns2:type>
+        <ns2:prix>13.5</ns2:prix>
+        <ns2:ingredients>jambon</ns2:ingredients>
+        <ns2:ingredients>champignons</ns2:ingredients>   
+        <ns2:ingredients>mozza</ns2:ingredients> 
+        <ns2:ingredients>aubergine</ns2:ingredients>
+        <ns2:ingredients>roquefort</ns2:ingredients>  
+        <ns2:ingredients>chèvre</ns2:ingredients> 
+                 
+    </ns1:plat>
+    <ns1:plat>
+        <ns2:id>bois2</ns2:id>
+        <ns2:image>./images/banane.jpg</ns2:image>
+        <ns2:type>boisson</ns2:type>
+        <ns2:prix>4.5</ns2:prix>
+        <ns2:ingredients>bananes</ns2:ingredients>
+        <ns2:ingredients>ananas</ns2:ingredients>
+    </ns1:plat>
+    <ns1:plat>
+        <ns2:id>bois3</ns2:id>
+        <ns2:image>./images/melon.jpg</ns2:image>
+        <ns2:type>boisson</ns2:type>
+        <ns2:prix>2.5</ns2:prix>
+        <ns2:ingredients>melon</ns2:ingredients>
+        
+    </ns1:plat>
+</ns1:plats>
