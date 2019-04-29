@@ -1,14 +1,18 @@
 package l3m;
 
+import classesgen.commande.Commande;
+import classesgen.plat.Plat;
 import database.GestionnaireCommande;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import classesgen.plats.Plats;
 
 /**
  * @author Groupe6
@@ -23,6 +27,9 @@ public class CommandesServlet extends HttpServlet {
     private String idFilms = "idFilms";
     private String prix = "prix";
     private String adresseLivraison = "adresseLivraison";
+    
+    private String idPlat = "idPlat";
+    private String idCommande = "idCommande";
 
     /**
      *
@@ -64,9 +71,16 @@ public class CommandesServlet extends HttpServlet {
 
     }
 
+    // AJOUTER PLAT A UNE COMMANDE EXISTANTE
     @Override
     protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+           idPlat = request.getParameter("idPlat");
+           idCommande = request.getParameter("idCommande");
+           
+           GestionnaireCommande gComm = new GestionnaireCommande(this.idCommande);
+           Commande comm = gComm.getCommande(this.idCommande);
+           comm.getPlat().add(###FIND PLAT FROM idPlat);
+           
     }
 
     @Override

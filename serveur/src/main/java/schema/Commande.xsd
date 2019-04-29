@@ -10,10 +10,12 @@ and open the template in the editor.
            targetNamespace="http://classesGen/commande"
            xmlns="http://classesGen/commande"
            xmlns:plats="http://classesGen/plats"
+           xmlns:plat="http://classesGen/plat"
            xmlns:clt="classesGen/client"
            elementFormDefault="qualified">
     
     <xsd:import namespace="http://classesGen/plats" schemaLocation="Plats.xsd"/>
+    <xsd:import namespace="http://classesGen/plat" schemaLocation="Plat.xsd"/>
     <xsd:import namespace="classesGen/client" schemaLocation="Client.xsd"/>
      
     <xsd:element name="commande" type="Commande"/>
@@ -21,7 +23,7 @@ and open the template in the editor.
     <xsd:complexType name="Commande">
         <xsd:sequence>
         <xsd:element name="client" type="clt:Client"/>
-        <xsd:element name="plats"  type="plats:Plats" minOccurs="1" maxOccurs="unbounded"/>
+        <xsd:element name="plat"  type="plat:Plat" minOccurs="1" maxOccurs="unbounded"/>
         <xsd:element name="film"  type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
         </xsd:sequence>
         <xsd:attribute name="adresseLivraison" type="xsd:string"/>

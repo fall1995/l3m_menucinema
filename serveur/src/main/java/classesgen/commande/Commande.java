@@ -2,7 +2,7 @@
 // Ce fichier a été généré par l'implémentation de référence JavaTM Architecture for XML Binding (JAXB), v2.2.8-b130911.1802 
 // Voir <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
 // Toute modification apportée à ce fichier sera perdue lors de la recompilation du schéma source. 
-// Généré le : 2019.04.29 à 11:46:15 AM CEST 
+// Généré le : 2019.04.29 à 01:19:35 PM CEST 
 //
 
 
@@ -16,7 +16,7 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 import classesgen.client.Client;
-import classesgen.plats.Plats;
+import classesgen.plat.Plat;
 
 
 /**
@@ -30,7 +30,7 @@ import classesgen.plats.Plats;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
  *         &lt;element name="client" type="{classesGen/client}Client"/>
- *         &lt;element name="plats" type="{http://classesGen/plats}Plats" maxOccurs="unbounded"/>
+ *         &lt;element name="plat" type="{http://classesGen/plat}Plat" maxOccurs="unbounded"/>
  *         &lt;element name="film" type="{http://www.w3.org/2001/XMLSchema}string" maxOccurs="unbounded" minOccurs="0"/>
  *       &lt;/sequence>
  *       &lt;attribute name="adresseLivraison" type="{http://www.w3.org/2001/XMLSchema}string" />
@@ -47,7 +47,7 @@ import classesgen.plats.Plats;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Commande", propOrder = {
     "client",
-    "plats",
+    "plat",
     "film"
 })
 public class Commande {
@@ -55,7 +55,7 @@ public class Commande {
     @XmlElement(required = true)
     protected Client client;
     @XmlElement(required = true)
-    protected List<Plats> plats;
+    protected List<Plat> plat;
     protected List<String> film;
     @XmlAttribute(name = "adresseLivraison")
     protected String adresseLivraison;
@@ -91,32 +91,32 @@ public class Commande {
     }
 
     /**
-     * Gets the value of the plats property.
+     * Gets the value of the plat property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the plats property.
+     * This is why there is not a <CODE>set</CODE> method for the plat property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getPlats().add(newItem);
+     *    getPlat().add(newItem);
      * </pre>
      * 
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link Plats }
+     * {@link Plat }
      * 
      * 
      */
-    public List<Plats> getPlats() {
-        if (plats == null) {
-            plats = new ArrayList<Plats>();
+    public List<Plat> getPlat() {
+        if (plat == null) {
+            plat = new ArrayList<Plat>();
         }
-        return this.plats;
+        return this.plat;
     }
 
     /**
