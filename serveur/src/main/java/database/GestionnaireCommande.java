@@ -1,9 +1,10 @@
 package database;
 
+import classesgen.commande.Commande;
 import java.sql.CallableStatement;
+import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 import oracle.jdbc.OracleCallableStatement;
 import oracle.jdbc.OracleTypes;
@@ -19,8 +20,8 @@ public class GestionnaireCommande extends SQLAble {
     public GestionnaireCommande(String idClient, List<String> idPlats , List<String> idFilms , String adresseLivraison) {
         commande = new Commande();
         commande.setId(idClient);
-        commande.setIdplats((ArrayList<String>) idPlats);
-        commande.setIdFilms((ArrayList<String>) idFilms);
+        commande.setIdPlat(idPlats);
+        commande.setIdFilm(idFilms);
         commande.setAdresseLivraison(adresseLivraison);
     }
 
@@ -35,15 +36,14 @@ public class GestionnaireCommande extends SQLAble {
      */
     public void enregistrerCommandeDB() throws Exception {
         try {
-            List<String> listIdPlats = commande.getIdplats();
-            List<String> listIdFilms = commande.getIdFilms();
+            connectToDatabase();
             String adrLivr = commande.getAdresseLivraison();
             
-            ARRAY arrayPlats = CreateArray.toARRAY( listIdPlats , conn);
-            ARRAY arrayFilms = CreateArray.toARRAY( listIdFilms , conn );
+            ARRAY arrayPlats = CreateArray.toARRAY( commande.getIdPlat() , conn);
+            ARRAY arrayFilms = CreateArray.toARRAY( commande.getFilm() , conn );
             CallableStatement cstmt;
-            if (      ( !arrayPlats.isNull() &&  listIdPlats.size() > 0  &&  adrLivr != null && !adrLivr.isEmpty() )
-                  ||  ( !arrayFilms.isNull() &&  listIdFilms.size() > 0  &&  adrLivr != null && !adrLivr.isEmpty() )       ){
+            if (     ( arrayPlats != null  &&  arrayPlats.length() > 0  &&  adrLivr != null && !adrLivr.isEmpty() )
+                  || ( arrayFilms != null  &&  arrayFilms.length() > 0  &&  adrLivr != null && !adrLivr.isEmpty() )     ){
 
                 cstmt = conn.prepareCall("{ = call enregistrerCommande(?,?,?,?,?) }");
                 cstmt.setString(1, commande.getIdClient());
@@ -71,13 +71,15 @@ public class GestionnaireCommande extends SQLAble {
     }
 
 
-    public static Commande getCommande(String id) {
+    public Commande getCommande(String id) {
+        
         Commande commande = new Commande();
         commande.setId(id);
-        List<String> platsCommandes = commande.getIdplats();
-        List<String> filmsCommandes = commande.getIdFilms();
+        List<String> platsCommandes = commande.getIdPlat();
+        List<String> filmsCommandes = commande.getFilm();
         
         try {
+            connectToDatabase();
             OracleCallableStatement ocstmt;
             ocstmt = (OracleCallableStatement) conn.prepareCall("{ = call getcommande(?,?,?,?) }");
             ocstmt.setString( 1 , id );
@@ -120,4 +122,18 @@ public class GestionnaireCommande extends SQLAble {
             
         return commande;
     }
+
+    @Override
+    public String toString() {
+        return " { \n" 
+                    + " id : \""   + commande.getId() + "\"\n" 
+                    + " id : \""   + commande.getIdClient() + " \n"
+                    + " id : \""   + commande.getFilm().toString() + " \n"
+                    + " id : \""   + commande.getIdPlat().toString() + " \n"
+                    + " id : \""   + commande.getPrix() + " \n"
+                    + " id : \""   + commande.getDate() + " \n"
+                    + " id : \""   + commande.getAdresseLivraison() + " \n"
+                + '}';
+    }    
+  
 }

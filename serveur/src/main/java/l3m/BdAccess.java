@@ -1,6 +1,8 @@
 package l3m;
 
-import database.Client;
+import database.GestionnaireClient;
+import classesgen.client.Client;
+
 import database.GestionnaireClient;
 import java.sql.SQLException;
 

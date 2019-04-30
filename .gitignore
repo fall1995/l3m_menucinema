@@ -1,13 +1,7 @@
-<<<<<<< HEAD
-
 node_modules/
 .idea/
 .idea/workspace.xml
-<<<<<<< HEAD
-/serveur/target/
-=======
 serveur/target/
->>>>>>> serveurIteration1
 
 # See http://help.github.com/ignore-files/ for more about ignoring files.
 
@@ -53,7 +47,5 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
-=======
 node_modules/
 serveur/target/
->>>>>>> bdIteration1

@@ -1,18 +1,12 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package l3m;
 
-import database.Client;
+
+import classesgen.client.Client;
 import database.GestionnaireClient;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Enumeration;
 import java.util.HashMap;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -87,7 +81,7 @@ public class UpdateClientServlet extends HttpServlet {
         client.setPrenom(parametres.get(prenom));
         client.setEmail(parametres.get(email));
         client.setPhoto(parametres.get(photo));
-        client.setTel(parametres.get(tel));
+        client.setTelephone(parametres.get(tel));
         client.setAdresse(parametres.get(adresse));
         
         /**

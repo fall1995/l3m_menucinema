@@ -6,10 +6,9 @@ and open the template in the editor.
 -->
 
 
-<ns1:ingredient
+<ns1:typeDePlat
     xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
-
-    xmlns:ns1='http://chez.mario.fr/ingredient'
-    xsi:schemaLocation='http://chez.mario.fr/ingredient Ingredient.xsd'>poulet</ns1:ingredient>
-
+    xmlns:ns1='http://chez.mario.fr/typeDePlat'
+    xsi:schemaLocation='http://chez.mario.fr/typeDePlat TypeDePlat.xsd'>dessert</ns1:typeDePlat>
+    
 
