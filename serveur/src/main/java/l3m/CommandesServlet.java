@@ -38,13 +38,10 @@ public class CommandesServlet extends HttpServlet {
         response.setContentType("application/json");
         id = request.getParameter("id");
         GestionnaireCommande gestonCommande;
-        try {
+       
             gestonCommande = new GestionnaireCommande(id);
-            GestionnaireCommande.getCommande(id);
-        } catch (SQLException ex) {
-            Logger.getLogger(CommandesServlet.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
+           // GestionnaireCommande.getCommande(id);
+       
     }
 
     /**
@@ -99,14 +96,6 @@ public class CommandesServlet extends HttpServlet {
     protected void doDelete(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         id = request.getParameter("id");
-
-        GestionnaireCommande gestioncommandesup;
-        try {
-            gestioncommandesup = new GestionnaireCommande(id);
-            //gestioncommandesup.deleteCommandeId(id);
-        } catch (SQLException ex) {
-            Logger.getLogger(CommandesServlet.class.getName()).log(Level.SEVERE, null, ex);
-        }
 
     }
 
