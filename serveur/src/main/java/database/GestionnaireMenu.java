@@ -3,6 +3,7 @@ package database;
 import classesgen.ingredient.Ingredient;
 import classesgen.plat.Plat;
 import classesgen.typedeplat.TypeDePlat;
+import com.google.gson.Gson;
 import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.List;
@@ -86,6 +87,11 @@ public class GestionnaireMenu  extends XMLAble{
      */
     public void enleverDuMenu(String id) {
         //???ENLEVER DANS  XML
+    }
+    
+    public String platsToJson(){
+         String json = new Gson().toJson(getCartesDB());
+         return json;
     }
 
     /**
@@ -194,6 +200,8 @@ public class GestionnaireMenu  extends XMLAble{
                break;
             } 
          }
+         
+         
         }catch (Exception e){
             System.out.println("Exception: " + e);
         }
