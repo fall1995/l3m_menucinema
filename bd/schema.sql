@@ -20,7 +20,7 @@ CREATE TABLE client (
 
 CREATE TABLE commande (
     idcommande         VARCHAR2(8),
-    idclient           VARCHAR2(8) NOT NULL,
+    idclient           VARCHAR2(50) NOT NULL,
     datecommande       DATE NOT NULL,
     prix               NUMBER(4, 2),
     adresselivraison   VARCHAR2(100) NOT NULL,
@@ -35,11 +35,11 @@ CREATE TABLE PlatsCommandes (
     idCommande    VARCHAR2(8),
     idplat        VARCHAR2(8),
     quantite      INTEGER,
-    CONSTRAINT    plat_c0 PRIMARY KEY ( idCommande , idplat ),
-    CONSTRAINT    plat_c1 FOREIGN KEY (idCommande) 
+    CONSTRAINT    PlatsCommandes_c0 PRIMARY KEY ( idCommande , idplat ),
+    CONSTRAINT    platPlatsCommandes_c1 FOREIGN KEY (idCommande) 
         REFERENCES commande ( idCommande ) on delete cascade,
         -- on update cascade
-    CONSTRAINT    plat_c2 CHECK ( quantite > 0 )
+    CONSTRAINT    PlatsCommandes_c2 CHECK ( quantite > 0 )
 );
 
 CREATE TABLE FilmsCommandes (

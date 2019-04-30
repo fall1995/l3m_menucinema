@@ -16,7 +16,7 @@ DECLARE
         filmsCommandes(1) := item_('20000002');
         filmsCommandes(2) := item_('20000020');
 
-        enregistrerCommande( '10' , platsCommandes , filmsCommandes , to_number('25,6') ,'vienne' );
+        enregistrerCommande( '10' , platsCommandes , filmsCommandes , to_number('25.6') ,'vienne' );
 end;
 /
 
@@ -29,7 +29,7 @@ DECLARE
         platsCommandes(1) := item_('1050');
         filmsCommandes.EXTEND (1);
         filmsCommandes(1) := item_('20000053');
-        enregistrerCommande( '12' , platsCommandes , filmsCommandes , to_number('7,0') , 'VIllette de vienne' );
+        enregistrerCommande( '12' , platsCommandes , filmsCommandes , to_number('7.0') , 'VIllette de vienne' );
 end;
 /
 
@@ -45,7 +45,7 @@ DECLARE
         platsCommandes(4) := item_('1033');
         platsCommandes(5) := item_('1064');
         platsCommandes(6) := item_('1066');
-        enregistrerCommande( '14' , platsCommandes , filmsCommandes , to_number('32,9') , 'VIllette de vienne' );
+        enregistrerCommande( '14' , platsCommandes , filmsCommandes , to_number('32.9') , 'VIllette de vienne' );
         end;
 /
 
@@ -56,7 +56,7 @@ DECLARE
     BEGIN
         filmsCommandes.EXTEND (1);
         filmsCommandes(1) := item_('20000043');
-        enregistrerCommande( '14' , platsCommandes , filmsCommandes , to_number('3,75') , 'VIllette de vienne' );
+        enregistrerCommande( '14' , platsCommandes , filmsCommandes , to_number('3.75') , 'VIllette de vienne' );
         end;
 /
 
@@ -65,7 +65,7 @@ DECLARE
     platsCommandes list_ :=list_();
     filmsCommandes list_ :=list_();
     BEGIN
-        enregistrerCommande( '14' , platsCommandes , filmsCommandes , to_number('3,75') , 'VIllette de vienne' );
+        enregistrerCommande( '14' , platsCommandes , filmsCommandes , to_number('3.75') , 'VIllette de vienne' );
         end;
 /
 
