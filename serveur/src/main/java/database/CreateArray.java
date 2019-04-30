@@ -13,7 +13,7 @@ import oracle.sql.StructDescriptor;
  */
 
 public class CreateArray {
-
+     
     public static ARRAY toARRAY(List<String> list, Connection conn) throws SQLException {
         
         ARRAY sqlArray;

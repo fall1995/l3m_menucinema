@@ -51,6 +51,7 @@ public class GestionnaireCommande extends SQLAble {
      * @throws java.sql.SQLException
      */
     public void enregistrerCommandeDB() throws Exception {
+        connectToDatabase();
         try {
             List<String> listIdPlats = commande.getIdPlats();
             List<String> listIdFilms = commande.getFilm();

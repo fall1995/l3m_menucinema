@@ -2,11 +2,11 @@
 // Ce fichier a été généré par l'implémentation de référence JavaTM Architecture for XML Binding (JAXB), v2.2.8-b130911.1802 
 // Voir <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
 // Toute modification apportée à ce fichier sera perdue lors de la recompilation du schéma source. 
-// Généré le : 2019.04.29 à 01:19:35 PM CEST 
+// Généré le : 2019.04.30 à 10:32:20 AM CEST 
 //
 
 
-package classesgen.plats;
+package classesgen.menus;
 
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.annotation.XmlElementDecl;
@@ -17,7 +17,7 @@ import javax.xml.namespace.QName;
 /**
  * This object contains factory methods for each 
  * Java content interface and Java element interface 
- * generated in the classesgen.plats package. 
+ * generated in the classesgen.menus package. 
  * <p>An ObjectFactory allows you to programatically 
  * construct new instances of the Java representation 
  * for XML content. The Java representation of XML 
@@ -31,30 +31,38 @@ import javax.xml.namespace.QName;
 @XmlRegistry
 public class ObjectFactory {
 
-    private final static QName _Plats_QNAME = new QName("http://classesGen/plats", "plats");
+    private final static QName _Menus_QNAME = new QName("http://classesGen/menus", "menus");
 
     /**
-     * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: classesgen.plats
+     * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: classesgen.menus
      * 
      */
     public ObjectFactory() {
     }
 
     /**
-     * Create an instance of {@link Plats }
+     * Create an instance of {@link Menus }
      * 
      */
-    public Plats createPlats() {
-        return new Plats();
+    public Menus createMenus() {
+        return new Menus();
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link Plats }{@code >}}
+     * Create an instance of {@link Menu }
      * 
      */
-    @XmlElementDecl(namespace = "http://classesGen/plats", name = "plats")
-    public JAXBElement<Plats> createPlats(Plats value) {
-        return new JAXBElement<Plats>(_Plats_QNAME, Plats.class, null, value);
+    public Menu createMenu() {
+        return new Menu();
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link Menus }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://classesGen/menus", name = "menus")
+    public JAXBElement<Menus> createMenus(Menus value) {
+        return new JAXBElement<Menus>(_Menus_QNAME, Menus.class, null, value);
     }
 
 }

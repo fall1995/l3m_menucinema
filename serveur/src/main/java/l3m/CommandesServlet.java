@@ -10,7 +10,10 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+<<<<<<< HEAD
 
+=======
+>>>>>>> 7dddd0944b93800183b978e196ed2c6088718415
 /**
  * @author Groupe6 
  * CommandesServlet

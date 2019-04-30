@@ -1,11 +1,3 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
-
-
 <ns1:plats
     xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
     xmlns:ns1='http://classesGen/plats'
@@ -14,16 +6,16 @@ and open the template in the editor.
     <ns1:plat>
         <ns2:id>plat1</ns2:id>
         <ns2:image>./images/poulet.jpeg</ns2:image>
-        <ns2:type>ENTREE</ns2:type>
+        <ns2:type>entree</ns2:type>
         <ns2:prix>10.3</ns2:prix>
-        <ns2:ingredients>POULET</ns2:ingredients>
-        <ns2:ingredients>POIVRONS</ns2:ingredients>
+        <ns2:ingredients>poulet</ns2:ingredients>
+        <ns2:ingredients>poivrons</ns2:ingredients>
     </ns1:plat>
     
     <ns1:plat>
         <ns2:id>des1</ns2:id>
         <ns2:image>./images/dessert.jpeg</ns2:image>
-        <ns2:type>DESSERT</ns2:type>
+        <ns2:type>dessert</ns2:type>
         <ns2:prix>7.5</ns2:prix>
         <ns2:ingredients>ananas</ns2:ingredients>
         <ns2:ingredients>mozza</ns2:ingredients>

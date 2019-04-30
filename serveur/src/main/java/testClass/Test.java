@@ -21,6 +21,9 @@ public class Test extends XMLAble {
     public static void main(String[] args) {
       GestionnaireMenu m = new GestionnaireMenu();
       m.getCartesDB();
+      System.out.println("=============");
+      double d =m.getPrixPlat("des2");
+      System.out.println("prix: " + d);
       // System.out.print(conn);
         // TODO code application logic here
     }
