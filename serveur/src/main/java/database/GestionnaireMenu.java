@@ -23,6 +23,7 @@ import javax.xml.stream.events.XMLEvent;
  *
  * @author Groupe6 la classe GestionnaireMenu permet de modeliser un menu
  */
+//TODO: Deplacer tous les methodes dans XMLAble?
 public class GestionnaireMenu  extends XMLAble{
     
     ArrayList<Plat> menu;
@@ -45,12 +46,12 @@ public class GestionnaireMenu  extends XMLAble{
         this.menu = new ArrayList<Plat>();
         int i = 0;
         for(String id : idPlats){
-            if(existPlatDB(id){
+            if(existPlatDB(id)){
             i = 0;
-            while(!id.equals(plats.get(i).getId() || i < plats.length()){
+            while(!id.equals(plats.get(i).getId()) || i < plats.size()){
                 i++;
             }
-            if(id.equals(plats.get(i).getId()){
+            if(id.equals(plats.get(i).getId())){
                 menu.add(plats.get(i));
             }
             }
@@ -78,7 +79,7 @@ public class GestionnaireMenu  extends XMLAble{
      * @param id
      */
     public void ajouterAuMenu(String id) {
-
+        //???AJOUTER this.menu a XML AVEC id = id
     }
 
     /**
@@ -86,16 +87,28 @@ public class GestionnaireMenu  extends XMLAble{
      * @param id
      */
     public void enleverDuMenu(String id) {
-
+        //???ENLEVER DANS  XML
     }
 
     /**
      *Methode qui permet de recuperer le menu
      * @return menu
      */
-     ????????????????Besoin de param - identificateur de menu specifique
+     //????????????????Besoin de param - identificateur de menu specifique
     public ArrayList<Plat> getMenu() {
         return menu;
+    }
+    
+    public double getPrixPlat(String idPlat){
+        ArrayList<Plat> plats = getCartesDB();
+        int i = 0;
+        while(i < plats.size()){
+            if(plats.get(i).getId().equals(idPlat)){
+                return plats.get(i).getPrix();
+            }
+            i++;
+        }
+        return -1.0;
     }
 
     /**
@@ -157,7 +170,7 @@ public class GestionnaireMenu  extends XMLAble{
                   bImage = false;
                }
                if(bType) {
-                   target.setType(TypeDePlat.valueOf(characters.getData()));
+                   target.setType(TypeDePlat.fromValue(characters.getData()));
                   bType = false;
                }
                if(bPrix) {
@@ -165,7 +178,7 @@ public class GestionnaireMenu  extends XMLAble{
                   bPrix = false;
                }
                if(bIngredient) {
-                   ingre.add(Ingredient.valueOf(characters.getData()));
+                   ingre.add(Ingredient.fromValue(characters.getData()));
                   bIngredient = false;
                }
                break;

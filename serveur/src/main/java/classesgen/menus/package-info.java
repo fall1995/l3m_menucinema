@@ -5,5 +5,5 @@
 // Généré le : 2019.04.30 à 10:32:20 AM CEST 
 //
 
-@javax.xml.bind.annotation.XmlSchema(namespace = "http://classesGen/plat", elementFormDefault = javax.xml.bind.annotation.XmlNsForm.QUALIFIED)
-package classesgen.plat;
+@javax.xml.bind.annotation.XmlSchema(namespace = "http://classesGen/menus", elementFormDefault = javax.xml.bind.annotation.XmlNsForm.QUALIFIED)
+package classesgen.menus;
