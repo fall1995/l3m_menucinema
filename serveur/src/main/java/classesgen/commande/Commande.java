@@ -67,6 +67,9 @@ public class Commande {
     protected Double prix;
     @XmlAttribute(name = "idClient")
     protected String idClient;
+    // question plats voir le type de plats
+      @XmlElement(required = true)
+    protected List<String> plats;
 
     /**
      * Obtient la valeur de la propriété client.
@@ -89,16 +92,7 @@ public class Commande {
     }
 
     /**
-<<<<<<< HEAD
-     * Gets the value of the plat property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the plat property.
-     * 
-=======
+
      * Gets the value of the plats property.
      *
      * <p>
@@ -106,8 +100,6 @@ public class Commande {
      * snapshot. Therefore any modification you make to the returned list will
      * be present inside the JAXB object. This is why there is not a
      * <CODE>set</CODE> method for the plats property.
-     *
->>>>>>> 9e0376f8646db0bead7f8efab1c6760987b47101
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
@@ -116,17 +108,11 @@ public class Commande {
      *
      *
      * <p>
-<<<<<<< HEAD
-     * Objects of the following type(s) are allowed in the list
-     * {@link Plat }
-     * 
-     * 
-=======
      * Objects of the following type(s) are allowed in the list {@link Plats }
      *
      *
      * @return
->>>>>>> 9e0376f8646db0bead7f8efab1c6760987b47101
+
      */
     public List<Plat> getPlat() {
         if (plat == null) {
@@ -258,7 +244,7 @@ public class Commande {
      *
      * @param idplats
      */
-    public void setIdplats(List<Plat> idplats) {
+    public void setIdPlats(List<Plat> idplats) {
         this.plat = idplats;
     }
 
@@ -278,6 +264,14 @@ public class Commande {
      */
     public void setIdClient(String idClient) {
         this.idClient = idClient;
+    }
+
+    public List<String> getIdPlats() {
+        return plats ;
+    }
+
+    public void setIdplats(List<String> idPlats) {
+        this.plats = idPlats;
     }
 
 }

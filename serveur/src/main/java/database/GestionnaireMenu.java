@@ -8,12 +8,15 @@ package database;
 import classesgen.ingredient.Ingredient;
 import classesgen.plat.Plat;
 import classesgen.typedeplat.TypeDePlat;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import javax.xml.stream.XMLEventReader;
 import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamConstants;
+import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.events.Characters;
 import javax.xml.stream.events.EndElement;
 import javax.xml.stream.events.StartElement;
@@ -25,7 +28,7 @@ import javax.xml.stream.events.XMLEvent;
  */
 public class GestionnaireMenu  extends XMLAble{
     
-    ArrayList<Plat> menu;
+   List<Plat> menu;
     /**
      * Constructeur par defaut
      */
@@ -39,7 +42,7 @@ public class GestionnaireMenu  extends XMLAble{
      *
      * @param idPlats
      */
-    public GestionnaireMenu(ArrayList<String> idPlats) {
+    public GestionnaireMenu(List<String> idPlats) {
         // RECUPERER TOUS LES PLATS AVEC id DANS idPlats
         
     }
@@ -75,7 +78,7 @@ public class GestionnaireMenu  extends XMLAble{
      *Methode qui permet de recuperer le menu
      * @return menu
      */
-    public ArrayList<Plat> getMenu() {
+    public List<Plat> getMenu() {
         return menu;
     }
 
@@ -83,8 +86,8 @@ public class GestionnaireMenu  extends XMLAble{
      *Methode qui permet de recuperer les plats
      * @return res
      */
-    public ArrayList<Plat> getCartesDB() {
-        ArrayList<Plat> res = new ArrayList<Plat>();
+    public List<Plat> getCartesDB() {
+        List<Plat> res = new ArrayList<Plat>();
         Plat target = new Plat();
         List<Ingredient> ingre = new ArrayList<Ingredient>();
         
@@ -166,13 +169,13 @@ public class GestionnaireMenu  extends XMLAble{
                break;
             } 
          }
-        }catch (Exception e){
+        }catch (FileNotFoundException | NumberFormatException | XMLStreamException e){
             System.out.println("Exception: " + e);
         }
         
-        for(Plat p : res){
-            System.out.print(p.getId());
-        }
+       for (Plat p : res) {
+           System.out.print(p.getId());
+       }
         
         return res;
     }

@@ -13,7 +13,7 @@ import java.sql.Statement;
  */
 public abstract class SQLAble implements DataBaseAble {
 
-    Connection conn;
+     static Connection conn;
 
     /**
      * Methode permert de se connecter la base de donnee oracle
