@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+
+<xsd:schema version="1.0"
+           xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+           targetNamespace="http://classesGen/plat"
+           xmlns="http://classesGen/plat"
+           xmlns:type="http://classesGen/typeDePlat"
+           xmlns:ingre="http://classesGen/ingredient"
+           elementFormDefault="qualified">     
+    <xsd:import namespace="http://classesGen/typeDePlat" schemaLocation="TypeDePlat.xsd"/>
+    <xsd:import namespace="http://classesGen/ingredient" schemaLocation="Ingredient.xsd"/>
+    <xsd:element name="plat" type="Plat"/>
+    <!--    declarartion du complexe type plat-->
+    <xsd:complexType name="Plat">
+        <xsd:sequence>
+            <xsd:element name="id"                type="xsd:string"/>
+            <xsd:element name="image"             type="xsd:string"/>
+            <xsd:element name="type"              type="type:TypeDePlat"/>
+            <xsd:element name="prix"              type="xsd:double"/>
+            <xsd:element name="ingredients"       type="ingre:Ingredient" minOccurs="1" maxOccurs="unbounded"/>
+        </xsd:sequence>  
+    </xsd:complexType> 
+</xsd:schema>

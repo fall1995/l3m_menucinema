@@ -1,0 +1,47 @@
+<p-dialog header="Profile" [(visible)]="afficherDialog" [modal]="true" [responsive]="true"
+          [style]="{width: '400px', minWidth: '250px'}" [minY]="90"
+          [maximizable]="true" [baseZIndex]="10000" (onHide)="onHide()">
+    <form>
+        <div class="input-group">
+            <span class="input-group-addon"><i class="fa fa-user"></i></span>
+            <input type="text" class="form-control" id="nom"
+                   name="nom" placeholder="Nom" [(ngModel)]="user.nom">
+        </div>
+        <span class="help-block"></span>
+        <div class="input-group">
+            <span class="input-group-addon"><i class="fa fa-user-o"></i></span>
+            <input type="text" class="form-control" id="Prenom"
+                   name="prenom" placeholder="Prenom" [(ngModel)]="user.prenom">
+        </div>
+        <span class="help-block"></span>
+        <div class="input-group">
+            <span class="input-group-addon"><i class="fa fa-phone"></i></span>
+            <input type="number" class="form-control" id="phone"
+                   name="phone" placeholder="Téléphone" [(ngModel)]="user.tel">
+        </div>
+        <span class="help-block"></span>
+        <div class="input-group">
+            <span class="input-group-addon"><i class="fa fa-map-marker"></i></span>
+            <input type="text" class="form-control" id="adresse"
+                   name="adresse" placeholder="Adresse" [(ngModel)]="user.adresse">
+        </div>
+        <span class="help-block"></span>
+        <div class="input-group">
+            <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
+            <input type="email" class="form-control" id="email"
+                   name="email" placeholder="e-mail" [(ngModel)]="user.email">
+        </div>
+        <span class="help-block"></span>
+        <div class="form-group">
+            <label>Chosir l'image de profile</label>
+            <input type="file" name="..." accept="image/*" #photo>
+        </div>
+        <br>
+        <p-footer>
+            <button type="button" pButton icon="pi pi-pencil" (click)="cupdateProfile()" label="Modifier"
+                    class="ui-button-rounded" style="margin-right: 10px"></button>
+            <button type="button" pButton icon="fa fa-close" (click)="afficherDialog=false" label="Annuler"
+                    class="ui-button-secondary ui-button-rounded"></button>
+        </p-footer>
+    </form>
+</p-dialog>

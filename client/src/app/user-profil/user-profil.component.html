@@ -1,0 +1,79 @@
+<!--
+<div class="container">
+    <div class="col-md-4 ">
+        <div class="jumbotron">
+            <p>Information {{user.nom}}</p>
+        </div>
+        <div>
+            <p>{{user.nom}}</p>
+            <i class="fa fa-user" aria-hidden="true" style="text-align: inherit"></i>
+        </div>
+    </div>
+    <div class="col-md-4 ">
+        <div class="jumbotron">
+            <p>Commande</p>
+        </div>
+    </div>
+    <div class="col-md-4 ">
+        <div class="jumbotron">
+            <p>Action</p>
+        </div>
+        <button pButton type="button" label="Modifier vos informations" icon="fa fa-pencil"></button>
+    </div>
+</div>
+-->
+<div class="container">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">
+                        <i class="fa fa-book"><b> Informations commande en cours</b></i>
+                    </h3>
+                </div>
+                <div class="panel-body">
+                    <b>Produit selectionné</b>
+                </div>
+            </div>
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">
+                        <i class="fa fa-file-text-o"> <b> Vos récentes commandes</b></i>
+                    </h3>
+                </div>
+                <div class="panel-body">
+                    <b>Data table de commande</b>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <h3 class="panel-title">
+                        Informations sur votre compte
+                    </h3>
+                </div>
+                <div class="panel-body">
+                    <p>
+                        <img  src="{{user.photo}}" class="img-rounded img-thumbnail" alt="profile">
+                    </p>
+                    <h4>{{user.nom}}</h4>
+                    <p>
+                        <button type="button" class="btn btn-success" (click)="afficherDialogProfil()">
+                            <i class="fa fa-user"></i>
+                            Modifier Vos informations
+                        </button>
+                    </p>
+                    <p>
+                        <b>Email :</b>
+                        <br>
+                        {{user.email}}
+                    </p>
+                </div>
+            </div>
+        </div>
+        <app-user-dialog [afficherDialog]="afficherDialog" *ngIf="afficherDialog"
+         (onDialogHide)="onHideProfilDialog()" [user]="user"></app-user-dialog>
+    </div>
+
+</div>
