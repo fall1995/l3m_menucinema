@@ -8,6 +8,7 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 import classesgen.client.Client;
+import javax.servlet.http.HttpServletResponse;
 
 
 /**
@@ -57,6 +58,8 @@ public class Commande {
     
     @XmlAttribute(name = "prix")
     protected Double prix;
+      @XmlElement(required = true)
+    protected String idClient;
 
     /**
      * Obtient la valeur de la propriété client.
@@ -239,12 +242,12 @@ public class Commande {
 
    
     public void setIdClient(String id) {
-        this.client.setId(id);
+        this.idClient=id;
       
     }
 
     public String getIdClient() {
-       return client.getId();
+       return idClient;
     }
 
     public void setIdPlat(List<String> idPlats) {
@@ -254,5 +257,20 @@ public class Commande {
     public void setIdFilm(List<String> idFilms) {
         this.film=idFilms;
     }
+     @Override
+    public String toString() {
+        return 
+                " { \n" 
+                    + " idCommande : \""   + getId() + "\"\n" 
+                    + " idClient : \""   + getIdClient() + " \n"
+                    + " idFilm : \""   + getFilm() + " \n"
+                    + " idPlat : \""   + getIdPlat() + " \n"
+                    + " Prix : \""   + getPrix() + " \n"
+                    + " Date : \""   + getDate() + " \n"
+                    + " Adresse de location : \""   +getAdresseLivraison() + " \n"
+                + "}";
+        //"{\"id\":"+getId()+", \"idClient\":\""+getIdClient()+,"\"}";
+        //"{\"id\":"+id+", \"name\":\""+name+"\"}";
+    }    
 
 }

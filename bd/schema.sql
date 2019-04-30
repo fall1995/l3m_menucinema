@@ -6,7 +6,7 @@ drop table Commande;
 drop table Client;
 
 create table Client(
-    idClient varchar2(8),
+    idClient varchar2(50),
     nom varchar2(20) not null,
     prenom varchar2(20) not null,
     photo varchar2(20),
@@ -20,7 +20,7 @@ create table Client(
 );
 
 create table Commande(
-    idCommande varchar2(8),
+    idCommande varchar2(50),
     idClient varchar2(8) not null,
     idPlats varchar2(4), 
     idFilms varchar2(8),

@@ -39,11 +39,12 @@ public class GestionnaireCommande extends SQLAble {
             connectToDatabase();
             String adrLivr = commande.getAdresseLivraison();
             
-            ARRAY arrayPlats = CreateArray.toARRAY( commande.getIdPlat() , conn);
+            ARRAY arrayPlats = 
+                    CreateArray.toARRAY( commande.getIdPlat() , conn);
             ARRAY arrayFilms = CreateArray.toARRAY( commande.getFilm() , conn );
             CallableStatement cstmt;
-            if (     ( arrayPlats != null  &&  arrayPlats.length() > 0  &&  adrLivr != null && !adrLivr.isEmpty() )
-                  || ( arrayFilms != null  &&  arrayFilms.length() > 0  &&  adrLivr != null && !adrLivr.isEmpty() )     ){
+            //if (     ( arrayPlats != null  &&  arrayPlats.length() > 0  &&  adrLivr != null && !adrLivr.isEmpty() )
+             //     || ( arrayFilms != null  &&  arrayFilms.length() > 0  &&  adrLivr != null && !adrLivr.isEmpty() )     ){
 
                 cstmt = conn.prepareCall("{ = call enregistrerCommande(?,?,?,?,?) }");
                 cstmt.setString(1, commande.getIdClient());
@@ -62,9 +63,9 @@ public class GestionnaireCommande extends SQLAble {
                 commande.setId( ocstmt.getString(1) );
                 ocstmt.close();
                 
-            }else{
-                throw new Exception("Parametre non valide ( null ou vide ) pour l'appel de la procedure enregistrerCommande");
-            }
+            //}else{
+              //  throw new Exception("Parametre non valide ( null ou vide ) pour l'appel de la procedure enregistrerCommande");
+            //}
         } catch (SQLException e){
             e.printStackTrace();
         }
@@ -79,7 +80,7 @@ public class GestionnaireCommande extends SQLAble {
         List<String> filmsCommandes = commande.getFilm();
         
         try {
-            connectToDatabase();
+          connectToDatabase();
             OracleCallableStatement ocstmt;
             ocstmt = (OracleCallableStatement) conn.prepareCall("{ = call getcommande(?,?,?,?) }");
             ocstmt.setString( 1 , id );
@@ -126,13 +127,13 @@ public class GestionnaireCommande extends SQLAble {
     @Override
     public String toString() {
         return " { \n" 
-                    + " id : \""   + commande.getId() + "\"\n" 
-                    + " id : \""   + commande.getIdClient() + " \n"
-                    + " id : \""   + commande.getFilm().toString() + " \n"
-                    + " id : \""   + commande.getIdPlat().toString() + " \n"
-                    + " id : \""   + commande.getPrix() + " \n"
-                    + " id : \""   + commande.getDate() + " \n"
-                    + " id : \""   + commande.getAdresseLivraison() + " \n"
+                    + " idCommande : \""   + commande.getId() + "\"\n" 
+                    + " idClient : \""   + commande.getIdClient() + " \n"
+                    + " idFilm : \""   + commande.getFilm().toString() + " \n"
+                    + " idPlat : \""   + commande.getIdPlat().toString() + " \n"
+                    + " Prix : \""   + commande.getPrix() + " \n"
+                    + " Date : \""   + commande.getDate() + " \n"
+                    + " Adresse de location : \""   + commande.getAdresseLivraison() + " \n"
                 + '}';
     }    
   
