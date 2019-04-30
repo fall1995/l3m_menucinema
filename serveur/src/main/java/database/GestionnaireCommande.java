@@ -127,13 +127,13 @@ public class GestionnaireCommande extends SQLAble {
     public String toString() {
         return " { \n" 
                     + " id : \""   + commande.getId() + "\"\n" 
-                    + " id : \""   + commande.getIdClient() + " \n"
-                    + " id : \""   + commande.getFilm().toString() + " \n"
-                    + " id : \""   + commande.getIdPlat().toString() + " \n"
-                    + " id : \""   + commande.getPrix() + " \n"
-                    + " id : \""   + commande.getDate() + " \n"
-                    + " id : \""   + commande.getAdresseLivraison() + " \n"
-                + '}';
+                    + " idClient : \""   + commande.getIdClient() + "\"\n" 
+                    + " idPlats : \""   + commande.getIdPlat().toString() + "\"\n" 
+                    + " idFilms : \""   + commande.getFilm().toString() + "\"\n" 
+                    + " idPrix : \""   + commande.getPrix() + "\"\n" 
+                    + " dateCommande : \""   + commande.getDate() + "\"\n" 
+                    + " adresseLivraison : \""   + commande.getAdresseLivraison() + "\"\n" 
+                + "}";
     }    
   
 }

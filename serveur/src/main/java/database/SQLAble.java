@@ -20,10 +20,11 @@ public abstract class SQLAble implements DataBaseAble {
      * @throws java.sql.SQLException
      */
     @Override
-    public void connectToDatabase() throws SQLException {
+    public Connection connectToDatabase() throws SQLException {
+        Connection conn;
         String CONN_URL = "jdbc:oracle:thin:@im2ag-oracle.e.ujf-grenoble.fr:1521:im2ag";
-        String USER = "sagarai";
-        String PASSWD = "Sagara1992";
+        String USER = "";
+        String PASSWD = "";
         System.out.print("Loading Oracle driver... ");
         DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
         System.out.println("loaded");
@@ -32,17 +33,7 @@ public abstract class SQLAble implements DataBaseAble {
         System.out.print("Connecting to the database... ");
         conn = DriverManager.getConnection(CONN_URL, USER, PASSWD);
         System.out.println("connected");
-        /* 
-        if (conn == null || conn.isClosed()) {
-            try {
-                Class.forName("oracle.jdbc.driver.OracleDriver");
-            } catch (ClassNotFoundException e) {
-                throw new SQLException(e);
-            }
-            conn = DriverManager.getConnection(
-                    CONN_URL, USER, PASSWD);
-        }
-        **/
+        return conn;
     }
 
     /**
@@ -54,7 +45,6 @@ public abstract class SQLAble implements DataBaseAble {
         if (conn != null && !conn.isClosed()) {
             conn.close();
         }
-
     }
 
     /**

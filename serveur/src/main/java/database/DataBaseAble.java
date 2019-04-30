@@ -1,5 +1,7 @@
 package database;
 
+import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**
@@ -7,8 +9,8 @@ import java.sql.SQLException;
  * DataBaseAble Intteface  permet la gestion de la connection
  */
 interface DataBaseAble {
-    public void connectToDatabase() throws SQLException;
+    public Connection connectToDatabase() throws SQLException;
     public void disconnect() throws SQLException;
-    //public ResultFormat request(String request) throws SQLException, Exception;
+    public ResultSet request(String request) throws SQLException, Exception;
     
 }
