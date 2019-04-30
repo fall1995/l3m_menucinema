@@ -77,14 +77,17 @@ export class SigninComponent implements OnInit {
         });
     }
     sendServeur(){
+        let i;
         this.afAuth.user.subscribe(utilisateur =>{
+            i = utilisateur.displayName.indexOf(" "); // couper en 2 displayname pour avoir le prenom et le nom
             if (utilisateur.uid){
                 this.authService.authentificate({
                     // variable que le serveur s'attend a recevoir
                     idClient: utilisateur.uid,
-                    nom: utilisateur.displayName,
-                    prenom: utilisateur.displayName}).then(data =>{
-                    console.log("envoie au serveur ok");
+                    nom: utilisateur.displayName.substr(0,i),
+                    prenom: utilisateur.displayName.substr(i),
+                }).then(data =>{
+                    console.log("envoie après verification au serveur ok");
                 });
                 console.log("verification avec le serveur", utilisateur.emailVerified);
             }

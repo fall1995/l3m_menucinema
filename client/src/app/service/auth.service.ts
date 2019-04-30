@@ -57,7 +57,7 @@ export class AuthService {
      */
     authentificate(params: {[key: string]: string}): Promise<HttpResponse<string>> {
         const P = new HttpParams( {fromObject: params} );
-        return this.http.post( `/api/enregistreNouveauClient`, P, {
+        return this.http.post( `/api/authentification`, P, {
             observe: 'response',
             responseType: 'text',
             headers: {'content-type': 'application/x-www-form-urlencoded'}
