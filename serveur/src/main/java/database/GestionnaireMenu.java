@@ -199,6 +199,7 @@ public class GestionnaireMenu  extends XMLAble{
                   res.add(target);
                }else if(endElement.getName().getLocalPart().equalsIgnoreCase("ingredients")){
                    target.getIngredients().clear();
+                   ingre.clear();
                    target.getIngredients().addAll(ingre);
                }
                break;
