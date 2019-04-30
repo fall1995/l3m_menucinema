@@ -5,9 +5,17 @@
  */
 package testClass;
 
+import classesgen.client.Client;
+import classesgen.plat.Plat;
 import database.GestionnaireMenu;
 import database.SQLAble;
 import database.XMLAble;
+import facture.TransformationFacture;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import javax.xml.bind.JAXBException;
 
 /**
  *
@@ -18,12 +26,34 @@ public class Test extends XMLAble {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
-      GestionnaireMenu m = new GestionnaireMenu();
+    public static void main(String[] args) throws JAXBException, IOException {
+     
+        GestionnaireMenu m = new GestionnaireMenu();
       m.getCartesDB();
       System.out.println("=============");
       double d =m.getPrixPlat("des2");
       System.out.println("prix: " + d);
+        
+       
+         Client c = new Client();
+         c.setAdresse("A");
+         c.setId("C");
+         c.setNom("D");
+         c.setPhoto("E");
+         c.setPrenom("F");
+         c.setTelephone("G");
+         TransformationFacture tf = new TransformationFacture(c, new ArrayList<>(Arrays.asList(
+    "des1",
+    "de3",
+    "plat2"
+)), new ArrayList<>(Arrays.asList(
+    "Unbreakable",
+    "Die Hard",
+    "Sixth Sense"
+)),
+        "Mon Maison", "12:41 31.10.19", 41000, "xk7to1");
+         
+         tf.saveAsXml("testFacture.xml");
       // System.out.print(conn);
         // TODO code application logic here
     }

@@ -1,11 +1,15 @@
 package database;
 
 import classesgen.commande.Commande;
+import classesgen.plat.Plat;
 import java.sql.CallableStatement;
-import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
+import oracle.jdbc.OracleCallableStatement;
+import oracle.jdbc.OracleTypes;
+import oracle.sql.ARRAY;
 
 /**
  * @author Groupe6 La clase GestionnaireCommande pour la gestion des commandes
@@ -16,49 +20,76 @@ public class GestionnaireCommande extends SQLAble {
 
     /**
      * Constructeur qui prend en parametre idclient, liste des IdPlats, liste
-     * des idFilms,et adresse de livraisons et les modifie
-     *
+     * des idFilms,et adresse de livraisons et les modifie *
      * @param idClient
-     * @param idPlat
+     * @param idPlats
      * @param idFilms
      * @param adresseLivraison
+     * @throws java.sql.SQLException
      */
-    public GestionnaireCommande(String idClient, List<String> idPlat,
-            List<String> idFilms, String adresseLivraison) {
+    public GestionnaireCommande(String idClient, List<String> idPlats, List<String> idFilms, String adresseLivraison) throws SQLException {
+        commande = new Commande();
         commande.setId(idClient);
-        //commande.setIdplats(idplats);
-        commande.setIdFilms(idFilms);
+        commande.getIdPlat().addAll(idPlats);
+        commande.getFilm().addAll(idFilms);
         commande.setAdresseLivraison(adresseLivraison);
+        connectToDatabase();
     }
 
     /**
      * Methode qui permet d'initialiser le id et prend en parametre le nouveau
      *
      * @param id
+     * @throws java.sql.SQLException
      */
-    public GestionnaireCommande(String id) {
+    public GestionnaireCommande(String id) throws SQLException {
+        commande = new Commande();
         commande.setId(id);
+        connectToDatabase();
     }
 
     /**
      * Methode qui permet d'enregistre une commander
-     *
      * @throws java.sql.SQLException
      */
-    public void enregistreCommanderDB() throws SQLException {
-        CallableStatement cstmt;
-        cstmt = conn.prepareCall("{ = call enregistrerCommande(?,?,?) }");
-        cstmt.setString(1, commande.getId());
-        cstmt.setString(2, commande.getIdClient());
-        cstmt.setString(3, " ");
-        cstmt.setString(4, " ");
-        cstmt.setString(5, commande.getDate());
-        cstmt.setDouble(6, commande.getPrix());
-        cstmt.setString(7, commande.getAdresseLivraison());
+    public void enregistrerCommandeDB() throws Exception {
+        connectToDatabase();
+        try {
+            
+            List<String> listIdPlats = commande.getIdPlat();
+        
+            List<String> listIdFilms = commande.getFilm();
+            String adrLivr = commande.getAdresseLivraison();
 
-        cstmt.execute();
-        cstmt.close();
+            ARRAY arrayPlats = CreateArray.toARRAY(listIdPlats, conn);
+            ARRAY arrayFilms = CreateArray.toARRAY(listIdFilms, conn);
+            CallableStatement cstmt;
+            if ((!arrayPlats.isNull() && listIdPlats.size() > 0 && adrLivr != null && !adrLivr.isEmpty())
+                    || (!arrayFilms.isNull() && listIdFilms.size() > 0 && adrLivr != null && !adrLivr.isEmpty())) {
 
+                cstmt = conn.prepareCall("{ = call enregistrerCommande(?,?,?,?,?) }");
+                cstmt.setString(1, commande.getId());
+                cstmt.setObject(2, arrayPlats);
+                cstmt.setObject(3, arrayFilms);
+                cstmt.setDouble(4, commande.getPrix());
+                cstmt.setString(5, commande.getAdresseLivraison());
+                cstmt.executeUpdate();
+                cstmt.close();
+
+                OracleCallableStatement ocstmt;
+                ocstmt = (OracleCallableStatement) conn.prepareCall("{ ? = call getLastIdCommande() }");
+                ocstmt.registerOutParameter(1, OracleTypes.VARCHAR);
+                ocstmt.execute();
+
+                commande.setId(ocstmt.getString(1));
+                ocstmt.close();
+
+            } else {
+                throw new Exception("Parametre non valide ( null ou vide ) pour l'appel de la procedure enregistrerCommande");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -66,30 +97,56 @@ public class GestionnaireCommande extends SQLAble {
      *
      * @param id
      * @return commande
-     * @throws java.sql.SQLException
      */
-    public Commande getCommande(String id) throws SQLException {
-        Commande res = new Commande();
-        String requete = "{ ? = call getCommande(?,?) }";
-        ResultSet reslreq = request(requete);
-        while (reslreq.next()) {
-            String idCommande = reslreq.getString("id");
-            String idClient = reslreq.getString("idClient");
-            String idplats = reslreq.getString("idplats");
-            String idFilms = reslreq.getString("idFilms");
-            double price = reslreq.getDouble("price");
-            Date dateCommande = reslreq.getDate("dateCommande");
-            String adresseLivraison = reslreq.getString("adresseLivraison");
+    public static Commande getCommande(String id) {
+        Commande commande = new Commande();
+        commande.setId(id);
+        
+        List<String> platsCommandes = commande.getIdPlat();
+      
+        List<String> filmsCommandes = commande.getFilm();
 
-            res.setId(id);
-            res.setIdClient(idClient);
-            //res.setIdFilms(idFilms);
-            //res.setIdplats(idplats);
-            res.setAdresseLivraison(adresseLivraison);
-            res.setPrix(price);
+        try {
+            OracleCallableStatement ocstmt;
+            ocstmt = (OracleCallableStatement) conn.prepareCall("{ = call getcommande(?,?,?,?) }");
+            ocstmt.setString(1, id);
+            ocstmt.registerOutParameter(2, OracleTypes.CURSOR);
+            ocstmt.registerOutParameter(3, OracleTypes.CURSOR);
+            ocstmt.registerOutParameter(4, OracleTypes.CURSOR);
+            ocstmt.execute();
+
+            ResultSet rset = (ResultSet) (ocstmt.getObject(2));
+            if (rset != null && rset.next()) {
+                commande.setId(rset.getString("idClient"));
+                commande.setDate((rset.getDate("dateCommande")).toString());
+                commande.setPrix(rset.getDouble("prix"));
+                commande.setAdresseLivraison(rset.getString("adresseLivraison"));
+            }
+            rset.close();
+
+            rset = (ResultSet) (ocstmt.getObject(3));
+            while (rset != null && rset.next()) {
+                int quantite = rset.getInt("quantite");
+                for (int i = 0; i < quantite; i++) {
+                    platsCommandes.add(rset.getString("idPlat"));
+                }
+            }
+            rset.close();
+
+            rset = (ResultSet) (ocstmt.getObject(4));
+            while (rset != null && rset.next()) {
+                filmsCommandes.add(rset.getString("idFilm"));
+            }
+            rset.close();
+
+            ocstmt.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            //System.err.println(e);    
         }
 
-        return res;
+        return commande;
     }
 
     /**

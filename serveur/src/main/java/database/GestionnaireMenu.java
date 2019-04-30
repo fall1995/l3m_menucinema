@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package database;
 
 import classesgen.ingredient.Ingredient;
@@ -21,29 +16,31 @@ import javax.xml.stream.events.StartElement;
 import javax.xml.stream.events.XMLEvent;
 
 /**
- *
- * @author Groupe6 la classe GestionnaireMenu permet de modeliser un menu
+ * @author Groupe6 
+ * la classe GestionnaireMenu permet de modeliser un menu
  */
+
+
 //TODO: Deplacer tous les methodes dans XMLAble?
 public class GestionnaireMenu  extends XMLAble{
     
     ArrayList<Plat> menu;
+
     /**
      * Constructeur par defaut
      */
-    public GestionnaireMenu() { 
+    public GestionnaireMenu() {
         // PAR DEFAUT MENU EST VIDE
         this.menu = new ArrayList<Plat>();
     }
 
     /**
      * Constructeur qui initialise les id plats
-     *
      * @param idPlats
      */
-    public GestionnaireMenu(ArrayList<String> idPlats) {
+    public GestionnaireMenu(List<String> idPlats) {
         // RECUPERER TOUS LES PLATS AVEC id DANS idPlats
-        ArrayList<Plat> plats = getCartesDB();
+        ArrayList<Plat> plats = (ArrayList<Plat>) getCartesDB();
         this.menu = new ArrayList<Plat>();
         int i = 0;
         for(String id : idPlats){
@@ -57,18 +54,18 @@ public class GestionnaireMenu  extends XMLAble{
             }
             }
         }
-        
+
     }
 
     /**
-     *Methode qui permet de verifier si plat existe dans la base en prenant en
+     * Methode qui permet de verifier si plat existe dans la base en prenant en
      * id du plat
      * @param id
      * @return res
      */
     protected boolean existPlatDB(String id) {
-        for(Plat p : getCartesDB()){
-            if(p.getId().equals(id)){
+        for (Plat p : getCartesDB()) {
+            if (p.getId().equals(id)) {
                 return true;
             }
         }
@@ -76,7 +73,7 @@ public class GestionnaireMenu  extends XMLAble{
     }
 
     /**
-     *Methode qui permet d'ajouter un menu en prenant en parametre id du menu
+     * Methode qui permet d'ajouter un menu en prenant en parametre id du menu
      * @param id
      */
     public void ajouterAuMenu(String id) {
@@ -84,7 +81,8 @@ public class GestionnaireMenu  extends XMLAble{
     }
 
     /**
-     *Methode qui permet enlever un menu en prenant en paramtre id du menu
+     * Methode qui permet enlever un menu en prenant en paramtre id du menu
+     *
      * @param id
      */
     public void enleverDuMenu(String id) {
@@ -97,16 +95,17 @@ public class GestionnaireMenu  extends XMLAble{
     }
 
     /**
-     *Methode qui permet de recuperer le menu
+     * Methode qui permet de recuperer le menu
+     *
      * @return menu
      */
-     //????????????????Besoin de param - identificateur de menu specifique
+
     public ArrayList<Plat> getMenu() {
-        return menu;
+        return (ArrayList<Plat>) menu;
     }
     
     public double getPrixPlat(String idPlat){
-        ArrayList<Plat> plats = getCartesDB();
+        ArrayList<Plat> plats = (ArrayList<Plat>) getCartesDB();
         int i = 0;
         while(i < plats.size()){
             if(plats.get(i).getId().equals(idPlat)){
@@ -118,22 +117,19 @@ public class GestionnaireMenu  extends XMLAble{
     }
 
     /**
-     *Methode qui permet de recuperer les plats
+     * Methode qui permet de recuperer les plats
+     *
      * @return res
      */
-    public ArrayList<Plat> getCartesDB() {
-        ArrayList<Plat> res = new ArrayList<Plat>();
+    public List<Plat> getCartesDB() {
+        List<Plat> res = new ArrayList<Plat>();
         Plat target = new Plat();
         List<Ingredient> ingre = new ArrayList<Ingredient>();
-        
         boolean bId = false;
         boolean bImage = false;
         boolean bType = false;
         boolean bPrix = false;
-        boolean bIngredient = false;
-        
-        
-        
+        boolean bIngredient = false;   
         try{
          XMLInputFactory factory = XMLInputFactory.newInstance();
          XMLEventReader eventReader =
@@ -210,8 +206,8 @@ public class GestionnaireMenu  extends XMLAble{
         }catch (Exception e){
             System.out.println("Exception: " + e);
         }
-        
-        for(Plat p : res){
+
+        for (Plat p : res) {
             System.out.print(p.getId());
         }
         return res;
