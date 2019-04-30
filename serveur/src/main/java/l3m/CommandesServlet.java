@@ -1,6 +1,7 @@
 package l3m;
 
 import database.GestionnaireCommande;
+import database.GestionnaireMenu;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.HashMap;
@@ -134,7 +135,8 @@ public class CommandesServlet extends HttpServlet {
         double prixplat = 0.0;
         for (int i = 0; i < idplats.length; i++) {
             String idp = idplats[i];
-            //prixplat ;
+            GestionnaireMenu gestionmenu= new GestionnaireMenu();
+             prixplat=gestionmenu.getPrixPlat(idp);
             res+=prixplat;
         }
         return res;

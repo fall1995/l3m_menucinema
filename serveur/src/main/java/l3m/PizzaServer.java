@@ -1,4 +1,4 @@
-package l3m; 
+package l3m;
 
 import javax.servlet.http.HttpServlet;
 import org.eclipse.jetty.server.Server;
@@ -8,18 +8,18 @@ import org.eclipse.jetty.servlet.ServletHandler;
 import org.eclipse.jetty.util.thread.QueuedThreadPool;
 
 /**
- * @author Groupe6
- * PizzaServer
+ * @author Groupe6 PizzaServer
  */
 public class PizzaServer extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-	private Server server;
-        
+
+    private static final long serialVersionUID = 1L;
+    private Server server;
+
     /**
-     *Methode qui permet de demarrer le server
+     * Methode qui permet de demarrer le server
+     *
      * @throws Exception
      */
-
     void start() throws Exception {
         int maxThreads = 100;
         int minThreads = 10;
@@ -29,7 +29,7 @@ public class PizzaServer extends HttpServlet {
         server = new Server(threadPool);
         ServerConnector connector = new ServerConnector(server);
         connector.setPort(8090);
-        server.setConnectors(new Connector[] { connector });
+        server.setConnectors(new Connector[]{connector});
 
         ServletHandler servletHandler = new ServletHandler();
         server.setHandler(servletHandler);
@@ -38,27 +38,30 @@ public class PizzaServer extends HttpServlet {
         servletHandler.addServletWithMapping(ClientAuthentificationServlet.class, "/api/authentification");
         servletHandler.addServletWithMapping(ClientEnregistreServlet.class, "/api/enregistreNouveauClient");
         servletHandler.addServletWithMapping(UpdateClientServlet.class, "/api/updateClient");
-        servletHandler.addServletWithMapping(CommandesServlet.class,"/api/commande");
-          servletHandler.addServletWithMapping(PlatsServlet.class,"/api/plats");
+        servletHandler.addServletWithMapping(CommandesServlet.class, "/api/commande");
+        servletHandler.addServletWithMapping(PlatsServlet.class, "/api/plats");
         server.start();
     }
 
     /**
-     *Methode  qui permet d' arreter le server
+     * Methode qui permet d' arreter le server
+     *
      * @throws Exception
      */
     void stop() throws Exception {
         System.out.println("Server stop");
-    	server.stop();
+        server.stop();
     }
+
     /**
-     *Methode main qui permet de demarrer le server
+     * Methode main qui permet de demarrer le server
+     *
      * @param args
      * @throws Exception
      */
     public static void main(String[] args) throws Exception {
-		PizzaServer server = new PizzaServer();
-		server.start();
-	}
+        PizzaServer server = new PizzaServer();
+        server.start();
+    }
 
 }

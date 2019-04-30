@@ -1,11 +1,3 @@
-//
-// Ce fichier a été généré par l'implémentation de référence JavaTM Architecture for XML Binding (JAXB), v2.2.8-b130911.1802 
-// Voir <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
-// Toute modification apportée à ce fichier sera perdue lors de la recompilation du schéma source. 
-// Généré le : 2019.04.30 à 01:38:01 PM CEST 
-//
-
-
 package classesgen.commande;
 
 import java.util.ArrayList;
@@ -62,6 +54,7 @@ public class Commande {
     protected String date;
     @XmlAttribute(name = "id")
     protected String id;
+    
     @XmlAttribute(name = "prix")
     protected Double prix;
 
@@ -241,6 +234,25 @@ public class Commande {
      */
     public void setPrix(Double value) {
         this.prix = value;
+    }
+
+
+   
+    public void setIdClient(String id) {
+        this.client.setId(id);
+      
+    }
+
+    public String getIdClient() {
+       return client.getId();
+    }
+
+    public void setIdPlat(List<String> idPlats) {
+        this.idPlat=idPlats;
+    }
+
+    public void setIdFilm(List<String> idFilms) {
+        this.film=idFilms;
     }
 
 }
