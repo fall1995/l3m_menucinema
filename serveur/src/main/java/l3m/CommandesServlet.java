@@ -12,7 +12,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * @author Groupe6 CommandesServlet
+ * @author Groupe6 
+ * CommandesServlet
  */
 public class CommandesServlet extends HttpServlet {
 
@@ -56,11 +57,12 @@ public class CommandesServlet extends HttpServlet {
             throws ServletException, IOException {
         HashMap<String, String> idplat_quantite = new HashMap<>();
         // recuperation des donnes
-        idClient = request.getParameter("idClient");
         id = request.getParameter("id");
-        idplats = request.getParameterValues("idplat");
+        idClient = request.getParameter("idClient");
+        idplats = request.getParameterValues("idPlat");
         idFilms = request.getParameterValues("idFilms");
         adresseLivraison = request.getParameter("adresseLivraison");
+
         // calculer du prix de la commande
         double prixFilms = sommeFilm(idFilms);
         double prixPlats = sommePlat(idplats);
@@ -87,13 +89,9 @@ public class CommandesServlet extends HttpServlet {
      */
     // AJOUTER PLAT A UNE COMMANDE EXISTANTE
     @Override
-    protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        //idPlat = request.getParameter("idPlat");
-        //idCommande = request.getParameter("idCommande");
-
-        //GestionnaireCommande gComm = new GestionnaireCommande(this.idCommande);
-        //Commande comm = gComm.getCommande(this.idCommande);
-        //comm.getPlat().add(###FIND PLAT FROM idPlat);
+    protected void doPut(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+      
     }
 
     @Override
@@ -131,9 +129,13 @@ public class CommandesServlet extends HttpServlet {
      * @return res
      */
     public double sommePlat(String[] idplats) {
-        double res = 0.0;
+        double res;
+        res = 0.0;
+        double prixplat = 0.0;
         for (int i = 0; i < idplats.length; i++) {
-
+            String idp = idplats[i];
+            //prixplat ;
+            res+=prixplat;
         }
         return res;
     }

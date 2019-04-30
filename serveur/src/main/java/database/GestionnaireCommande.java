@@ -18,12 +18,12 @@ public class GestionnaireCommande extends SQLAble {
 
     /**
      * Constructeur qui prend en parametre idclient, liste des IdPlats, liste
-     * des idFilms,et adresse de livraisons et les modifie
-     *
+     * des idFilms,et adresse de livraisons et les modifie *
      * @param idClient
-     * @param idPlat
+     * @param idPlats
      * @param idFilms
      * @param adresseLivraison
+     * @throws java.sql.SQLException
      */
     public GestionnaireCommande(String idClient, List<String> idPlats, List<String> idFilms, String adresseLivraison) throws SQLException {
         commande = new Commande();
@@ -38,6 +38,7 @@ public class GestionnaireCommande extends SQLAble {
      * Methode qui permet d'initialiser le id et prend en parametre le nouveau
      *
      * @param id
+     * @throws java.sql.SQLException
      */
     public GestionnaireCommande(String id) throws SQLException {
         commande = new Commande();
@@ -47,7 +48,6 @@ public class GestionnaireCommande extends SQLAble {
 
     /**
      * Methode qui permet d'enregistre une commander
-     *
      * @throws java.sql.SQLException
      */
     public void enregistrerCommandeDB() throws Exception {
