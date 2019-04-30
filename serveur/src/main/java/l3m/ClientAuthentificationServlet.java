@@ -6,6 +6,8 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Enumeration;
 import java.util.HashMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -27,8 +29,31 @@ public class ClientAuthentificationServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("application/json");
+        response.addHeader("Access-Control-Allow-Origin", "*");
+        response.addHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, PUT, DELETE, HEAD");
+        response.addHeader("Access-Control-Allow-Headers", "X-PINGOTHER, Origin, X-Requested-With, Content-Type, Accept");
+        response.addHeader("Access-Control-Max-Age", "1728000");
+
+        String res = "";
+        HashMap<String, String> parametres = new HashMap();
+        Client client = new Client();
         response.setStatus(HttpServletResponse.SC_OK);
         response.getWriter().println(this.processQueryTest(request));
+
+        parametres.put(id, request.getParameter("idClient"));
+
+        if (getClientinfo(parametres)) {
+            try {
+                GestionnaireClient gestionClient = new GestionnaireClient(parametres.get(id));
+                response.setStatus(HttpServletResponse.SC_OK);
+                response.getWriter().println(client.toString());
+            } catch (SQLException ex) {
+                Logger.getLogger(ClientAuthentificationServlet.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }else {
+            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+            response.getWriter().println("Parametre non complet");
+        }
     }
 
     /*____________________________________________________________________________________________________________________
@@ -99,6 +124,15 @@ public class ClientAuthentificationServlet extends HttpServlet {
         }
 
         return res;
+    }
+
+    private boolean getClientinfo(HashMap<String, String> params) {
+        boolean valide = false;
+
+        if (params.containsKey(id) && params.get(id) != null) {
+            valide = true;
+        }
+        return valide;
     }
 
 }

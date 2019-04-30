@@ -26,6 +26,14 @@ public class GestionnaireClient extends SQLAble {
         init();
 
     }
+    
+    public GestionnaireClient(String id) throws SQLException {
+        client = new Client();
+        client.setId(id);
+        connectToDatabase();
+        init();
+
+    }
 
     protected void init() {
 
