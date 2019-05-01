@@ -15,6 +15,7 @@ export class FilmsComponent implements OnInit {
     listeMovie: MovieResponse;
     listeMovieDram : MovieResponse;
     listeMovieHightRatet : MovieResponse;
+    afficherDialog = false;
 
   constructor(private tmdbService: TmdbService) {
 
@@ -51,5 +52,15 @@ export class FilmsComponent implements OnInit {
     get film(): MovieResponse {
         return this.listeMovie;
     }
+
+
+    afficherDialogProfil(): void {
+        this.afficherDialog = true;
+    }
+
+    onHideProfilDialog(): void{
+        this.afficherDialog = false;
+    }
+
 
 }

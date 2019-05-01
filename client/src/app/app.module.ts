@@ -36,6 +36,7 @@ import {DialogModule} from 'primeng/dialog';
 
 import 'hammerjs';
 import { UserDialogComponent } from './user-profil/user-dialog/user-dialog.component';
+import {OverlayPanelModule} from 'primeng/primeng';
 @NgModule({
     declarations: [
         AppComponent,
@@ -71,6 +72,7 @@ import { UserDialogComponent } from './user-profil/user-dialog/user-dialog.compo
         DialogModule,
         ButtonModule,
         MatIconModule,
+        OverlayPanelModule,
 
     ],
     providers: [TmdbService,AuthService,MenuService, AuthGuardService],
