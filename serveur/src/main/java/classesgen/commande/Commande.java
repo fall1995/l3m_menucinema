@@ -246,7 +246,7 @@ public class Commande {
                 + ", Date:" + getDate()
                 + ", Adresse:" + getAdresseLivraison()
                 + "}";
-        //"{\"id\":"+id+", \"name\":\""+name+"\"}";
+        
     }
 
 }

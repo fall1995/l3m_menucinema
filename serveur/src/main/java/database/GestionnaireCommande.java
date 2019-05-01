@@ -16,6 +16,7 @@ import oracle.sql.ARRAY;
 public class GestionnaireCommande extends SQLAble {
 
     private Commande commande;
+    private  double prix;
 
     public GestionnaireCommande(String idClient, List<String> idPlats , List<String> idFilms , String adresseLivraison) {
         commande = new Commande();
@@ -30,9 +31,14 @@ public class GestionnaireCommande extends SQLAble {
         commande = new Commande();
         commande.setId(id);
     }
+      public GestionnaireCommande() {
+        commande = new Commande();
+       
+    }
 
     /**
      * Cette mÃ©thode permet d'enregistrer la commande en cours "l'objet this" dans la BD
+     * @throws java.lang.Exception
      */
     public void enregistrerCommandeDB() throws Exception {
         try {
@@ -43,14 +49,14 @@ public class GestionnaireCommande extends SQLAble {
                     CreateArray.toARRAY( commande.getIdPlat() , conn);
             ARRAY arrayFilms = CreateArray.toARRAY( commande.getFilm() , conn );
             CallableStatement cstmt;
-            //if (     ( arrayPlats != null  &&  arrayPlats.length() > 0  &&  adrLivr != null && !adrLivr.isEmpty() )
-             //     || ( arrayFilms != null  &&  arrayFilms.length() > 0  &&  adrLivr != null && !adrLivr.isEmpty() )     ){
+           if (     ( arrayPlats != null  &&  arrayPlats.length() > 0  &&  adrLivr != null && !adrLivr.isEmpty() )
+                 || ( arrayFilms != null  &&  arrayFilms.length() > 0  &&  adrLivr != null && !adrLivr.isEmpty() )     ){
 
                 cstmt = conn.prepareCall("{ = call enregistrerCommande(?,?,?,?,?) }");
                 cstmt.setString(1, commande.getIdClient());
                 cstmt.setObject(2, arrayPlats);
                 cstmt.setObject(3, arrayFilms);
-                cstmt.setDouble(4, commande.getPrix());
+                cstmt.setDouble(4, prix);
                 cstmt.setString(5, commande.getAdresseLivraison());
                 cstmt.executeUpdate();
                 cstmt.close();
@@ -63,9 +69,9 @@ public class GestionnaireCommande extends SQLAble {
                 commande.setId( ocstmt.getString(1) );
                 ocstmt.close();
                 
-            //}else{
-              //  throw new Exception("Parametre non valide ( null ou vide ) pour l'appel de la procedure enregistrerCommande");
-            //}
+           }else{
+              throw new Exception("Parametre non valide ( null ou vide ) pour l'appel de la procedure enregistrerCommande");
+          }
         } catch (SQLException e){
             e.printStackTrace();
         }

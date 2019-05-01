@@ -6,6 +6,7 @@ import database.GestionnaireMenu;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
@@ -44,7 +45,7 @@ public class CommandesServlet extends HttpServlet {
         List<Commande> comm = new ArrayList<>();
         gestonCommande = new GestionnaireCommande(id);
         Commande commande = gestonCommande.getCommande(id);
-        
+
         response.setContentType("application/json");
         response.setStatus(HttpServletResponse.SC_OK);
         response.getWriter().println(commande.toString());
@@ -60,8 +61,9 @@ public class CommandesServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
-        Enumeration<String> P = request.getParameterNames();
+        Commande commande = new Commande();
+        
+        /* Enumeration<String> P = request.getParameterNames();
         HashMap<String, String> parametres = new HashMap();
         Commande commande = new Commande();
 
@@ -74,22 +76,35 @@ public class CommandesServlet extends HttpServlet {
         //commande.setIdFilm(parametres.get(idFilms));
         commande.setAdresseLivraison(parametres.get(adresseLivraison));
         commande.setPrix(prix);
+         */
 
         // recuperation des donnes
         //id = request.getParameter("id");
+        
         idClient = request.getParameter("idClient");
         idplats = request.getParameterValues("idPlat");
         idFilms = request.getParameterValues("idFilms");
         adresseLivraison = request.getParameter("adresseLivraison");
-
-        // calculer du prix de la commande
+        List<String> al = (ArrayList<String>) toArrayList(idplats);
+        List<String> alf = (ArrayList<String>) toArrayList(idFilms);
+        
         double prixFilms = sommeFilm(idFilms);
         double prixPlats = sommePlat(idplats);
         prix = prixFilms + prixPlats;
+        
+        commande.setIdClient(idClient);
+        commande.setIdPlat(al);
+        commande.setIdFilm(alf);
+        commande.setAdresseLivraison(adresseLivraison);
+        commande.setPrix(prix);
+
+        System.out.println(idClient);
+        // calculer du prix de la commande
+        
         //insertion dans la base de donnes
         GestionnaireCommande addCommande;
         try {
-            addCommande = new GestionnaireCommande(id);
+            addCommande = new GestionnaireCommande(idClient, al, alf, adresseLivraison);
             addCommande.enregistrerCommandeDB();
         } catch (SQLException ex) {
             Logger.getLogger(CommandesServlet.class.getName()).log(Level.SEVERE, null, ex);
@@ -151,5 +166,13 @@ public class CommandesServlet extends HttpServlet {
             res += prixplat;
         }
         return res;
+    }
+
+    static <T> List<T> toArrayList(T[] Tableau) {
+        List<T> al = new ArrayList<T>();
+        for (T obj : Tableau) {
+            al.add(obj);
+        }
+        return al;
     }
 }
