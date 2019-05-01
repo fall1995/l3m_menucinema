@@ -88,10 +88,7 @@ public class CommandesServlet extends HttpServlet {
         adresseLivraison = request.getParameter("adresseLivraison");
         List<String> al = (ArrayList<String>) toArrayList(idplats);
         List<String> alf = (ArrayList<String>) toArrayList(idFilms);
-        // calculer du prix de la commande
-        double prixFilms = sommeFilm(idFilms);
-        double prixPlats = sommePlat(idplats);
-        prix = prixFilms + prixPlats;
+       
 
         commande.setIdClient(idClient);
         commande.setIdPlat(al);
@@ -103,6 +100,8 @@ public class CommandesServlet extends HttpServlet {
         GestionnaireCommande addCommande;
         try {
             addCommande = new GestionnaireCommande(idClient, al, alf, adresseLivraison);
+             System.out.println("prix seclionner est  avant: " + prix);
+            commande.setPrix(prix);
             addCommande.enregistrerCommandeDB();
         } catch (SQLException ex) {
             Logger.getLogger(CommandesServlet.class.getName()).log(Level.SEVERE, null, ex);
@@ -130,39 +129,7 @@ public class CommandesServlet extends HttpServlet {
         id = request.getParameter("id");
     }
 
-    /**
-     * Methode qui permet de calcule le prix total des films choisis par un
-     * client client et qui prend en parametre la liste des films
-     *
-     * @param idFilms
-     * @return res
-     */
-    public double sommeFilm(String[] idFilms) {
-        double res;
-        int nbreFilm = idFilms.length;
-        res = 3.79 * nbreFilm;
-        return res;
-    }
 
-    /**
-     * Methode qui permet de calcule le prix total des plats choisis par un
-     * client client et qui prend en parametre la liste des des plats
-     *
-     * @param idplats
-     * @return res
-     */
-    public double sommePlat(String[] idplats) {
-        double res;
-        res = 0.0;
-        double prixplat;
-        for (int i = 0; i < idplats.length; i++) {
-            String idp = idplats[i];
-            GestionnaireMenu gestionmenu = new GestionnaireMenu();
-            prixplat = gestionmenu.getPrixPlat(idp);
-            res += prixplat;
-        }
-        return res;
-    }
 
     static <T> List<T> toArrayList(T[] Tableau) {
         List<T> al = new ArrayList<>();

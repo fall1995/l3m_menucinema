@@ -11,11 +11,12 @@ import oracle.sql.ARRAY;
 
 /**
  * @author Groupe6 La clase GestionnaireCommande pour la gestion des commandes
+ * d'un client
  */
 public class GestionnaireCommande extends SQLAble {
 
     private Commande commande;
-    private double prix = 1.;
+    private double prix;
 
     public GestionnaireCommande(String idClient, List<String> idPlats, List<String> idFilms, String adresseLivraison) {
         commande = new Commande();
@@ -23,8 +24,12 @@ public class GestionnaireCommande extends SQLAble {
         commande.setIdPlat(idPlats);
         commande.setIdFilm(idFilms);
         commande.setAdresseLivraison(adresseLivraison);
+        // calculer du prix de la commande
+        double prixFilms = sommeFilm(idFilms);
+        double prixPlats = sommePlat(idPlats);
+        prix = prixFilms + prixPlats;
         commande.setPrix(prix);
-        System.out.println("ci=ommande :"+commande.toString());
+
     }
 
     public GestionnaireCommande(String id) {
@@ -40,6 +45,7 @@ public class GestionnaireCommande extends SQLAble {
      */
     public void enregistrerCommandeDB() throws Exception {
         try {
+            System.out.println("prix dans la methode enregistre seclionner est : " + commande.getPrix());
             connectToDatabase();
             String adrLivr = commande.getAdresseLivraison();
 
@@ -54,7 +60,7 @@ public class GestionnaireCommande extends SQLAble {
                 cstmt.setString(1, commande.getIdClient());
                 cstmt.setObject(2, arrayPlats);
                 cstmt.setObject(3, arrayFilms);
-                cstmt.setDouble(4, prix);
+                cstmt.setDouble(4, commande.getPrix());
                 cstmt.setString(5, commande.getAdresseLivraison());
                 cstmt.executeUpdate();
                 cstmt.close();
@@ -75,6 +81,12 @@ public class GestionnaireCommande extends SQLAble {
         }
     }
 
+    /**
+     * Methode permet d'afficher  une  commande en prenant comme parametre id de
+     * de la commande
+     * @param id
+     * @return commande
+     */
     public Commande getCommande(String id) {
 
         Commande commande = new Commande();
@@ -124,6 +136,40 @@ public class GestionnaireCommande extends SQLAble {
         }
 
         return commande;
+    }
+
+    /**
+     * Methode qui permet de calcule le prix total des films choisis par un
+     * client client et qui prend en parametre la liste des films
+     *
+     * @param idFilms
+     * @return res
+     */
+    public double sommeFilm(List<String> idFilms) {
+        double res;
+        int nbreFilm = idFilms.size();
+        res = 3.79 * nbreFilm;
+        return res;
+    }
+
+    /**
+     * Methode qui permet de calcule le prix total des plats choisis par un
+     * client client et qui prend en parametre la liste des des plats
+     *
+     * @param idplats
+     * @return res
+     */
+    public double sommePlat(List<String> idplats) {
+        double res;
+        res = 0.0;
+        double prixplat;
+        for (int i = 0; i < idplats.size(); i++) {
+            String idp = idplats.get(i);
+            GestionnaireMenu gestionmenu = new GestionnaireMenu();
+            prixplat = gestionmenu.getPrixPlat(idp);
+            res += prixplat;
+        }
+        return res;
     }
 
     @Override
