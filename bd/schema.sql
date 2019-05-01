@@ -1,58 +1,71 @@
-DROP TABLE filmscommandes;
+drop table Film;
+drop table Plat;
+drop table LigneFacture;
+drop table Facture;
+drop table Commande;
+drop table Client;
 
-drop table platscommandes;
-
-DROP TABLE commande;
-
-DROP TABLE client;
-
-CREATE TABLE client (
-    idclient   VARCHAR2(50),
-    nom        VARCHAR2(20) NOT NULL,
-    prenom     VARCHAR2(20) NOT NULL,
-    photo      VARCHAR2(20),
-    email      VARCHAR2(100),
-    tel        VARCHAR2(10),
-    adresse    VARCHAR2(100),
-    CONSTRAINT client_c0 PRIMARY KEY ( idclient ),
-    CONSTRAINT client_c1 UNIQUE ( nom ,prenom )
+create table Client(
+    idClient varchar2(50),
+    nom varchar2(20) not null,
+    prenom varchar2(20) not null,
+    photo varchar2(20),
+    email varchar2(100),
+    tel varchar2(10) ,
+    adresse varchar2(120) not null,
+    
+    constraint Client_C0 primary key (idClient),
+    constraint Client_C1 unique (email),
+    constraint Client_C2 unique (nom,prenom)
 );
 
-CREATE TABLE commande (
-    idcommande         VARCHAR2(8),
-    idclient           VARCHAR2(8) NOT NULL,
-    datecommande       DATE NOT NULL,
-    prix               NUMBER(4, 2),
-    adresselivraison   VARCHAR2(100) NOT NULL,
-    CONSTRAINT commande_c0 PRIMARY KEY ( idcommande ),
-    CONSTRAINT commande_c1 FOREIGN KEY ( idclient )
-        REFERENCES client ( idclient ) ON DELETE CASCADE,
-        -- on update cascade
-    constraint commande_c2 check ( prix > 0 )
+create table Commande(
+    idCommande varchar2(50),
+    idClient varchar2(8) not null,
+    idPlats varchar2(4), 
+    idFilms varchar2(8),
+    dateCommande date not null,
+    prix number(4,2),
+    adresseLivraison varchar2(120),
+    
+    constraint Commande_C0 primary key (idCommande),
+    constraint Commande_C1 foreign key (idClient) references Client(idClient) on delete cascade -- on update cascade
 );
 
-CREATE TABLE PlatsCommandes (
-    idCommande    VARCHAR2(8),
-    idplat        VARCHAR2(8),
-    quantite      INTEGER,
-    CONSTRAINT    plat_c0 PRIMARY KEY ( idCommande , idplat ),
-    CONSTRAINT    plat_c1 FOREIGN KEY (idCommande) 
-        REFERENCES commande ( idCommande ) on delete cascade,
-        -- on update cascade
-    CONSTRAINT    plat_c2 CHECK ( quantite > 0 )
+create table Plat(
+    idPlats number(8),
+    idPlat varchar2(4),
+    quantite number(2),
+    
+    constraint Plat_C0 primary key (idPlats, idPlat),
+    constraint Plat_C1 check ( quantite > 0 )
 );
 
-CREATE TABLE FilmsCommandes (
-    idCommande   VARCHAR2(8),
-    idfilm       VARCHAR2(8),
-    CONSTRAINT   FilmsCommandes_c0 PRIMARY KEY ( idCommande , idfilm ),
-    CONSTRAINT   FilmsCommandes_c1 FOREIGN KEY (idCommande) 
-        REFERENCES commande ( idCommande ) on delete cascade
-        -- on update cascade
+create table Film(
+    idFilms number(8),
+    idFilm varchar2(8),
+    
+    constraint Film_C0 primary key (idFilms, idFilm)
 );
 
-start GestionnaireClient.sql;
-start GestionnaireCommande.sql;
-start defTypes.sql;
-start sequences.sql;
-start data.sql;
+create table Facture(
+    idFacture varchar2(8),
+    idCommande varchar2(8),
+    dateFacture date,
+    
+    constraint Facture_C0 primary key (idFacture),
+    constraint Facture_C1 foreign key (idCommande) references Commande(idCommande) on delete cascade -- on update cascade
+);
+
+create table LigneFacture(
+    idLigneFacture number(2),
+    idFacture varchar2(20),
+    Plat varchar2(20) not null,
+    quantite number(2) not null,
+    prixHT number(2,2),
+    
+    constraint LigneFacture_C0 primary key (idLigneFacture),
+    constraint LigneFacture_C1 foreign key (idFacture) references Facture(idFacture) on delete cascade, --on update cascade
+    constraint LigneFacture_C2 check ( prixHT > 0 and prixHT < 49),
+    constraint LigneFacture_C3 check ( quantite > 0 )
+);
