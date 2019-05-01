@@ -41,7 +41,7 @@ public class CommandesServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("application/json");
-        id = request.getParameter("idClient");
+        id = request.getParameter("id");
         GestionnaireCommande gestonCommande;
         List<Commande> comm = new ArrayList<>();
         gestonCommande = new GestionnaireCommande(id);

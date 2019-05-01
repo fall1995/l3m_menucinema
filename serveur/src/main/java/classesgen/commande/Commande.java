@@ -239,13 +239,13 @@ public class Commande {
 
     @Override
     public String toString() {
-        return " { idCommande:"  + getId()
-                + ", idClient:" + getIdClient()
-                + ", idFilm:" + getFilm()
-                + ", idPlat:" + getIdPlat()
-                + ",Prix=" + getPrix()
-                + ", Date:" + getDate()
-                + ", Adresse:" + getAdresseLivraison()
+        return " { \"idCommande\":"  + "\""+getId()+"\","
+                + "\"idClient \":" + "\""+getIdClient()+"\","
+                + "\" idFilm \":" +"\""+ getFilm()+"\","
+                + "\"idPlat \":" + getIdPlat()+"\","
+                + "\"Prix \":" + getPrix()+"\","
+                + "\" Date \":" + getDate()+"\","
+                + "\" Adresse \" :" + getAdresseLivraison()
                 + "}";
         
     }
