@@ -32,6 +32,8 @@ import {MatTabsModule} from '@angular/material/tabs';
 import {CardModule} from 'primeng/card';
 import {ButtonModule} from 'primeng/button';
 import {DialogModule} from 'primeng/dialog';
+import {ToastModule} from 'primeng/toast';
+import {MessageService} from 'primeng/api';
 
 
 import 'hammerjs';
@@ -73,9 +75,10 @@ import {OverlayPanelModule} from 'primeng/primeng';
         ButtonModule,
         MatIconModule,
         OverlayPanelModule,
+        ToastModule,
 
     ],
-    providers: [TmdbService,AuthService,MenuService, AuthGuardService],
+    providers: [TmdbService, MessageService,AuthService,MenuService, AuthGuardService],
     bootstrap: [AppComponent]
 })
 export class AppModule {

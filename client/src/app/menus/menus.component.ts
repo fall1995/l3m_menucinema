@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {MenuService} from '../service/menu.service';
-import {DataMenu, ListePlats} from '../menu-commade-data/Menu';
+import { ListePlats} from '../menu-commade-data/Menu';
 import {MovieResponse} from '../tmdb-data/Movie';
 
 @Component({
@@ -11,6 +11,7 @@ import {MovieResponse} from '../tmdb-data/Movie';
 export class MenusComponent implements OnInit {
 
   listePlats: ListePlats;
+  aff = false;
 
   constructor(private menuService : MenuService) {
 
@@ -18,10 +19,17 @@ export class MenusComponent implements OnInit {
 
   ngOnInit() {
 
-    this.init();
+    this.init().then(res => {
+    });
   }
   async init(){
-    this.listePlats = await this.menuService.getAllMenu();
+    await this.menuService.getAllMenu().then(res => {
+        this.listePlats = res;
+        this.aff = true;
+        console.log(this.listePlats);
+    }, err => {
+      console.log('error de recup');
+    });
   }
     get plats(): ListePlats {
         return this.listePlats;

@@ -3,6 +3,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {AuthService} from '../../service/auth.service';
 import {Router} from '@angular/router';
 import {AngularFireAuth} from '@angular/fire/auth';
+import {MessageService} from 'primeng/api';
 
 @Component({
   selector: 'app-signup',
@@ -14,7 +15,7 @@ export class SignupComponent implements OnInit {
   signUpForm : FormGroup;
   errorMessage : string;
   constructor(private authService: AuthService, private formBuilder: FormBuilder, private route: Router,
-              private afAuth: AngularFireAuth) { }
+              private afAuth: AngularFireAuth, private messageService: MessageService) { }
 
   ngOnInit() {
     this.initForm();
@@ -38,8 +39,19 @@ export class SignupComponent implements OnInit {
         this.afAuth.auth.createUserWithEmailAndPassword(email,password).then(
             () => {
                 this.route.navigate(['/films']);
+                this.messageService.add({
+                    severity:'success',
+                    summary: 'Inscription reusit ',
+                    detail: 'Bienvenue Vous venez de vous inscrire.'
+                });
+
             },
             (error) => {
+                this.messageService.add({
+                    severity:'error',
+                    summary: 'Erreur d\'inscription',
+                    detail: 'Une erreur est survenu lors de votre inscription'
+                });
                 this.errorMessage = error;
             }
         );
