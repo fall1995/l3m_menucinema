@@ -1,5 +1,6 @@
 package l3m;
 
+import classesgen.commande.Commande;
 import database.GestionnaireClient;
 import java.io.IOException;
 import java.sql.SQLException;
@@ -12,9 +13,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * @author Groupe6 
- * ClientEnregistreServlet est une classe qui permet d'enregistre
- * un client dans la base de donnee oracle
+ * @author Groupe6 ClientEnregistreServlet est une classe qui permet
+ * d'enregistre un client dans la base de donnee oracle
  */
 public class ClientEnregistreServlet extends HttpServlet {
 
@@ -34,12 +34,14 @@ public class ClientEnregistreServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String idClient = request.getParameter("idClient");
-        String nom = request.getParameter("nom");
-        String prenom = request.getParameter("prenom");
 
         try {
-            GestionnaireClient gestionClient = new GestionnaireClient(idClient, nom, prenom);
+            GestionnaireClient gestionClient = new GestionnaireClient(idClient);
             List<String> listeCommandes = gestionClient.getListeCommandes();
+
+            response.setContentType("application/json");
+            response.setStatus(HttpServletResponse.SC_OK);
+            response.getWriter().println(listeCommandes.toString());
         } catch (SQLException ex) {
             Logger.getLogger(ClientEnregistreServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -126,6 +128,7 @@ public class ClientEnregistreServlet extends HttpServlet {
 
     /**
      * Methode qui permet de supprimer un client
+     *
      * @param request
      * @param response
      * @throws ServletException

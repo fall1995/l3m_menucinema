@@ -2,7 +2,6 @@ package l3m;
 
 import classesgen.commande.Commande;
 import database.GestionnaireCommande;
-import database.GestionnaireMenu;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -41,8 +40,8 @@ public class CommandesServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("application/json");
         id = request.getParameter("id");
+        
         GestionnaireCommande gestonCommande;
-        List<Commande> comm = new ArrayList<>();
         gestonCommande = new GestionnaireCommande(id);
         Commande commande = gestonCommande.getCommande(id);
 
@@ -65,42 +64,23 @@ public class CommandesServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         Commande commande = new Commande();
-        /*
-        Enumeration<String> P = request.getParameterNames();
-        HashMap<String, String> parametres = new HashMap();
-        Commande commande = new Commande();
-        while (P.hasMoreElements()) {
-            String p = P.nextElement();
-            parametres.put(p, request.getParameter((String) p));
-        }
-        commande.setIdClient(parametres.get(idClient));
-        commande.setIdPlat((parametres.values(idPlats));
-        commande.setIdFilm(parametres.get(idFilms));
-        commande.setAdresseLivraison(parametres.get(adresseLivraison));
-        commande.setPrix(prix);
-        
-         */
         // recuperation des donnes
-        //id = request.getParameter("id");
         idClient = request.getParameter("idClient");
         idplats = request.getParameterValues("idPlat");
         idFilms = request.getParameterValues("idFilms");
         adresseLivraison = request.getParameter("adresseLivraison");
-        List<String> al = (ArrayList<String>) toArrayList(idplats);
-        List<String> alf = (ArrayList<String>) toArrayList(idFilms);
-       
+        
+        List<String> listeplat = (ArrayList<String>) toArrayList(idplats);
+        List<String> listeFilms = (ArrayList<String>) toArrayList(idFilms);
 
         commande.setIdClient(idClient);
-        commande.setIdPlat(al);
-        commande.setIdFilm(alf);
+        commande.setIdPlat(listeplat);
+        commande.setIdFilm(listeFilms);
         commande.setAdresseLivraison(adresseLivraison);
-
-        System.out.println("idclient seclionner est : " + idClient);
         //insertion dans la base de donnes
         GestionnaireCommande addCommande;
         try {
-            addCommande = new GestionnaireCommande(idClient, al, alf, adresseLivraison);
-             System.out.println("prix seclionner est  avant: " + prix);
+            addCommande = new GestionnaireCommande(idClient, listeplat, listeFilms, adresseLivraison);
             commande.setPrix(prix);
             addCommande.enregistrerCommandeDB();
         } catch (SQLException ex) {
@@ -111,6 +91,7 @@ public class CommandesServlet extends HttpServlet {
     }
 
     /**
+     * Methode pour modifier une commande 
      * @param request
      * @param response
      * @throws ServletException
@@ -129,8 +110,10 @@ public class CommandesServlet extends HttpServlet {
         id = request.getParameter("id");
     }
 
-
-
+    /**
+     * Methode qui permet de convertir un tableau de string en liste
+     * @param Tableau
+     */
     static <T> List<T> toArrayList(T[] Tableau) {
         List<T> al = new ArrayList<>();
         for (T obj : Tableau) {
