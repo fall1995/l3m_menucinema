@@ -37,8 +37,7 @@ public class GestionnaireClient extends SQLAble {
     public GestionnaireClient(String id) throws SQLException {
         this.client = new Client();
         client.setId(id);
-        
-        System.out.println("constructeur "+client.getId());
+        System.out.println("constructeur " + client.getId());
 
     }
 
@@ -164,18 +163,19 @@ public class GestionnaireClient extends SQLAble {
 
         return res;
     }
-public Client getClient(String id) {
-         //client = new Client();
+
+    public Client getClient(String id) {
+        //client = new Client();
         //client.setId(id);
-        System.out.println("id :"+client.getId());
+        System.out.println("id :" + client.getId());
         try {
             connectToDatabase();
             OracleCallableStatement ocstmt;
-            ocstmt = (OracleCallableStatement )conn.prepareCall("{ ? = call getClient(?) }");
+            ocstmt = (OracleCallableStatement) conn.prepareCall("{ ? = call getClient(?) }");
             ocstmt.registerOutParameter(1, OracleTypes.CURSOR);
             ocstmt.setString(2, id);
             ocstmt.execute();
-            
+
             ResultSet rset = (ResultSet) (ocstmt.getObject(1));
 
             if (rset != null && rset.next()) {
@@ -190,10 +190,10 @@ public Client getClient(String id) {
                 System.out.println("le resultSet est null");
             }
             ocstmt.close();
-            System.out.println("OK pour la proced 2"+ client.toString());
+            System.out.println("OK pour la proced 2" + client.toString());
 
         } catch (Exception e) {
-            System.out.println("erreur lors de la recuperation: "+e.getMessage());
+            System.out.println("erreur lors de la recuperation: " + e.getMessage());
         }
 
         return client;
@@ -295,21 +295,21 @@ public Client getClient(String id) {
      */
     public List<String> getListeCommandes() throws SQLException {
         boolean exist = existsClientDB();
-        List<String> list = new ArrayList<String>();
+        List<String> list = new ArrayList<>();
 
         if (exist) {
             try {
-                OracleCallableStatement ocstmt = (OracleCallableStatement) conn.prepareCall("{ ? = call getListeCommandes(?) }");
-                ocstmt.registerOutParameter(1, OracleTypes.CURSOR);
-                ocstmt.setString(2, "18");
-                ocstmt.execute();
+                try (OracleCallableStatement ocstmt = (OracleCallableStatement) conn.prepareCall("{ ? = call getListeCommandes(?) }")) {
+                    ocstmt.registerOutParameter(1, OracleTypes.CURSOR);
+                    ocstmt.setString(2, "18");
+                    ocstmt.execute();
 
-                ResultSet rset = (ResultSet) (ocstmt.getObject(1));
-                while (rset.next()) {
-                    list.add(rset.getString(1));
+                    ResultSet rset = (ResultSet) (ocstmt.getObject(1));
+                    while (rset.next()) {
+                        list.add(rset.getString(1));
+                    }
+                    rset.close();
                 }
-                rset.close();
-                ocstmt.close();
             } catch (SQLException e) {
             }
         }
