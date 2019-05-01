@@ -1,5 +1,7 @@
 package l3m;
 
+import classesgen.client.Client;
+import database.GestionnaireClient;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Enumeration;
@@ -12,10 +14,16 @@ import javax.servlet.http.HttpServletResponse;
 public class ClientAuthentificationServlet extends HttpServlet  {
 	private static final long serialVersionUID = 1L;
 
+        @Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String idClient = request.getParameter("idClient");
+        GestionnaireClient gestonClient;
+        //gestonClient = new GestionnaireClient(idClient);
+        //Client client = gestonClient;
+
         response.setContentType("application/json");
         response.setStatus(HttpServletResponse.SC_OK);
-        response.getWriter().println( this.processQueryTest(request) );
+        //response.getWriter().println(client.toString());
     }
 
 	/*____________________________________________________________________________________________________________________

@@ -15,9 +15,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * @author Groupe6
- * CommandesServlet est une classe qui permet de modeliser les commandes 
- * d'un client
+ * @author Groupe6 CommandesServlet est une classe qui permet de modeliser les
+ * commandes d'un client
  */
 public class CommandesServlet extends HttpServlet {
 
@@ -98,9 +97,8 @@ public class CommandesServlet extends HttpServlet {
         commande.setIdPlat(al);
         commande.setIdFilm(alf);
         commande.setAdresseLivraison(adresseLivraison);
-        commande.setPrix(prix);
 
-        System.out.println("idclient seclionner est : "+idClient);
+        System.out.println("idclient seclionner est : " + idClient);
         //insertion dans la base de donnes
         GestionnaireCommande addCommande;
         try {
@@ -112,6 +110,7 @@ public class CommandesServlet extends HttpServlet {
             Logger.getLogger(CommandesServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
     /**
      * @param request
      * @param response
@@ -130,6 +129,7 @@ public class CommandesServlet extends HttpServlet {
             throws ServletException, IOException {
         id = request.getParameter("id");
     }
+
     /**
      * Methode qui permet de calcule le prix total des films choisis par un
      * client client et qui prend en parametre la liste des films
@@ -154,7 +154,7 @@ public class CommandesServlet extends HttpServlet {
     public double sommePlat(String[] idplats) {
         double res;
         res = 0.0;
-        double prixplat = 0.0;
+        double prixplat;
         for (int i = 0; i < idplats.length; i++) {
             String idp = idplats[i];
             GestionnaireMenu gestionmenu = new GestionnaireMenu();
