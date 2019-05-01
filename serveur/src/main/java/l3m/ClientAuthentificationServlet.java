@@ -53,9 +53,11 @@ public class ClientAuthentificationServlet extends HttpServlet {
         System.out.println("idclient " + parametres.get(id));
 
         if (getClientinfo(parametres)) {
+            
             // 200 OK
             try {
                 GestionnaireClient gestionClient = new GestionnaireClient(parametres.get(id));
+                System.out.println("parametres : "+parametres.get(id));
                 client = gestionClient.getClient(id);
                 response.setStatus(HttpServletResponse.SC_OK);
                 response.getWriter().println(client.toString());

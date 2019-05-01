@@ -235,7 +235,7 @@ public class Client {
         res += "id: "+ this.id + ",\"\n ";
         res += "nom:"+ this.nom + ",\"\n ";
         res += "prenom:"+ this.prenom + "\n ";
-        res += "photoUrl:"+ this.photo + "\", ";
+        res += "photoUrl:"+ this.photo + ",\"\n ";
         res += "email:"+ this.email + ",\"\n ";
         res += "tel:"+ this.telephone + "\", \n";
         res += "adresse:"+ this.adresse + ",\"\n";

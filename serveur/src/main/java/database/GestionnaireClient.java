@@ -37,7 +37,8 @@ public class GestionnaireClient extends SQLAble {
     public GestionnaireClient(String id) throws SQLException {
         this.client = new Client();
         client.setId(id);
-        connectToDatabase();
+        
+        System.out.println("constructeur "+client.getId());
 
     }
 
@@ -163,18 +164,33 @@ public class GestionnaireClient extends SQLAble {
 
         return res;
     }
-
-    public Client getClient(String id) {
-        Client client = new Client();
+public Client getClient(String id) {
+         //client = new Client();
         //client.setId(id);
+        System.out.println("id :"+client.getId());
         try {
             connectToDatabase();
-            CallableStatement cstmt;
-            cstmt = conn.prepareCall("{ ?= call getClient(?) }");
-            cstmt.registerOutParameter(1, OracleTypes.VARCHAR);
-            cstmt.setString(2, id);
-            cstmt.execute();
-            cstmt.close();
+            OracleCallableStatement ocstmt;
+            ocstmt = (OracleCallableStatement )conn.prepareCall("{ ? = call getClient(?) }");
+            ocstmt.registerOutParameter(1, OracleTypes.CURSOR);
+            ocstmt.setString(2, id);
+            ocstmt.execute();
+            
+            ResultSet rset = (ResultSet) (ocstmt.getObject(1));
+
+            if (rset != null && rset.next()) {
+                client.setId(rset.getString("idClient"));
+                client.setNom(rset.getString("nom"));
+                client.setPrenom(rset.getString("prenom"));
+                client.setAdresse(rset.getString("adresse"));
+                client.setEmail(rset.getString("email"));
+                client.setPhoto(rset.getString("photo"));
+                client.setTelephone(rset.getString("tel"));
+            } else {
+                System.out.println("le resultSet est null");
+            }
+            ocstmt.close();
+            System.out.println("OK pour la proced 2"+ client.toString());
 
         } catch (Exception e) {
             System.out.println("erreur lors de la recuperation: "+e.getMessage());
