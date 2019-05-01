@@ -1,6 +1,5 @@
 package database;
 
-
 import classesgen.client.Client;
 import java.sql.CallableStatement;
 import java.sql.ResultSet;
@@ -11,8 +10,7 @@ import oracle.jdbc.OracleCallableStatement;
 import oracle.jdbc.OracleTypes;
 
 /**
- * @author Groupe6 
- * Classe GestionnaireClient qui permet de gerer un client
+ * @author Groupe6 Classe GestionnaireClient qui permet de gerer un client
  */
 public class GestionnaireClient extends SQLAble {
 
@@ -40,6 +38,7 @@ public class GestionnaireClient extends SQLAble {
         this.client = new Client();
         client.setId(id);
         connectToDatabase();
+
     }
 
     /**
@@ -146,7 +145,7 @@ public class GestionnaireClient extends SQLAble {
      * @return true si oui si non il retourne false
      * @throws java.sql.SQLException
      */
-        public boolean existsClientDB() throws SQLException {
+    public boolean existsClientDB() throws SQLException {
         boolean res = false;
         try {
             OracleCallableStatement ocstmt;
@@ -165,10 +164,30 @@ public class GestionnaireClient extends SQLAble {
         return res;
     }
 
+    public Client getClient(String id) {
+        Client client = new Client();
+        //client.setId(id);
+        try {
+            connectToDatabase();
+            CallableStatement cstmt;
+            cstmt = conn.prepareCall("{ ?= call getClient(?) }");
+            cstmt.registerOutParameter(1, OracleTypes.VARCHAR);
+            cstmt.setString(2, id);
+            cstmt.execute();
+            cstmt.close();
+
+        } catch (Exception e) {
+            System.out.println("erreur lors de la recuperation: "+e.getMessage());
+        }
+
+        return client;
+    }
+
     /**
-     * Methode permet de mettre à jour les info sur un client encours s'il 
+     * Methode permet de mettre à jour les info sur un client encours s'il
      * existe, sinon elle fait rien Cette méthode catch la SQLException si cette
      * dernière est lévée par la procédure PL SQL editClient
+     *
      * @throws java.sql.SQLException
      */
     public void editClientDB() throws SQLException {
@@ -281,8 +300,9 @@ public class GestionnaireClient extends SQLAble {
 
         return list;
     }
-    
+
     public void setClient(Client client) {
         this.client = client;
     }
+
 }

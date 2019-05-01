@@ -27,6 +27,14 @@ public class ClientAuthentificationServlet extends HttpServlet {
     private final String photo = "photo";
     private final String adresse = "adresse";
 
+    /**
+     * doGet va nous permettre de retourné les informations d'un client dont l'id est passé en 
+     * parametre
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException 
+     */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("application/json");
         response.addHeader("Access-Control-Allow-Origin", "*");
@@ -41,14 +49,20 @@ public class ClientAuthentificationServlet extends HttpServlet {
         response.getWriter().println(this.processQueryTest(request));
 
         parametres.put(id, request.getParameter("idClient"));
+        response.setContentType("application/json");
+        System.out.println("idclient " + parametres.get(id));
 
         if (getClientinfo(parametres)) {
+            // 200 OK
             try {
                 GestionnaireClient gestionClient = new GestionnaireClient(parametres.get(id));
+                client = gestionClient.getClient(id);
                 response.setStatus(HttpServletResponse.SC_OK);
                 response.getWriter().println(client.toString());
-            } catch (SQLException ex) {
-                Logger.getLogger(ClientAuthentificationServlet.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (SQLException e) {
+                response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+                response.getWriter().println(""+e.toString());
+                
             }
         }else {
             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
@@ -126,11 +140,14 @@ public class ClientAuthentificationServlet extends HttpServlet {
         return res;
     }
 
-    private boolean getClientinfo(HashMap<String, String> params) {
+    private boolean getClientinfo(HashMap<String, String> parametres) {
         boolean valide = false;
 
-        if (params.containsKey(id) && params.get(id) != null) {
-            valide = true;
+        if (parametres.containsKey(id)) {
+            //verification si les valeurs ne sont pas null
+            if (parametres.get(id) != null) {
+                valide = true;
+            }
         }
         return valide;
     }
