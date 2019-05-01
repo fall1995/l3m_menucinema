@@ -20,6 +20,7 @@ public class BdAccess {
                 client.toString();
             } else {
                 res = "le client existe";
+                client.toString();
             }
         } else {
             res ="champs non complet";
