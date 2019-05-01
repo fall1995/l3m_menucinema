@@ -14,7 +14,9 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author idrisssagara
+ * @author Groupe6 
+ * UpdateClientServlet est la classe qui permet de mettre a jour les informations
+ * sur clients
  */
 public class UpdateClientServlet extends HttpServlet {
 

@@ -6,9 +6,6 @@ import database.GestionnaireMenu;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Enumeration;
-import java.util.HashMap;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -18,7 +15,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * @author Groupe6 CommandesServlet
+ * @author Groupe6
+ * CommandesServlet est une classe qui permet de modeliser les commandes 
+ * d'un client
  */
 public class CommandesServlet extends HttpServlet {
 
@@ -26,11 +25,13 @@ public class CommandesServlet extends HttpServlet {
     private String id = "id";
     private String idClient = "idClient";
     private double prix;
-    private String adresseLivraison = "adresseLivraison";
-    String[] idplats;
-    String[] idFilms;
+    private String adresseLivraison;
+    private String[] idplats;
+    private String[] idFilms;
 
     /**
+     * Methode qui permet d'afficher les commander d'un client donné
+     *
      * @param request
      * @param response
      * @throws ServletException
@@ -40,7 +41,7 @@ public class CommandesServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("application/json");
-        id = request.getParameter("id");
+        id = request.getParameter("idClient");
         GestionnaireCommande gestonCommande;
         List<Commande> comm = new ArrayList<>();
         gestonCommande = new GestionnaireCommande(id);
@@ -53,6 +54,9 @@ public class CommandesServlet extends HttpServlet {
     }
 
     /**
+     * *
+     * Methode qui permet d'enregistrer un une commande
+     *
      * @param request
      * @param response
      * @throws ServletException
@@ -62,45 +66,41 @@ public class CommandesServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         Commande commande = new Commande();
-        
-        /* Enumeration<String> P = request.getParameterNames();
+        /*
+        Enumeration<String> P = request.getParameterNames();
         HashMap<String, String> parametres = new HashMap();
         Commande commande = new Commande();
-
         while (P.hasMoreElements()) {
             String p = P.nextElement();
             parametres.put(p, request.getParameter((String) p));
         }
         commande.setIdClient(parametres.get(idClient));
-        // commande.setIdPlat((parametres.values(idPlats));
-        //commande.setIdFilm(parametres.get(idFilms));
+        commande.setIdPlat((parametres.values(idPlats));
+        commande.setIdFilm(parametres.get(idFilms));
         commande.setAdresseLivraison(parametres.get(adresseLivraison));
         commande.setPrix(prix);
+        
          */
-
         // recuperation des donnes
         //id = request.getParameter("id");
-        
         idClient = request.getParameter("idClient");
         idplats = request.getParameterValues("idPlat");
         idFilms = request.getParameterValues("idFilms");
         adresseLivraison = request.getParameter("adresseLivraison");
         List<String> al = (ArrayList<String>) toArrayList(idplats);
         List<String> alf = (ArrayList<String>) toArrayList(idFilms);
-        
+        // calculer du prix de la commande
         double prixFilms = sommeFilm(idFilms);
         double prixPlats = sommePlat(idplats);
         prix = prixFilms + prixPlats;
-        
+
         commande.setIdClient(idClient);
         commande.setIdPlat(al);
         commande.setIdFilm(alf);
         commande.setAdresseLivraison(adresseLivraison);
         commande.setPrix(prix);
 
-        System.out.println(idClient);
-        // calculer du prix de la commande
-        
+        System.out.println("idclient seclionner est : "+idClient);
         //insertion dans la base de donnes
         GestionnaireCommande addCommande;
         try {
@@ -111,9 +111,7 @@ public class CommandesServlet extends HttpServlet {
         } catch (Exception ex) {
             Logger.getLogger(CommandesServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
-
     }
-
     /**
      * @param request
      * @param response
@@ -131,9 +129,7 @@ public class CommandesServlet extends HttpServlet {
     protected void doDelete(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         id = request.getParameter("id");
-
     }
-
     /**
      * Methode qui permet de calcule le prix total des films choisis par un
      * client client et qui prend en parametre la liste des films
@@ -169,7 +165,7 @@ public class CommandesServlet extends HttpServlet {
     }
 
     static <T> List<T> toArrayList(T[] Tableau) {
-        List<T> al = new ArrayList<T>();
+        List<T> al = new ArrayList<>();
         for (T obj : Tableau) {
             al.add(obj);
         }

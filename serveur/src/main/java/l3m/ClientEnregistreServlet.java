@@ -12,8 +12,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * @author Groupe6 Cette classe permet d'enregistre un client dans la base de
- * donnee oracle
+ * @author Groupe6 
+ * ClientEnregistreServlet est une classe qui permet d'enregistre
+ * un client dans la base de donnee oracle
  */
 public class ClientEnregistreServlet extends HttpServlet {
 
@@ -88,6 +89,7 @@ public class ClientEnregistreServlet extends HttpServlet {
         gestionclientsup.deleteClientId(idClient);
         //response.sendRedirect("list");
     }
+
     /**
      * Methode qui permet de mettre a les info d'un client en prenant en
      * parametre la requete envoyee par le client et la reponse de retour de la
@@ -115,18 +117,24 @@ public class ClientEnregistreServlet extends HttpServlet {
             gestionClient.editEmail(email);
             gestionClient.enregistreClientDB();
             gestionClient.editAdresse(adresse);
-            
+
             gestionClient.editClientDB();
         } catch (SQLException ex) {
             Logger.getLogger(ClientEnregistreServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
+    /**
+     * Methode qui permet de supprimer un client
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException
+     */
     @Override
     protected void doDelete(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String idClient = request.getParameter("idClient");
-
         GestionnaireClient gestionclientsup;
         try {
             gestionclientsup = new GestionnaireClient(idClient);
