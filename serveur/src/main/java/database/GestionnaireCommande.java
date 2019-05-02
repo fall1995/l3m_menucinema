@@ -4,6 +4,7 @@ import classesgen.commande.Commande;
 import java.sql.CallableStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import oracle.jdbc.OracleCallableStatement;
 import oracle.jdbc.OracleTypes;
@@ -82,8 +83,9 @@ public class GestionnaireCommande extends SQLAble {
     }
 
     /**
-     * Methode permet d'afficher  une  commande en prenant comme parametre id de
+     * Methode permet d'afficher une commande en prenant comme parametre id de
      * de la commande
+     *
      * @param id
      * @return commande
      */
@@ -170,6 +172,61 @@ public class GestionnaireCommande extends SQLAble {
             res += prixplat;
         }
         return res;
+    }
+
+    public List<Commande> filmPlusVueAvecPlat() {
+        List<String> platsCommandes=new ArrayList<>();
+        List<String> filmsCommandes=new ArrayList<>() ;
+        List<Commande> listeFilm = new ArrayList<Commande>();
+        try {
+            connectToDatabase();
+            OracleCallableStatement ocstmt;
+            ocstmt = (OracleCallableStatement) conn.prepareCall("{ = call getcommande(?,?,?,?) }");
+           //ocstmt.setString(1, id);
+            ocstmt.registerOutParameter(2, OracleTypes.CURSOR);
+            ocstmt.registerOutParameter(3, OracleTypes.CURSOR);
+            ocstmt.registerOutParameter(4, OracleTypes.CURSOR);
+            ocstmt.execute();
+
+            ResultSet rset = (ResultSet) (ocstmt.getObject(2));
+            if (rset != null && rset.next()) {
+                commande.setIdClient(rset.getString("idClient"));
+                commande.setDate((rset.getDate("dateCommande")).toString());
+                commande.setPrix(rset.getDouble("prix"));
+                commande.setAdresseLivraison(rset.getString("adresseLivraison"));
+                listeFilm.add(commande);
+            }
+            rset.close();
+
+            rset = (ResultSet) (ocstmt.getObject(3));
+            while (rset != null && rset.next()) {
+                int quantite = rset.getInt("quantite");
+                for (int i = 0; i < quantite; i++) {
+                    platsCommandes.add(rset.getString("idPlat"));
+                }
+            }
+            rset.close();
+
+            rset = (ResultSet) (ocstmt.getObject(4));
+            while (rset != null && rset.next()) {
+                filmsCommandes.add(rset.getString("idFilm"));
+            }
+            rset.close();
+
+            ocstmt.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            //System.err.println(e);    
+        }
+
+        return listeFilm;
+    }
+
+    public List<Commande> platPlusCommandeAvecPlat() {
+        List<Commande> listePlat = null;
+
+        return listePlat;
     }
 
     @Override

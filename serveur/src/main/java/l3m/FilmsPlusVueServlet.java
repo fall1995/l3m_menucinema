@@ -10,15 +10,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * @author Groupe6 PlatsPlusCommandeServlet est la classe qui permet d'afficher
- * les plats les plus commandés
+ * @author Groupe6
+ * FilmsPlusVueServlet est la classe qui permet d'affiche les films 
  */
-public class PlatsPlusCommandeServlet extends HttpServlet {
-
+public class FilmsPlusVueServlet extends HttpServlet{
+    
     /**
-     * Methode qui permet d'afficher la liste des commandes concernant un client
-     * en prenant en parametre la requete envoyee par le client et la reponse de
-     * retour de la part du server
+     * Methode qui permet d'afficher la liste des films le plus commandes avec
+     * les plats ausssi
      *
      * @param request
      * @param response
@@ -32,9 +31,9 @@ public class PlatsPlusCommandeServlet extends HttpServlet {
 
         GestionnaireCommande gestionClient = new GestionnaireCommande(id);
         List<Commande> listeCommandes = null;
+        
         response.setContentType("application/json");
         response.setStatus(HttpServletResponse.SC_OK);
         response.getWriter().println(listeCommandes.toString());
     }
-
 }

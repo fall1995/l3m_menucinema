@@ -1,10 +1,14 @@
 package l3m;
 
+import classesgen.client.Client;
 import classesgen.commande.Commande;
+import database.GestionnaireClient;
 import database.GestionnaireCommande;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Enumeration;
+import java.util.HashMap;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -48,6 +52,7 @@ public class CommandesServlet extends HttpServlet {
         response.setContentType("application/json");
         response.setStatus(HttpServletResponse.SC_OK);
         response.getWriter().println(commande.toString());
+        //response.sendError(0, id);
 
     }
 
@@ -101,13 +106,33 @@ public class CommandesServlet extends HttpServlet {
     @Override
     protected void doPut(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+    
+        Enumeration<String> P = request.getParameterNames();
+        HashMap<String, String> parametres = new HashMap();
+        Client client = new Client();
+
+            try {
+                //mise à jour
+                GestionnaireClient gestionClient = new GestionnaireClient(client.getId(), client.getNom(), client.getPrenom());
+                gestionClient.setClient(client);
+                gestionClient.editClientDB();
+                
+                response.setStatus(HttpServletResponse.SC_OK);
+                response.getWriter().println(client.toString());
+            } catch (SQLException ex) {
+                response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+                response.getWriter().println(ex.getMessage());
+            }
+        
 
     }
+      
 
     @Override
     protected void doDelete(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         id = request.getParameter("id");
+        
     }
 
     /**

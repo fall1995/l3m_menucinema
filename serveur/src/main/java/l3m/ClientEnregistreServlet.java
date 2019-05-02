@@ -1,6 +1,5 @@
 package l3m;
 
-import classesgen.commande.Commande;
 import database.GestionnaireClient;
 import java.io.IOException;
 import java.sql.SQLException;
@@ -105,6 +104,7 @@ public class ClientEnregistreServlet extends HttpServlet {
     @Override
     protected void doPut(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+
         String idClient = request.getParameter("idClient");
         String nom = request.getParameter("nom");
         String prenom = request.getParameter("prenom");
@@ -138,6 +138,7 @@ public class ClientEnregistreServlet extends HttpServlet {
     protected void doDelete(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String idClient = request.getParameter("idClient");
+
         GestionnaireClient gestionclientsup;
         try {
             gestionclientsup = new GestionnaireClient(idClient);

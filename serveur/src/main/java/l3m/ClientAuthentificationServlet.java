@@ -31,6 +31,7 @@ public class ClientAuthentificationServlet extends HttpServlet  {
 	 * It sends back a HTTP code 401 error if the userId is not specified or empty
 	 * It sends back a HTTP code 500 error if a problem occured when accessing to the database
 	 */
+        @Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         System.out.println("doPost");
         response.setContentType("text/plain");
