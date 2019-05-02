@@ -36,7 +36,7 @@ CREATE TABLE PlatsCommandes (
     idplat        VARCHAR2(8),
     quantite      INTEGER,
     CONSTRAINT    PlatsCommandes_c0 PRIMARY KEY ( idCommande , idplat ),
-    CONSTRAINT    platPlatsCommandes_c1 FOREIGN KEY (idCommande) 
+    CONSTRAINT    PlatsCommandes_c1 FOREIGN KEY (idCommande) 
         REFERENCES commande ( idCommande ) on delete cascade,
         -- on update cascade
     CONSTRAINT    PlatsCommandes_c2 CHECK ( quantite > 0 )
@@ -53,6 +53,6 @@ CREATE TABLE FilmsCommandes (
 
 start GestionnaireClient.sql;
 start GestionnaireCommande.sql;
-start defTypes.sql;
 start sequences.sql;
+start triggers.sql
 start data.sql;

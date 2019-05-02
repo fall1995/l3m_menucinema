@@ -32,14 +32,11 @@ public class GestionnaireClient extends SQLAble {
         client.setId(id);
         client.setNom(nom);
         client.setPrenom(premon);
-        connectToDatabase();
-
     }
 
     public GestionnaireClient(String id) throws SQLException {
         this.client = new Client();
         client.setId(id);
-        connectToDatabase();
     }
 
     /**
@@ -125,7 +122,7 @@ public class GestionnaireClient extends SQLAble {
         boolean res = false;
         if (!exist) {
             try {
-
+                connectToDatabase();
                 CallableStatement cstmt;
                 cstmt = conn.prepareCall("{ = call enregistrerClient(?,?,?) }");
                 cstmt.setString(1, client.getId());
@@ -135,7 +132,10 @@ public class GestionnaireClient extends SQLAble {
                 cstmt.close();
                 res = true;
             } catch (SQLException e) {
+                e.printStackTrace();
             }
+        }else{
+            System.out.println("il existe pour cela, on ne peut pas le rajouter !");
         }
         return res;
     }
@@ -149,6 +149,7 @@ public class GestionnaireClient extends SQLAble {
         public boolean existsClientDB() throws SQLException {
         boolean res = false;
         try {
+            connectToDatabase();
             OracleCallableStatement ocstmt;
             ocstmt = (OracleCallableStatement) conn.prepareCall("{ ? = call existsClient(?) }");
             ocstmt.registerOutParameter(1, OracleTypes.NUMBER);
@@ -160,9 +161,40 @@ public class GestionnaireClient extends SQLAble {
                 res = true;
             }
         } catch (SQLException e) {
+            e.printStackTrace();
         }
 
         return res;
+    }
+        
+    public Client getClient(String id) {
+        Client client = new Client();
+        try {
+            connectToDatabase();
+            OracleCallableStatement ocstmt;
+            ocstmt = (OracleCallableStatement )conn.prepareCall("{ ? = call getClient(?) }");
+            ocstmt.registerOutParameter(1, OracleTypes.CURSOR);
+            ocstmt.setString(2, id);
+            ocstmt.execute();
+            
+            ResultSet rset = (ResultSet) (ocstmt.getObject(1));
+
+            if (rset != null && rset.next()) {
+                //client.setId(rset.getString("idClient"));
+                client.setNom(rset.getString("nom"));
+                client.setPrenom(rset.getString("prenom"));
+                client.setAdresse(rset.getString("adresse"));
+                client.setEmail(rset.getString("email"));
+                client.setPhoto(rset.getString("photo"));
+                client.setTelephone(rset.getString("tel"));
+            }
+            ocstmt.close();
+
+        } catch (Exception e) {
+            System.out.println("erreur lors de la recuperation: "+e.getMessage());
+        }
+
+        return client;
     }
 
     /**
@@ -175,6 +207,7 @@ public class GestionnaireClient extends SQLAble {
         boolean exist = existsClientDB();
         if (exist) {
             try {
+                connectToDatabase();
                 CallableStatement cstmt;
                 cstmt = conn.prepareCall("{ = call editClient(?,?,?,?,?) }");
                 cstmt.setString(1, client.getId());
@@ -185,6 +218,7 @@ public class GestionnaireClient extends SQLAble {
                 cstmt.execute();
                 cstmt.close();
             } catch (SQLException e) {
+                e.printStackTrace();
             }
         }
     }
@@ -196,11 +230,12 @@ public class GestionnaireClient extends SQLAble {
      * @param prenom
      * @return id
      */
-    public String getClientIdBD(String nom, String prenom) {
+    public String getClientIdDB(String nom, String prenom) {
         String idClient = "";
         try {
+            connectToDatabase();
             CallableStatement cstmt;
-            cstmt = conn.prepareCall("{ ? = call getClientId(?,?) }");
+            cstmt = conn.prepareCall("{ ? = call getClientIdDB(?,?) }");
             cstmt.registerOutParameter(1, OracleTypes.VARCHAR);
             cstmt.setString(2, nom);
             cstmt.setString(3, prenom);
@@ -210,6 +245,7 @@ public class GestionnaireClient extends SQLAble {
             cstmt.close();
 
         } catch (SQLException e) {
+            e.printStackTrace();
         }
         return idClient;
     }
@@ -224,6 +260,7 @@ public class GestionnaireClient extends SQLAble {
         boolean exist = false;
         boolean res = false;
         try {
+            connectToDatabase();
             OracleCallableStatement ocstmt;
             ocstmt = (OracleCallableStatement) conn.prepareCall("{ ? = call existsClient(?) }");
             ocstmt.registerOutParameter(1, OracleTypes.NUMBER);
@@ -239,6 +276,7 @@ public class GestionnaireClient extends SQLAble {
             ocstmt.close();
 
             if (exist) {
+                connectToDatabase();
                 CallableStatement cstmt = conn.prepareCall("{ = call deleteClient(?) }");
                 cstmt.setString(1, id);
                 cstmt.execute();
@@ -247,6 +285,7 @@ public class GestionnaireClient extends SQLAble {
             }
 
         } catch (SQLException e) {
+            e.printStackTrace();
         }
 
         return res;
@@ -264,7 +303,9 @@ public class GestionnaireClient extends SQLAble {
 
         if (exist) {
             try {
-                OracleCallableStatement ocstmt = (OracleCallableStatement) conn.prepareCall("{ ? = call getListeCommandes(?) }");
+                connectToDatabase();
+                OracleCallableStatement ocstmt;
+                ocstmt = (OracleCallableStatement) conn.prepareCall("{ ? = call getListeCommandes(?) }");
                 ocstmt.registerOutParameter(1, OracleTypes.CURSOR);
                 ocstmt.setString(2, "18");
                 ocstmt.execute();
@@ -276,6 +317,7 @@ public class GestionnaireClient extends SQLAble {
                 rset.close();
                 ocstmt.close();
             } catch (SQLException e) {
+                e.printStackTrace();
             }
         }
 

@@ -1,6 +1,7 @@
 package l3m;
 
 import database.GestionnaireClient;
+import database.GestionnaireCommande;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
@@ -38,7 +39,7 @@ public class ClientEnregistreServlet extends HttpServlet {
 
         try {
             GestionnaireClient gestionClient = new GestionnaireClient(idClient, nom, prenom);
-            List<String> listeCommandes = gestionClient.getListeCommandes();
+            
         } catch (SQLException ex) {
             Logger.getLogger(ClientEnregistreServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -60,17 +61,13 @@ public class ClientEnregistreServlet extends HttpServlet {
         String idClient = request.getParameter("idClient");
         String nom = request.getParameter("nom");
         String prenom = request.getParameter("prenom");
-        System.out.print(idClient);
+        System.out.print("idClient, c'est moi : " + idClient);
         
         System.out.println();
         try {
             GestionnaireClient gestionClient = new GestionnaireClient(idClient, nom, prenom);
-            gestionClient.connectToDatabase();
-            System.out.println("------");
-            
-            System.out.print(gestionClient.getNom());
             gestionClient.enregistreClientDB();
-
+            response.getWriter().println(gestionClient.toString());
         } catch (SQLException ex) {
             Logger.getLogger(ClientEnregistreServlet.class.getName()).log(Level.SEVERE, null, ex);
         }

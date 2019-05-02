@@ -50,7 +50,7 @@ end;
 /
 
 
-create or replace procedure editclientDB (
+create or replace procedure editclient (
     idclient_   client.idclient%type,
     photo_      client.photo%type,
     email_      client.email%type,

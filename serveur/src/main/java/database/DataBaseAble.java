@@ -9,7 +9,7 @@ import java.sql.SQLException;
  * DataBaseAble Intteface  permet la gestion de la connection
  */
 interface DataBaseAble {
-    public Connection connectToDatabase() throws SQLException;
+    public void connectToDatabase() throws SQLException;
     public void disconnect() throws SQLException;
     public ResultSet request(String request) throws SQLException, Exception;
     

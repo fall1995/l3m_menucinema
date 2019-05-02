@@ -13,27 +13,27 @@ import java.sql.Statement;
  */
 public abstract class SQLAble implements DataBaseAble {
 
-     static Connection conn;
+    static Connection conn;
 
     /**
      * Methode permert de se connecter la base de donnee oracle
      * @throws java.sql.SQLException
      */
     @Override
-    public Connection connectToDatabase() throws SQLException {
-        Connection conn;
-        String CONN_URL = "jdbc:oracle:thin:@im2ag-oracle.e.ujf-grenoble.fr:1521:im2ag";
-        String USER = "";
-        String PASSWD = "";
-        System.out.print("Loading Oracle driver... ");
-        DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
-        System.out.println("loaded");
+    public void connectToDatabase() throws SQLException {
+        if (conn == null || conn.isClosed()) {
+            String CONN_URL = "jdbc:oracle:thin:@im2ag-oracle.e.ujf-grenoble.fr:1521:im2ag";
+            String USER = "hasdit";
+            String PASSWD = "az1ER2t3";
+            System.out.print("Loading Oracle driver... ");
+            DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
+            System.out.println("loaded");
 
-        // Etablissement de la connection
-        System.out.print("Connecting to the database... ");
-        conn = DriverManager.getConnection(CONN_URL, USER, PASSWD);
-        System.out.println("connected");
-        return conn;
+            // Etablissement de la connection
+            System.out.print("Connecting to the database... ");
+            conn = DriverManager.getConnection(CONN_URL, USER, PASSWD);
+            System.out.println("connected");
+        }
     }
 
     /**
