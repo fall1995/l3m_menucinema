@@ -93,6 +93,7 @@ export class SigninComponent implements OnInit {
     sendServeur(){
         let i;
         this.afAuth.user.subscribe(utilisateur =>{
+
             i = utilisateur.displayName.indexOf(" "); // couper en 2 displayname pour avoir le prenom et le nom
             if (utilisateur.uid){
                 this.authService.authentificate({
@@ -100,6 +101,8 @@ export class SigninComponent implements OnInit {
                     idClient: utilisateur.uid,
                     nom: utilisateur.displayName.substr(0,i),
                     prenom: utilisateur.displayName.substr(i),
+                    email: utilisateur.email,
+                    photo: utilisateur.photoURL,
                 }).then(data =>{
                     console.log("envoie après verification au serveur ok");
                 });

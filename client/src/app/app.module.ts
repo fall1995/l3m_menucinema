@@ -34,6 +34,9 @@ import {ButtonModule} from 'primeng/button';
 import {DialogModule} from 'primeng/dialog';
 import {ToastModule} from 'primeng/toast';
 import {MessageService} from 'primeng/api';
+import {DataViewModule} from 'primeng/dataview';
+import {DropdownModule} from 'primeng/dropdown';
+import {PanelModule} from 'primeng/panel';
 
 
 import 'hammerjs';
@@ -76,6 +79,9 @@ import {OverlayPanelModule} from 'primeng/primeng';
         MatIconModule,
         OverlayPanelModule,
         ToastModule,
+        DataViewModule,
+        DropdownModule,
+        PanelModule,
 
     ],
     providers: [TmdbService, MessageService,AuthService,MenuService, AuthGuardService],
