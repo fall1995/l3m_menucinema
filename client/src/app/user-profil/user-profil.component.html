@@ -53,11 +53,11 @@
                         Informations sur votre compte
                     </h3>
                 </div>
-                <div class="panel-body">
+                <div class="panel-body" *ngIf="user">
                     <p>
-                        <img  src="{{user.photo}}" class="img-rounded img-thumbnail" alt="profile">
+                        <img  src="{{userPhoto?.photo}}" class="img-rounded img-thumbnail" alt="profile">
                     </p>
-                    <h4>{{user.nom}}</h4>
+                    <h4>{{user?.nom}}</h4>
                     <p>
                         <button type="button" class="btn btn-success" (click)="afficherDialogProfil()">
                             <i class="fa fa-user"></i>
@@ -65,9 +65,19 @@
                         </button>
                     </p>
                     <p>
+                        <b>Nom :</b>
+                        <br>
+                        {{user?.nom}}
+                    </p>
+                    <p>
+                        <b>Prenom :</b>
+                        <br>
+                        {{user?.prenom}}
+                    </p>
+                    <p>
                         <b>Email :</b>
                         <br>
-                        {{user.email}}
+                        {{user?.email}}
                     </p>
                 </div>
             </div>

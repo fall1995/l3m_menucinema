@@ -13,6 +13,8 @@ import {AuthService} from '../../service/auth.service';
 })
 export class UserDialogComponent implements OnInit {
 
+    //user: User;
+
     constructor(private afAuth: AngularFireAuth, private afDatabase : AngularFireDatabase,
                 private route: Router, private authService: AuthService) {
         this.afAuth.authState.subscribe(user =>{
@@ -23,8 +25,22 @@ export class UserDialogComponent implements OnInit {
     ngOnInit() {
     }
 
-    cupdateProfile() {
-        this.afAuth.authState.subscribe( user =>{
+    async updateProfile(params: {[key: string]: string}) {
+        await this.authService.modification({
+            id: params.id,
+            nom: params.nom,
+            prenom : params.prenom,
+            photo : params.photo,
+            email : params.email,
+            tel : params.tel,
+            adresse: params.adress,
+        }).then(res =>{
+            console.log(res);
+        }, err =>{
+            console.log("err");
+        });
+        /*
+        await this.afAuth.authState.subscribe( user =>{
             if (user.uid){
                 this.authService.modification({
                    idClient : user.uid,
@@ -36,6 +52,8 @@ export class UserDialogComponent implements OnInit {
 
             //});
         });
+        */
+
     }
 
     // user = {} as User;
