@@ -77,7 +77,7 @@ public class GestionnaireMenu  extends XMLAble{
      * @param id
      */
     public void ajouterAuMenu(String id) {
-        //???AJOUTER this.menu a XML AVEC id = id
+        this.menu.add(id);
     }
 
     /**
@@ -86,7 +86,11 @@ public class GestionnaireMenu  extends XMLAble{
      * @param id
      */
     public void enleverDuMenu(String id) {
-        //???ENLEVER DANS  XML
+        for(int i = 0; i < menu.length(); i++){
+            if(menu[i].getId.equals(id)){
+                menu.remove(i);
+            }
+        }
     }
     
     public String platsToJson(){
