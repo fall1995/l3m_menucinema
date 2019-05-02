@@ -8,13 +8,18 @@ import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 // Je suis passé par l'itération 0 du serveur...
+
+/**
+ * @author Groupe6 
+ * ClientAuthentificationServlet est une classe qui permet d' assurre la connexion
+ * d'un client
+ */
 public class ClientAuthentificationServlet extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
@@ -28,48 +33,29 @@ public class ClientAuthentificationServlet extends HttpServlet {
     private final String adresse = "adresse";
 
     /**
-     * doGet va nous permettre de retourné les informations d'un client dont l'id est passé en 
-     * parametre
+     * doGet va nous permettre de retourné les informations d'un client dont
+     * l'id est passé en parametre
+     *
      * @param request
      * @param response
      * @throws ServletException
-     * @throws IOException 
+     * @throws IOException
      */
+    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        response.setContentType("application/json");
-        response.addHeader("Access-Control-Allow-Origin", "*");
-        response.addHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, PUT, DELETE, HEAD");
-        response.addHeader("Access-Control-Allow-Headers", "X-PINGOTHER, Origin, X-Requested-With, Content-Type, Accept");
-        response.addHeader("Access-Control-Max-Age", "1728000");
+        String idClient = request.getParameter("idClient");
+        GestionnaireClient gestonClient;
+        try {
+            gestonClient = new GestionnaireClient(idClient);
+            Client client_trouve = gestonClient.getClient(idClient);
 
-        String res = "";
-        HashMap<String, String> parametres = new HashMap();
-        Client client = new Client();
-        response.setStatus(HttpServletResponse.SC_OK);
-        response.getWriter().println(this.processQueryTest(request));
-
-        parametres.put(id, request.getParameter("idClient"));
-        response.setContentType("application/json");
-        System.out.println("idclient " + parametres.get(id));
-
-        if (getClientinfo(parametres)) {
-            
-            // 200 OK
-            try {
-                GestionnaireClient gestionClient = new GestionnaireClient(parametres.get(id));
-                System.out.println("parametres : "+parametres.get(id));
-                client = gestionClient.getClient(id);
-                response.setStatus(HttpServletResponse.SC_OK);
-                response.getWriter().println(client.toString());
-            } catch (SQLException e) {
-                response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-                response.getWriter().println(""+e.toString());
-                
-            }
-        }else {
-            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-            response.getWriter().println("Parametre non complet");
+            response.setContentType("application/json");
+            response.setStatus(HttpServletResponse.SC_OK);
+            response.getWriter().println(client_trouve.toString());
+        } catch (SQLException ex) {
+            Logger.getLogger(ClientAuthentificationServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
+
     }
 
     /*____________________________________________________________________________________________________________________
@@ -78,6 +64,16 @@ public class ClientAuthentificationServlet extends HttpServlet {
 	 * It sends back a HTTP code 401 error if the userId is not specified or empty
 	 * It sends back a HTTP code 500 error if a problem occured when accessing to the database
      */
+
+    /**
+     *Methode qui permet d'assurer la connaissance
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException
+     */
+
+    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         response.setContentType("application/json");
@@ -87,7 +83,7 @@ public class ClientAuthentificationServlet extends HttpServlet {
         response.addHeader("Access-Control-Max-Age", "1728000");
 
         // Extract userId from HTTP parameters
-        String res = "";
+        String res = " ";
         Enumeration<String> P = request.getParameterNames();
         HashMap<String, String> parametres = new HashMap();
         Client client = new Client();

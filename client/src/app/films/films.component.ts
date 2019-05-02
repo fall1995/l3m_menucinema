@@ -49,18 +49,5 @@ export class FilmsComponent implements OnInit {
         this.listeMovieHightRatet = await this.tmdbService.getAllHightRated();
     }
 
-    get film(): MovieResponse {
-        return this.listeMovie;
-    }
-
-
-    afficherDialogProfil(): void {
-        this.afficherDialog = true;
-    }
-
-    onHideProfilDialog(): void{
-        this.afficherDialog = false;
-    }
-
 
 }

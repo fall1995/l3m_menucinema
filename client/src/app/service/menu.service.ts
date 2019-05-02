@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpParams, HttpResponse} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {DataMenu, ListePlats} from '../menu-commade-data/Menu';
+import { ListePlats} from '../menu-commade-data/Menu';
 import {MovieQuery, MovieResponse} from '../tmdb-data/Movie';
 
 function AlxToObjectString(data?: object): { [key: string]: string } {

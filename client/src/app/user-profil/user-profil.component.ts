@@ -4,6 +4,7 @@ import {User} from '../tmdb-data/user';
 import * as firebase from 'firebase';
 import {AngularFireDatabase} from '@angular/fire/database';
 import {FirebaseObjectObservable} from '@angular/fire/database-deprecated';
+import {AuthService} from '../service/auth.service';
 
 @Component({
     selector: 'app-user-profil',
@@ -12,35 +13,41 @@ import {FirebaseObjectObservable} from '@angular/fire/database-deprecated';
 })
 export class UserProfilComponent implements OnInit {
 
-    constructor(private afAuth: AngularFireAuth, private afDatabase: AngularFireDatabase) {
+    constructor(private afAuth: AngularFireAuth, private authService: AuthService) {
     }
+
     afficherDialog = false;
-
-    user: User = {
-        nom: '',
-        prenom: '',
-        tel: null,
-        adresse: '',
+    user: User;
+    userPhoto : User = {
         photo: '',
-        email: '',
-
     };
-    public providerId: string;
     ngOnInit() {
-        this.afAuth.user.subscribe(u => {
-            if (u) {
-                this.user.nom =u.displayName;
-                this.providerId = u.providerData[0].providerId;
-                this.user.email = u.email;
-                this.user.photo = u.photoURL;
+        //this.initObser();
+        this.init();
+    }
+
+
+
+     async init() {
+         await this.afAuth.user.subscribe( u =>{
+            if (u){
+                 this.authService.getData( u.uid).then( res =>{
+                     this.user = res;
+                     this.userPhoto.photo = u.photoURL;
+                    console.log(this.user);
+                }, r =>{
+                    console.log("errr"+r);
+                });
             }
         });
     }
+
+
     afficherDialogProfil(): void {
         this.afficherDialog = true;
     }
 
-    onHideProfilDialog(): void{
+    onHideProfilDialog(): void {
         this.afficherDialog = false;
     }
 

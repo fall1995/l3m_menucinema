@@ -7,6 +7,7 @@ import {Router} from '@angular/router';
 import {TmdbService} from '../../service/tmdb.service';
 import {environment} from '../../../environments/environment';
 import {MovieResponse} from '../../tmdb-data/Movie';
+import {MessageService} from 'primeng/api';
 
 @Component({
   selector: 'signin',
@@ -20,7 +21,7 @@ export class SigninComponent implements OnInit {
     isAuth : boolean;
     listeMovie: MovieResponse;
 
-  constructor(private afAuth: AngularFireAuth, private authService : AuthService,
+  constructor(private afAuth: AngularFireAuth, private authService : AuthService, private message : MessageService,
               private formBuilder: FormBuilder, private route: Router, private tmdbService : TmdbService) {
       afAuth.user.subscribe(u => console.log("L'utilisateur est ", u));
   }
@@ -55,12 +56,18 @@ export class SigninComponent implements OnInit {
      */
     loginGoogle() {
         this.afAuth.auth.signInWithPopup(new auth.GoogleAuthProvider()).then(
-            () => {
+            u => {
                 this.route.navigate(['/profil']);
+                this.message.add({severity:'success',
+                    summary:`Bienvenue ${u.user.displayName}`,
+                    detail:'Vous pouvez commander vos films et plats 😁!'});
                 this.sendServeur();
             },
             (error) => {
                 this.errorMessage = error;
+                this.message.add({severity:'error',
+                    summary:'Erreur de connexion',
+                    detail:'Une erreur est survenue l\'ors de la connexion !'});
             }
         );
     }
@@ -70,15 +77,23 @@ export class SigninComponent implements OnInit {
      */
     loginFacebook(){
         this.afAuth.auth.signInWithPopup(new auth.FacebookAuthProvider()).then(u =>{
-
-        }, (erro) =>{
-            this.errorMessage = erro;
-            console.log(erro);
-        });
+                this.route.navigate(['/profil']);
+                this.message.add({severity:'success',
+                    summary:`Bienvenue ${u.user.displayName} 😁`,
+                    detail:'Vous pouvez commander vos films et plats !'});
+                this.sendServeur();
+            },
+            (error) => {
+                this.errorMessage = error;
+                this.message.add({severity:'error',
+                    summary:'Erreur de connexion',
+                    detail:'Une erreur est survenue l\'ors de la connexion !'});
+            });
     }
     sendServeur(){
         let i;
         this.afAuth.user.subscribe(utilisateur =>{
+
             i = utilisateur.displayName.indexOf(" "); // couper en 2 displayname pour avoir le prenom et le nom
             if (utilisateur.uid){
                 this.authService.authentificate({
@@ -86,6 +101,8 @@ export class SigninComponent implements OnInit {
                     idClient: utilisateur.uid,
                     nom: utilisateur.displayName.substr(0,i),
                     prenom: utilisateur.displayName.substr(i),
+                    email: utilisateur.email,
+                    photo: utilisateur.photoURL,
                 }).then(data =>{
                     console.log("envoie après verification au serveur ok");
                 });
@@ -106,12 +123,18 @@ export class SigninComponent implements OnInit {
         const email = this.signInForm.get('email').value;
         const password = this.signInForm.get('password').value;
         this.afAuth.auth.signInWithEmailAndPassword(email,password).then(
-            () => {
+            u => {
                 this.route.navigate(['/profil']);
+                this.message.add({severity:'success',
+                    summary:`Bienvenue `,
+                    detail:'Vous pouvez commander vos films et plats 😁!'});
                 this.sendServeur();
             },
             (error) => {
                 this.errorMessage = error;
+                this.message.add({severity:'error',
+                    summary:'Erreur de connexion',
+                    detail:'Une erreur est survenue l\'ors de la connexion !'});
             }
         );
     }
