@@ -26,10 +26,13 @@
                 </p-header>
                 <p></p>
                 <p-footer>
-                    <button pButton type="button" label="Details" icon="fa fa-info"
-                            style="margin-right: .25em" ></button>
+        <div>
+                    <p-fieldset legend="Details" [toggleable]="true" [collapsed]="true" style="">
+                        {{f.overview}}
+                        </p-fieldset>
                     <button pButton type="button" label="Ajouter" icon="fa fa-shopping-cart"
                             class="ui-button-secondary"></button>
+        </div>
                 </p-footer>
             </p-card>
         </div>
