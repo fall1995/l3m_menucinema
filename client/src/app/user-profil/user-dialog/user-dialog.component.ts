@@ -5,6 +5,7 @@ import {AngularFireDatabase} from '@angular/fire/database';
 import {Router} from '@angular/router';
 import {FirebaseListObservable} from '@angular/fire/database-deprecated';
 import {AuthService} from '../../service/auth.service';
+import {MessageService} from 'primeng/api';
 
 @Component({
     selector: 'app-user-dialog',
@@ -16,7 +17,7 @@ export class UserDialogComponent implements OnInit {
     //user: User;
 
     constructor(private afAuth: AngularFireAuth, private afDatabase : AngularFireDatabase,
-                private route: Router, private authService: AuthService) {
+                private route: Router, private authService: AuthService, private message : MessageService) {
         this.afAuth.authState.subscribe(user =>{
             if (user) { this.user.id = user.uid; }
         });
@@ -35,9 +36,16 @@ export class UserDialogComponent implements OnInit {
             tel : params.tel,
             adresse: params.adress,
         }).then(res =>{
+            this.afficherDialog = false;
+            this.message.add({severity:'success',
+                summary:`Modification du profil OK `,
+                detail:'Vous avez bien modifié votre profil'});
             console.log(res);
         }, err =>{
             console.log("err");
+            this.message.add({severity:'error',
+                summary:`Erreur de Modification `,
+                detail:'Une erreur est survenue lors de la modification de votre profil'});
         });
         /*
         await this.afAuth.authState.subscribe( user =>{
