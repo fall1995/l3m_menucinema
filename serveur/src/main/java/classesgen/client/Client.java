@@ -231,15 +231,13 @@ public class Client {
     
        public String toString() {
         String res = "{\n";
-                res = "{";
-        res += "id: "+ this.id + ",\"\n ";
-        res += "nom:"+ this.nom + ",\"\n ";
-        res += "prenom:"+ this.prenom + "\n ";
-        res += "photoUrl:"+ this.photo + ",\"\n ";
-        res += "email:"+ this.email + ",\"\n ";
-        res += "tel:"+ this.telephone + "\", \n";
-        res += "adresse:"+ this.adresse + ",\"\n";
-        res += "}\n";
+        res += "\"id\" :\""+ this.id + "\",\n ";
+        res += "\"nom\" :\""+ this.nom + "\",\n ";
+        res += "\"prenom\" :\""+ this.prenom + "\",\n ";
+        res += "\"photoUrl\" :\""+ this.photo + "\",\n ";
+        res += "\"email\" :\""+ this.email + "\",\n ";
+        res += "\"tel\" :\""+ this.telephone + "\", \n";
+        res += "\"adresse\" :\""+ this.adresse + "\"\n";
         res += "}";
         return res;
     }
