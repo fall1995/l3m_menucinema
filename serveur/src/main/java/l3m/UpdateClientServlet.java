@@ -14,9 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author Groupe6 
- * UpdateClientServlet est la classe qui permet de mettre a jour les informations
- * sur clients
+ * @author idrisssagara
  */
 public class UpdateClientServlet extends HttpServlet {
 
@@ -107,7 +105,7 @@ public class UpdateClientServlet extends HttpServlet {
         } else {
             //on retourne un message d'erreur
             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-            response.getWriter().println("Paramètres non complets");
+            response.getWriter().println("Paramètres non complet");
         }
 
     }

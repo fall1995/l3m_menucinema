@@ -167,7 +167,6 @@ public class GestionnaireClient extends SQLAble {
     public Client getClient(String id) {
         //client = new Client();
         //client.setId(id);
-        System.out.println("id :" + client.getId());
         try {
             connectToDatabase();
             OracleCallableStatement ocstmt;
@@ -190,7 +189,6 @@ public class GestionnaireClient extends SQLAble {
                 System.out.println("le resultSet est null");
             }
             ocstmt.close();
-            System.out.println("OK pour la proced 2" + client.toString());
 
         } catch (Exception e) {
             System.out.println("erreur lors de la recuperation: " + e.getMessage());
@@ -206,7 +204,7 @@ public class GestionnaireClient extends SQLAble {
      *
      * @throws java.sql.SQLException
      */
-    public void editClientDB() throws SQLException {
+    public void editClientDB() throws SQLException, Exception {
         boolean exist = existsClientDB();
         if (exist) {
             try {
@@ -220,7 +218,11 @@ public class GestionnaireClient extends SQLAble {
                 cstmt.execute();
                 cstmt.close();
             } catch (SQLException e) {
+                System.out.println("cath error: ");
+                e.printStackTrace();
             }
+        }else{
+            throw new Exception("client inexistant !");
         }
     }
 
