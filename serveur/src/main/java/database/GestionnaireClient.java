@@ -1,6 +1,7 @@
 package database;
 
 import classesgen.client.Client;
+import com.google.gson.Gson;
 import java.sql.CallableStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -148,6 +149,7 @@ public class GestionnaireClient extends SQLAble {
     public boolean existsClientDB() throws SQLException {
         boolean res = false;
         try {
+            connectToDatabase();
             OracleCallableStatement ocstmt;
             ocstmt = (OracleCallableStatement) conn.prepareCall("{ ? = call existsClient(?) }");
             ocstmt.registerOutParameter(1, OracleTypes.NUMBER);
@@ -302,7 +304,7 @@ public class GestionnaireClient extends SQLAble {
             try {
                 try (OracleCallableStatement ocstmt = (OracleCallableStatement) conn.prepareCall("{ ? = call getListeCommandes(?) }")) {
                     ocstmt.registerOutParameter(1, OracleTypes.CURSOR);
-                    ocstmt.setString(2, "18");
+                    ocstmt.setString(2, client.getId());
                     ocstmt.execute();
 
                     ResultSet rset = (ResultSet) (ocstmt.getObject(1));
@@ -317,6 +319,11 @@ public class GestionnaireClient extends SQLAble {
 
         return list;
     }
+    
+     public String gestionClientToJson(){
+            String json = new Gson().toJson(this.client);
+            return json;
+        } 
 
     public void setClient(Client client) {
         this.client = client;

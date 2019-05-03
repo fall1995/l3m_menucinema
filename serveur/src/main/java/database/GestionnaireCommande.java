@@ -88,14 +88,14 @@ public class GestionnaireCommande extends SQLAble {
             }
 
             if (nbInsertions > 1) {
-                conn.commit();
+                //conn.commit();
             } else {
-                conn.rollback();
+                //conn.rollback();
                 System.out.println("Les listes des plats et des films sont vides");
             }
 
         } catch (SQLException e) {
-            conn.rollback();
+            //conn.rollback();
             e.printStackTrace();
         }
     }

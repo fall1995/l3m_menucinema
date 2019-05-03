@@ -1,6 +1,7 @@
 package l3m;
 
 import database.GestionnaireClient;
+import database.GestionnaireCommande;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
@@ -37,10 +38,13 @@ public class ClientEnregistreServlet extends HttpServlet {
         try {
             GestionnaireClient gestionClient = new GestionnaireClient(idClient);
             List<String> listeCommandes = gestionClient.getListeCommandes();
-
+            GestionnaireCommande[] t_gs = new GestionnaireCommande[listeCommandes.size()];
+            for (int i = 0; i < listeCommandes.size(); i++) {
+               // t_gs[i] = t_gs[i].getCommande(listeCommandes.get(i));
+            }
             response.setContentType("application/json");
             response.setStatus(HttpServletResponse.SC_OK);
-            response.getWriter().println(listeCommandes.toString());
+            response.getWriter().println(gestionClient.gestionClientToJson());
         } catch (SQLException ex) {
             Logger.getLogger(ClientEnregistreServlet.class.getName()).log(Level.SEVERE, null, ex);
         }

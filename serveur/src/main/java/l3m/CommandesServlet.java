@@ -28,8 +28,8 @@ public class CommandesServlet extends HttpServlet {
     private String idClient = "idClient";
     private double prix;
     private String adresseLivraison;
-    private String[] idplats;
-    private String[] idFilms;
+    private List<String> idPlats = new ArrayList<String>();
+    private List<String> idFilms = new ArrayList<String>();
 
     /**
      * Methode qui permet d'afficher les commander d'un client donné
@@ -71,21 +71,27 @@ public class CommandesServlet extends HttpServlet {
         Commande commande = new Commande();
         // recuperation des donnes
         idClient = request.getParameter("idClient");
-        idplats = request.getParameterValues("idPlat");
-        idFilms = request.getParameterValues("idFilms");
+        String[] tabP = request.getParameterValues("idPlat");
+        for ( int i = 0 ; i < tabP.length ; i ++ ){
+            idPlats.add(tabP[i]);
+        }
+        String[] tabF = request.getParameterValues("idFilms");
+        for ( int i = 0 ; i < tabF.length ; i ++ ){
+            idFilms.add(tabF[i]);
+        }
         adresseLivraison = request.getParameter("adresseLivraison");
-        
+        /*
         List<String> listeplat = (ArrayList<String>) toArrayList(idplats);
         List<String> listeFilms = (ArrayList<String>) toArrayList(idFilms);
-
+        */
         commande.setIdClient(idClient);
-        commande.setIdPlat(listeplat);
-        commande.setIdFilm(listeFilms);
+        commande.setIdPlat(idPlats);
+        commande.setIdFilm(idFilms);
         commande.setAdresseLivraison(adresseLivraison);
         //insertion dans la base de donnes
         GestionnaireCommande addCommande;
         try {
-            addCommande = new GestionnaireCommande(idClient, listeplat, listeFilms, adresseLivraison);
+            addCommande = new GestionnaireCommande(idClient, idPlats, idFilms, adresseLivraison);
             commande.setPrix(prix);
             addCommande.enregistrerCommandeDB();
         } catch (SQLException ex) {
