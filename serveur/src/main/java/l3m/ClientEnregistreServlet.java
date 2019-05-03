@@ -70,6 +70,8 @@ public class ClientEnregistreServlet extends HttpServlet {
             response.getWriter().println(gestionClient.toString());
         } catch (SQLException ex) {
             Logger.getLogger(ClientEnregistreServlet.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            Logger.getLogger(ClientEnregistreServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }
@@ -122,6 +124,8 @@ public class ClientEnregistreServlet extends HttpServlet {
             
             gestionClient.editClientDB();
         } catch (SQLException ex) {
+            Logger.getLogger(ClientEnregistreServlet.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
             Logger.getLogger(ClientEnregistreServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }

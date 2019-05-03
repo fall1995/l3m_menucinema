@@ -9,13 +9,14 @@ import java.sql.SQLException;
 // Je suis passé par l'itération 0 de la BD...
 public class BdAccess {
 
-    static String authentifyUser(Client client) throws SQLException {
+    static String authentifyUser(Client client) throws SQLException, Exception {
         String res = "";
         boolean request = false;
-        GestionnaireClient clt = new GestionnaireClient(client.getId(), client.getNom(),client.getPrenom());
-        request = clt.existsClientDB();
+        GestionnaireClient gc;
+        gc = new GestionnaireClient(client.getId(), client.getNom(),client.getPrenom());
+        request = gc.existsClientDB();
         if (!request) {
-            if (clt.enregistreClientDB()) {
+            if (gc.enregistreClientDB()) {
                 // enregistrement ok return le json
                 client.toString();
             } else {

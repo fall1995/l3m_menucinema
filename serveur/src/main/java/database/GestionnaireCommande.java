@@ -1,6 +1,8 @@
 package database;
 
 import classesgen.commande.Commande;
+import classesgen.menus.Menus;
+import com.google.gson.Gson;
 import java.sql.CallableStatement;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -25,12 +27,31 @@ public class GestionnaireCommande extends SQLAble {
         commande.setIdPlat(idPlats);
         commande.setIdFilm(idFilms);
         commande.setAdresseLivraison(adresseLivraison);
+        computePrix();
     }
 
 
     public GestionnaireCommande(String id) {
         commande = new Commande();
         commande.setId(id);
+    }
+    
+    // calcul du prix de la commande
+    private void computePrix(){
+        List<String> idPlats = commande.getIdPlat();
+        List<String> idFilms = commande.getFilm();
+        
+        double prixPlats = 0;
+        double prixFilms = 0;
+        if ( commande.getFilm() != null ){
+            prixFilms = 3.79 * commande.getFilm().size();
+        }
+        
+        GestionnaireMenu gestionnaireMenu = new GestionnaireMenu(commande.getIdPlat());
+        for ( String idPlat : commande.getIdPlat() ){
+            prixPlats += gestionnaireMenu.getPrixPlat( idPlat );
+        }
+        commande.setPrix( prixFilms + prixPlats );
     }
 
     /**
@@ -50,15 +71,19 @@ public class GestionnaireCommande extends SQLAble {
             pstmt.executeUpdate();
             pstmt.close();
                 
-            CallableStatement cstmt;
-            cstmt = conn.prepareCall("{ ? = call getLastIdCommande() }");
-            cstmt.registerOutParameter(1, OracleTypes.VARCHAR );
-            cstmt.execute();
+            OracleCallableStatement ocstmt;
+            ocstmt = (OracleCallableStatement )conn.prepareCall("{ ? = call getLastCommande() }");
+            ocstmt.registerOutParameter(1, OracleTypes.CURSOR );
+            ocstmt.execute();
 
-            commande.setId( cstmt.getString(1) );            
-            cstmt.close();
-            
-            System.out.println( "id = " + commande.getId() );
+            ResultSet rset = (ResultSet) (ocstmt.getObject(1));
+            if (rset != null && rset.next()) {
+                commande.setId( rset.getString("idCommande") );
+                commande.setDate( rset.getString("dateCommande") ) ; 
+            }
+            rset.close();
+            ocstmt.close();
+
             int nbInsertions = 1;
             
             Map<String,Integer> mapIdPlats;
@@ -80,7 +105,7 @@ public class GestionnaireCommande extends SQLAble {
                 conn.commit();
             }else{
                 conn.rollback();
-                System.out.println("Les listes des plats et des films sont vides");
+                throw new Exception("Les listes des plats et des films sont vides");
             }
             
         } catch (SQLException e){
@@ -90,62 +115,56 @@ public class GestionnaireCommande extends SQLAble {
     }
 
 
-    public Commande getCommande(String id) {
+    public static Commande getCommande(String id) throws SQLException {
+        GestionnaireCommande gc = new GestionnaireCommande(id);
+        gc.connectToDatabase();
         
-        Commande commande = new Commande();
-        commande.setId(id);
-        List<String> platsCommandes = commande.getIdPlat();
-        List<String> filmsCommandes = commande.getFilm();
-        
-        try {
-            connectToDatabase();
-            OracleCallableStatement ocstmt;
-            ocstmt = (OracleCallableStatement) conn.prepareCall("{ = call getcommande(?,?,?,?) }");
-            ocstmt.setString( 1 , id );
-            ocstmt.registerOutParameter(2, OracleTypes.CURSOR);
-            ocstmt.registerOutParameter(3, OracleTypes.CURSOR);
-            ocstmt.registerOutParameter(4, OracleTypes.CURSOR);
-            ocstmt.execute();
-             
-            ResultSet rset = (ResultSet) (ocstmt.getObject(2));
-            if (rset != null && rset.next()) {
-                commande.setIdClient( rset.getString("idClient") );
-                commande.setDate( ( rset.getDate("dateCommande") ).toString() );
-                commande.setPrix( rset.getDouble("prix") );
-                commande.setAdresseLivraison( rset.getString("adresseLivraison") );
-            }
-            rset.close();
-            
-            rset = (ResultSet) (ocstmt.getObject(3));
-            while ( rset != null && rset.next() ) {
-                int quantite = rset.getInt("quantite");
-                for ( int i = 0 ; i < quantite ; i++ ) {
-                    platsCommandes.add(rset.getString("idPlat"));
-                }
-            }
-            rset.close();
-         
-            rset = (ResultSet) (ocstmt.getObject(4));
-            while ( rset != null && rset.next() ) {
-                filmsCommandes.add(rset.getString("idFilm"));
-            }
-            rset.close();
-            
-            ocstmt.close();
+        OracleCallableStatement ocstmt;
+        ocstmt = (OracleCallableStatement) conn.prepareCall("{ = call getcommande(?,?,?,?) }");
+        ocstmt.setString(1, id);
+        ocstmt.registerOutParameter(2, OracleTypes.CURSOR);
+        ocstmt.registerOutParameter(3, OracleTypes.CURSOR);
+        ocstmt.registerOutParameter(4, OracleTypes.CURSOR);
+        ocstmt.execute();
 
+        ResultSet rset = (ResultSet) (ocstmt.getObject(2));
+        if (rset != null && rset.next()) {
+            gc.commande.setDate((rset.getDate("dateCommande")).toString());
+            gc.commande.setPrix(rset.getDouble("prix"));
+            gc.commande.setAdresseLivraison(rset.getString("adresseLivraison"));
         }
-        catch (SQLException e){
-            e.printStackTrace();
-            //System.err.println(e);    
+        rset.close();
+
+        List<String> platsCommandes = new ArrayList<String>();
+        List<String> filmsCommandes = new ArrayList<String>();
+
+        rset = (ResultSet) (ocstmt.getObject(3));
+        while (rset != null && rset.next()) {
+            int quantite = rset.getInt("quantite");
+            for (int i = 0; i < quantite; i++) {
+                platsCommandes.add(rset.getString("idPlat"));
+            }
         }
-            
-        return commande;
+        rset.close();
+
+        rset = (ResultSet) (ocstmt.getObject(4));
+        while (rset != null && rset.next()) {
+            filmsCommandes.add(rset.getString("idFilm"));
+        }
+        rset.close();
+        ocstmt.close();
+
+        gc.commande.setIdPlat(platsCommandes);
+        gc.commande.setIdFilm(filmsCommandes);
+
+        return gc.commande;
     }
     
-    public List<String> getPlatsLesPlusCommandes(){
+    public static List<String> getPlatsLesPlusCommandes(){
+        GestionnaireCommande gc = new GestionnaireCommande("0");
         List<String> listIdPlatsPC = new ArrayList<String>();
         try{
-            connectToDatabase();
+            gc.connectToDatabase();
             OracleCallableStatement ocstmt;
             ocstmt = (OracleCallableStatement) conn.prepareCall("{ ? = call platsLesPlusCommandes() }");
             ocstmt.registerOutParameter( 1 , OracleTypes.CURSOR );
@@ -164,10 +183,11 @@ public class GestionnaireCommande extends SQLAble {
     }
 
     
-    public List<String> getFilmsLesPlusVus(){
+    public static List<String> getFilmsLesPlusVus(){
+        GestionnaireCommande gc = new GestionnaireCommande("0");
         List<String> listIdFilmPV = new ArrayList<String>();
         try{
-            connectToDatabase();
+            gc.connectToDatabase();
             OracleCallableStatement ocstmt;
             ocstmt = (OracleCallableStatement) conn.prepareCall("{ ? = call filmslesplusVus() }");
             ocstmt.registerOutParameter( 1 , OracleTypes.CURSOR );
@@ -186,10 +206,11 @@ public class GestionnaireCommande extends SQLAble {
     }
     
     
-    public List<String> getPlatsLesPlusCommandesAvec( String idFilm ){
+    public static List<String> getPlatsLesPlusCommandesAvec( String idFilm ){
+        GestionnaireCommande gc = new GestionnaireCommande("0");
         List<String> listIdPlatsPCA = new ArrayList<String>();
         try{
-            connectToDatabase();
+            gc.connectToDatabase();
             OracleCallableStatement ocstmt;
             ocstmt = (OracleCallableStatement) conn.prepareCall("{ ? = call platslespluscommandesAvec( ? ) }");
             ocstmt.registerOutParameter( 1 , OracleTypes.CURSOR );
@@ -209,10 +230,11 @@ public class GestionnaireCommande extends SQLAble {
     }
     
     
-    public List<String> getFilmsLesPlusVusAvec( String idPlat ){
+    public static List<String> getFilmsLesPlusVusAvec( String idPlat ){
+        GestionnaireCommande gc = new GestionnaireCommande("0");
         List<String> listIdFilmPVA = new ArrayList<String>();
         try{
-            connectToDatabase();
+            gc.connectToDatabase();
             OracleCallableStatement ocstmt;
             ocstmt = (OracleCallableStatement) conn.prepareCall("{ ? = call filmslesplusVusAvec( ? ) }");
             ocstmt.registerOutParameter( 1 , OracleTypes.CURSOR );
@@ -243,7 +265,7 @@ public class GestionnaireCommande extends SQLAble {
                     + " dateCommande : \""   + commande.getDate() + "\"\n" 
                     + " adresseLivraison : \""   + commande.getAdresseLivraison() + "\"\n" 
                 + "}";
-    } 
+    }
     
     
     private void ajouterPlatQtDB( String idCommande , String idPlat , int quantite ) throws SQLException{
@@ -292,6 +314,11 @@ public class GestionnaireCommande extends SQLAble {
             }
         }
         return hashMap;
+    }
+    
+    public String CommandeToJson(){
+        String json = new Gson().toJson(this.commande);
+        return json;
     }
   
 }

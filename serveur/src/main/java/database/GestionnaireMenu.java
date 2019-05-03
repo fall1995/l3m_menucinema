@@ -107,7 +107,7 @@ public class GestionnaireMenu  extends XMLAble{
     public double getPrixPlat(String idPlat){
         ArrayList<Plat> plats = (ArrayList<Plat>) getCartesDB();
         int i = 0;
-        while(i < plats.size()){
+        while( i < plats.size() ){
             if(plats.get(i).getId().equals(idPlat)){
                 return plats.get(i).getPrix();
             }

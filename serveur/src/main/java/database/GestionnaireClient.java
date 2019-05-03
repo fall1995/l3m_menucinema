@@ -2,6 +2,7 @@ package database;
 
 
 import classesgen.client.Client;
+import com.google.gson.Gson;
 import java.sql.CallableStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -117,11 +118,10 @@ public class GestionnaireClient extends SQLAble {
      * @return true si oui si non il retourne false
      * @throws java.sql.SQLException
      */
-    public boolean enregistreClientDB() throws SQLException {
+    public boolean enregistreClientDB() throws SQLException, Exception {
         boolean exist = existsClientDB();
         boolean res = false;
         if (!exist) {
-            try {
                 connectToDatabase();
                 CallableStatement cstmt;
                 cstmt = conn.prepareCall("{ = call enregistrerClient(?,?,?) }");
@@ -131,11 +131,8 @@ public class GestionnaireClient extends SQLAble {
                 cstmt.execute();
                 cstmt.close();
                 res = true;
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
         }else{
-            System.out.println("il existe pour cela, on ne peut pas le rajouter !");
+            throw new Exception("il existe pour cela, on ne peut pas le rajouter !");
         }
         return res;
     }
@@ -148,51 +145,44 @@ public class GestionnaireClient extends SQLAble {
      */
         public boolean existsClientDB() throws SQLException {
         boolean res = false;
-        try {
-            connectToDatabase();
-            OracleCallableStatement ocstmt;
-            ocstmt = (OracleCallableStatement) conn.prepareCall("{ ? = call existsClient(?) }");
-            ocstmt.registerOutParameter(1, OracleTypes.NUMBER);
-            ocstmt.setString(2, client.getId());
-            ocstmt.execute();
 
-            int ret = ocstmt.getInt(1);
-            if (ret == 1) {
-                res = true;
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
+        connectToDatabase();
+        OracleCallableStatement ocstmt;
+        ocstmt = (OracleCallableStatement) conn.prepareCall("{ ? = call existsClient(?) }");
+        ocstmt.registerOutParameter(1, OracleTypes.NUMBER);
+        ocstmt.setString(2, client.getId());
+        ocstmt.execute();
+
+        int ret = ocstmt.getInt(1);
+        if (ret == 1) {
+            res = true;
         }
 
         return res;
     }
         
-    public Client getClient(String id) {
+    public Client getClient(String id) throws SQLException {
         Client client = new Client();
-        try {
-            connectToDatabase();
-            OracleCallableStatement ocstmt;
-            ocstmt = (OracleCallableStatement )conn.prepareCall("{ ? = call getClient(?) }");
-            ocstmt.registerOutParameter(1, OracleTypes.CURSOR);
-            ocstmt.setString(2, id);
-            ocstmt.execute();
-            
-            ResultSet rset = (ResultSet) (ocstmt.getObject(1));
 
-            if (rset != null && rset.next()) {
-                //client.setId(rset.getString("idClient"));
-                client.setNom(rset.getString("nom"));
-                client.setPrenom(rset.getString("prenom"));
-                client.setAdresse(rset.getString("adresse"));
-                client.setEmail(rset.getString("email"));
-                client.setPhoto(rset.getString("photo"));
-                client.setTelephone(rset.getString("tel"));
-            }
-            ocstmt.close();
+        connectToDatabase();
+        OracleCallableStatement ocstmt;
+        ocstmt = (OracleCallableStatement) conn.prepareCall("{ ? = call getClient(?) }");
+        ocstmt.registerOutParameter(1, OracleTypes.CURSOR);
+        ocstmt.setString(2, id);
+        ocstmt.execute();
 
-        } catch (Exception e) {
-            System.out.println("erreur lors de la recuperation: "+e.getMessage());
+        ResultSet rset = (ResultSet) (ocstmt.getObject(1));
+
+        if (rset != null && rset.next()) {
+            //client.setId(rset.getString("idClient"));
+            client.setNom(rset.getString("nom"));
+            client.setPrenom(rset.getString("prenom"));
+            client.setAdresse(rset.getString("adresse"));
+            client.setEmail(rset.getString("email"));
+            client.setPhoto(rset.getString("photo"));
+            client.setTelephone(rset.getString("tel"));
         }
+        ocstmt.close();
 
         return client;
     }
@@ -206,20 +196,16 @@ public class GestionnaireClient extends SQLAble {
     public void editClientDB() throws SQLException {
         boolean exist = existsClientDB();
         if (exist) {
-            try {
-                connectToDatabase();
-                CallableStatement cstmt;
-                cstmt = conn.prepareCall("{ = call editClient(?,?,?,?,?) }");
-                cstmt.setString(1, client.getId());
-                cstmt.setString(2, client.getPhoto());
-                cstmt.setString(3, client.getEmail());
-                cstmt.setString(4, client.getTelephone());
-                cstmt.setString(5, client.getAdresse());
-                cstmt.execute();
-                cstmt.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
+            connectToDatabase();
+            CallableStatement cstmt;
+            cstmt = conn.prepareCall("{ = call editClient(?,?,?,?,?) }");
+            cstmt.setString(1, client.getId());
+            cstmt.setString(2, client.getPhoto());
+            cstmt.setString(3, client.getEmail());
+            cstmt.setString(4, client.getTelephone());
+            cstmt.setString(5, client.getAdresse());
+            cstmt.execute();
+            cstmt.close();
         }
     }
 
@@ -230,23 +216,21 @@ public class GestionnaireClient extends SQLAble {
      * @param prenom
      * @return id
      */
-    public String getClientIdDB(String nom, String prenom) {
+    public static String getClientIdDB(String nom, String prenom) throws SQLException {
+        GestionnaireClient gc = new GestionnaireClient("0");
+        gc.connectToDatabase();
         String idClient = "";
-        try {
-            connectToDatabase();
-            CallableStatement cstmt;
-            cstmt = conn.prepareCall("{ ? = call getClientIdDB(?,?) }");
-            cstmt.registerOutParameter(1, OracleTypes.VARCHAR);
-            cstmt.setString(2, nom);
-            cstmt.setString(3, prenom);
-            cstmt.execute();
+        
+        CallableStatement cstmt;
+        cstmt = conn.prepareCall("{ ? = call getClientIdDB(?,?) }");
+        cstmt.registerOutParameter(1, OracleTypes.VARCHAR);
+        cstmt.setString(2, nom);
+        cstmt.setString(3, prenom);
+        cstmt.execute();
 
-            idClient = cstmt.getString(1);
-            cstmt.close();
+        idClient = cstmt.getString(1);
+        cstmt.close();
 
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
         return idClient;
     }
 
@@ -256,36 +240,35 @@ public class GestionnaireClient extends SQLAble {
      * @param id
      * @return true si oui si non il retourne false
      */
-    public boolean deleteClientId(String id) {
+    public static boolean deleteClientId(String id) throws SQLException, Exception {
+        GestionnaireClient gc = new GestionnaireClient("0");
         boolean exist = false;
         boolean res = false;
-        try {
-            connectToDatabase();
-            OracleCallableStatement ocstmt;
-            ocstmt = (OracleCallableStatement) conn.prepareCall("{ ? = call existsClient(?) }");
-            ocstmt.registerOutParameter(1, OracleTypes.NUMBER);
-            ocstmt.setString(2, id);
-            ocstmt.execute();
 
-            int ret = ocstmt.getInt(1);
+        gc.connectToDatabase();
+        OracleCallableStatement ocstmt;
+        ocstmt = (OracleCallableStatement) conn.prepareCall("{ ? = call existsClient(?) }");
+        ocstmt.registerOutParameter(1, OracleTypes.NUMBER);
+        ocstmt.setString(2, id);
+        ocstmt.execute();
 
-            if (ret == 1) {
-                exist = true;
-            }
+        int ret = ocstmt.getInt(1);
 
-            ocstmt.close();
+        if (ret == 1) {
+            exist = true;
+        }
 
-            if (exist) {
-                connectToDatabase();
-                CallableStatement cstmt = conn.prepareCall("{ = call deleteClient(?) }");
-                cstmt.setString(1, id);
-                cstmt.execute();
-                res = true;
-                cstmt.close();
-            }
+        ocstmt.close();
 
-        } catch (SQLException e) {
-            e.printStackTrace();
+        if (exist) {
+            gc.connectToDatabase();
+            CallableStatement cstmt = conn.prepareCall("{ = call deleteClient(?) }");
+            cstmt.setString(1, id);
+            cstmt.execute();
+            res = true;
+            cstmt.close();
+        }else{
+            throw new Exception("Client inexistant !");
         }
 
         return res;
@@ -307,7 +290,7 @@ public class GestionnaireClient extends SQLAble {
                 OracleCallableStatement ocstmt;
                 ocstmt = (OracleCallableStatement) conn.prepareCall("{ ? = call getListeCommandes(?) }");
                 ocstmt.registerOutParameter(1, OracleTypes.CURSOR);
-                ocstmt.setString(2, "18");
+                ocstmt.setString(2, client.getId() );
                 ocstmt.execute();
 
                 ResultSet rset = (ResultSet) (ocstmt.getObject(1));
@@ -324,7 +307,9 @@ public class GestionnaireClient extends SQLAble {
         return list;
     }
     
-    public void setClient(Client client) {
-        this.client = client;
+    
+    public String ClientToJson(){
+        String json = new Gson().toJson(this.client);
+        return json;
     }
 }
