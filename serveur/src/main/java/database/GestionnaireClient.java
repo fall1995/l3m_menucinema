@@ -292,6 +292,7 @@ public class GestionnaireClient extends SQLAble {
      *
      * @return list
      * @throws java.sql.SQLException
+     * Corrigez le 18  de cette mehode
      */
     public List<String> getListeCommandes() throws SQLException {
         boolean exist = existsClientDB();

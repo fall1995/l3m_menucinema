@@ -12,8 +12,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * @author Groupe6 Cette classe permet d'enregistre un client dans la base de
- * donnee oracle
+ * @author Groupe6 ClientEnregistreServlet est une classe qui permet
+ * d'enregistre un client dans la base de donnee oracle
  */
 public class ClientEnregistreServlet extends HttpServlet {
 
@@ -33,12 +33,14 @@ public class ClientEnregistreServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String idClient = request.getParameter("idClient");
-        String nom = request.getParameter("nom");
-        String prenom = request.getParameter("prenom");
 
         try {
-            GestionnaireClient gestionClient = new GestionnaireClient(idClient, nom, prenom);
+            GestionnaireClient gestionClient = new GestionnaireClient(idClient);
             List<String> listeCommandes = gestionClient.getListeCommandes();
+
+            response.setContentType("application/json");
+            response.setStatus(HttpServletResponse.SC_OK);
+            response.getWriter().println(listeCommandes.toString());
         } catch (SQLException ex) {
             Logger.getLogger(ClientEnregistreServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -108,6 +110,7 @@ public class ClientEnregistreServlet extends HttpServlet {
     @Override
     protected void doPut(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+
         String idClient = request.getParameter("idClient");
         String nom = request.getParameter("nom");
         String prenom = request.getParameter("prenom");
@@ -122,14 +125,21 @@ public class ClientEnregistreServlet extends HttpServlet {
             gestionClient.editEmail(email);
             gestionClient.enregistreClientDB();
             gestionClient.editAdresse(adresse);
-            
+
             gestionClient.editClientDB();
         } catch (SQLException ex) {
             Logger.getLogger(ClientEnregistreServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
-    /*
+    /**
+     * Methode qui permet de supprimer un client
+     *
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException
+     */
     @Override
     protected void doDelete(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -144,6 +154,4 @@ public class ClientEnregistreServlet extends HttpServlet {
         }
 
     }
-*/
-
 }
