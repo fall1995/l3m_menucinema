@@ -204,7 +204,7 @@ public class GestionnaireClient extends SQLAble {
      *
      * @throws java.sql.SQLException
      */
-    public void editClientDB() throws SQLException, Exception {
+    public void editClientDB() throws SQLException {
         boolean exist = existsClientDB();
         if (exist) {
             try {
@@ -221,8 +221,6 @@ public class GestionnaireClient extends SQLAble {
                 System.out.println("cath error: ");
                 e.printStackTrace();
             }
-        }else{
-            throw new Exception("client inexistant !");
         }
     }
 

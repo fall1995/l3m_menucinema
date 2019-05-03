@@ -140,7 +140,7 @@ public class ClientEnregistreServlet extends HttpServlet {
      * @throws ServletException
      * @throws IOException
      */
-    @Override
+
     protected void doDelete(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String idClient = request.getParameter("idClient");
@@ -154,4 +154,6 @@ public class ClientEnregistreServlet extends HttpServlet {
         }
 
     }
+
+
 }
