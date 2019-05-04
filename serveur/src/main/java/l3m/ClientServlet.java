@@ -29,7 +29,10 @@ public class ClientServlet extends HttpServlet {
         
         String idClient = request.getParameter("idClient");
         System.out.println("idClient : " + idClient );
-        idClient = "10";
+        //Juste pour voir comment ça marche le reste lol
+        if ( idClient == null ){
+            idClient = "10";
+        }
         try {
             GestionnaireClient gc = new GestionnaireClient( idClient , "" , "" );            
             List<String> listeCommandes = gc.getListeCommandes();
@@ -53,7 +56,8 @@ public class ClientServlet extends HttpServlet {
 
     
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
         
         String userPath = request.getServletPath();
         
@@ -64,6 +68,16 @@ public class ClientServlet extends HttpServlet {
         System.out.println("idClient = " + idClient );
         System.out.println("nom = " + nom );
         System.out.println("prenom = " + prenom );
+        
+        if ( idClient == null ){
+            idClient = "fhsqjkfhhfqfkdnmkqknfdd";
+        }
+        if ( nom == null ){
+            nom = "Brel";
+        }
+        if ( prenom == null ){
+            prenom = "Jacques";
+        }
         try {
             GestionnaireClient gc = new GestionnaireClient(idClient, nom, prenom);
             gc.enregistreClientDB();
@@ -76,24 +90,28 @@ public class ClientServlet extends HttpServlet {
 
     }
 
-    /**
-     * Methode qui permet supprimer client en prenant en parametre la requete
-     * envoyee par le client et la reponse de retour de la part du server
-     *
-     * @param request
-     * @param response
-     * @throws ServletException
-     * @throws IOException
-     */
-    /*
-    private void deleteClient(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException {
+ 
+    @Override
+     protected void doDelete(HttpServletRequest request, HttpServletResponse response) 
+             throws ServletException, IOException {
+        
         String idClient = request.getParameter("idClient");
-
-        GestionnaireClient gestionclientsup = new GestionnaireClient(idClient);
-        gestionclientsup.deleteClientId(idClient);
-        //response.sendRedirect("list");
+        System.out.println("idClient = " + idClient );
+        boolean supprime = false;
+        
+        if ( idClient == null){
+            idClient = "fhsqjkfhhfqfkdnmkqknfdd";
+        }
+        
+        try {
+            supprime = GestionnaireClient.deleteClientId(idClient);
+            response.setStatus(HttpServletResponse.SC_OK);
+            response.getWriter().println( supprime );
+        } catch (Exception ex) {
+            Logger.getLogger(ClientServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
-    */
+
     /**
      * Methode qui permet de mettre a les info d'un client en prenant en
      * parametre la requete envoyee par le client et la reponse de retour de la
@@ -129,30 +147,6 @@ public class ClientServlet extends HttpServlet {
         } catch (Exception ex) {
             Logger.getLogger(ClientServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }
-
-    /**
-     * Methode qui permet de supprimer un client
-     *
-     * @param request
-     * @param response
-     * @throws ServletException
-     * @throws IOException
-     */
-
-    protected void doDelete(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        String idClient = request.getParameter("idClient");
-
-        GestionnaireClient gestionclientsup;
-        try {
-            GestionnaireClient.deleteClientId(idClient);
-        } catch (SQLException ex) {
-            Logger.getLogger(ClientServlet.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (Exception ex) {
-            Logger.getLogger(ClientServlet.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
     }
 
 }

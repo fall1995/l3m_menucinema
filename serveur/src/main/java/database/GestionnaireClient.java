@@ -17,16 +17,11 @@ public class GestionnaireClient extends SQLAble {
 
     private Client client;
 
-    public GestionnaireClient(String id, String nom, String premon) throws SQLException {
+    public GestionnaireClient(String id, String nom, String premon) {
         this.client = new Client();
         client.setId(id);
         client.setNom(nom);
         client.setPrenom(premon);
-    }
-    
-    
-    public GestionnaireClient( Client client ){
-        this.client = client;
     }
 
     
