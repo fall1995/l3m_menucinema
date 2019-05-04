@@ -1,6 +1,7 @@
 package l3m;
 
 import classesgen.commande.Commande;
+import com.google.gson.Gson;
 import database.GestionnaireClient;
 import database.GestionnaireCommande;
 import java.io.IOException;
@@ -14,51 +15,40 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * @author Groupe6 ClientEnregistreServlet est une classe qui permet
- * d'enregistre un client dans la base de donnee oracle
+ * @author Groupe6 ClientServlet est une classe qui permet
+ d'enregistre un client dans la base de donnee oracle
  */
-public class ClientEnregistreServlet extends HttpServlet {
+public class ClientServlet extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
 
-    /**
-     * Methode qui permet d'afficher la liste des commandes concernant un client
-     * en prenant en parametre la requete envoyee par le client et la reponse de
-     * retour de la part du server
-     *
-     * @param request
-     * @param response
-     * @throws ServletException
-     * @throws IOException
-     */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
         String idClient = request.getParameter("idClient");
 
         try {
-            GestionnaireClient gestionnaireCli = new GestionnaireClient(idClient);
-            GestionnaireCommande[] gc;
+            GestionnaireClient gc = new GestionnaireClient( idClient , "" , "" );
             Commande commande;
             
-            List<String> listeCommandes;
-            listeCommandes = gestionnaireCli.getListeCommandes();
-            gc = new GestionnaireCommande[listeCommandes.size()];
+            List<String> listeCommandes = gc.getListeCommandes();
+            
             String[] dataJson = new String[listeCommandes.size()];
             
-            for (int i = 0; i < listeCommandes.size(); i++) {
-               commande = GestionnaireCommande.getCommande(listeCommandes.get(i));
-               gc[i] = new GestionnaireCommande(commande);
-               dataJson[i] = gc[i].CommandeToJson();
+            for ( int i = 0 ; i < listeCommandes.size() ; i++ ) {
+               commande = GestionnaireCommande.getCommande( listeCommandes.get(i) );
+               dataJson[i] = new Gson().toJson(commande);
             }
+            
             response.setContentType("application/json");
             response.setStatus(HttpServletResponse.SC_OK);
             response.getWriter().println( dataJson );
 
         } catch (SQLException ex) {
-            Logger.getLogger(ClientEnregistreServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ClientServlet.class.getName()).log(Level.SEVERE, null, ex);
         } catch (Exception ex) {
-            Logger.getLogger(ClientEnregistreServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ClientServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -66,20 +56,24 @@ public class ClientEnregistreServlet extends HttpServlet {
     
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        
+        String userPath = request.getServletPath();
+        
         String idClient = request.getParameter("idClient");
         String nom = request.getParameter("nom");
         String prenom = request.getParameter("prenom");
         
-        System.out.println();
+        System.out.println("idClient = " + idClient );
+        System.out.println("nom = " + nom );
+        System.out.println("prenom = " + prenom );
         try {
             GestionnaireClient gc = new GestionnaireClient(idClient, nom, prenom);
             gc.enregistreClientDB();
             response.getWriter().println( gc.ClientToJson() );
         } catch (SQLException ex) {
-            Logger.getLogger(ClientEnregistreServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ClientServlet.class.getName()).log(Level.SEVERE, null, ex);
         } catch (Exception ex) {
-            Logger.getLogger(ClientEnregistreServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ClientServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }
@@ -133,9 +127,9 @@ public class ClientEnregistreServlet extends HttpServlet {
 
             gestionClient.editClientDB();
         } catch (SQLException ex) {
-            Logger.getLogger(ClientEnregistreServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ClientServlet.class.getName()).log(Level.SEVERE, null, ex);
         } catch (Exception ex) {
-            Logger.getLogger(ClientEnregistreServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ClientServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -156,9 +150,9 @@ public class ClientEnregistreServlet extends HttpServlet {
         try {
             GestionnaireClient.deleteClientId(idClient);
         } catch (SQLException ex) {
-            Logger.getLogger(ClientEnregistreServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ClientServlet.class.getName()).log(Level.SEVERE, null, ex);
         } catch (Exception ex) {
-            Logger.getLogger(ClientEnregistreServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ClientServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }

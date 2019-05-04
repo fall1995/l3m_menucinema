@@ -36,10 +36,6 @@ public class GestionnaireCommande extends SQLAble {
         commande.setId(id);
     }
     
-    public GestionnaireCommande(Commande commande){
-        this.commande = commande;
-    }
-    
     // calcul du prix de la commande
     private void computePrix(){
         List<String> idPlats = commande.getIdPlat();
@@ -158,7 +154,6 @@ public class GestionnaireCommande extends SQLAble {
 
         gc.commande.setIdPlat(platsCommandes);
         gc.commande.setIdFilm(filmsCommandes);
-
         return gc.commande;
     }
     

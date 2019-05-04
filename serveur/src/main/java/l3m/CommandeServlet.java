@@ -1,8 +1,7 @@
 package l3m;
 
-import classesgen.client.Client;
 import classesgen.commande.Commande;
-import database.GestionnaireClient;
+import com.google.gson.Gson;
 import database.GestionnaireCommande;
 import java.io.IOException;
 import java.sql.SQLException;
@@ -18,44 +17,26 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * @author Groupe6 CommandesServlet est une classe qui permet de modeliser les
- * commandes d'un client
+ * @author Groupe6 CommandeServlet est une classe qui permet de modeliser les
+ commandes d'un client
  */
-public class CommandesServlet extends HttpServlet {
+public class CommandeServlet extends HttpServlet {
 
-    private static final long serialVersionUID = 1L;
-    private String id = "id";
-    private String idClient = "idClient";
-    private double prix;
-    private String adresseLivraison;
-    private List<String> idPlats = new ArrayList<String>();
-    private List<String> idFilms = new ArrayList<String>();
-
-    /**
-     * Methode qui permet d'afficher les commander d'un client donné
-     *
-     * @param request
-     * @param response
-     * @throws ServletException
-     * @throws IOException
-     */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("application/json");
-        id = request.getParameter("id");
-        
+        String idCommande = request.getParameter("idCommande");
         Commande commande;
         try {
-            commande = GestionnaireCommande.getCommande(id);
-            GestionnaireCommande gc = new GestionnaireCommande(commande);
-
+            commande = GestionnaireCommande.getCommande(idCommande);
+            
             response.setContentType("application/json");
             response.setStatus(HttpServletResponse.SC_OK);
-            response.getWriter().println(gc.CommandeToJson());
+            response.getWriter().println( new Gson().toJson(commande) );
             
         } catch (SQLException ex) {
-            Logger.getLogger(CommandesServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CommandeServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
         
     }
@@ -66,10 +47,12 @@ public class CommandesServlet extends HttpServlet {
             throws ServletException, IOException {
         
         Commande commande = new Commande();
-        // recuperation des donnes
-        idClient = request.getParameter("idClient");
+        commande.setIdClient( request.getParameter("idClient") );
+        commande.setAdresseLivraison(request.getParameter("adresseLivraion") );
+        List<String> idPlats = new ArrayList<String>();
+        List<String> idFilms = new ArrayList<String>();
         
-        String[] tabPlats = request.getParameterValues("idPlat");
+        String[] tabPlats = request.getParameterValues("idPlats");
         for ( int i = 0 ; i < tabPlats.length ; i ++ ){
             idPlats.add(tabPlats[i]);
         }
@@ -79,16 +62,16 @@ public class CommandesServlet extends HttpServlet {
             idFilms.add(tabFilms[i]);
         }
         
-        adresseLivraison = request.getParameter("adresseLivraison");
-
-        commande.setIdClient(idClient);
         commande.setIdPlat(idPlats);
         commande.setIdFilm(idFilms);
-        commande.setAdresseLivraison(adresseLivraison);
-        //insertion dans la base de donnes
+
         GestionnaireCommande gc;
         try {
-            gc = new GestionnaireCommande(idClient, idPlats, idFilms, adresseLivraison);
+            gc = new GestionnaireCommande(  commande.getIdClient(),
+                                            commande.getIdPlat(),
+                                            commande.getFilm(),
+                                            commande.getAdresseLivraison()
+                                         );
             gc.enregistrerCommandeDB();
             
             response.setContentType("application/json");
@@ -96,9 +79,9 @@ public class CommandesServlet extends HttpServlet {
             response.getWriter().println( gc.CommandeToJson() );
             
         } catch (SQLException ex) {
-            Logger.getLogger(CommandesServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CommandeServlet.class.getName()).log(Level.SEVERE, null, ex);
         } catch (Exception ex) {
-            Logger.getLogger(CommandesServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CommandeServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -131,7 +114,7 @@ public class CommandesServlet extends HttpServlet {
     @Override
     protected void doDelete(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        id = request.getParameter("id");
+        String idClient = request.getParameter("idCommande");
         
     }
 

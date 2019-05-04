@@ -24,10 +24,6 @@ public class GestionnaireClient extends SQLAble {
         client.setPrenom(premon);
     }
     
-    public GestionnaireClient( String idClient ){
-        client = new Client();
-        client.setId(idClient);
-    }
     
     public GestionnaireClient( Client client ){
         this.client = client;
@@ -114,7 +110,7 @@ public class GestionnaireClient extends SQLAble {
     
         
     public static Client getClient(String id) throws SQLException, Exception {
-        GestionnaireClient gc = new GestionnaireClient( id );
+        GestionnaireClient gc = new GestionnaireClient( id , "" , "" );
         gc.client = new Client();
         gc.client.setId(id);
         
@@ -164,7 +160,7 @@ public class GestionnaireClient extends SQLAble {
 
 
     public static String getClientIdDB(String nom, String prenom) throws SQLException {
-        GestionnaireClient gc = new GestionnaireClient("");
+        GestionnaireClient gc = new GestionnaireClient("","","");
         gc.connectToDatabase();
         String idClient = "";
         
@@ -183,7 +179,7 @@ public class GestionnaireClient extends SQLAble {
 
 
     public static boolean deleteClientId(String id) throws SQLException, Exception {
-        GestionnaireClient gc = new GestionnaireClient( id );
+        GestionnaireClient gc = new GestionnaireClient( id , "" , "" );
         boolean exist = false;
         boolean res = false;
 
