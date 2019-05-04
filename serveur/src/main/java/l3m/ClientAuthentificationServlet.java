@@ -1,6 +1,7 @@
 package l3m;
 
 import classesgen.client.Client;
+import com.google.gson.Gson;
 import database.GestionnaireClient;
 import java.io.IOException;
 import java.sql.SQLException;
@@ -47,11 +48,10 @@ public class ClientAuthentificationServlet extends HttpServlet {
         GestionnaireClient gc;
         try {
             Client client = GestionnaireClient.getClient(idClient);
-            gc = new GestionnaireClient(client);
             
             response.setContentType("application/json");
             response.setStatus(HttpServletResponse.SC_OK);
-            response.getWriter().println( gc.ClientToJson() );
+            response.getWriter().println( new Gson().toJson(client) );
             
         } catch (SQLException ex) {
             Logger.getLogger(ClientAuthentificationServlet.class.getName()).log(Level.SEVERE, null, ex);
@@ -85,8 +85,7 @@ public class ClientAuthentificationServlet extends HttpServlet {
         response.addHeader("Access-Control-Allow-Headers", "X-PINGOTHER, Origin, X-Requested-With, Content-Type, Accept");
         response.addHeader("Access-Control-Max-Age", "1728000");
 
-        // Extract userId from HTTP parameters
-        String res = " ";
+        String res = "";
         Enumeration<String> P = request.getParameterNames();
         HashMap<String, String> parametres = new HashMap();
         Client client = new Client();

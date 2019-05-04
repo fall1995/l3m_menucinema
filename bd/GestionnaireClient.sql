@@ -18,8 +18,8 @@ end;
 
 
 create or replace function existsclient (
-    idclient_ client.idclient%type
-) return number is
+    idclient_ varchar2
+) return integer is
 
     idcli   varchar2(50);
 begin

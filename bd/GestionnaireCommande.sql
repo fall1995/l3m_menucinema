@@ -7,7 +7,7 @@ create or replace procedure getcommande (
 
 begin
     open rcCommande for 
-                select idClient, dateCommande , prix, adresseLivraison
+                select idCommande, dateCommande , prix, adresseLivraison
                 from commande 
                 where   idcommande = idCommande_;
                 
