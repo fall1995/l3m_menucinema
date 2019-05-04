@@ -7,6 +7,8 @@ import java.sql.CallableStatement;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -117,6 +119,9 @@ public class GestionnaireCommande extends SQLAble {
         GestionnaireCommande gc = new GestionnaireCommande(id);
         gc.connectToDatabase();
         
+        String pattern = "DD-MM-YYYY HH:MM:SS";
+        DateFormat dateFormat = new SimpleDateFormat(pattern);
+
         OracleCallableStatement ocstmt;
         ocstmt = (OracleCallableStatement) conn.prepareCall("{ = call getcommande(?,?,?,?) }");
         ocstmt.setString(1, id);
@@ -124,10 +129,11 @@ public class GestionnaireCommande extends SQLAble {
         ocstmt.registerOutParameter(3, OracleTypes.CURSOR);
         ocstmt.registerOutParameter(4, OracleTypes.CURSOR);
         ocstmt.execute();
-
+        
         ResultSet rset = (ResultSet) (ocstmt.getObject(2));
         if (rset != null && rset.next()) {
-            gc.commande.setDate( rset.getDate("dateCommande").toString() );
+            gc.commande.setId(rset.getString("idCommande") );
+            gc.commande.setDate( dateFormat.format(rset.getDate("dateCommande")) );
             gc.commande.setPrix(rset.getDouble("prix"));
             gc.commande.setAdresseLivraison(rset.getString("adresseLivraison"));
         }

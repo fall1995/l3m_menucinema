@@ -13,6 +13,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.json.simple.JSONArray;
 
 /**
  * @author Groupe6 ClientServlet est une classe qui permet
@@ -27,23 +28,20 @@ public class ClientServlet extends HttpServlet {
             throws ServletException, IOException {
         
         String idClient = request.getParameter("idClient");
-
+        System.out.println("idClient : " + idClient );
+        idClient = "10";
         try {
-            GestionnaireClient gc = new GestionnaireClient( idClient , "" , "" );
-            Commande commande;
-            
+            GestionnaireClient gc = new GestionnaireClient( idClient , "" , "" );            
             List<String> listeCommandes = gc.getListeCommandes();
-            
-            String[] dataJson = new String[listeCommandes.size()];
-            
+            Commande[] commande = new Commande[ listeCommandes.size() ];
+
             for ( int i = 0 ; i < listeCommandes.size() ; i++ ) {
-               commande = GestionnaireCommande.getCommande( listeCommandes.get(i) );
-               dataJson[i] = new Gson().toJson(commande);
+               commande[i] = GestionnaireCommande.getCommande( listeCommandes.get(i) );
             }
-            
+
             response.setContentType("application/json");
             response.setStatus(HttpServletResponse.SC_OK);
-            response.getWriter().println( dataJson );
+            response.getWriter().println( new Gson().toJson(commande) );
 
         } catch (SQLException ex) {
             Logger.getLogger(ClientServlet.class.getName()).log(Level.SEVERE, null, ex);
