@@ -1,3 +1,65 @@
-<p>
-  menus works!
-</p>
+<div class="container">
+    <p-dataView [value]="listePlats" [paginator]="true" [rows]="5" [sortField]="sortField" [sortOrder]="sortOrder"
+                filterBy="type" [loading]="loading">
+        <p-header>
+            <div class="ui-helper-clearfix">
+                <div class="ui-g">
+                    <div class="ui-g-12 ui-md-4">
+                        <p-dropdown [options]="sortOptions" [(ngModel)]="sortKey" placeholder="Sort By"
+                                    (onChange)="onSortChange($event)" [style]="{'min-width':'15em'}"></p-dropdown>
+                    </div>
+                    <div class="ui-g-6 ui-md-4 filter-container">
+                        <div style="position:relative">
+                            <input type="search" pInputText placeholder="Recherche un plat" (keyup)="dv._sortField">
+                        </div>
+                    </div>
+                    <div class="ui-g-6 ui-md-4" style="text-align:right">
+                        <p-dataViewLayoutOptions></p-dataViewLayoutOptions>
+                    </div>
+                </div>
+            </div>
+        </p-header>
+        <ng-template let-plat pTemplate="listItem">
+            <div class="ui-g" style="padding: 2em;border-bottom: 1px solid #d9d9d9">
+                <div class="ui-g-12 ui-md-3" style="text-align:center">
+                    <img height="100" width="100" src="{{plat.image}}">
+                </div>
+                <div class="ui-g-12 ui-md-8 car-details">
+                    <div class="ui-g">
+                        <div class="ui-g-2 ui-sm-6">Nom:</div>
+                        <div class="ui-g-10 ui-sm-6"><b>{{plat.id}}</b></div>
+
+                        <div class="ui-g-2 ui-sm-6">type:</div>
+                        <div class="ui-g-10 ui-sm-6"><b>{{plat.type}}</b></div>
+
+                        <div class="ui-g-2 ui-sm-6">Prix:</div>
+                        <div class="ui-g-10 ui-sm-6"><b>{{plat.prix}}</b></div>
+
+                        <div class="ui-g-2 ui-sm-6">Ingredients:</div>
+                        <div class="ui-g-10 ui-sm-6"><b>{{plat.ingredients}}</b></div>
+                    </div>
+                </div>
+                <div class="ui-g-12 ui-md-1 search-icon">
+                    <button pButton type="button" icon="fa fa-plus" (click)="selectCar($event, car)"></button>
+                </div>
+            </div>
+        </ng-template>
+        <ng-template let-plat pTemplate="gridItem">
+            <div style="padding:.5em" class="ui-g-12 ui-md-3">
+                <p-panel [header]="plat.id" [style]="{'text-align':'center'}">
+                    <img src="{{plat.image}}" width="60">
+                    <div class="car-detail">{{plat.type}} - {{plat.prix}}</div>
+                    <hr class="ui-widget-content" style="border-top:0">
+                    <button pButton type="button" icon="pi pi-search" (click)="selectCar($event, car)"
+                            style="margin-top:0"></button>
+                </p-panel>
+            </div>
+        </ng-template>
+        <ng-template pTemplate="paginatorleft" let-state>
+            <button type="button" pButton icon="fa-refresh"></button>
+        </ng-template>
+        <ng-template pTemplate="paginatorright">
+            <button type="button" pButton icon="fa-cloud-upload"></button>
+        </ng-template>
+    </p-dataView>
+</div>

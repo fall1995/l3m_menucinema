@@ -38,10 +38,11 @@
         </div>
         <br>
         <p-footer>
-            <button type="button" pButton icon="pi pi-pencil" (click)="cupdateProfile()" label="Modifier"
+            <button type="button" pButton icon="pi pi-pencil" (click)="updateProfile(user)" label="Modifier"
                     class="ui-button-rounded" style="margin-right: 10px"></button>
             <button type="button" pButton icon="fa fa-close" (click)="afficherDialog=false" label="Annuler"
                     class="ui-button-secondary ui-button-rounded"></button>
         </p-footer>
     </form>
 </p-dialog>
+<p-toast position="top-right"></p-toast>

@@ -15,6 +15,7 @@ export class FilmsComponent implements OnInit {
     listeMovie: MovieResponse;
     listeMovieDram : MovieResponse;
     listeMovieHightRatet : MovieResponse;
+    afficherDialog = false;
 
   constructor(private tmdbService: TmdbService) {
 
@@ -48,8 +49,5 @@ export class FilmsComponent implements OnInit {
         this.listeMovieHightRatet = await this.tmdbService.getAllHightRated();
     }
 
-    get film(): MovieResponse {
-        return this.listeMovie;
-    }
 
 }

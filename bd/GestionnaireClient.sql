@@ -21,7 +21,7 @@ create or replace function existsclient (
     idclient_ client.idclient%type
 ) return number is
 
-    idcli   varchar2(8);
+    idcli   varchar2(50);
 begin
     select idclient into idcli
         from client

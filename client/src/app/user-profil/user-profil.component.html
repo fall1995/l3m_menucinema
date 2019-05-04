@@ -1,28 +1,10 @@
-<!--
 <div class="container">
-    <div class="col-md-4 ">
-        <div class="jumbotron">
-            <p>Information {{user.nom}}</p>
-        </div>
-        <div>
-            <p>{{user.nom}}</p>
-            <i class="fa fa-user" aria-hidden="true" style="text-align: inherit"></i>
-        </div>
-    </div>
-    <div class="col-md-4 ">
-        <div class="jumbotron">
-            <p>Commande</p>
-        </div>
-    </div>
-    <div class="col-md-4 ">
-        <div class="jumbotron">
-            <p>Action</p>
-        </div>
-        <button pButton type="button" label="Modifier vos informations" icon="fa fa-pencil"></button>
-    </div>
-</div>
--->
-<div class="container">
+    <br>
+    <h1 class="text-center">
+        <i class="fa fa-dashboard"></i>
+        Tableau de bord
+    </h1>
+    <br>
     <div class="row">
         <div class="col-md-8">
             <div class="panel panel-primary">
@@ -53,11 +35,11 @@
                         Informations sur votre compte
                     </h3>
                 </div>
-                <div class="panel-body">
+                <div class="panel-body" *ngIf="user">
                     <p>
-                        <img  src="{{user.photo}}" class="img-rounded img-thumbnail" alt="profile">
+                        <img  src="{{userPhoto?.photo}}" class="img-rounded img-thumbnail" alt="profile">
                     </p>
-                    <h4>{{user.nom}}</h4>
+                    <h4>{{user?.nom}}</h4>
                     <p>
                         <button type="button" class="btn btn-success" (click)="afficherDialogProfil()">
                             <i class="fa fa-user"></i>
@@ -65,9 +47,19 @@
                         </button>
                     </p>
                     <p>
+                        <b>Nom :</b>
+                        <br>
+                        {{user?.nom}}
+                    </p>
+                    <p>
+                        <b>Prenom :</b>
+                        <br>
+                        {{user?.prenom}}
+                    </p>
+                    <p>
                         <b>Email :</b>
                         <br>
-                        {{user.email}}
+                        {{user?.email}}
                     </p>
                 </div>
             </div>

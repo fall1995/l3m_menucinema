@@ -2,6 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {AngularFireAuth} from '@angular/fire/auth';
 import {AuthService} from '../service/auth.service';
 import * as firebase from 'firebase';
+import {MessageService} from 'primeng/api';
+import {Router} from '@angular/router';
 
 @Component({
     selector: 'app-header',
@@ -12,7 +14,8 @@ export class HeaderComponent implements OnInit {
     isAuth: boolean;
     user: any;
 
-    constructor(private afAuth: AngularFireAuth, private authService: AuthService) {
+    constructor(private afAuth: AngularFireAuth, private authService: AuthService,
+    private message: MessageService, private route: Router) {
     }
 
     init() {
@@ -39,7 +42,12 @@ export class HeaderComponent implements OnInit {
 
     onSignOut() {
         this.afAuth.auth.signOut();
+        this.message.add({severity:'info',
+            summary:'',
+            detail:'Vous êtes deconneté 🙁'});
+        this.route.navigate(['/films']);
         this.init();
+
     }
 
 }

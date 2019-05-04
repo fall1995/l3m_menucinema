@@ -1,57 +1,71 @@
-<mat-tab-group mat-stretch-tabs class="example-stretched-tabs mat-elevation-z4">
-    <mat-tab label="Films mieux notés">
-        <br>
-        <div *ngFor="let f of listeMovieHightRatet?.results" class="col-md-4" style="margin-bottom: 20px">
-            <p-card header={{f.title}} [style]="{width: '360px'}" styleClass="ui-card-shadow" style="display: inline-block">
-                <p-header>
-                    <img src="Card" src="{{this.tmdbService.host+f?.poster_path}}">
-                </p-header>
-                <p></p>
-                <p-footer>
-                    <button pButton type="button" label="Details" icon="fa fa-info"
-                            style="margin-right: .25em"></button>
-                    <button pButton type="button" label="Ajouter" icon="fa fa-shopping-cart"
-                            class="ui-button-secondary"></button>
-                </p-footer>
-            </p-card>
-        </div>
-    </mat-tab>
-    <mat-tab label="Films 2019">
-        <br>
-        <div *ngFor="let f of listeMovie?.results" class="col-md-4"
-             style="margin-bottom: 20px" >
-            <p-card header={{f.title}} [style]="{width: '360px'}" styleClass="ui-card-shadow" style="display: inline-block">
-                <p-header>
-                    <img src="Card" src="{{this.tmdbService.host+f?.poster_path}}">
-                </p-header>
-                <p></p>
-                <p-footer>
-                    <button pButton type="button" label="Details" icon="fa fa-info"
-                            style="margin-right: .25em"></button>
-                    <button pButton type="button" label="Ajouter" icon="fa fa-shopping-cart"
-                            class="ui-button-secondary"></button>
-                </p-footer>
-            </p-card>
-        </div>
-    </mat-tab>
-    <mat-tab label="Films dramatique">
-        <br>
-        <div *ngFor="let f of listeMovieDram?.results" class="col-md-4" style="margin-bottom: 20px">
-            <p-card header={{f.title}} [style]="{width: '360px'}" styleClass="ui-card-shadow" style="display: inline-block">
-                <p-header>
-                    <img src="Card" src="{{this.tmdbService.host+f?.poster_path}}">
-                </p-header>
-                <p></p>
-                <p-footer>
-                    <button pButton type="button" label="Details" icon="fa fa-info"
-                            style="margin-right: .25em"></button>
-                    <button pButton type="button" label="Ajouter" icon="fa fa-shopping-cart"
-                            class="ui-button-secondary"></button>
-                </p-footer>
-            </p-card>
-        </div>
-    </mat-tab>
-</mat-tab-group>
+<div class="container">
+
+    <mat-tab-group mat-stretch-tabs class="example-stretched-tabs mat-elevation-z4">
+        <mat-tab label="Films mieux notés">
+            <br>
+            <div *ngFor="let f of listeMovieHightRatet?.results" class="col-md-4" style="margin-bottom: 20px">
+                <p-card header={{f.title}} [style]="{width: '360px'}" styleClass="ui-card-shadow"
+                        style="display: inline-block">
+                    <p-header>
+                        <img src="Card" src="{{this.tmdbService.host+f?.poster_path}}">
+                    </p-header>
+                    <p></p>
+                    <p-footer>
+                        <button pButton type="button" label="Details" icon="fa fa-info"
+                                style="margin-right: .25em"></button>
+                        <button pButton type="button" label="Ajouter" icon="fa fa-shopping-cart"
+                                class="ui-button-secondary"></button>
+                    </p-footer>
+                </p-card>
+            </div>
+        </mat-tab>
+        <mat-tab label="Films 2019">
+            <br>
+            <div *ngFor="let f of listeMovie?.results" class="col-md-4"
+                 style="margin-bottom: 20px">
+                <p-card header={{f.title}} [style]="{width: '360px'}" styleClass="ui-card-shadow"
+                        style="display: inline-block">
+                    <p-header>
+                        <img src="Card" src="{{this.tmdbService.host+f?.poster_path}}">
+                    </p-header>
+                    <p></p>
+                    <p-footer>
+                        <button pButton type="button" label="Details" icon="fa fa-info"
+                                style="margin-right: .25em"></button>
+                        <button pButton type="button" label="Ajouter" icon="fa fa-shopping-cart"
+                                class="ui-button-secondary"></button>
+                    </p-footer>
+                </p-card>
+            </div>
+        </mat-tab>
+        <mat-tab label="Films dramatique">
+            <br>
+            <div *ngFor="let f of listeMovieDram?.results" class="col-md-4" style="margin-bottom: 20px">
+                <p-card header={{f.title}} [style]="{width: '360px'}" styleClass="ui-card-shadow"
+                        style="display: inline-block">
+                    <p-header>
+                        <img src="Card" src="{{this.tmdbService.host+f?.poster_path}}">
+                    </p-header>
+                    <p></p>
+                    <p-footer>
+
+                        <button pButton type="button" label="Details" icon="fa fa-info"
+                                style="margin-right: .25em" (click)="op1.toggle($event)"></button>
+                        <button pButton type="button" label="Ajouter" icon="fa fa-shopping-cart"
+                                class="ui-button-secondary"></button>
+                        <div>
+                            <p-overlayPanel #op1 [dismissable]="true" [showCloseIcon]="true" [autoZIndex]="true">
+                                <p> {{f.overview}} </p>
+                            </p-overlayPanel>
+                        </div>
+
+                    </p-footer>
+                </p-card>
+
+            </div>
+        </mat-tab>
+    </mat-tab-group>
+</div>
 <!--
 <mat-tab-group mat-stretch-tabs class="example-stretched-tabs mat-elevation-z4">
     <mat-tab label="Films">

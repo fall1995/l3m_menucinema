@@ -1,3 +1,4 @@
+
 <nav class="navbar navbar-default" style="background-color: #e3f2fd;">
     <div class="collapse navbar-collapse">
         <ul class="nav navbar-nav">
@@ -45,7 +46,13 @@
                         <p>{{user }}<i class="fa fa-check-circle-o" aria-hidden="true" style="margin-left: 5px"></i></p>
                     </li>
                     <li *ngIf="isAuth">
-                        <a routerLink="profil">Profil</a>
+                        <a routerLink="user/dashbord">Tableau de bord</a>
+                    </li>
+                    <li *ngIf="isAuth">
+                        <a routerLink="user/commande">Historique des Commandes</a>
+                    </li>
+                    <li *ngIf="isAuth">
+                        <a routerLink="user/panier">Votre panier</a>
                     </li>
                     <li routerLinkActive="" *ngIf="!isAuth">
                         <a routerLink="authentification/signin">Connexion</a>
@@ -55,10 +62,11 @@
                     </li>
                     <li class="divider"></li>
                     <li>
-                        <a (click)="onSignOut()" *ngIf="isAuth" style="cursor:pointer">Déconnexion</a>
+                        <a (click)="onSignOut()" *ngIf="isAuth" style="cursor:pointer">Se déconnecter</a>
                     </li>
                 </ul>
             </li>
         </ul>
     </div>
 </nav>
+<p-toast position="top-right"></p-toast>

@@ -6,7 +6,8 @@ create or replace procedure getcommande (
 ) is
 
 begin
-    open rcCommande for select *
+    open rcCommande for 
+                select idClient, dateCommande , prix, adresseLivraison
                 from commande 
                 where   idcommande = idCommande_;
                 
@@ -22,16 +23,19 @@ end;
 /
 
 
-create or replace function getLastIdCommande
-return varchar2 is
+create or replace function getLastCommande
+return SYS_REFCURSOR is
 
+rc_lastCommande    SYS_REFCURSOR;
 idC_            integer := seqIdCommande.currval;
-idCommande_     varchar2(8); 
+idCommande_     varchar2(8) := to_char(idC_); 
 begin
-    select to_char(idC_) into idCommande_
-        from dual;
+    open rc_lastCommande for
+        select idCommande, dateCommande
+        from Commande
+        where idCommande = idCommande_;
     
-    return idCommande_;
+    return rc_lastCommande;
 end;
 /
 
