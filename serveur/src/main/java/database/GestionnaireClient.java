@@ -28,6 +28,10 @@ public class GestionnaireClient extends SQLAble {
         client = new Client();
         client.setId(idClient);
     }
+    
+    public GestionnaireClient( Client client ){
+        this.client = client;
+    }
 
     
     public String getNom() {
@@ -109,7 +113,7 @@ public class GestionnaireClient extends SQLAble {
     }
     
         
-    public static Client getClient(String id) throws SQLException {
+    public static Client getClient(String id) throws SQLException, Exception {
         GestionnaireClient gc = new GestionnaireClient( id );
         gc.client = new Client();
         gc.client.setId(id);
@@ -132,7 +136,7 @@ public class GestionnaireClient extends SQLAble {
             gc.client.setTelephone(rset.getString("tel"));
             rset.close();
         }else{
-            throw new Exception("Client inexistant dans la BD!")
+            throw new Exception("Client inexistant dans la BD!");
         }
         
         ocstmt.close();
@@ -140,7 +144,7 @@ public class GestionnaireClient extends SQLAble {
     }
 
 
-    public void editClientDB() throws SQLException {
+    public void editClientDB() throws SQLException, Exception {
         boolean exist = existsClientDB();
         if (exist) {
             connectToDatabase();
@@ -154,7 +158,7 @@ public class GestionnaireClient extends SQLAble {
             cstmt.execute();
             cstmt.close();
         }else{
-                throw new Exception("Client inexistant !")
+                throw new Exception("Client inexistant !");
         }
     }
 
@@ -183,7 +187,7 @@ public class GestionnaireClient extends SQLAble {
         boolean exist = false;
         boolean res = false;
 
-        connectToDatabase();
+        gc.connectToDatabase();
         OracleCallableStatement ocstmt;
         ocstmt = (OracleCallableStatement) conn.prepareCall("{ ? = call existsClient(?) }");
         ocstmt.registerOutParameter(1, OracleTypes.NUMBER);
@@ -199,7 +203,6 @@ public class GestionnaireClient extends SQLAble {
         ocstmt.close();
 
         if (exist) {
-            connectToDatabase();
             CallableStatement cstmt = conn.prepareCall("{ = call deleteClient(?) }");
             cstmt.setString(1, id);
             cstmt.execute();
@@ -213,7 +216,7 @@ public class GestionnaireClient extends SQLAble {
     }
 
 
-    public List<String> getListeCommandes() throws SQLException {
+    public List<String> getListeCommandes() throws SQLException, Exception {
         boolean exist = existsClientDB();
         List<String> list = new ArrayList<>();
 

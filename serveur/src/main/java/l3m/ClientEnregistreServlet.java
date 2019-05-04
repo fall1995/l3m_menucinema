@@ -57,6 +57,8 @@ public class ClientEnregistreServlet extends HttpServlet {
 
         } catch (SQLException ex) {
             Logger.getLogger(ClientEnregistreServlet.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            Logger.getLogger(ClientEnregistreServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

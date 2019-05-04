@@ -81,7 +81,7 @@ public class GestionnaireCommande extends SQLAble {
             ResultSet rset = (ResultSet) (ocstmt.getObject(1));
             if (rset != null && rset.next()) {
                 commande.setId( rset.getString("idCommande") );
-                commande.setDate( rset.getString("dateCommande") ) ; 
+                commande.setDate( rset.getDate("dateCommande").toString() ) ; 
             }
             rset.close();
             ocstmt.close();
@@ -131,7 +131,7 @@ public class GestionnaireCommande extends SQLAble {
 
         ResultSet rset = (ResultSet) (ocstmt.getObject(2));
         if (rset != null && rset.next()) {
-            gc.commande.setDate( rset.getString("dateCommand") );
+            gc.commande.setDate( rset.getDate("dateCommande").toString() );
             gc.commande.setPrix(rset.getDouble("prix"));
             gc.commande.setAdresseLivraison(rset.getString("adresseLivraison"));
         }

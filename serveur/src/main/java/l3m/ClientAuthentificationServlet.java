@@ -44,15 +44,18 @@ public class ClientAuthentificationServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String idClient = request.getParameter("idClient");
-        GestionnaireClient gestonClient;
+        GestionnaireClient gc;
         try {
-            gestonClient = new GestionnaireClient(idClient);
-            Client client_trouve = gestonClient.getClient(idClient);
-
+            Client client = GestionnaireClient.getClient(idClient);
+            gc = new GestionnaireClient(client);
+            
             response.setContentType("application/json");
             response.setStatus(HttpServletResponse.SC_OK);
-            response.getWriter().println(client_trouve.toString());
+            response.getWriter().println( gc.ClientToJson() );
+            
         } catch (SQLException ex) {
+            Logger.getLogger(ClientAuthentificationServlet.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
             Logger.getLogger(ClientAuthentificationServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
 
