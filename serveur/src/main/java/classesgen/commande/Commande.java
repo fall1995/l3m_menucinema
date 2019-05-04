@@ -103,10 +103,11 @@ public class Commande {
      * Objects of the following type(s) are allowed in the list {@link String }
      *
      *
+     * @return 
      */
     public List<String> getIdPlat() {
         if (idPlat == null) {
-            idPlat = new ArrayList<String>();
+            idPlat = new ArrayList<>();
         }
         return this.idPlat;
     }
@@ -129,12 +130,12 @@ public class Commande {
      *
      * <p>
      * Objects of the following type(s) are allowed in the list {@link String }
-     *
-     *
+  
+     * @return 
      */
     public List<String> getFilm() {
         if (film == null) {
-            film = new ArrayList<String>();
+            film = new ArrayList<>();
         }
         return this.film;
     }
@@ -238,13 +239,13 @@ public class Commande {
 
     @Override
     public String toString() {
-        return " { idCommande:"  + getId()
-                + ", idClient:" + getIdClient()
-                + ", idFilm:" + getFilm()
-                + ", idPlat:" + getIdPlat()
-                + ",Prix=" + getPrix()
-                + ", Date:" + getDate()
-                + ", Adresse:" + getAdresseLivraison()
+        return " { \"idCommande\":"  + "\""+getId()+"\","
+                + "\"idClient \":" + "\""+getIdClient()+"\","
+                + "\" idFilm \":" +"\""+ getFilm()+"\","
+                + "\"idPlat \":" + getIdPlat()+"\","
+                + "\"Prix \":" + getPrix()+"\","
+                + "\" Date \":" + getDate()+"\","
+                + "\" Adresse \" :" + getAdresseLivraison()
                 + "}";
         
     }

@@ -18,10 +18,10 @@ end;
 
 
 create or replace function existsclient (
-    idclient_ client.idclient%type
-) return number is
+    idclient_ varchar2
+) return integer is
 
-    idcli   varchar2(8);
+    idcli   varchar2(50);
 begin
     select idclient into idcli
         from client
@@ -50,7 +50,7 @@ end;
 /
 
 
-create or replace procedure editclientDB (
+create or replace procedure editclient (
     idclient_   client.idclient%type,
     photo_      client.photo%type,
     email_      client.email%type,

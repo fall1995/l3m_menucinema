@@ -57,7 +57,7 @@ export class SigninComponent implements OnInit {
     loginGoogle() {
         this.afAuth.auth.signInWithPopup(new auth.GoogleAuthProvider()).then(
             u => {
-                this.route.navigate(['/profil']);
+                this.route.navigate(['/user/dashbord']);
                 this.message.add({severity:'success',
                     summary:`Bienvenue ${u.user.displayName}`,
                     detail:'Vous pouvez commander vos films et plats 😁!'});
@@ -77,7 +77,7 @@ export class SigninComponent implements OnInit {
      */
     loginFacebook(){
         this.afAuth.auth.signInWithPopup(new auth.FacebookAuthProvider()).then(u =>{
-                this.route.navigate(['/profil']);
+                this.route.navigate(['/dashbord']);
                 this.message.add({severity:'success',
                     summary:`Bienvenue ${u.user.displayName} 😁`,
                     detail:'Vous pouvez commander vos films et plats !'});
@@ -124,7 +124,7 @@ export class SigninComponent implements OnInit {
         const password = this.signInForm.get('password').value;
         this.afAuth.auth.signInWithEmailAndPassword(email,password).then(
             u => {
-                this.route.navigate(['/profil']);
+                this.route.navigate(['/user/dashbord']);
                 this.message.add({severity:'success',
                     summary:`Bienvenue `,
                     detail:'Vous pouvez commander vos films et plats 😁!'});

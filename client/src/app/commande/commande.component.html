@@ -1,0 +1,45 @@
+<div class="container">
+    <br>
+    <h1 class="text-center">
+        <i class="fa fa-file-text-o"></i>
+        Historiques de vos commandes
+    </h1>
+    <p class="text-center text-muted">
+        Merci d'avoir éffectué vos achats chez nous vous trouverez
+        ci-dessous un résumé de vos commandes .
+    </p>
+    <br>
+    <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+            <div class="panel panel-primary">
+                <div class="panel panel-heading">
+                    <h3 class="panel-title"> Commandes</h3>
+                </div>
+                <div class="panel panel-body">
+                    <p></p>
+                    <div class="table-responsive">
+                        <p-table [value]="cars">
+                            <ng-template pTemplate="header">
+                                <tr>
+                                    <th>Commande #</th>
+                                    <th>Articles</th>
+                                    <th>Total</th>
+                                    <th>Date</th>
+                                </tr>
+                            </ng-template>
+                            <ng-template pTemplate="body" let-car>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                            </ng-template>
+                        </p-table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

@@ -47,20 +47,9 @@ export class UserDialogComponent implements OnInit {
                 summary:`Erreur de Modification `,
                 detail:'Une erreur est survenue lors de la modification de votre profil'});
         });
-        /*
-        await this.afAuth.authState.subscribe( user =>{
-            if (user.uid){
-                this.authService.modification({
-                   idClient : user.uid,
-                });
-            }
-            this.onHide();
-            this.route.navigate(['/profil']);
-            //this.afDatabase.object(`user/${this.user.id}`).set(this.user).then( () =>{
-
-            //});
-        });
-        */
+        this.message.add({severity:'success',
+            summary:`Modification du profil OK `,
+            detail:'Vous avez bien modifié votre profil'});
 
     }
 
