@@ -103,7 +103,7 @@ public class UpdateClientServlet extends HttpServlet {
         } else {
             //on retourne un message d'erreur
             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-            response.getWriter().println("Paramètres non complets");
+            response.getWriter().println("Paramètres non complet");
         }
 
     }

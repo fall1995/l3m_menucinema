@@ -1,6 +1,5 @@
 package database;
 
-
 import classesgen.client.Client;
 import com.google.gson.Gson;
 import java.sql.CallableStatement;
@@ -12,112 +11,65 @@ import oracle.jdbc.OracleCallableStatement;
 import oracle.jdbc.OracleTypes;
 
 /**
- * @author Groupe6 
- * Classe GestionnaireClient qui permet de gerer un client
+ * @author Groupe6 Classe GestionnaireClient qui permet de gerer un client
  */
 public class GestionnaireClient extends SQLAble {
 
     private Client client;
 
-    /**
-     * Constructeur qui prend en parametre en l'id, le nom et prenom et il
-     * modifie les id, nom et prenom du client courran
-     *
-     * @param id
-     * @param nom
-     * @param premon
-     * @throws java.sql.SQLException
-     */
     public GestionnaireClient(String id, String nom, String premon) throws SQLException {
         this.client = new Client();
         client.setId(id);
         client.setNom(nom);
         client.setPrenom(premon);
     }
-
-    public GestionnaireClient(String id) throws SQLException {
-        this.client = new Client();
-        client.setId(id);
+    
+    public GestionnaireClient( String idClient ){
+        client = new Client();
+        client.setId(idClient);
     }
 
-    /**
-     * Methode qui permet de re-envoyer le nom
-     *
-     * @return nom
-     */
+    
     public String getNom() {
         return client.getNom();
     }
 
-    /**
-     * Methode qui permet d'envoyer le prenom
-     *
-     * @return prenom
-     */
+
     public String getPrenom() {
         return client.getPrenom();
     }
 
-    /**
-     * Methode qui permet d'envoyer la photo
-     *
-     * @return photo
-     */
+
     public String getPhoto() {
-        return client.getPrenom();
+        return client.getPhoto();
     }
 
-    /**
-     * Methode qui permet d'envoyer l'adresse
-     *
-     * @return adresse
-     */
+ 
     public String getAdresse() {
         return client.getAdresse();
     }
 
-    /**
-     * Methode qui permet de modifier l'email
-     *
-     * @param email
-     */
+  
     public void editEmail(String email) {
-        client.setTelephone(email);
+        client.setEmail(email);
     }
 
-    /**
-     * Methode qui permet de modifier l'adresse
-     *
-     * @param adresse
-     */
+ 
     public void editAdresse(String adresse) {
         client.setAdresse(adresse);
     }
 
-    /**
-     * Methode qui permet de modifier le numero de tel
-     *
-     * @param tel
-     */
+
     public void editTel(String tel) {
         client.setTelephone(tel);
     }
 
-    /**
-     * Methode qui permet de modifier la photo
-     *
-     * @param photo
-     */
+
     public void editPhoto(String photo) {
         client.setPhoto(photo);
     }
 
-    /**
-     * Methode qui permet d'ajouter un client
-     *
-     * @return true si oui si non il retourne false
-     * @throws java.sql.SQLException
-     */
+ 
     public boolean enregistreClientDB() throws SQLException, Exception {
         boolean exist = existsClientDB();
         boolean res = false;
@@ -132,18 +84,13 @@ public class GestionnaireClient extends SQLAble {
                 cstmt.close();
                 res = true;
         }else{
-            throw new Exception("il existe pour cela, on ne peut pas le rajouter !");
+            throw new Exception("il existe, pour cela on ne peut pas le réinsérer !");
         }
         return res;
     }
 
-    /**
-     * Methode qui permet de verifier si un le client existe
-     *
-     * @return true si oui si non il retourne false
-     * @throws java.sql.SQLException
-     */
-        public boolean existsClientDB() throws SQLException {
+
+    public boolean existsClientDB() throws SQLException {
         boolean res = false;
 
         connectToDatabase();
@@ -160,11 +107,14 @@ public class GestionnaireClient extends SQLAble {
 
         return res;
     }
+    
         
-    public Client getClient(String id) throws SQLException {
-        Client client = new Client();
-
-        connectToDatabase();
+    public static Client getClient(String id) throws SQLException {
+        GestionnaireClient gc = new GestionnaireClient( id );
+        gc.client = new Client();
+        gc.client.setId(id);
+        
+        gc.connectToDatabase();
         OracleCallableStatement ocstmt;
         ocstmt = (OracleCallableStatement) conn.prepareCall("{ ? = call getClient(?) }");
         ocstmt.registerOutParameter(1, OracleTypes.CURSOR);
@@ -174,25 +124,22 @@ public class GestionnaireClient extends SQLAble {
         ResultSet rset = (ResultSet) (ocstmt.getObject(1));
 
         if (rset != null && rset.next()) {
-            //client.setId(rset.getString("idClient"));
-            client.setNom(rset.getString("nom"));
-            client.setPrenom(rset.getString("prenom"));
-            client.setAdresse(rset.getString("adresse"));
-            client.setEmail(rset.getString("email"));
-            client.setPhoto(rset.getString("photo"));
-            client.setTelephone(rset.getString("tel"));
+            gc.client.setNom(rset.getString("nom"));
+            gc.client.setPrenom(rset.getString("prenom"));
+            gc.client.setAdresse(rset.getString("adresse"));
+            gc.client.setEmail(rset.getString("email"));
+            gc.client.setPhoto(rset.getString("photo"));
+            gc.client.setTelephone(rset.getString("tel"));
+            rset.close();
+        }else{
+            throw new Exception("Client inexistant dans la BD!")
         }
+        
         ocstmt.close();
-
-        return client;
+        return gc.client;
     }
 
-    /**
-     * Methode permet de mettre à jour les info sur un client encours s'il 
-     * existe, sinon elle fait rien Cette méthode catch la SQLException si cette
-     * dernière est lévée par la procédure PL SQL editClient
-     * @throws java.sql.SQLException
-     */
+
     public void editClientDB() throws SQLException {
         boolean exist = existsClientDB();
         if (exist) {
@@ -206,18 +153,14 @@ public class GestionnaireClient extends SQLAble {
             cstmt.setString(5, client.getAdresse());
             cstmt.execute();
             cstmt.close();
+        }else{
+                throw new Exception("Client inexistant !")
         }
     }
 
-    /**
-     * Methode qui permet d'optenir l'id du client avec le nom et prenom passé
-     *
-     * @param nom
-     * @param prenom
-     * @return id
-     */
+
     public static String getClientIdDB(String nom, String prenom) throws SQLException {
-        GestionnaireClient gc = new GestionnaireClient("0");
+        GestionnaireClient gc = new GestionnaireClient("");
         gc.connectToDatabase();
         String idClient = "";
         
@@ -234,18 +177,13 @@ public class GestionnaireClient extends SQLAble {
         return idClient;
     }
 
-    /**
-     * Methode qui permet de suppimer un client dont id est passe en parametre
-     *
-     * @param id
-     * @return true si oui si non il retourne false
-     */
+
     public static boolean deleteClientId(String id) throws SQLException, Exception {
-        GestionnaireClient gc = new GestionnaireClient("0");
+        GestionnaireClient gc = new GestionnaireClient( id );
         boolean exist = false;
         boolean res = false;
 
-        gc.connectToDatabase();
+        connectToDatabase();
         OracleCallableStatement ocstmt;
         ocstmt = (OracleCallableStatement) conn.prepareCall("{ ? = call existsClient(?) }");
         ocstmt.registerOutParameter(1, OracleTypes.NUMBER);
@@ -261,7 +199,7 @@ public class GestionnaireClient extends SQLAble {
         ocstmt.close();
 
         if (exist) {
-            gc.connectToDatabase();
+            connectToDatabase();
             CallableStatement cstmt = conn.prepareCall("{ = call deleteClient(?) }");
             cstmt.setString(1, id);
             cstmt.execute();
@@ -274,34 +212,27 @@ public class GestionnaireClient extends SQLAble {
         return res;
     }
 
-    /**
-     * Methode qui permet d'optenir la liste des commande
-     *
-     * @return list
-     * @throws java.sql.SQLException
-     */
+
     public List<String> getListeCommandes() throws SQLException {
         boolean exist = existsClientDB();
-        List<String> list = new ArrayList<String>();
+        List<String> list = new ArrayList<>();
 
         if (exist) {
-            try {
-                connectToDatabase();
-                OracleCallableStatement ocstmt;
-                ocstmt = (OracleCallableStatement) conn.prepareCall("{ ? = call getListeCommandes(?) }");
-                ocstmt.registerOutParameter(1, OracleTypes.CURSOR);
-                ocstmt.setString(2, client.getId() );
-                ocstmt.execute();
+            connectToDatabase();
+            OracleCallableStatement ocstmt;
+            ocstmt = (OracleCallableStatement) conn.prepareCall("{ ? = call getListeCommandes(?) }");
+            ocstmt.registerOutParameter(1, OracleTypes.CURSOR);
+            ocstmt.setString(2, client.getId());
+            ocstmt.execute();
 
-                ResultSet rset = (ResultSet) (ocstmt.getObject(1));
-                while (rset.next()) {
-                    list.add(rset.getString(1));
-                }
-                rset.close();
-                ocstmt.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
+            ResultSet rset = (ResultSet) (ocstmt.getObject(1));
+            while (rset.next()) {
+                list.add(rset.getString(1));
             }
+            rset.close();
+            ocstmt.close();
+        }else{
+             throw new Exception("Client inexistant dans la BD !");
         }
 
         return list;
@@ -312,4 +243,5 @@ public class GestionnaireClient extends SQLAble {
         String json = new Gson().toJson(this.client);
         return json;
     }
+
 }

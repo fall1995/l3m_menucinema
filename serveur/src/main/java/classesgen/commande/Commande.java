@@ -8,13 +8,16 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 import classesgen.client.Client;
-
+import javax.servlet.http.HttpServletResponse;
 
 /**
- * <p>Classe Java pour Commande complex type.
- * 
- * <p>Le fragment de schéma suivant indique le contenu attendu figurant dans cette classe.
- * 
+ * <p>
+ * Classe Java pour Commande complex type.
+ *
+ * <p>
+ * Le fragment de schéma suivant indique le contenu attendu figurant dans cette
+ * classe.
+ *
  * <pre>
  * &lt;complexType name="Commande">
  *   &lt;complexContent>
@@ -32,8 +35,8 @@ import classesgen.client.Client;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
+ *
+ *
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Commande", propOrder = {
@@ -54,17 +57,17 @@ public class Commande {
     protected String date;
     @XmlAttribute(name = "id")
     protected String id;
-    
+
     @XmlAttribute(name = "prix")
     protected Double prix;
+    @XmlElement(required = true)
+    protected String idClient;
 
     /**
      * Obtient la valeur de la propriété client.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Client }
-     *     
+     *
+     * @return possible object is {@link Client }
+     *
      */
     public Client getClient() {
         return client;
@@ -72,11 +75,9 @@ public class Commande {
 
     /**
      * Définit la valeur de la propriété client.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Client }
-     *     
+     *
+     * @param value allowed object is {@link Client }
+     *
      */
     public void setClient(Client value) {
         this.client = value;
@@ -84,69 +85,66 @@ public class Commande {
 
     /**
      * Gets the value of the idPlat property.
-     * 
+     *
      * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the idPlat property.
-     * 
+     * This accessor method returns a reference to the live list, not a
+     * snapshot. Therefore any modification you make to the returned list will
+     * be present inside the JAXB object. This is why there is not a
+     * <CODE>set</CODE> method for the idPlat property.
+     *
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
      *    getIdPlat().add(newItem);
      * </pre>
-     * 
-     * 
+     *
+     *
      * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link String }
-     * 
-     * 
+     * Objects of the following type(s) are allowed in the list {@link String }
+     *
+     *
+     * @return 
      */
     public List<String> getIdPlat() {
         if (idPlat == null) {
-            idPlat = new ArrayList<String>();
+            idPlat = new ArrayList<>();
         }
         return this.idPlat;
     }
 
     /**
      * Gets the value of the film property.
-     * 
+     *
      * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the film property.
-     * 
+     * This accessor method returns a reference to the live list, not a
+     * snapshot. Therefore any modification you make to the returned list will
+     * be present inside the JAXB object. This is why there is not a
+     * <CODE>set</CODE> method for the film property.
+     *
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
      *    getFilm().add(newItem);
      * </pre>
-     * 
-     * 
+     *
+     *
      * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link String }
-     * 
-     * 
+     * Objects of the following type(s) are allowed in the list {@link String }
+  
+     * @return 
      */
     public List<String> getFilm() {
         if (film == null) {
-            film = new ArrayList<String>();
+            film = new ArrayList<>();
         }
         return this.film;
     }
 
     /**
      * Obtient la valeur de la propriété adresseLivraison.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is {@link String }
+     *
      */
     public String getAdresseLivraison() {
         return adresseLivraison;
@@ -154,11 +152,9 @@ public class Commande {
 
     /**
      * Définit la valeur de la propriété adresseLivraison.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is {@link String }
+     *
      */
     public void setAdresseLivraison(String value) {
         this.adresseLivraison = value;
@@ -166,11 +162,9 @@ public class Commande {
 
     /**
      * Obtient la valeur de la propriété date.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is {@link String }
+     *
      */
     public String getDate() {
         return date;
@@ -178,11 +172,9 @@ public class Commande {
 
     /**
      * Définit la valeur de la propriété date.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is {@link String }
+     *
      */
     public void setDate(String value) {
         this.date = value;
@@ -190,11 +182,9 @@ public class Commande {
 
     /**
      * Obtient la valeur de la propriété id.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is {@link String }
+     *
      */
     public String getId() {
         return id;
@@ -202,11 +192,9 @@ public class Commande {
 
     /**
      * Définit la valeur de la propriété id.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is {@link String }
+     *
      */
     public void setId(String value) {
         this.id = value;
@@ -214,11 +202,9 @@ public class Commande {
 
     /**
      * Obtient la valeur de la propriété prix.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Double }
-     *     
+     *
+     * @return possible object is {@link Double }
+     *
      */
     public Double getPrix() {
         return prix;
@@ -226,33 +212,42 @@ public class Commande {
 
     /**
      * Définit la valeur de la propriété prix.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Double }
-     *     
+     *
+     * @param value allowed object is {@link Double }
+     *
      */
     public void setPrix(Double value) {
         this.prix = value;
     }
 
-
-   
     public void setIdClient(String id) {
-        this.client.setId(id);
-      
+        this.idClient = id;
+
     }
 
     public String getIdClient() {
-       return client.getId();
+        return idClient;
     }
 
     public void setIdPlat(List<String> idPlats) {
-        this.idPlat=idPlats;
+        this.idPlat = idPlats;
     }
 
     public void setIdFilm(List<String> idFilms) {
-        this.film=idFilms;
+        this.film = idFilms;
+    }
+
+    @Override
+    public String toString() {
+        return " { \"idCommande\":"  + "\""+getId()+"\","
+                + "\"idClient \":" + "\""+getIdClient()+"\","
+                + "\" idFilm \":" +"\""+ getFilm()+"\","
+                + "\"idPlat \":" + getIdPlat()+"\","
+                + "\"Prix \":" + getPrix()+"\","
+                + "\" Date \":" + getDate()+"\","
+                + "\" Adresse \" :" + getAdresseLivraison()
+                + "}";
+        
     }
 
 }

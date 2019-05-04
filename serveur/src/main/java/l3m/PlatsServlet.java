@@ -1,14 +1,7 @@
 package l3m;
 
-import classesgen.commande.Commande;
-import classesgen.plat.Plat;
-import database.GestionnaireCommande;
 import database.GestionnaireMenu;
 import java.io.IOException;
-import java.sql.SQLException;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -16,15 +9,17 @@ import javax.servlet.http.HttpServletResponse;
 /**
 
 /**
- *
- * @author firsovol
+ * @author Groupe6
+ * PlatsServlet est une classe qui permet d'afficher les plats stocker dans 
+ * la base donnee Xml
+ * 
  */
 public class PlatsServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
     private String json = "json";
 
     /**
-     *
+     *Methode qui permet lire plats dans la base Xml 
      * @param request
      * @param response
      * @throws ServletException
