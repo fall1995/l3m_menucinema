@@ -71,12 +71,6 @@ public class CommandeServlet extends HttpServlet {
                                             commande.getAdresseLivraison()
                                          );
             
-            System.out.println( "idClient : " + commande.getIdClient() );
-            System.out.println( "adresseLivraison : " + commande.getAdresseLivraison() );
-            System.out.println( "idPlats : " + commande.getIdPlats() + ", size :" + commande.getIdPlats().size() );
-            System.out.println( "idFilms : " + commande.getIdFilms()  + ", size : " + commande.getIdFilms().size() );
-            System.out.println( "prix : " + commande.getPrix() );
-            
             gc.enregistrerCommandeDB();
             
             response.setContentType("application/json");
