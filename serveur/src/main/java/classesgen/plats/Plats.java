@@ -1,12 +1,12 @@
 //
-// Ce fichier a Ã©tÃ© gÃ©nÃ©rÃ© par l'implÃ©mentation de rÃ©fÃ©rence JavaTM Architecture for XML Binding (JAXB), v2.2.8-b130911.1802 
+// Ce fichier a été généré par l'implémentation de référence JavaTM Architecture for XML Binding (JAXB), v2.2.8-b130911.1802 
 // Voir <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
-// Toute modification apportÃ©e Ã  ce fichier sera perdue lors de la recompilation du schÃ©ma source. 
-// GÃ©nÃ©rÃ© le : 2019.04.30 Ã  10:32:20 AM CEST 
+// Toute modification apportée à ce fichier sera perdue lors de la recompilation du schéma source. 
+// Généré le : 2019.05.05 à 04:57:11 PM CEST 
 //
 
 
-package classesgen.menus;
+package classesgen.plats;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,16 +18,16 @@ import classesgen.plat.Plat;
 
 
 /**
- * <p>Classe Java pour Menu complex type.
+ * <p>Classe Java pour Plats complex type.
  * 
- * <p>Le fragment de schÃ©ma suivant indique le contenu attendu figurant dans cette classe.
+ * <p>Le fragment de schéma suivant indique le contenu attendu figurant dans cette classe.
  * 
  * <pre>
- * &lt;complexType name="Menu">
+ * &lt;complexType name="Plats">
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="plat" type="{http://classesGen/plat}Plat" maxOccurs="unbounded"/>
+ *         &lt;element name="plats" type="{http://classesGen/plat}Plat" maxOccurs="unbounded"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -37,27 +37,27 @@ import classesgen.plat.Plat;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "Menu", propOrder = {
-    "plat"
+@XmlType(name = "Plats", propOrder = {
+    "plats"
 })
-public class Menu {
+public class Plats {
 
     @XmlElement(required = true)
-    protected List<Plat> plat;
+    protected List<Plat> plats;
 
     /**
-     * Gets the value of the plat property.
+     * Gets the value of the plats property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the plat property.
+     * This is why there is not a <CODE>set</CODE> method for the plats property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getPlat().add(newItem);
+     *    getPlats().add(newItem);
      * </pre>
      * 
      * 
@@ -67,11 +67,11 @@ public class Menu {
      * 
      * 
      */
-    public List<Plat> getPlat() {
-        if (plat == null) {
-            plat = new ArrayList<Plat>();
+    public List<Plat> getPlats() {
+        if (plats == null) {
+            plats = new ArrayList<Plat>();
         }
-        return this.plat;
+        return this.plats;
     }
 
 }

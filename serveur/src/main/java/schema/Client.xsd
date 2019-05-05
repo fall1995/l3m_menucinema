@@ -9,13 +9,13 @@
      <xsd:element name="client" type="Client"/> 
     <xsd:complexType name="Client">
         <xsd:sequence>
-            <xsd:element name="id"       type="xsd:string"/>
+            <xsd:element name="id"        type="xsd:string"/>
             <xsd:element name="nom"       type="xsd:string"/>
             <xsd:element name="prenom"    type="xsd:string"/>
-            <xsd:element name="telephone" type="xsd:string"/>
+            <xsd:element name="tel"       type="xsd:string"/>
             <xsd:element name="adresse"   type="xsd:string"/>
-            <xsd:element name="photo"   type="xsd:string"/>
-            <xsd:element name="email"   type="xsd:string"/>
+            <xsd:element name="photo"     type="xsd:string"/>
+            <xsd:element name="email"     type="xsd:string"/>
             
         </xsd:sequence>
        

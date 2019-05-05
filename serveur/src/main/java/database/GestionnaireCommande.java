@@ -1,9 +1,7 @@
 package database;
 
 import classesgen.commande.Commande;
-import classesgen.menus.Menus;
 import com.google.gson.Gson;
-import java.sql.CallableStatement;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -24,11 +22,13 @@ public class GestionnaireCommande extends SQLAble {
 
     private Commande commande;
 
-    public GestionnaireCommande(String idClient, List<String> idPlats, List<String> idFilms, String adresseLivraison) {
+    public GestionnaireCommande(String idClient, List<String> idPlats, List<String> idFilms, String adresseLivraison) 
+            throws Exception {
+        
         commande = new Commande();
         commande.setIdClient(idClient);
-        commande.setIdPlat(idPlats);
-        commande.setIdFilm(idFilms);
+        commande.getIdPlats().addAll(idPlats);
+        commande.getIdFilms().addAll(idFilms);
         commande.setAdresseLivraison(adresseLivraison);
         computePrix();
     }
@@ -39,20 +39,17 @@ public class GestionnaireCommande extends SQLAble {
     }
     
     // calcul du prix de la commande
-    private void computePrix(){
-        List<String> idPlats = commande.getIdPlat();
-        List<String> idFilms = commande.getFilm();
-        
+    private void computePrix() throws Exception{
+    
         double prixPlats = 0;
         double prixFilms = 0;
-        if ( commande.getFilm() != null ){
-            prixFilms = 3.79 * commande.getFilm().size();
+
+        prixFilms = 3.79 * commande.getIdFilms().size();
+
+        for ( String idPlat : commande.getIdPlats() ){
+            prixPlats += GestionnaireMenu.getPrixPlat(idPlat);
         }
         
-        GestionnaireMenu gestionnaireMenu = new GestionnaireMenu(commande.getIdPlat());
-        for ( String idPlat : commande.getIdPlat() ){
-            prixPlats += gestionnaireMenu.getPrixPlat( idPlat );
-        }
         commande.setPrix( prixFilms + prixPlats );
     }
 
@@ -60,26 +57,30 @@ public class GestionnaireCommande extends SQLAble {
     public void enregistrerCommandeDB() throws SQLException, Exception {
         try {
             connectToDatabase();
+            String pattern = "DD-MM-YYYY HH:MM:SS";
+            DateFormat dateFormat = new SimpleDateFormat(pattern);
+        
             PreparedStatement pstmt;
             pstmt = conn.prepareStatement(
                     "insert into Commande (idClient, prix, adresseLivraison)"
                     + " values ( ? , ? , ? ) "
             );
-            pstmt.setString(1, commande.getIdClient());
-            pstmt.setDouble(2, commande.getPrix());
-            pstmt.setString(3, commande.getAdresseLivraison());
+            pstmt.setString( 1 , commande.getIdClient() );
+            pstmt.setDouble( 2 , commande.getPrix() );
+            pstmt.setString( 3 , commande.getAdresseLivraison() );
             pstmt.executeUpdate();
             pstmt.close();
                 
             OracleCallableStatement ocstmt;
-            ocstmt = (OracleCallableStatement )conn.prepareCall("{ ? = call getLastCommande() }");
+            ocstmt = (OracleCallableStatement )conn.prepareCall("{ ? = call getLastIdCommandeDate( ? ) }");
             ocstmt.registerOutParameter(1, OracleTypes.CURSOR );
+            ocstmt.setString( 2 , commande.getIdClient() );
             ocstmt.execute();
 
             ResultSet rset = (ResultSet) (ocstmt.getObject(1));
             if (rset != null && rset.next()) {
                 commande.setId( rset.getString("idCommande") );
-                commande.setDate( rset.getDate("dateCommande").toString() ) ; 
+                commande.setDate( dateFormat.format(rset.getDate("dateCommande")) );
             }
             rset.close();
             ocstmt.close();
@@ -87,7 +88,7 @@ public class GestionnaireCommande extends SQLAble {
             int nbInsertions = 1;
             
             Map<String,Integer> mapIdPlats;
-            mapIdPlats = listToMap(commande.getIdPlat());
+            mapIdPlats = listToMap( commande.getIdPlats() );
             
             for (Map.Entry<String, Integer> mapPlat : mapIdPlats.entrySet()) {
                 String idPlat = mapPlat.getKey();
@@ -96,7 +97,7 @@ public class GestionnaireCommande extends SQLAble {
                 nbInsertions++;
             }
             
-            for ( String idFilm : commande.getFilm() ){
+            for ( String idFilm : commande.getIdFilms() ){
                 ajouterFilmDB( commande.getId() , idFilm );
                 nbInsertions++;
             }
@@ -139,28 +140,58 @@ public class GestionnaireCommande extends SQLAble {
         }
         rset.close();
 
-        List<String> platsCommandes = new ArrayList<String>();
-        List<String> filmsCommandes = new ArrayList<String>();
 
         rset = (ResultSet) (ocstmt.getObject(3));
         while (rset != null && rset.next()) {
             int quantite = rset.getInt("quantite");
             for (int i = 0; i < quantite; i++) {
-                platsCommandes.add(rset.getString("idPlat"));
+                gc.commande.getIdPlats().add(rset.getString("idPlat"));
             }
         }
         rset.close();
 
         rset = (ResultSet) (ocstmt.getObject(4));
         while (rset != null && rset.next()) {
-            filmsCommandes.add(rset.getString("idFilm"));
+            gc.commande.getIdFilms().add(rset.getString("idFilm"));
         }
         rset.close();
         ocstmt.close();
 
-        gc.commande.setIdPlat(platsCommandes);
-        gc.commande.setIdFilm(filmsCommandes);
         return gc.commande;
+    }
+    
+    
+    public static Commande getLastCommande(String idClient) throws SQLException, Exception {
+        GestionnaireCommande gc = new GestionnaireCommande( "0");
+        gc.connectToDatabase();
+        
+        Commande commande = new Commande();
+        String idCommande = "";
+        boolean trouve = false;
+        
+        OracleCallableStatement ocstmt;
+        ocstmt = (OracleCallableStatement) conn.prepareCall("{ ? = call getLastIdCommandeDate( ? ) }");
+        ocstmt.registerOutParameter( 1 , OracleTypes.CURSOR );
+        ocstmt.setString( 2 , idClient );
+        ocstmt.execute();
+
+        ResultSet rset = (ResultSet) (ocstmt.getObject(1));
+        if (rset != null && rset.next()) {
+            idCommande = rset.getString("idCommande");
+            trouve = true;
+        }
+        if ( rset != null ){
+            rset.close();
+        }
+        ocstmt.close();
+        
+        if ( trouve ){
+            commande = getCommande(idCommande);
+        }else{
+            throw new Exception("Il n'y a aucune commande pour ce client !");
+        }
+
+        return commande;
     }
     
     
