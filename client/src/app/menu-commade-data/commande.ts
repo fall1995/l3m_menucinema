@@ -1,6 +1,6 @@
 export interface CommandeData {
-    idCommade?:number;
-    idClient?:string;
+    idCommade?: number;
+    idClient?: string;
     idPlat?: string;
     date?: any;
     prix?: number;

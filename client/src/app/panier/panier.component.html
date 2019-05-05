@@ -66,12 +66,12 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="text-right">
-                                        <a routerLink="films" class="btn btn-info">
+                                        <button (click)="retour()" class="btn btn-info">
                                             <i class="fa fa-shopping-cart"></i>
                                             CONTINUER A MAGASINER
-                                        </a>
+                                        </button>
                                         <span> </span>
-                                        <button (click)="retour()" class="btn btn-success btn-shadow">
+                                        <button (click)="validationCommande()" class="btn btn-success btn-shadow">
                                             <i class="fa fa-credit-card"></i>
                                             PAYER MAINTENANT
                                         </button>

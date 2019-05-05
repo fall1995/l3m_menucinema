@@ -94,7 +94,6 @@ export class SigninComponent implements OnInit {
     sendServeur(){
         let i;
         this.afAuth.user.subscribe(utilisateur =>{
-
             i = utilisateur.displayName.indexOf(" "); // couper en 2 displayname pour avoir le prenom et le nom
             if (utilisateur.uid){
                 this.authService.authentificate({

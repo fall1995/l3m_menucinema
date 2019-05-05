@@ -62,6 +62,8 @@ export class StorageService {
         return null;
     }
 
+
+
     /**
      * effacer le plat dont l'index est passé en parametre
      * @param index
@@ -70,8 +72,12 @@ export class StorageService {
         let data: ListePlats[] = JSON.parse(localStorage.getItem('plat'));
         data.splice(index, 1);
         localStorage.setItem('plat', JSON.stringify(data));
-
     }
+
+    /**
+     * effacer un film dont l'index est passer en parametre
+     * @param index
+     */
     deleteMovie(index: number): void {
         let data: MovieResponse[] = JSON.parse(localStorage.getItem('filmNote'));
         data.splice(index, 1);
