@@ -62,30 +62,8 @@ public class GestionnaireMenu  extends XMLAble{
             }
         }
     }
-     /*   
-        List<Plat> plats = (ArrayList<Plat>) getCartesDB();
-        this.menu = new ArrayList<Plat>();
-        int i = 0;
-        for(String id : idPlats){
-            if(existPlatDB(id)){
-            i = 0;
-            while( !id.equals(plats.get(i).getId()) || i < plats.size()){
-                i++;
-            }
-            if(id.equals(plats.get(i).getId())){
-                menu.add(plats.get(i));
-            }
-            }
-        }
 
-    }*/
 
-    /**
-     * Methode qui permet de verifier si plat existe dans la base en prenant en
-     * id du plat
-     * @param id
-     * @return res
-     */
     protected boolean existPlatDB(String id) {
         boolean trouve = false;
         int i = 0;
@@ -139,8 +117,7 @@ public class GestionnaireMenu  extends XMLAble{
 
     
     /**
-     * Methode qui permet de recuperer les plats
-     *
+     * Methode qui permet de récuperer la carte de tous les plats
      * @return res
      */
     public static Plats getCarteDB() {
