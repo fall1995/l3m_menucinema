@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {environment} from '../../environments/environment';
 import {MovieResponse} from '../tmdb-data/Movie';
 import {TmdbService} from '../service/tmdb.service';
-import {TVResponse} from '../tmdb-data/TV';
+import {StorageService} from '../service/storage.service';
+import {MessageService} from 'primeng/api';
 
 @Component({
   selector: 'app-films',
@@ -17,13 +18,25 @@ export class FilmsComponent implements OnInit {
     listeMovieHightRatet : MovieResponse;
     afficherDialog = false;
 
-  constructor(private tmdbService: TmdbService) {
-
-  }
-
+  constructor(private tmdbService: TmdbService, private storage: StorageService,
+                private message: MessageService) { }
   ngOnInit() {
       this.init();
   }
+
+
+    /**
+     * méthode d'ajout dans le panier
+     * @param id
+     */
+    addFilmNote(id: number) {
+        let film = this.listeMovieHightRatet.results.find(films => films.id === id);
+        this.storage.addMovieNote(film);
+        this.message.add({severity:'success',
+            summary:`Ajout du Film ${film.title} `,
+            detail:'Votre choix a bien été ajouter dans votre panier'});
+
+    }
     /*
     async getMovies(){
       this.tmdbService.getAllMovie().then(

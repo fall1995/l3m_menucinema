@@ -13,7 +13,7 @@
                     <p-footer>
                         <button pButton type="button" label="Details" icon="fa fa-info"
                                 style="margin-right: .25em"></button>
-                        <button pButton type="button" label="Ajouter" icon="fa fa-shopping-cart"
+                        <button pButton type="button" label="Ajouter" icon="fa fa-shopping-cart" (click)="addFilmNote(f.id)"
                                 class="ui-button-secondary"></button>
                     </p-footer>
                 </p-card>
@@ -61,11 +61,11 @@
 
                     </p-footer>
                 </p-card>
-
             </div>
         </mat-tab>
     </mat-tab-group>
 </div>
+<p-toast position="top-right"></p-toast>
 <!--
 <mat-tab-group mat-stretch-tabs class="example-stretched-tabs mat-elevation-z4">
     <mat-tab label="Films">

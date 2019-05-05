@@ -57,6 +57,7 @@ export class SigninComponent implements OnInit {
     loginGoogle() {
         this.afAuth.auth.signInWithPopup(new auth.GoogleAuthProvider()).then(
             u => {
+                localStorage.setItem('UserData', u.user.uid);
                 this.route.navigate(['/user/dashbord']);
                 this.message.add({severity:'success',
                     summary:`Bienvenue ${u.user.displayName}`,

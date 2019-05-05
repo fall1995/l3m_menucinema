@@ -94,6 +94,7 @@ public class CommandesServlet extends HttpServlet {
             addCommande = new GestionnaireCommande(idClient, idPlats, idFilms, adresseLivraison);
             commande.setPrix(prix);
             addCommande.enregistrerCommandeDB();
+            
         } catch (SQLException ex) {
             Logger.getLogger(CommandesServlet.class.getName()).log(Level.SEVERE, null, ex);
         } catch (Exception ex) {
