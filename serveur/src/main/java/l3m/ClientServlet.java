@@ -28,11 +28,7 @@ public class ClientServlet extends HttpServlet {
             throws ServletException, IOException {
         
         String idClient = request.getParameter("idClient");
-        System.out.println("idClient : " + idClient );
-        //Juste pour voir comment ça marche le reste lol
-        if ( idClient == null ){
-            idClient = "10";
-        }
+
         try {
             GestionnaireClient gc = new GestionnaireClient( idClient , "" , "" );            
             List<String> listeCommandes = gc.getListeCommandes();
@@ -65,19 +61,6 @@ public class ClientServlet extends HttpServlet {
         String nom = request.getParameter("nom");
         String prenom = request.getParameter("prenom");
         
-        System.out.println("idClient = " + idClient );
-        System.out.println("nom = " + nom );
-        System.out.println("prenom = " + prenom );
-        
-        if ( idClient == null ){
-            idClient = "fhsqjkfhhfqfkdnmkqknfdd";
-        }
-        if ( nom == null ){
-            nom = "Brel";
-        }
-        if ( prenom == null ){
-            prenom = "Jacques";
-        }
         try {
             GestionnaireClient gc = new GestionnaireClient(idClient, nom, prenom);
             gc.enregistreClientDB();
@@ -96,12 +79,7 @@ public class ClientServlet extends HttpServlet {
              throws ServletException, IOException {
         
         String idClient = request.getParameter("idClient");
-        System.out.println("idClient = " + idClient );
         boolean supprime = false;
-        
-        if ( idClient == null){
-            idClient = "fhsqjkfhhfqfkdnmkqknfdd";
-        }
         
         try {
             supprime = GestionnaireClient.deleteClientId(idClient);

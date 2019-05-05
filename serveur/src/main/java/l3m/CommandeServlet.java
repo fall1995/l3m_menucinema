@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -48,11 +49,12 @@ public class CommandeServlet extends HttpServlet {
         
         Commande commande = new Commande();
         commande.setIdClient( request.getParameter("idClient") );
-        commande.setAdresseLivraison(request.getParameter("adresseLivraion") );
+        commande.setAdresseLivraison(request.getParameter("adresseLivraison") );
         List<String> idPlats = new ArrayList<String>();
         List<String> idFilms = new ArrayList<String>();
         
-        String[] tabPlats = request.getParameterValues("idPlats");
+        String[] tabPlats = (String[] )request.getParameterValues("idPlats");
+
         for ( int i = 0 ; i < tabPlats.length ; i ++ ){
             idPlats.add(tabPlats[i]);
         }

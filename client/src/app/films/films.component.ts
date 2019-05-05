@@ -3,6 +3,7 @@ import {environment} from '../../environments/environment';
 import {MovieResponse} from '../tmdb-data/Movie';
 import {TmdbService} from '../service/tmdb.service';
 import {TVResponse} from '../tmdb-data/TV';
+import { ShowOnDirtyErrorStateMatcher } from '@angular/material';
 
 @Component({
   selector: 'app-films',
@@ -16,6 +17,10 @@ export class FilmsComponent implements OnInit {
     listeMovieDram : MovieResponse;
     listeMovieHightRatet : MovieResponse;
     afficherDialog = false;
+    detail_afficher='Detail';
+    detail_cacher='Afficher detail';
+
+    detail:string= this.detail_afficher;
 
   constructor(private tmdbService: TmdbService) {
 
@@ -35,6 +40,16 @@ export class FilmsComponent implements OnInit {
       );
   }
   */
+ afficher():void{
+     if(this.detail=this.detail_cacher){
+
+         this.detail=this.detail_afficher;
+     }
+     else{
+        this.detail=this.detail_cacher;
+     }
+
+ }
     async init() {
         this.tmdbService.init( environment.tmdbKey );
         this.idFilm = await this.tmdbService.getMovie(14);
