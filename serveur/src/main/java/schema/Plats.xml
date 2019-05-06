@@ -5,7 +5,7 @@
     xsi:schemaLocation='http://classesGen/plats Plats.xsd'>
     <ns1:plat>
         <ns2:id>plat1</ns2:id>
-        <ns2:image>https://circulairehttps-smisolutionsmark.netdna-ssl.com/wp-content/uploads/poulet-aux-nnoix-de-cajou-thai.jpg</ns2:image>
+        <ns2:image>https://i.imgur.com/kfRizd9.jpg</ns2:image>
         <ns2:type>entree</ns2:type>
         <ns2:prix>10.3</ns2:prix>
         <ns2:ingredients>poulet</ns2:ingredients>
@@ -14,7 +14,7 @@
     
     <ns1:plat>
         <ns2:id>des1</ns2:id>
-        <ns2:image>https://i2.wp.com/www.recette-pour-diabetique.com/wp-content/uploads/2017/03/tomate-mozzarella-basilic.jpg?resize=620%2C376&ssl=1</ns2:image>
+        <ns2:image>https://i.imgur.com/AFC7b8S.jpg</ns2:image>
         <ns2:type>dessert</ns2:type>
         <ns2:prix>7.5</ns2:prix>
         <ns2:ingredients>ananas</ns2:ingredients>
@@ -31,7 +31,7 @@
     
     <ns1:plat>
         <ns2:id>de3</ns2:id>
-        <ns2:image>http://p9.storage.canalblog.com/99/14/1118309/89578201_o.jpg</ns2:image>
+        <ns2:image>https://i.imgur.com/3vYatzA.jpg</ns2:image>
         <ns2:type>dessert</ns2:type>
         <ns2:prix>2.5</ns2:prix>
         <ns2:ingredients>ananas</ns2:ingredients>
