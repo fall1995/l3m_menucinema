@@ -57,6 +57,7 @@ export class SigninComponent implements OnInit {
     loginGoogle() {
         this.afAuth.auth.signInWithPopup(new auth.GoogleAuthProvider()).then(
             u => {
+                localStorage.setItem('UserData', u.user.uid);
                 this.route.navigate(['/user/dashbord']);
                 this.message.add({severity:'success',
                     summary:`Bienvenue ${u.user.displayName}`,
@@ -93,7 +94,6 @@ export class SigninComponent implements OnInit {
     sendServeur(){
         let i;
         this.afAuth.user.subscribe(utilisateur =>{
-
             i = utilisateur.displayName.indexOf(" "); // couper en 2 displayname pour avoir le prenom et le nom
             if (utilisateur.uid){
                 this.authService.authentificate({

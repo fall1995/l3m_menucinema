@@ -40,7 +40,7 @@
                     </div>
                 </div>
                 <div class="ui-g-12 ui-md-1 search-icon">
-                    <button pButton type="button" icon="fa fa-plus" (click)="selectCar($event, car)"></button>
+                    <button pButton type="button" icon="fa fa-plus" (click)="addMenus(plat.id)"></button>
                 </div>
             </div>
         </ng-template>
@@ -63,3 +63,4 @@
         </ng-template>
     </p-dataView>
 </div>
+<p-toast position="top-right"></p-toast>

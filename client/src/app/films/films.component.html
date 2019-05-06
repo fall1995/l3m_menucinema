@@ -12,15 +12,11 @@
                     </p-header>
                     <p></p>
                     <p-footer>
-                        <button pButton type="button"  id="detail" icon="fa fa-info" (click)="afficher()" 
-                            style="margin-right: .25em">{{detail}}</button>
-                        <button pButton type="button" label="Ajouter" icon="fa fa-shopping-cart"
-                            class="ui-button-secondary"></button>
-                        <div id="div_detail" *ngIf="detail===detail_cacher" >
-                            <p>
-                                Ceci est l'onglet N° 1
-                            </p>
-                        </div>
+                        <button pButton type="button" label="Details" icon="fa fa-info"
+                                style="margin-right: .25em"></button>
+                        <button pButton type="button" label="Ajouter" icon="fa fa-shopping-cart" (click)="addFilmNote(f.id)"
+                                class="ui-button-secondary"></button>
+
                     </p-footer>
                 </p-card>
             </div>
@@ -66,11 +62,11 @@
 
                     </p-footer>
                 </p-card>
-
             </div>
         </mat-tab>
     </mat-tab-group>
 </div>
+<p-toast position="top-right"></p-toast>
 <!--
 <mat-tab-group mat-stretch-tabs class="example-stretched-tabs mat-elevation-z4">
     <mat-tab label="Films">

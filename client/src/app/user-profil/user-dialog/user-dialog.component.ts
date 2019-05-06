@@ -36,6 +36,7 @@ export class UserDialogComponent implements OnInit {
             tel : params.tel,
             adresse: params.adress,
         }).then(res =>{
+            localStorage.setItem('adresse', params.adresse);
             this.afficherDialog = false;
             this.message.add({severity:'success',
                 summary:`Modification du profil OK `,

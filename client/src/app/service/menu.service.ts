@@ -30,9 +30,9 @@ export class MenuService {
     constructor(private http: HttpClient) {
     }
 
-    async getAllMenu( options?: MovieQuery): Promise<ListePlats> {
+    async getAllMenu( options?: MovieQuery): Promise<ListePlats[]> {
         const url = `/api/plats`;
-        const res = await this.get<ListePlats>(url, options);
+        const res = await this.get<ListePlats[]>(url, options);
         return res.body;
     }
 

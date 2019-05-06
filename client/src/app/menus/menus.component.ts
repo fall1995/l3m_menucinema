@@ -2,7 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {MenuService} from '../service/menu.service';
 import {ListePlats} from '../menu-commade-data/Menu';
 import {MovieResponse} from '../tmdb-data/Movie';
-import {SelectItem} from 'primeng/api';
+import {MessageService, SelectItem} from 'primeng/api';
+import {StorageService} from '../service/storage.service';
 
 @Component({
     selector: 'app-menus',
@@ -14,7 +15,7 @@ export class MenusComponent implements OnInit {
     /**
      *variable dans le quel on stock les plats après les avoirs récupéré
      */
-    listePlats: ListePlats;
+    listePlats: ListePlats[];
     aff = false;
 
     sortOptions: SelectItem[];
@@ -25,8 +26,8 @@ export class MenusComponent implements OnInit {
 
     sortOrder: number;
 
-    constructor(private menuService: MenuService) {
-
+    constructor(private menuService: MenuService, private storageService: StorageService,
+                private message: MessageService) {
     }
 
     ngOnInit() {
@@ -38,9 +39,12 @@ export class MenusComponent implements OnInit {
         ];
     }
 
+    /**
+     *
+     * @param event
+     */
     onSortChange(event) {
         let value = event.value;
-
         if (value.indexOf('!') === 0) {
             this.sortOrder = -1;
             this.sortField = value.substring(1, value.length);
@@ -61,8 +65,17 @@ export class MenusComponent implements OnInit {
         });
     }
 
-    get plats(): ListePlats {
-        return this.listePlats;
+    /**
+     * methode d'ajout du plat dans le panier après selection
+     * @param id
+     */
+    addMenus(id: string) {
+        let plat = this.listePlats.find(plats => plats.id === id);
+        this.storageService.addMenu(plat);
+        this.message.add({severity:'success',
+            summary:`Ajout de ${plat.id} `,
+            detail:'Votre choix a bien été ajouter dans votre panier'});
+
     }
 
 }

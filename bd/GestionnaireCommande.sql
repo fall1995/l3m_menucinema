@@ -23,17 +23,18 @@ end;
 /
 
 
-create or replace function getLastCommande
-return SYS_REFCURSOR is
+create or replace function getLastIdCommandeDate(
+idClient_          varchar2
+)return SYS_REFCURSOR is
 
 rc_lastCommande    SYS_REFCURSOR;
-idC_            integer := seqIdCommande.currval;
-idCommande_     varchar2(8) := to_char(idC_); 
 begin
     open rc_lastCommande for
         select idCommande, dateCommande
         from Commande
-        where idCommande = idCommande_;
+        where idClient = idClient_
+            and idCommande = ( select max(idCommande) from Commande
+                                where idClient = idClient_ );
     
     return rc_lastCommande;
 end;

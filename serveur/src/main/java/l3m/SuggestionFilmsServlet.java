@@ -1,40 +1,39 @@
 package l3m;
 
-import classesgen.plat.Plat;
-import classesgen.plats.Plats;
-import com.google.gson.Gson;
-import database.GestionnaireMenu;
 import java.io.IOException;
-import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import facture.GestionnaireFactures;
 /**
 
 /**
- * @author Groupe6
- LaCarteServlet est une classe qui permet d'afficher les plats stocker dans 
- la base donnee Xml
- * 
+ *
+ * @author firsovol
  */
-public class LaCarteServlet extends HttpServlet {
+public class SuggestionFilmsServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
-    private String json = "json";
+    private String idPlat = "idPlat";
 
-
+    /**
+     *
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException
+     */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) 
             throws ServletException, IOException {
-        
         response.setContentType("application/json");
-        json = request.getParameter("json");
-        
-        List<Plat> laCarte = GestionnaireMenu.getCartesDB();
+        idPlat = request.getParameter("idPlat");
+        GestionnaireFactures gf;
+        gf = new GestionnaireFactures();
         
         response.setContentType("application/json");
         response.setStatus(HttpServletResponse.SC_OK);
-        response.getWriter().println( new Gson().toJson(laCarte) );
-
+        response.getWriter().println(
+        gf.suggestionFilmToJson(idPlat));
     }
 }
