@@ -1,0 +1,60 @@
+<div class="container">
+    <div class="page-header">
+        <h1 class="text-center">
+            <i class="fa fa-shopping-cart"></i>
+            Votre Panier
+        </h1>
+    </div>
+    <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+        <div class="panel panel-primary">
+            <div class=" panel-heading">
+                <h3 class=" panel-title">
+                    <i class="fa fa-shopping-cart"></i>
+                    Contenu actuel de votre panier
+                </h3>
+            </div>
+            <div class="panel-body">
+                <div class="table-responsive">
+                    <p-table [value]="cars">
+                        <ng-template pTemplate="header">
+                            <tr>
+                                <th>Films & Plats </th>
+                                <th>Quantité</th>
+                                <th>Prix</th>
+                                <th>Total</th>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body" let-car>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                        </ng-template>
+                    </p-table>
+                    <br>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="text-right">
+                                <a routerLink="films" class="btn btn-info">
+                                    <i class="fa fa-shopping-cart"></i>
+                                    CONTINUER A MAGASINER
+                                </a>
+                                <span> </span>
+                                <a href="#" class="btn btn-success btn-shadow" id="payer">
+                                    <i class="fa fa-credit-card"></i>
+                                    PAYER MAINTENANT
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        </div>
+    </div>
+</div>

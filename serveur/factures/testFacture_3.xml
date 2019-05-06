@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ns3:facutre adresseLivraison="Mon Maison" date="12:41 31.10.19" id="xk7to1" prix="41000.0" xmlns="classesGen/client" xmlns:ns2="http://classesGen/commande" xmlns:ns3="facture">
+    <ns2:client>
+        <id>C</id>
+        <nom>D</nom>
+        <prenom>F</prenom>
+        <telephone>G</telephone>
+        <adresse>A</adresse>
+        <photo>E</photo>
+    </ns2:client>
+    <ns2:idPlat>des1</ns2:idPlat>
+    <ns2:idPlat>de3</ns2:idPlat>
+    <ns2:idPlat>plat2</ns2:idPlat>
+    <ns2:film>Unbreakable</ns2:film>
+    <ns2:film>Die Hard</ns2:film>
+    <ns2:film>Sixth Sense</ns2:film>
+</ns3:facutre>
