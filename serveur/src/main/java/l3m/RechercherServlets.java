@@ -39,11 +39,9 @@ public class RechercherServlets extends HttpServlet {
         response.setContentType("application/json");
         json = request.getParameter("json");
 
-        Plats laCarte = GestionnaireMenu.getCarteDB();
-
         response.setContentType("application/json");
         response.setStatus(HttpServletResponse.SC_OK);
-        response.getWriter().println(new Gson().toJson(laCarte));
+        //response.getWriter().println(new Gson().toJson(laCarte));
 
     }
 

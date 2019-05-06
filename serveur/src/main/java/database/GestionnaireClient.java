@@ -313,8 +313,6 @@ public class GestionnaireClient extends SQLAble {
         this.client = client;
     }
 
-    public void setClient(Client client) {
-        throw new UnsupportedOperationException("Not supported yet."); 
-    }
+    
 
 }
