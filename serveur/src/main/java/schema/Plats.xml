@@ -6,97 +6,97 @@
     <ns1:plat>
         <ns2:id>plat1</ns2:id>
         <ns2:image>https://circulairehttps-smisolutionsmark.netdna-ssl.com/wp-content/uploads/poulet-aux-nnoix-de-cajou-thai.jpg</ns2:image>
-        <ns2:type>entree</ns2:type>
+        <ns2:type>Entree</ns2:type>
         <ns2:prix>10.3</ns2:prix>
-        <ns2:ingredients>poulet</ns2:ingredients>
-        <ns2:ingredients>poivrons</ns2:ingredients>
+        <ns2:ingredients>Poulet</ns2:ingredients>
+        <ns2:ingredients>Poivrons</ns2:ingredients>
     </ns1:plat>
     
     <ns1:plat>
         <ns2:id>des1</ns2:id>
         <ns2:image>https://i2.wp.com/www.recette-pour-diabetique.com/wp-content/uploads/2017/03/tomate-mozzarella-basilic.jpg</ns2:image>
-        <ns2:type>dessert</ns2:type>
+        <ns2:type>Dessert</ns2:type>
         <ns2:prix>7.5</ns2:prix>
-        <ns2:ingredients>ananas</ns2:ingredients>
-        <ns2:ingredients>mozza</ns2:ingredients>
+        <ns2:ingredients>Ananas</ns2:ingredients>
+        <ns2:ingredients>Mozza</ns2:ingredients>
     </ns1:plat>
     
     <ns1:plat>
         <ns2:id>des2</ns2:id>
         <ns2:image></ns2:image>
-        <ns2:type>dessert</ns2:type>
+        <ns2:type>Dessert</ns2:type>
         <ns2:prix>1.5</ns2:prix>
-        <ns2:ingredients>mozza</ns2:ingredients>
+        <ns2:ingredients>Mozza</ns2:ingredients>
     </ns1:plat>
     
     <ns1:plat>
         <ns2:id>des3</ns2:id>
         <ns2:image>http://p9.storage.canalblog.com/99/14/1118309/89578201_o.jpg</ns2:image>
-        <ns2:type>dessert</ns2:type>
+        <ns2:type>Dessert</ns2:type>
         <ns2:prix>2.5</ns2:prix>
-        <ns2:ingredients>ananas</ns2:ingredients>
+        <ns2:ingredients>Ananas</ns2:ingredients>
     </ns1:plat>
     
     <ns1:plat>
         <ns2:id>plat2</ns2:id>
         <ns2:image>https://images.ricardocuisine.com/services/recipes/1074x1074_3089-background.jpg</ns2:image>
-        <ns2:type>plat</ns2:type>
+        <ns2:type>Plat</ns2:type>
         <ns2:prix>10.0</ns2:prix>
-        <ns2:ingredients>saumon</ns2:ingredients>
-        <ns2:ingredients>champignons</ns2:ingredients>
-        <ns2:ingredients>poivrons</ns2:ingredients>
+        <ns2:ingredients>Saumon</ns2:ingredients>
+        <ns2:ingredients>Champignons</ns2:ingredients>
+        <ns2:ingredients>Poivrons</ns2:ingredients>
     </ns1:plat>
     
     <ns1:plat>
         <ns2:id>plat3</ns2:id>
         <ns2:image>https://p7.storage.canalblog.com/77/30/1052250/86288983_o.jpg</ns2:image>
-        <ns2:type>plat</ns2:type>
+        <ns2:type>Plat</ns2:type>
         <ns2:prix>12.5</ns2:prix>
-        <ns2:ingredients>thon</ns2:ingredients>
-        <ns2:ingredients>champignons</ns2:ingredients>   
-        <ns2:ingredients>mozza</ns2:ingredients> 
-        <ns2:ingredients>aubergine</ns2:ingredients>           
+        <ns2:ingredients>Thon</ns2:ingredients>
+        <ns2:ingredients>Champignons</ns2:ingredients>   
+        <ns2:ingredients>Mozza</ns2:ingredients> 
+        <ns2:ingredients>Aubergine</ns2:ingredients>           
     </ns1:plat>
     
     <ns1:plat>
         <ns2:id>plat4</ns2:id>
         <ns2:image>https://assets.afcdn.com/recipe/20170614/69388_w800h600c1cx3000cy2000.jpg</ns2:image>
-        <ns2:type>plat</ns2:type>
+        <ns2:type>Plat</ns2:type>
         <ns2:prix>13.5</ns2:prix>
-        <ns2:ingredients>thon</ns2:ingredients>
-        <ns2:ingredients>champignons</ns2:ingredients>   
-        <ns2:ingredients>mozza</ns2:ingredients> 
-        <ns2:ingredients>aubergine</ns2:ingredients>
-        <ns2:ingredients>roquefort</ns2:ingredients>           
+        <ns2:ingredients>Thon</ns2:ingredients>
+        <ns2:ingredients>Champignons</ns2:ingredients>   
+        <ns2:ingredients>Mozza</ns2:ingredients> 
+        <ns2:ingredients>Aubergine</ns2:ingredients>
+        <ns2:ingredients>Roquefort</ns2:ingredients>           
     </ns1:plat>
     
     <ns1:plat>
         <ns2:id>plat5</ns2:id>
         <ns2:image>https://www.atelierdeschefs.com/media/recette-e17221-crepe-jambon-champignons.jpg</ns2:image>
-        <ns2:type>plat</ns2:type>
+        <ns2:type>Plat</ns2:type>
         <ns2:prix>13.5</ns2:prix>
-        <ns2:ingredients>jambon</ns2:ingredients>
-        <ns2:ingredients>champignons</ns2:ingredients>   
-        <ns2:ingredients>mozza</ns2:ingredients> 
-        <ns2:ingredients>aubergine</ns2:ingredients>
-        <ns2:ingredients>roquefort</ns2:ingredients>  
-        <ns2:ingredients>chevre</ns2:ingredients> 
+        <ns2:ingredients>Jambon</ns2:ingredients>
+        <ns2:ingredients>Champignons</ns2:ingredients>   
+        <ns2:ingredients>Mozza</ns2:ingredients> 
+        <ns2:ingredients>Aubergine</ns2:ingredients>
+        <ns2:ingredients>Roquefort</ns2:ingredients>  
+        <ns2:ingredients>Chevre</ns2:ingredients> 
                  
     </ns1:plat>
     <ns1:plat>
         <ns2:id>bois1</ns2:id>
         <ns2:image>http://www.prunier.com/wp-content/uploads/2013/03/ananas-victoria.jpg</ns2:image>
-        <ns2:type>boisson</ns2:type>
+        <ns2:type>Boisson</ns2:type>
         <ns2:prix>4.5</ns2:prix>
-        <ns2:ingredients>bananes</ns2:ingredients>
-        <ns2:ingredients>ananas</ns2:ingredients>
+        <ns2:ingredients>Bananes</ns2:ingredients>
+        <ns2:ingredients>Ananas</ns2:ingredients>
     </ns1:plat>
     <ns1:plat>
         <ns2:id>bois2</ns2:id>
         <ns2:image>https://sf1.viepratique.fr/wp-content/uploads/sites/2/2014/10/soupiere-melon.jpg</ns2:image>
-        <ns2:type>boisson</ns2:type>
+        <ns2:type>Boisson</ns2:type>
         <ns2:prix>2.5</ns2:prix>
-        <ns2:ingredients>melon</ns2:ingredients>
+        <ns2:ingredients>Melon</ns2:ingredients>
         
     </ns1:plat>
 </ns1:plats>

@@ -65,7 +65,7 @@ public class GestionnaireClient extends SQLAble {
     }
 
  
-    public boolean enregistreClientDB() throws SQLException, Exception {
+    public boolean enregistreClientDB() throws SQLException {
         boolean exist = existsClientDB();
         boolean res = false;
         if (!exist) {
@@ -78,8 +78,6 @@ public class GestionnaireClient extends SQLAble {
                 cstmt.execute();
                 cstmt.close();
                 res = true;
-        }else{
-            throw new Exception("il existe, pour cela on ne peut pas le réinsérer !");
         }
         return res;
     }
@@ -104,38 +102,42 @@ public class GestionnaireClient extends SQLAble {
     }
     
         
-    public static Client getClient(String id) throws SQLException, Exception {
-        GestionnaireClient gc = new GestionnaireClient( id , "" , "" );
-        gc.client = new Client();
-        gc.client.setId(id);
-        
-        gc.connectToDatabase();
-        OracleCallableStatement ocstmt;
-        ocstmt = (OracleCallableStatement) conn.prepareCall("{ ? = call getClient(?) }");
-        ocstmt.registerOutParameter(1, OracleTypes.CURSOR);
-        ocstmt.setString(2, id);
-        ocstmt.execute();
+   public Client getClient(String id) {
+        //client = new Client();
+        //client.setId(id);
+        try {
+            connectToDatabase();
+            OracleCallableStatement ocstmt;
+            ocstmt = (OracleCallableStatement) conn.prepareCall("{ ? = call getClient(?) }");
+            ocstmt.registerOutParameter(1, OracleTypes.CURSOR);
+            ocstmt.setString(2, id);
+            ocstmt.execute();
 
-        ResultSet rset = (ResultSet) (ocstmt.getObject(1));
+            ResultSet rset = (ResultSet) (ocstmt.getObject(1));
 
-        if (rset != null && rset.next()) {
-            gc.client.setNom(rset.getString("nom"));
-            gc.client.setPrenom(rset.getString("prenom"));
-            gc.client.setAdresse(rset.getString("adresse"));
-            gc.client.setEmail(rset.getString("email"));
-            gc.client.setPhoto(rset.getString("photo"));
-            gc.client.setTel(rset.getString("tel"));
-            rset.close();
-        }else{
-            throw new Exception("Client inexistant dans la BD!");
+            if (rset != null && rset.next()) {
+                client.setId(rset.getString("idClient"));
+                client.setNom(rset.getString("nom"));
+                client.setPrenom(rset.getString("prenom"));
+                client.setAdresse(rset.getString("adresse"));
+                client.setEmail(rset.getString("email"));
+                client.setPhoto(rset.getString("photo"));
+                client.setTel(rset.getString("tel"));
+            } else {
+                System.out.println("le resultSet est null");
+            }
+            ocstmt.close();
+
+        } catch (Exception e) {
+            System.out.println("erreur lors de la recuperation: " + e.getMessage());
         }
-        
-        ocstmt.close();
-        return gc.client;
+
+        return client;
     }
 
 
-    public void editClientDB() throws SQLException, Exception {
+
+    public void editClientDB() throws SQLException {
         boolean exist = existsClientDB();
         if (exist) {
             connectToDatabase();
@@ -148,8 +150,6 @@ public class GestionnaireClient extends SQLAble {
             cstmt.setString(5, client.getAdresse());
             cstmt.execute();
             cstmt.close();
-        }else{
-                throw new Exception("Client inexistant !");
         }
     }
 

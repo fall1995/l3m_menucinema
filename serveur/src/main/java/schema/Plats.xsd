@@ -15,7 +15,7 @@ and open the template in the editor.
     <xsd:element name="plats" type="Plats"/>
     <xsd:complexType name="Plats">
         <xsd:sequence>
-            <xsd:element name="plats"  type="plat:Plat" minOccurs="1" maxOccurs="unbounded"/>
+            <xsd:element name="plat"  type="plat:Plat" minOccurs="1" maxOccurs="unbounded"/>
         </xsd:sequence>   
     </xsd:complexType>
 </xsd:schema>

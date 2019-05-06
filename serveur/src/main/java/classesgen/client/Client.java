@@ -1,8 +1,8 @@
 //
-// Ce fichier a été généré par l'implémentation de référence JavaTM Architecture for XML Binding (JAXB), v2.2.8-b130911.1802 
-// Voir <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
-// Toute modification apportée à ce fichier sera perdue lors de la recompilation du schéma source. 
-// Généré le : 2019.05.06 à 12:12:24 AM CEST 
+// Ce fichier a xe9txe9 gxe9nxe9rxe9 par l'implxe9mentation de rxe9fxe9rence JavaTM Architecture for XML Binding (JAXB), v2.3.1-b171012.0423 
+// Voir <a href="https://javaee.github.io/jaxb-v2/">https://javaee.github.io/jaxb-v2/</a> 
+// Toute modification apportxe9e xe0 ce fichier sera perdue lors de la recompilation du schxe9ma source. 
+// Gxe9nxe9rxe9 le : 2019.05.06 xe0 12:37:02 PM CEST 
 //
 
 
@@ -17,24 +17,24 @@ import javax.xml.bind.annotation.XmlType;
 /**
  * <p>Classe Java pour Client complex type.
  * 
- * <p>Le fragment de schéma suivant indique le contenu attendu figurant dans cette classe.
+ * <p>Le fragment de schxE9ma suivant indique le contenu attendu figurant dans cette classe.
  * 
  * <pre>
- * &lt;complexType name="Client">
- *   &lt;complexContent>
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *       &lt;sequence>
- *         &lt;element name="id" type="{http://www.w3.org/2001/XMLSchema}string"/>
- *         &lt;element name="nom" type="{http://www.w3.org/2001/XMLSchema}string"/>
- *         &lt;element name="prenom" type="{http://www.w3.org/2001/XMLSchema}string"/>
- *         &lt;element name="tel" type="{http://www.w3.org/2001/XMLSchema}string"/>
- *         &lt;element name="adresse" type="{http://www.w3.org/2001/XMLSchema}string"/>
- *         &lt;element name="photo" type="{http://www.w3.org/2001/XMLSchema}string"/>
- *         &lt;element name="email" type="{http://www.w3.org/2001/XMLSchema}string"/>
- *       &lt;/sequence>
- *     &lt;/restriction>
- *   &lt;/complexContent>
- * &lt;/complexType>
+ * &lt;complexType name="Client"&gt;
+ *   &lt;complexContent&gt;
+ *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
+ *       &lt;sequence&gt;
+ *         &lt;element name="id" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
+ *         &lt;element name="nom" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
+ *         &lt;element name="prenom" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
+ *         &lt;element name="tel" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
+ *         &lt;element name="adresse" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
+ *         &lt;element name="photo" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
+ *         &lt;element name="email" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
+ *       &lt;/sequence&gt;
+ *     &lt;/restriction&gt;
+ *   &lt;/complexContent&gt;
+ * &lt;/complexType&gt;
  * </pre>
  * 
  * 
@@ -67,7 +67,7 @@ public class Client {
     protected String email;
 
     /**
-     * Obtient la valeur de la propriété id.
+     * Obtient la valeur de la proprixE9txE9 id.
      * 
      * @return
      *     possible object is
@@ -79,7 +79,7 @@ public class Client {
     }
 
     /**
-     * Définit la valeur de la propriété id.
+     * DxE9finit la valeur de la proprixE9txE9 id.
      * 
      * @param value
      *     allowed object is
@@ -91,7 +91,7 @@ public class Client {
     }
 
     /**
-     * Obtient la valeur de la propriété nom.
+     * Obtient la valeur de la proprixE9txE9 nom.
      * 
      * @return
      *     possible object is
@@ -103,7 +103,7 @@ public class Client {
     }
 
     /**
-     * Définit la valeur de la propriété nom.
+     * DxE9finit la valeur de la proprixE9txE9 nom.
      * 
      * @param value
      *     allowed object is
@@ -115,7 +115,7 @@ public class Client {
     }
 
     /**
-     * Obtient la valeur de la propriété prenom.
+     * Obtient la valeur de la proprixE9txE9 prenom.
      * 
      * @return
      *     possible object is
@@ -127,7 +127,7 @@ public class Client {
     }
 
     /**
-     * Définit la valeur de la propriété prenom.
+     * DxE9finit la valeur de la proprixE9txE9 prenom.
      * 
      * @param value
      *     allowed object is
@@ -139,7 +139,7 @@ public class Client {
     }
 
     /**
-     * Obtient la valeur de la propriété tel.
+     * Obtient la valeur de la proprixE9txE9 tel.
      * 
      * @return
      *     possible object is
@@ -151,7 +151,7 @@ public class Client {
     }
 
     /**
-     * Définit la valeur de la propriété tel.
+     * DxE9finit la valeur de la proprixE9txE9 tel.
      * 
      * @param value
      *     allowed object is
@@ -163,7 +163,7 @@ public class Client {
     }
 
     /**
-     * Obtient la valeur de la propriété adresse.
+     * Obtient la valeur de la proprixE9txE9 adresse.
      * 
      * @return
      *     possible object is
@@ -175,7 +175,7 @@ public class Client {
     }
 
     /**
-     * Définit la valeur de la propriété adresse.
+     * DxE9finit la valeur de la proprixE9txE9 adresse.
      * 
      * @param value
      *     allowed object is
@@ -187,7 +187,7 @@ public class Client {
     }
 
     /**
-     * Obtient la valeur de la propriété photo.
+     * Obtient la valeur de la proprixE9txE9 photo.
      * 
      * @return
      *     possible object is
@@ -199,7 +199,7 @@ public class Client {
     }
 
     /**
-     * Définit la valeur de la propriété photo.
+     * DxE9finit la valeur de la proprixE9txE9 photo.
      * 
      * @param value
      *     allowed object is
@@ -211,7 +211,7 @@ public class Client {
     }
 
     /**
-     * Obtient la valeur de la propriété email.
+     * Obtient la valeur de la proprixE9txE9 email.
      * 
      * @return
      *     possible object is
@@ -223,7 +223,7 @@ public class Client {
     }
 
     /**
-     * Définit la valeur de la propriété email.
+     * DxE9finit la valeur de la proprixE9txE9 email.
      * 
      * @param value
      *     allowed object is

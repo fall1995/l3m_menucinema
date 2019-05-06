@@ -7,8 +7,6 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Enumeration;
 import java.util.HashMap;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -95,14 +93,14 @@ public class UpdateClientServlet extends HttpServlet {
             try {
                 //mise à jour
                 GestionnaireClient gestionClient = new GestionnaireClient(client.getId(), client.getNom(), client.getPrenom());
+                gestionClient.setClient(client);
                 gestionClient.editClientDB();
+                
                 response.setStatus(HttpServletResponse.SC_OK);
-                response.getWriter().println( gestionClient.ClientToJson() );
+                response.getWriter().println(client.toString());
             } catch (SQLException ex) {
                 response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
                 response.getWriter().println(ex.getMessage());
-            } catch (Exception ex) {
-                Logger.getLogger(UpdateClientServlet.class.getName()).log(Level.SEVERE, null, ex);
             }
         } else {
             //on retourne un message d'erreur
