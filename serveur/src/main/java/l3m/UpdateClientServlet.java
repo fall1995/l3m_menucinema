@@ -95,9 +95,13 @@ public class UpdateClientServlet extends HttpServlet {
             try {
                 //mise à jour
                 GestionnaireClient gestionClient = new GestionnaireClient(client.getId(), client.getNom(), client.getPrenom());
+                gestionClient.setClient(client);
                 gestionClient.editClientDB();
+                
                 response.setStatus(HttpServletResponse.SC_OK);
-                response.getWriter().println(gestionClient.ClientToJson());
+
+                response.getWriter().println(client.toString());
+
             } catch (SQLException ex) {
                 response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
                 response.getWriter().println(ex.getMessage());

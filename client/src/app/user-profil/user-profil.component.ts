@@ -16,22 +16,22 @@ export class UserProfilComponent implements OnInit {
     constructor(private afAuth: AngularFireAuth, private authService: AuthService) {
     }
 
-    afficherDialog = false;
-    user: User;
-    userPhoto : User = {
+    afficherDialog = false; // boolean pour ouvrir et fermer le dialogue pop up
+    user: User; // l'utilisateur courant
+    userPhoto : User = { // je stock la photo de profil recuperer dans firebase
         photo: '',
     };
     ngOnInit() {
-        //this.initObser();
         this.init();
     }
 
-
-
+    /**
+     * recuperation des informations de l'utilisateur
+     */
      async init() {
          await this.afAuth.user.subscribe( u =>{
             if (u){
-                 this.authService.getData( u.uid).then( res =>{
+                 this.authService.getUser( u.uid).then(res =>{
                      this.user = res;
                      this.userPhoto.photo = u.photoURL;
                     console.log(this.user);
@@ -42,11 +42,16 @@ export class UserProfilComponent implements OnInit {
         });
     }
 
-
+    /**
+     * bouton qui affiche le dialog pop up
+     */
     afficherDialogProfil(): void {
         this.afficherDialog = true;
     }
 
+    /**
+     * fermeture du dialog pop up
+     */
     onHideProfilDialog(): void {
         this.afficherDialog = false;
     }

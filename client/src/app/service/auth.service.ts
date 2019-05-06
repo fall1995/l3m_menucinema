@@ -32,8 +32,6 @@ export class AuthService {
     // Authentification ________________________________________________________________________________________________________________________________
     // _______________________________________________________________________________________________________________________________________
 
-
-
     async login(userId : string, nom : string, prenom : string): Promise<any>{
         // variable que le serveur s'attend a recevoir
         let data = {
@@ -59,22 +57,12 @@ export class AuthService {
         }).toPromise();
     }
 
-    /**
-     * recuperation des infos d'un client dans la base par son id
-     * @param id
-     * @param options
-     */
-    async getClientById(id: string, options?: MovieQuery): Promise<User> {
-        const url = `/api/authentification?idClient=${id}`;
-        const res = await this.get<User>(url, options);
-        return res.body;
-    }
-    
-    getClient(id: string): Observable<User>{
-        return this.http.get(`/api/authentification?idClient=${id}` );
-    }
 
-    async getData(id : string): Promise<User> {
+    /**
+     * recuperation des données su client dans la base par son id
+     * @param id
+     */
+    async getUser(id : string): Promise<User> {
         return new Promise<User>(((resolve, reject) => {
             this.http.get(`/api/authentification?idClient=${id}`, {responseType: 'text'}).toPromise().then(
                 res => {

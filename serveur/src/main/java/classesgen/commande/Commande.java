@@ -1,8 +1,8 @@
 //
-// Ce fichier a été généré par l'implémentation de référence JavaTM Architecture for XML Binding (JAXB), v2.2.8-b130911.1802 
-// Voir <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
-// Toute modification apportée à ce fichier sera perdue lors de la recompilation du schéma source. 
-// Généré le : 2019.05.06 à 12:12:24 AM CEST 
+// Ce fichier a xe9txe9 gxe9nxe9rxe9 par l'implxe9mentation de rxe9fxe9rence JavaTM Architecture for XML Binding (JAXB), v2.3.1-b171012.0423 
+// Voir <a href="https://javaee.github.io/jaxb-v2/">https://javaee.github.io/jaxb-v2/</a> 
+// Toute modification apportxe9e xe0 ce fichier sera perdue lors de la recompilation du schxe9ma source. 
+// Gxe9nxe9rxe9 le : 2019.05.06 xe0 12:37:02 PM CEST 
 //
 
 
@@ -19,24 +19,24 @@ import javax.xml.bind.annotation.XmlType;
 /**
  * <p>Classe Java pour Commande complex type.
  * 
- * <p>Le fragment de schéma suivant indique le contenu attendu figurant dans cette classe.
+ * <p>Le fragment de schxE9ma suivant indique le contenu attendu figurant dans cette classe.
  * 
  * <pre>
- * &lt;complexType name="Commande">
- *   &lt;complexContent>
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *       &lt;sequence>
- *         &lt;element name="id" type="{http://www.w3.org/2001/XMLSchema}string"/>
- *         &lt;element name="idClient" type="{http://www.w3.org/2001/XMLSchema}string"/>
- *         &lt;element name="idPlats" type="{http://www.w3.org/2001/XMLSchema}string" maxOccurs="unbounded" minOccurs="0"/>
- *         &lt;element name="idFilms" type="{http://www.w3.org/2001/XMLSchema}string" maxOccurs="unbounded" minOccurs="0"/>
- *         &lt;element name="adresseLivraison" type="{http://www.w3.org/2001/XMLSchema}string"/>
- *         &lt;element name="date" type="{http://www.w3.org/2001/XMLSchema}string"/>
- *         &lt;element name="prix" type="{http://www.w3.org/2001/XMLSchema}double"/>
- *       &lt;/sequence>
- *     &lt;/restriction>
- *   &lt;/complexContent>
- * &lt;/complexType>
+ * &lt;complexType name="Commande"&gt;
+ *   &lt;complexContent&gt;
+ *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
+ *       &lt;sequence&gt;
+ *         &lt;element name="id" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
+ *         &lt;element name="idClient" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
+ *         &lt;element name="idPlats" type="{http://www.w3.org/2001/XMLSchema}string" maxOccurs="unbounded" minOccurs="0"/&gt;
+ *         &lt;element name="idFilms" type="{http://www.w3.org/2001/XMLSchema}string" maxOccurs="unbounded" minOccurs="0"/&gt;
+ *         &lt;element name="adresseLivraison" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
+ *         &lt;element name="date" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
+ *         &lt;element name="prix" type="{http://www.w3.org/2001/XMLSchema}double"/&gt;
+ *       &lt;/sequence&gt;
+ *     &lt;/restriction&gt;
+ *   &lt;/complexContent&gt;
+ * &lt;/complexType&gt;
  * </pre>
  * 
  * 
@@ -66,7 +66,7 @@ public class Commande {
     protected double prix;
 
     /**
-     * Obtient la valeur de la propriété id.
+     * Obtient la valeur de la proprixE9txE9 id.
      * 
      * @return
      *     possible object is
@@ -78,7 +78,7 @@ public class Commande {
     }
 
     /**
-     * Définit la valeur de la propriété id.
+     * DxE9finit la valeur de la proprixE9txE9 id.
      * 
      * @param value
      *     allowed object is
@@ -90,7 +90,7 @@ public class Commande {
     }
 
     /**
-     * Obtient la valeur de la propriété idClient.
+     * Obtient la valeur de la proprixE9txE9 idClient.
      * 
      * @return
      *     possible object is
@@ -102,7 +102,7 @@ public class Commande {
     }
 
     /**
-     * Définit la valeur de la propriété idClient.
+     * DxE9finit la valeur de la proprixE9txE9 idClient.
      * 
      * @param value
      *     allowed object is
@@ -172,7 +172,7 @@ public class Commande {
     }
 
     /**
-     * Obtient la valeur de la propriété adresseLivraison.
+     * Obtient la valeur de la proprixE9txE9 adresseLivraison.
      * 
      * @return
      *     possible object is
@@ -184,7 +184,7 @@ public class Commande {
     }
 
     /**
-     * Définit la valeur de la propriété adresseLivraison.
+     * DxE9finit la valeur de la proprixE9txE9 adresseLivraison.
      * 
      * @param value
      *     allowed object is
@@ -196,7 +196,7 @@ public class Commande {
     }
 
     /**
-     * Obtient la valeur de la propriété date.
+     * Obtient la valeur de la proprixE9txE9 date.
      * 
      * @return
      *     possible object is
@@ -208,7 +208,7 @@ public class Commande {
     }
 
     /**
-     * Définit la valeur de la propriété date.
+     * DxE9finit la valeur de la proprixE9txE9 date.
      * 
      * @param value
      *     allowed object is
@@ -220,7 +220,7 @@ public class Commande {
     }
 
     /**
-     * Obtient la valeur de la propriété prix.
+     * Obtient la valeur de la proprixE9txE9 prix.
      * 
      */
     public double getPrix() {
@@ -228,7 +228,7 @@ public class Commande {
     }
 
     /**
-     * Définit la valeur de la propriété prix.
+     * DxE9finit la valeur de la proprixE9txE9 prix.
      * 
      */
     public void setPrix(double value) {

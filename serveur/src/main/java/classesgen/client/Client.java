@@ -1,3 +1,13 @@
+
+//
+// Ce fichier a xe9txe9 gxe9nxe9rxe9 par l'implxe9mentation de rxe9fxe9rence JavaTM Architecture for XML Binding (JAXB), v2.3.1-b171012.0423 
+// Voir <a href="https://javaee.github.io/jaxb-v2/">https://javaee.github.io/jaxb-v2/</a> 
+// Toute modification apportxe9e xe0 ce fichier sera perdue lors de la recompilation du schxe9ma source. 
+// Gxe9nxe9rxe9 le : 2019.05.06 xe0 12:37:02 PM CEST 
+//
+
+
+
 package classesgen.client;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -9,24 +19,25 @@ import javax.xml.bind.annotation.XmlType;
 /**
  * <p>Classe Java pour Client complex type.
  * 
- * <p>Le fragment de sch�ma suivant indique le contenu attendu figurant dans cette classe.
+ * <p>Le fragment de schxE9ma suivant indique le contenu attendu figurant dans cette classe.
+>>>>>>> eba46d10865b54b02fbf740ab69253d2b89c3686
  * 
  * <pre>
- * &lt;complexType name="Client">
- *   &lt;complexContent>
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *       &lt;sequence>
- *         &lt;element name="id" type="{http://www.w3.org/2001/XMLSchema}string"/>
- *         &lt;element name="nom" type="{http://www.w3.org/2001/XMLSchema}string"/>
- *         &lt;element name="prenom" type="{http://www.w3.org/2001/XMLSchema}string"/>
- *         &lt;element name="tel" type="{http://www.w3.org/2001/XMLSchema}string"/>
- *         &lt;element name="adresse" type="{http://www.w3.org/2001/XMLSchema}string"/>
- *         &lt;element name="photo" type="{http://www.w3.org/2001/XMLSchema}string"/>
- *         &lt;element name="email" type="{http://www.w3.org/2001/XMLSchema}string"/>
- *       &lt;/sequence>
- *     &lt;/restriction>
- *   &lt;/complexContent>
- * &lt;/complexType>
+ * &lt;complexType name="Client"&gt;
+ *   &lt;complexContent&gt;
+ *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
+ *       &lt;sequence&gt;
+ *         &lt;element name="id" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
+ *         &lt;element name="nom" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
+ *         &lt;element name="prenom" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
+ *         &lt;element name="tel" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
+ *         &lt;element name="adresse" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
+ *         &lt;element name="photo" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
+ *         &lt;element name="email" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
+ *       &lt;/sequence&gt;
+ *     &lt;/restriction&gt;
+ *   &lt;/complexContent&gt;
+ * &lt;/complexType&gt;
  * </pre>
  * 
  * 
@@ -59,7 +70,7 @@ public class Client {
     protected String email;
 
     /**
-     * Obtient la valeur de la propri�t� id.
+
      * 
      * @return
      *     possible object is
@@ -71,7 +82,7 @@ public class Client {
     }
 
     /**
-     * D�finit la valeur de la propri�t� id.
+
      * 
      * @param value
      *     allowed object is
@@ -83,7 +94,7 @@ public class Client {
     }
 
     /**
-     * Obtient la valeur de la propri�t� nom.
+
      * 
      * @return
      *     possible object is
@@ -95,7 +106,7 @@ public class Client {
     }
 
     /**
-     * D�finit la valeur de la propri�t� nom.
+
      * 
      * @param value
      *     allowed object is
@@ -107,7 +118,7 @@ public class Client {
     }
 
     /**
-     * Obtient la valeur de la propri�t� prenom.
+
      * 
      * @return
      *     possible object is
@@ -119,7 +130,7 @@ public class Client {
     }
 
     /**
-     * D�finit la valeur de la propri�t� prenom.
+
      * 
      * @param value
      *     allowed object is
@@ -131,7 +142,6 @@ public class Client {
     }
 
     /**
-     * Obtient la valeur de la propri�t� tel.
      * 
      * @return
      *     possible object is
@@ -143,7 +153,7 @@ public class Client {
     }
 
     /**
-     * D�finit la valeur de la propri�t� tel.
+
      * 
      * @param value
      *     allowed object is
@@ -155,7 +165,6 @@ public class Client {
     }
 
     /**
-     * Obtient la valeur de la propri�t� adresse.
      * 
      * @return
      *     possible object is
@@ -167,7 +176,6 @@ public class Client {
     }
 
     /**
-     * D�finit la valeur de la propri�t� adresse.
      * 
      * @param value
      *     allowed object is
@@ -179,7 +187,6 @@ public class Client {
     }
 
     /**
-     * Obtient la valeur de la propri�t� photo.
      * 
      * @return
      *     possible object is
@@ -191,7 +198,6 @@ public class Client {
     }
 
     /**
-     * D�finit la valeur de la propri�t� photo.
      * 
      * @param value
      *     allowed object is
@@ -203,7 +209,7 @@ public class Client {
     }
 
     /**
-     * Obtient la valeur de la propri�t� email.
+
      * 
      * @return
      *     possible object is
@@ -215,7 +221,6 @@ public class Client {
     }
 
     /**
-     * D�finit la valeur de la propri�t� email.
      * 
      * @param value
      *     allowed object is

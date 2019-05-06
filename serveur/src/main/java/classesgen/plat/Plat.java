@@ -1,8 +1,8 @@
 //
-// Ce fichier a été généré par l'implémentation de référence JavaTM Architecture for XML Binding (JAXB), v2.2.8-b130911.1802 
-// Voir <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
-// Toute modification apportée à ce fichier sera perdue lors de la recompilation du schéma source. 
-// Généré le : 2019.05.05 à 04:57:11 PM CEST 
+// Ce fichier a xe9txe9 gxe9nxe9rxe9 par l'implxe9mentation de rxe9fxe9rence JavaTM Architecture for XML Binding (JAXB), v2.3.1-b171012.0423 
+// Voir <a href="https://javaee.github.io/jaxb-v2/">https://javaee.github.io/jaxb-v2/</a> 
+// Toute modification apportxe9e xe0 ce fichier sera perdue lors de la recompilation du schxe9ma source. 
+// Gxe9nxe9rxe9 le : 2019.05.06 xe0 12:36:42 PM CEST 
 //
 
 
@@ -22,22 +22,22 @@ import classesgen.typedeplat.TypeDePlat;
 /**
  * <p>Classe Java pour Plat complex type.
  * 
- * <p>Le fragment de schéma suivant indique le contenu attendu figurant dans cette classe.
+ * <p>Le fragment de schxE9ma suivant indique le contenu attendu figurant dans cette classe.
  * 
  * <pre>
- * &lt;complexType name="Plat">
- *   &lt;complexContent>
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *       &lt;sequence>
- *         &lt;element name="id" type="{http://www.w3.org/2001/XMLSchema}string"/>
- *         &lt;element name="image" type="{http://www.w3.org/2001/XMLSchema}string"/>
- *         &lt;element name="type" type="{http://classesGen/typeDePlat}TypeDePlat"/>
- *         &lt;element name="prix" type="{http://www.w3.org/2001/XMLSchema}double"/>
- *         &lt;element name="ingredients" type="{http://classesGen/ingredient}Ingredient" maxOccurs="unbounded"/>
- *       &lt;/sequence>
- *     &lt;/restriction>
- *   &lt;/complexContent>
- * &lt;/complexType>
+ * &lt;complexType name="Plat"&gt;
+ *   &lt;complexContent&gt;
+ *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
+ *       &lt;sequence&gt;
+ *         &lt;element name="id" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
+ *         &lt;element name="image" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
+ *         &lt;element name="type" type="{http://classesGen/typeDePlat}TypeDePlat"/&gt;
+ *         &lt;element name="prix" type="{http://www.w3.org/2001/XMLSchema}double"/&gt;
+ *         &lt;element name="ingredients" type="{http://classesGen/ingredient}Ingredient" maxOccurs="unbounded"/&gt;
+ *       &lt;/sequence&gt;
+ *     &lt;/restriction&gt;
+ *   &lt;/complexContent&gt;
+ * &lt;/complexType&gt;
  * </pre>
  * 
  * 
@@ -65,7 +65,7 @@ public class Plat {
     protected List<Ingredient> ingredients;
 
     /**
-     * Obtient la valeur de la propriété id.
+     * Obtient la valeur de la proprixE9txE9 id.
      * 
      * @return
      *     possible object is
@@ -77,7 +77,7 @@ public class Plat {
     }
 
     /**
-     * Définit la valeur de la propriété id.
+     * DxE9finit la valeur de la proprixE9txE9 id.
      * 
      * @param value
      *     allowed object is
@@ -89,7 +89,7 @@ public class Plat {
     }
 
     /**
-     * Obtient la valeur de la propriété image.
+     * Obtient la valeur de la proprixE9txE9 image.
      * 
      * @return
      *     possible object is
@@ -101,7 +101,7 @@ public class Plat {
     }
 
     /**
-     * Définit la valeur de la propriété image.
+     * DxE9finit la valeur de la proprixE9txE9 image.
      * 
      * @param value
      *     allowed object is
@@ -113,7 +113,7 @@ public class Plat {
     }
 
     /**
-     * Obtient la valeur de la propriété type.
+     * Obtient la valeur de la proprixE9txE9 type.
      * 
      * @return
      *     possible object is
@@ -125,7 +125,7 @@ public class Plat {
     }
 
     /**
-     * Définit la valeur de la propriété type.
+     * DxE9finit la valeur de la proprixE9txE9 type.
      * 
      * @param value
      *     allowed object is
@@ -137,7 +137,7 @@ public class Plat {
     }
 
     /**
-     * Obtient la valeur de la propriété prix.
+     * Obtient la valeur de la proprixE9txE9 prix.
      * 
      */
     public double getPrix() {
@@ -145,7 +145,7 @@ public class Plat {
     }
 
     /**
-     * Définit la valeur de la propriété prix.
+     * DxE9finit la valeur de la proprixE9txE9 prix.
      * 
      */
     public void setPrix(double value) {

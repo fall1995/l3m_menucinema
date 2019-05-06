@@ -12,6 +12,7 @@ import { FilmsComponent } from './films/films.component';
 import { MenusComponent } from './menus/menus.component';
 import { HeaderComponent } from './header/header.component';
 // service
+import {StorageService} from './service/storage.service';
 import {TmdbService} from './service/tmdb.service';
 import {AuthService} from './service/auth.service';
 import {MenuService} from './service/menu.service';
@@ -98,7 +99,7 @@ import { PanierComponent } from './panier/panier.component';
         TableModule
 
     ],
-    providers: [TmdbService, MessageService,AuthService,MenuService, AuthGuardService],
+    providers: [TmdbService, MessageService,AuthService,MenuService, AuthGuardService, StorageService],
     bootstrap: [AppComponent]
 })
 export class AppModule {

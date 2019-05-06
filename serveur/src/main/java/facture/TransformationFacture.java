@@ -48,7 +48,7 @@ public TransformationFacture(Client client, List<String> idPlats, List<String> f
 public void saveAsXml(String nomFichier) throws JAXBException, IOException{
 
         
-    
+    /*
         Commande cmd = new Commande();
         cmd.setClient(client);
         cmd.setPrix(totale);
@@ -85,5 +85,7 @@ public void saveAsXml(String nomFichier) throws JAXBException, IOException{
             //do stuff with exception
             iox.printStackTrace();
         }
+*/
 }
+
 }
