@@ -4,7 +4,6 @@ import {MovieResponse} from '../tmdb-data/Movie';
 import {TmdbService} from '../service/tmdb.service';
 import {StorageService} from '../service/storage.service';
 import {MessageService} from 'primeng/api';
-
 @Component({
   selector: 'app-films',
   templateUrl: './films.component.html',
@@ -17,6 +16,10 @@ export class FilmsComponent implements OnInit {
     listeMovieDram : MovieResponse;
     listeMovieHightRatet : MovieResponse;
     afficherDialog = false;
+    detail_afficher='Detail';
+    detail_cacher='Afficher detail';
+
+    detail:string= this.detail_afficher;
 
   constructor(private tmdbService: TmdbService, private storage: StorageService,
                 private message: MessageService) { }
@@ -48,6 +51,16 @@ export class FilmsComponent implements OnInit {
       );
   }
   */
+ afficher():void{
+     if(this.detail=this.detail_cacher){
+
+         this.detail=this.detail_afficher;
+     }
+     else{
+        this.detail=this.detail_cacher;
+     }
+
+ }
     async init() {
         this.tmdbService.init( environment.tmdbKey );
         this.idFilm = await this.tmdbService.getMovie(14);

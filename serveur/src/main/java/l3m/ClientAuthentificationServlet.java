@@ -1,6 +1,7 @@
 package l3m;
 
 import classesgen.client.Client;
+import com.google.gson.Gson;
 import database.GestionnaireClient;
 import java.io.IOException;
 import java.sql.SQLException;
@@ -44,15 +45,17 @@ public class ClientAuthentificationServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String idClient = request.getParameter("idClient");
-        GestionnaireClient gestonClient;
+        GestionnaireClient gc;
         try {
-            gestonClient = new GestionnaireClient(idClient);
-            Client client_trouve = gestonClient.getClient(idClient);
-
+            Client client = GestionnaireClient.getClient(idClient);
+            
             response.setContentType("application/json");
             response.setStatus(HttpServletResponse.SC_OK);
-            response.getWriter().println(client_trouve.toString());
+            response.getWriter().println( new Gson().toJson(client) );
+            
         } catch (SQLException ex) {
+            Logger.getLogger(ClientAuthentificationServlet.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
             Logger.getLogger(ClientAuthentificationServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
 
@@ -82,8 +85,7 @@ public class ClientAuthentificationServlet extends HttpServlet {
         response.addHeader("Access-Control-Allow-Headers", "X-PINGOTHER, Origin, X-Requested-With, Content-Type, Accept");
         response.addHeader("Access-Control-Max-Age", "1728000");
 
-        // Extract userId from HTTP parameters
-        String res = " ";
+        String res = "";
         Enumeration<String> P = request.getParameterNames();
         HashMap<String, String> parametres = new HashMap();
         Client client = new Client();
@@ -107,6 +109,8 @@ public class ClientAuthentificationServlet extends HttpServlet {
             catch (SQLException e) {
                 response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
                 response.getWriter().println(e.toString());
+            } catch (Exception ex) {
+                Logger.getLogger(ClientAuthentificationServlet.class.getName()).log(Level.SEVERE, null, ex);
             }
         } // CAS HTTP code 401
         else {

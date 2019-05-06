@@ -42,17 +42,21 @@ public class CommandesServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("application/json");
-        id = request.getParameter("id");
-        
-        GestionnaireCommande gestonCommande;
-        gestonCommande = new GestionnaireCommande(id);
-        Commande commande = gestonCommande.getCommande(id);
-
-        response.setContentType("application/json");
-        response.setStatus(HttpServletResponse.SC_OK);
-        response.getWriter().println(commande.toString());
-        //response.sendError(0, id);
+        try {
+            response.setContentType("application/json");
+            id = request.getParameter("id");
+            
+            GestionnaireCommande gestonCommande;
+            gestonCommande = new GestionnaireCommande(id);
+            Commande commande = gestonCommande.getCommande(id);
+            
+            response.setContentType("application/json");
+            response.setStatus(HttpServletResponse.SC_OK);
+            response.getWriter().println(commande.toString());
+            //response.sendError(0, id);
+        } catch (SQLException ex) {
+            Logger.getLogger(CommandesServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
     }
 
@@ -85,16 +89,15 @@ public class CommandesServlet extends HttpServlet {
         List<String> listeFilms = (ArrayList<String>) toArrayList(idFilms);
         */
         commande.setIdClient(idClient);
-        commande.setIdPlat(idPlats);
+        commande.setIdPlat(idFilms);
         commande.setIdFilm(idFilms);
         commande.setAdresseLivraison(adresseLivraison);
         //insertion dans la base de donnes
         GestionnaireCommande addCommande;
         try {
-            addCommande = new GestionnaireCommande(idClient, idPlats, idFilms, adresseLivraison);
+            addCommande = new GestionnaireCommande(idClient, idFilms, idFilms, adresseLivraison);
             commande.setPrix(prix);
             addCommande.enregistrerCommandeDB();
-            
         } catch (SQLException ex) {
             Logger.getLogger(CommandesServlet.class.getName()).log(Level.SEVERE, null, ex);
         } catch (Exception ex) {

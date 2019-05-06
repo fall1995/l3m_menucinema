@@ -1,5 +1,7 @@
 package database;
 
+import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**
@@ -9,6 +11,6 @@ import java.sql.SQLException;
 interface DataBaseAble {
     public void connectToDatabase() throws SQLException;
     public void disconnect() throws SQLException;
-    //public ResultFormat request(String request) throws SQLException, Exception;
+    public ResultSet request(String request) throws SQLException, Exception;
     
 }

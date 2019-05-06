@@ -19,7 +19,7 @@ public abstract class XMLAble {
      *
      * @throws java.io.FileNotFoundException
      */
-    public void connectToDataBase() throws FileNotFoundException {
+    public void connectToDataBase() throws Exception {
 
     }
 

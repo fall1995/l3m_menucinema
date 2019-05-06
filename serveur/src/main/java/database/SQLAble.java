@@ -13,50 +13,32 @@ import java.sql.Statement;
  */
 public abstract class SQLAble implements DataBaseAble {
 
-     static Connection conn;
+    static Connection conn;
 
-    /**
-     * Methode permert de se connecter la base de donnee oracle
-     * @throws java.sql.SQLException
-     */
     @Override
     public void connectToDatabase() throws SQLException {
-        String CONN_URL = "jdbc:oracle:thin:@im2ag-oracle.e.ujf-grenoble.fr:1521:im2ag";
-        String USER = "sagarai";
-        String PASSWD = "Sagara1992";
-        System.out.print("Loading Oracle driver... ");
-        DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
-        System.out.println("loaded");
+        if (conn == null || conn != null && conn.isClosed()) {
+            String CONN_URL = "jdbc:oracle:thin:@im2ag-oracle.e.ujf-grenoble.fr:1521:im2ag";
+            String USER = "hasdit";
+            String PASSWD = "az1ER2t3";
+            System.out.print("Loading Oracle driver... ");
+            DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
+            System.out.println("loaded");
 
-        // Etablissement de la connection
-        System.out.print("Connecting to the database... ");
-        conn = DriverManager.getConnection(CONN_URL, USER, PASSWD);
-        //conn.setAutoCommit(false);
-        System.out.println("connected");
-        
-        /* 
-        if (conn == null || conn.isClosed()) {
-            try {
-                Class.forName("oracle.jdbc.driver.OracleDriver");
-            } catch (ClassNotFoundException e) {
-                throw new SQLException(e);
-            }
-            conn = DriverManager.getConnection(
-                    CONN_URL, USER, PASSWD);
+            // Etablissement de la connection
+            System.out.print("Connecting to the database... ");
+            conn = DriverManager.getConnection(CONN_URL, USER, PASSWD);
+            conn.setAutoCommit(false);
+            System.out.println("connected");
         }
-        **/
     }
-
-    /**
-     * Methode permet de se deconnecter a la base de donner oracle
-     * @throws java.sql.SQLException
-     */
+    
+    
     @Override
     public void disconnect() throws SQLException {
         if (conn != null && !conn.isClosed()) {
             conn.close();
         }
-
     }
 
     /**
