@@ -22,9 +22,17 @@ public class GestionnaireCommande extends SQLAble {
 
     private Commande commande;
 
-    public GestionnaireCommande(String idClient, List<String> idPlats, List<String> idFilms, String adresseLivraison) 
+    /**
+     *
+     * @param idClient
+     * @param idPlats
+     * @param idFilms
+     * @param adresseLivraison
+     * @throws Exception
+     */
+    public GestionnaireCommande(String idClient, List<String> idPlats, List<String> idFilms, String adresseLivraison)
             throws Exception {
-        
+
         commande = new Commande();
         commande.setIdClient(idClient);
         commande.getIdPlats().addAll(idPlats);
@@ -33,93 +41,106 @@ public class GestionnaireCommande extends SQLAble {
         computePrix();
     }
 
+    /**
+     *
+     * @param id
+     */
     public GestionnaireCommande(String id) {
         commande = new Commande();
         commande.setId(id);
     }
-    
+
     // calcul du prix de la commande
-    private void computePrix() throws Exception{
-    
+    private void computePrix() throws Exception {
+
         double prixPlats = 0;
         double prixFilms = 0;
 
         prixFilms = 3.79 * commande.getIdFilms().size();
 
-        for ( String idPlat : commande.getIdPlats() ){
+        for (String idPlat : commande.getIdPlats()) {
             prixPlats += GestionnaireMenu.getPrixPlat(idPlat);
         }
-        
-        commande.setPrix( prixFilms + prixPlats );
+
+        commande.setPrix(prixFilms + prixPlats);
     }
 
-
+    /**
+     *
+     * @throws SQLException
+     * @throws Exception
+     */
     public void enregistrerCommandeDB() throws SQLException, Exception {
         try {
             connectToDatabase();
             String pattern = "DD-MM-YYYY HH:MM:SS";
             DateFormat dateFormat = new SimpleDateFormat(pattern);
-        
+
             PreparedStatement pstmt;
             pstmt = conn.prepareStatement(
                     "insert into Commande (idClient, prix, adresseLivraison)"
                     + " values ( ? , ? , ? ) "
             );
-            pstmt.setString( 1 , commande.getIdClient() );
-            pstmt.setDouble( 2 , commande.getPrix() );
-            pstmt.setString( 3 , commande.getAdresseLivraison() );
+            pstmt.setString(1, commande.getIdClient());
+            pstmt.setDouble(2, commande.getPrix());
+            pstmt.setString(3, commande.getAdresseLivraison());
             pstmt.executeUpdate();
             pstmt.close();
-                
+
             OracleCallableStatement ocstmt;
-            ocstmt = (OracleCallableStatement )conn.prepareCall("{ ? = call getLastIdCommandeDate( ? ) }");
-            ocstmt.registerOutParameter(1, OracleTypes.CURSOR );
-            ocstmt.setString( 2 , commande.getIdClient() );
+            ocstmt = (OracleCallableStatement) conn.prepareCall("{ ? = call getLastIdCommandeDate( ? ) }");
+            ocstmt.registerOutParameter(1, OracleTypes.CURSOR);
+            ocstmt.setString(2, commande.getIdClient());
             ocstmt.execute();
 
             ResultSet rset = (ResultSet) (ocstmt.getObject(1));
             if (rset != null && rset.next()) {
-                commande.setId( rset.getString("idCommande") );
-                commande.setDate( dateFormat.format(rset.getDate("dateCommande")) );
+                commande.setId(rset.getString("idCommande"));
+                commande.setDate(dateFormat.format(rset.getDate("dateCommande")));
             }
             rset.close();
             ocstmt.close();
 
             int nbInsertions = 1;
-            
-            Map<String,Integer> mapIdPlats;
-            mapIdPlats = listToMap( commande.getIdPlats() );
-            
+
+            Map<String, Integer> mapIdPlats;
+            mapIdPlats = listToMap(commande.getIdPlats());
+
             for (Map.Entry<String, Integer> mapPlat : mapIdPlats.entrySet()) {
                 String idPlat = mapPlat.getKey();
                 int quantite = mapPlat.getValue();
-                ajouterPlatQtDB( commande.getId() , idPlat , quantite );
+                ajouterPlatQtDB(commande.getId(), idPlat, quantite);
                 nbInsertions++;
             }
-            
-            for ( String idFilm : commande.getIdFilms() ){
-                ajouterFilmDB( commande.getId() , idFilm );
+
+            for (String idFilm : commande.getIdFilms()) {
+                ajouterFilmDB(commande.getId(), idFilm);
                 nbInsertions++;
             }
-            
-            if ( nbInsertions > 1 ){
+
+            if (nbInsertions > 1) {
                 conn.commit();
-            }else{
+            } else {
                 conn.rollback();
                 throw new Exception("Les listes des plats et des films sont vides");
             }
-            
-        } catch (SQLException e){
+
+        } catch (SQLException e) {
             conn.rollback();
             throw new SQLException(e);
         }
     }
 
-
+    /**
+     *
+     * @param id
+     * @return
+     * @throws SQLException
+     */
     public static Commande getCommande(String id) throws SQLException {
         GestionnaireCommande gc = new GestionnaireCommande(id);
         gc.connectToDatabase();
-        
+
         String pattern = "DD-MM-YYYY HH:MM:SS";
         DateFormat dateFormat = new SimpleDateFormat(pattern);
 
@@ -130,16 +151,15 @@ public class GestionnaireCommande extends SQLAble {
         ocstmt.registerOutParameter(3, OracleTypes.CURSOR);
         ocstmt.registerOutParameter(4, OracleTypes.CURSOR);
         ocstmt.execute();
-        
+
         ResultSet rset = (ResultSet) (ocstmt.getObject(2));
         if (rset != null && rset.next()) {
-            gc.commande.setId(rset.getString("idCommande") );
-            gc.commande.setDate( dateFormat.format(rset.getDate("dateCommande")) );
+            gc.commande.setId(rset.getString("idCommande"));
+            gc.commande.setDate(dateFormat.format(rset.getDate("dateCommande")));
             gc.commande.setPrix(rset.getDouble("prix"));
             gc.commande.setAdresseLivraison(rset.getString("adresseLivraison"));
         }
         rset.close();
-
 
         rset = (ResultSet) (ocstmt.getObject(3));
         while (rset != null && rset.next()) {
@@ -159,20 +179,26 @@ public class GestionnaireCommande extends SQLAble {
 
         return gc.commande;
     }
-    
-    
+
+    /**
+     *
+     * @param idClient
+     * @return
+     * @throws SQLException
+     * @throws Exception
+     */
     public static Commande getLastCommande(String idClient) throws SQLException, Exception {
-        GestionnaireCommande gc = new GestionnaireCommande( "0");
+        GestionnaireCommande gc = new GestionnaireCommande("0");
         gc.connectToDatabase();
-        
+
         Commande commande = new Commande();
         String idCommande = "";
         boolean trouve = false;
-        
+
         OracleCallableStatement ocstmt;
         ocstmt = (OracleCallableStatement) conn.prepareCall("{ ? = call getLastIdCommandeDate( ? ) }");
-        ocstmt.registerOutParameter( 1 , OracleTypes.CURSOR );
-        ocstmt.setString( 2 , idClient );
+        ocstmt.registerOutParameter(1, OracleTypes.CURSOR);
+        ocstmt.setString(2, idClient);
         ocstmt.execute();
 
         ResultSet rset = (ResultSet) (ocstmt.getObject(1));
@@ -180,22 +206,25 @@ public class GestionnaireCommande extends SQLAble {
             idCommande = rset.getString("idCommande");
             trouve = true;
         }
-        if ( rset != null ){
+        if (rset != null) {
             rset.close();
         }
         ocstmt.close();
-        
-        if ( trouve ){
+
+        if (trouve) {
             commande = getCommande(idCommande);
-        }else{
+        } else {
             throw new Exception("Il n'y a aucune commande pour ce client !");
         }
 
         return commande;
     }
-    
-    
-    public static List<String> getPlatsLesPlusCommandes() throws SQLException{
+
+    /**
+     *
+     * @return @throws SQLException
+     */
+    public static List<String> getPlatsLesPlusCommandes() throws SQLException {
         GestionnaireCommande gc = new GestionnaireCommande("0");
         List<String> listIdPlatsPC = new ArrayList<String>();
 
@@ -214,7 +243,10 @@ public class GestionnaireCommande extends SQLAble {
         return listIdPlatsPC;
     }
 
-    
+    /**
+     *
+     * @return @throws SQLException
+     */
     public static List<String> getFilmsLesPlusVus() throws SQLException {
         GestionnaireCommande gc = new GestionnaireCommande("0");
         List<String> listIdFilmPV = new ArrayList<String>();
@@ -233,8 +265,13 @@ public class GestionnaireCommande extends SQLAble {
 
         return listIdFilmPV;
     }
-    
-    
+
+    /**
+     *
+     * @param idFilm
+     * @return
+     * @throws SQLException
+     */
     public static List<String> getPlatsLesPlusCommandesAvec(String idFilm) throws SQLException {
         GestionnaireCommande gc = new GestionnaireCommande("0");
         List<String> listIdPlatsPCA = new ArrayList<String>();
@@ -256,31 +293,39 @@ public class GestionnaireCommande extends SQLAble {
         return listIdPlatsPCA;
     }
 
-    
-    public static List<String> getFilmsLesPlusVusAvec( String idPlat ){
+    /**
+     *
+     * @param idPlat
+     * @return
+     */
+    public static List<String> getFilmsLesPlusVusAvec(String idPlat) {
         GestionnaireCommande gc = new GestionnaireCommande("0");
         List<String> listIdFilmPVA = new ArrayList<String>();
-        try{
+        try {
             gc.connectToDatabase();
             OracleCallableStatement ocstmt;
             ocstmt = (OracleCallableStatement) conn.prepareCall("{ ? = call filmslesplusVusAvec( ? ) }");
-            ocstmt.registerOutParameter( 1 , OracleTypes.CURSOR );
-            ocstmt.setString( 2 , idPlat );
+            ocstmt.registerOutParameter(1, OracleTypes.CURSOR);
+            ocstmt.setString(2, idPlat);
             ocstmt.execute();
-            
+
             ResultSet rset = (ResultSet) (ocstmt.getObject(1));
             while (rset != null && rset.next()) {
-                listIdFilmPVA.add( rset.getString("idFilm"));
+                listIdFilmPVA.add(rset.getString("idFilm"));
             }
             rset.close();
-            
-        }catch ( SQLException e){
+
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         return listIdFilmPVA;
     }
-    
-    
+
+    /**
+     *
+     * @param idPlat
+     * @return
+     */
     private void ajouterPlatQtDB(String idCommande, String idPlat, int quantite) throws SQLException {
         connectToDatabase();
         PreparedStatement pstmt;
@@ -293,8 +338,12 @@ public class GestionnaireCommande extends SQLAble {
         pstmt.executeUpdate();
         pstmt.close();
     }
-      
-    
+
+    /**
+     *
+     * @param idPlat
+     * @return
+     */
     private void ajouterFilmDB(String idCommande, String idFilm) throws SQLException {
         connectToDatabase();
         PreparedStatement pstmt;
@@ -306,8 +355,12 @@ public class GestionnaireCommande extends SQLAble {
         pstmt.executeUpdate();
         pstmt.close();
     }
-      
-    
+
+    /**
+     *
+     * @param idPlat
+     * @return
+     */
     private Map<String, Integer> listToMap(List<String> list) {
         Map<String, Integer> hashMap = new HashMap<String, Integer>();
         String elt = "";
@@ -329,11 +382,13 @@ public class GestionnaireCommande extends SQLAble {
         return hashMap;
     }
 
-    
+    /**
+     *
+     * @return
+     */
     public String CommandeToJson() {
         String json = new Gson().toJson(this.commande);
         return json;
     }
-    
-}   
-    
+
+}

@@ -17,6 +17,12 @@ public class GestionnaireClient extends SQLAble {
 
     private Client client;
 
+    /**
+     *
+     * @param id
+     * @param nom
+     * @param premon
+     */
     public GestionnaireClient(String id, String nom, String premon) {
         this.client = new Client();
         client.setId(id);
@@ -24,48 +30,78 @@ public class GestionnaireClient extends SQLAble {
         client.setPrenom(premon);
     }
 
-    
+    /**
+     *
+     * @return
+     */
     public String getNom() {
         return client.getNom();
     }
 
-
+    /**
+     *
+     * @return
+     */
     public String getPrenom() {
         return client.getPrenom();
     }
 
-
+    /**
+     *
+     * @return
+     */
     public String getPhoto() {
         return client.getPhoto();
     }
 
- 
+    /**
+     *
+     * @return
+     */
     public String getAdresse() {
         return client.getAdresse();
     }
 
-  
+    /**
+     *
+     * @param email
+     */
     public void editEmail(String email) {
         client.setEmail(email);
     }
 
- 
+    /**
+     *
+     * @param adresse
+     */
     public void editAdresse(String adresse) {
         client.setAdresse(adresse);
     }
 
-
+    /**
+     *
+     * @param tel
+     */
     public void editTel(String tel) {
         client.setTel(tel);
     }
 
-
+    /**
+     *
+     * @param photo
+     */
     public void editPhoto(String photo) {
         client.setPhoto(photo);
     }
 
- 
-    public boolean enregistreClientDB() throws SQLException {
+
+    /**
+     *Methode qui permet d'enregistrer  un client  dans la base
+     * @return
+     * @throws SQLException
+     * @throws Exception
+     */
+    public boolean enregistreClientDB() throws SQLException, Exception {
         boolean exist = existsClientDB();
         boolean res = false;
         if (!exist) {
@@ -82,7 +118,11 @@ public class GestionnaireClient extends SQLAble {
         return res;
     }
 
-
+    /**
+     *Methode qui permet de verifie si un client existe dans la base
+     * @return
+     * @throws SQLException
+     */
     public boolean existsClientDB() throws SQLException {
         boolean res = false;
 
@@ -101,7 +141,15 @@ public class GestionnaireClient extends SQLAble {
         return res;
     }
     
-        
+
+    /**
+     *
+     * @param id
+     * @return
+     * @throws SQLException
+     * @throws Exception
+     */
+
    public Client getClient(String id) {
         //client = new Client();
         //client.setId(id);
@@ -112,7 +160,6 @@ public class GestionnaireClient extends SQLAble {
             ocstmt.registerOutParameter(1, OracleTypes.CURSOR);
             ocstmt.setString(2, id);
             ocstmt.execute();
-
             ResultSet rset = (ResultSet) (ocstmt.getObject(1));
 
             if (rset != null && rset.next()) {
@@ -136,8 +183,12 @@ public class GestionnaireClient extends SQLAble {
     }
 
 
-
-    public void editClientDB() throws SQLException {
+    /**
+     *Methode qui permet de modifier un client
+     * @throws SQLException
+     * @throws Exception
+     */
+    public void editClientDB() throws SQLException, Exception {
         boolean exist = existsClientDB();
         if (exist) {
             connectToDatabase();
@@ -153,7 +204,13 @@ public class GestionnaireClient extends SQLAble {
         }
     }
 
-
+    /**
+     * Methode qui permet de retoune id du client
+     * @param nom
+     * @param prenom
+     * @return
+     * @throws SQLException
+     */
     public static String getClientIdDB(String nom, String prenom) throws SQLException {
         GestionnaireClient gc = new GestionnaireClient("","","");
         gc.connectToDatabase();
@@ -172,7 +229,13 @@ public class GestionnaireClient extends SQLAble {
         return idClient;
     }
 
-
+    /**
+     *Methode qui permet de supprimer un client
+     * @param id
+     * @return
+     * @throws SQLException
+     * @throws Exception
+     */
     public static boolean deleteClientId(String id) throws SQLException, Exception {
         GestionnaireClient gc = new GestionnaireClient( id , "" , "" );
         boolean exist = false;
@@ -206,7 +269,12 @@ public class GestionnaireClient extends SQLAble {
         return res;
     }
 
-
+    /**
+     *Methode qui affiche les commandes d'un client
+     * @return
+     * @throws SQLException
+     * @throws Exception
+     */
     public List<String> getListeCommandes() throws SQLException, Exception {
         boolean exist = existsClientDB();
         List<String> list = new ArrayList<>();
@@ -232,7 +300,10 @@ public class GestionnaireClient extends SQLAble {
         return list;
     }
     
-    
+    /**
+     *Methode qui convervit les donnees d'un client en json
+     * @return
+     */
     public String ClientToJson(){
         String json = new Gson().toJson(this.client);
         return json;
@@ -240,6 +311,10 @@ public class GestionnaireClient extends SQLAble {
     
      public void setClient(Client client) {
         this.client = client;
+    }
+
+    public void setClient(Client client) {
+        throw new UnsupportedOperationException("Not supported yet."); 
     }
 
 }

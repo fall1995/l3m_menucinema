@@ -44,11 +44,16 @@ public class ClientAuthentificationServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String idClient = request.getParameter("idClient");
         GestionnaireClient gestonClient;
-        gestonClient = new GestionnaireClient(idClient, "" , "");
-        Client client_trouve = gestonClient.getClient(idClient);
-        response.setContentType("application/json");
-        response.setStatus(HttpServletResponse.SC_OK);
-        response.getWriter().println(new Gson().toJson(client_trouve));
+        gestonClient = new GestionnaireClient(idClient, "", "");
+        Client client_trouve;
+        try {
+            client_trouve = gestonClient.getClient(idClient);
+            response.setContentType("application/json");
+            response.setStatus(HttpServletResponse.SC_OK);
+            response.getWriter().println(new Gson().toJson(client_trouve));
+        } catch (Exception ex) {
+            Logger.getLogger(ClientAuthentificationServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
     }
 
@@ -100,6 +105,8 @@ public class ClientAuthentificationServlet extends HttpServlet {
             catch (SQLException e) {
                 response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
                 response.getWriter().println(e.toString());
+            } catch (Exception ex) {
+                Logger.getLogger(ClientAuthentificationServlet.class.getName()).log(Level.SEVERE, null, ex);
             }
         } // CAS HTTP code 401
         else {

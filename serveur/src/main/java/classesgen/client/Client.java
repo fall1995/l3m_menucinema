@@ -1,9 +1,11 @@
+
 //
 // Ce fichier a xe9txe9 gxe9nxe9rxe9 par l'implxe9mentation de rxe9fxe9rence JavaTM Architecture for XML Binding (JAXB), v2.3.1-b171012.0423 
 // Voir <a href="https://javaee.github.io/jaxb-v2/">https://javaee.github.io/jaxb-v2/</a> 
 // Toute modification apportxe9e xe0 ce fichier sera perdue lors de la recompilation du schxe9ma source. 
 // Gxe9nxe9rxe9 le : 2019.05.06 xe0 12:37:02 PM CEST 
 //
+
 
 
 package classesgen.client;
@@ -18,6 +20,7 @@ import javax.xml.bind.annotation.XmlType;
  * <p>Classe Java pour Client complex type.
  * 
  * <p>Le fragment de schxE9ma suivant indique le contenu attendu figurant dans cette classe.
+>>>>>>> eba46d10865b54b02fbf740ab69253d2b89c3686
  * 
  * <pre>
  * &lt;complexType name="Client"&gt;
@@ -67,7 +70,7 @@ public class Client {
     protected String email;
 
     /**
-     * Obtient la valeur de la proprixE9txE9 id.
+
      * 
      * @return
      *     possible object is
@@ -79,7 +82,7 @@ public class Client {
     }
 
     /**
-     * DxE9finit la valeur de la proprixE9txE9 id.
+
      * 
      * @param value
      *     allowed object is
@@ -91,7 +94,7 @@ public class Client {
     }
 
     /**
-     * Obtient la valeur de la proprixE9txE9 nom.
+
      * 
      * @return
      *     possible object is
@@ -103,7 +106,7 @@ public class Client {
     }
 
     /**
-     * DxE9finit la valeur de la proprixE9txE9 nom.
+
      * 
      * @param value
      *     allowed object is
@@ -115,7 +118,7 @@ public class Client {
     }
 
     /**
-     * Obtient la valeur de la proprixE9txE9 prenom.
+
      * 
      * @return
      *     possible object is
@@ -127,7 +130,7 @@ public class Client {
     }
 
     /**
-     * DxE9finit la valeur de la proprixE9txE9 prenom.
+
      * 
      * @param value
      *     allowed object is
@@ -139,7 +142,6 @@ public class Client {
     }
 
     /**
-     * Obtient la valeur de la proprixE9txE9 tel.
      * 
      * @return
      *     possible object is
@@ -151,7 +153,7 @@ public class Client {
     }
 
     /**
-     * DxE9finit la valeur de la proprixE9txE9 tel.
+
      * 
      * @param value
      *     allowed object is
@@ -163,7 +165,6 @@ public class Client {
     }
 
     /**
-     * Obtient la valeur de la proprixE9txE9 adresse.
      * 
      * @return
      *     possible object is
@@ -175,7 +176,6 @@ public class Client {
     }
 
     /**
-     * DxE9finit la valeur de la proprixE9txE9 adresse.
      * 
      * @param value
      *     allowed object is
@@ -187,7 +187,6 @@ public class Client {
     }
 
     /**
-     * Obtient la valeur de la proprixE9txE9 photo.
      * 
      * @return
      *     possible object is
@@ -199,7 +198,6 @@ public class Client {
     }
 
     /**
-     * DxE9finit la valeur de la proprixE9txE9 photo.
      * 
      * @param value
      *     allowed object is
@@ -211,7 +209,7 @@ public class Client {
     }
 
     /**
-     * Obtient la valeur de la proprixE9txE9 email.
+
      * 
      * @return
      *     possible object is
@@ -223,7 +221,6 @@ public class Client {
     }
 
     /**
-     * DxE9finit la valeur de la proprixE9txE9 email.
      * 
      * @param value
      *     allowed object is
