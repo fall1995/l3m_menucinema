@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpParams, HttpResponse} from '@angular/common/http';
 import {User} from '../tmdb-data/user';
+import {CommandeData} from '../menu-commade-data/commande';
 
 @Injectable({
     providedIn: 'root'
@@ -28,7 +29,7 @@ export class CommandeService {
      */
     sendCmd(params: {[key: string]: string}): Promise<HttpResponse<string>> {
         const P = new HttpParams( {fromObject: params} );
-        return this.http.post( `/api/`, P, {
+        return this.http.post( `/api/commande`, P, {
             observe: 'response',
             responseType: 'text',
             headers: {'content-type': 'application/x-www-form-urlencoded'}
@@ -39,11 +40,10 @@ export class CommandeService {
      * recuperation de la commande en connaissant l'id du client
      * @param id
      */
-    async getCommande(id : string): Promise<User> {
-        return new Promise<User>(((resolve, reject) => {
-            this.http.get(`/api/authentification?idClient=${id}`, {responseType: 'text'}).toPromise().then(
+    async getCommande(id : string): Promise<CommandeData> {
+        return new Promise<CommandeData>(((resolve, reject) => {
+            this.http.get(`/api/client?idClient=${id}`, {responseType: 'text'}).toPromise().then(
                 res => {
-                    console.log("la commande est " + res);
                     resolve(JSON.parse(res));
                 }, rej => {
                     reject(rej);

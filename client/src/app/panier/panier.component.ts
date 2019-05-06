@@ -3,6 +3,7 @@ import {StorageService} from '../service/storage.service';
 import {ListePlats} from '../menu-commade-data/Menu';
 import {Router} from '@angular/router';
 import {CommandeService} from '../service/commande.service';
+import {Commande} from '../menu-commade-data/commande';
 
 @Component({
     selector: 'app-panier',
@@ -17,6 +18,7 @@ export class PanierComponent implements OnInit {
 
     panier: any[]; // variable qui stocke le tableaux de plat
     movie: any[]; // variable qui stock les films selectionnées
+    commande: any;
 
     ngOnInit() {
         this.init();
@@ -49,28 +51,29 @@ export class PanierComponent implements OnInit {
      * méthode de validation de la commande
      */
     validationCommande() {
-        let idClient = localStorage.getItem('userId');
-        let idPlat = localStorage.getItem('plat');
-        let idFilm = localStorage.getItem('filmNote');
+        let idClient = localStorage.getItem('UserData');
+        let idPlat = localStorage.getItem('platId');
+        console.log('contenu de idPlat' + idPlat);
+        let idFilm = localStorage.getItem('movieId');
+        console.log('contenu de idPlat' + idFilm);
         let adresse = localStorage.getItem('adresse');
         this.commandeService.sendCmd({
             // variable que le serveur s'attend a recevoir
             idClient: idClient,
-            idPlat: idPlat,
-            idFilm: idFilm,
+            idPlats: idPlat,
+            idFilms: idFilm,
             adresseLivraison: adresse,
         }).then(data => {
             console.log('envoie après verification au serveur ok');
         });
-        console.log('verification avec le serveur');
-
+        console.log('verification commande pas ok');
     }
+
     /**
      * bouton de retour vers le menu
      */
     retour() {
         this.route.navigate(['/menus']);
     }
-
 }
 

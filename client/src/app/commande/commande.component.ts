@@ -21,10 +21,10 @@ export class CommandeComponent implements OnInit {
      * je recupere ici les données de la commande
      */
     async init() {
-                let idClient = localStorage.getItem('userId');
+
+                let idClient = localStorage.getItem('UserData');
                 this.commandeService.getCommande( idClient).then(res =>{
                     this.commade = res;
-                    console.log(this.commade);
                 }, r =>{
                     console.log("errr"+r);
                 });

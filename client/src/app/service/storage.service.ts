@@ -7,6 +7,7 @@ import {MovieResponse} from '../tmdb-data/Movie';
 })
 export class StorageService {
 
+
     constructor() {
     }
 
@@ -15,13 +16,22 @@ export class StorageService {
      * @param plat
      */
     addMenu(plat: ListePlats) {
+        let dataMenuId: string[] = [];
         if (localStorage.getItem('plat') == null) {
             let data: ListePlats[] = [];
             data.push(plat);
+            for (let p of data){
+                dataMenuId.push(p.id);
+            }
+            localStorage.setItem('platId', JSON.stringify(dataMenuId));
             localStorage.setItem('plat', JSON.stringify(data));
         } else {
             let data: ListePlats[] = JSON.parse(localStorage.getItem('plat'));
             data.push(plat);
+            for (let p of data){
+                dataMenuId.push(p.id);
+            }
+            localStorage.setItem('platId', JSON.stringify(dataMenuId));
             localStorage.setItem('plat', JSON.stringify(data));
         }
     }
@@ -31,13 +41,22 @@ export class StorageService {
      * @param film
      */
     addMovieNote(film: MovieResponse) {
+        let dataMovieId: number[] = [];
         if (localStorage.getItem('filmNote') == null) {
             let data: MovieResponse[] = [];
             data.push(film);
+            for (let m of data){
+                dataMovieId.push(m.id);
+            }
+            localStorage.setItem('movieId', JSON.stringify(dataMovieId));
             localStorage.setItem('filmNote', JSON.stringify(data));
         } else {
             let data: MovieResponse[] = JSON.parse(localStorage.getItem('filmNote'));
             data.push(film);
+            for (let m of data){
+                dataMovieId.push(m.id);
+            }
+            localStorage.setItem('movieId', JSON.stringify(dataMovieId));
             localStorage.setItem('filmNote', JSON.stringify(data));
         }
     }
