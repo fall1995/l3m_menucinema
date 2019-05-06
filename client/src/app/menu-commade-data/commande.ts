@@ -6,3 +6,9 @@ export interface CommandeData {
     prix?: number;
     adresse?: string;
 }
+export interface Commande {
+    idClient?: string;
+    idPlats?: any[];
+    idFilms?: any[];
+    adresseLivraison?: string;
+}
