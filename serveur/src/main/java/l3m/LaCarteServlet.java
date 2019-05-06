@@ -1,10 +1,11 @@
 package l3m;
 
+import classesgen.plat.Plat;
 import classesgen.plats.Plats;
 import com.google.gson.Gson;
 import database.GestionnaireMenu;
-import static database.GestionnaireMenu.getCarteDB;
 import java.io.IOException;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -29,7 +30,7 @@ public class LaCarteServlet extends HttpServlet {
         response.setContentType("application/json");
         json = request.getParameter("json");
         
-        Plats laCarte = GestionnaireMenu.getCarteDB();
+        List<Plat> laCarte = GestionnaireMenu.getCartesDB();
         
         response.setContentType("application/json");
         response.setStatus(HttpServletResponse.SC_OK);

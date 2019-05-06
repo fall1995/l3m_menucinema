@@ -237,5 +237,9 @@ public class GestionnaireClient extends SQLAble {
         String json = new Gson().toJson(this.client);
         return json;
     }
+    
+     public void setClient(Client client) {
+        this.client = client;
+    }
 
 }
