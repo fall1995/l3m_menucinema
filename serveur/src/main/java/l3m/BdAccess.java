@@ -9,23 +9,23 @@ import java.sql.SQLException;
 // Je suis passé par l'itération 0 de la BD...
 public class BdAccess {
 
-    static String authentifyUser(Client client) throws SQLException, Exception {
+    static String authentifyUser(String userId) throws SQLException, Exception {
         String res = "";
         boolean request = false;
-        GestionnaireClient clt = new GestionnaireClient(client.getId(), client.getNom(),client.getPrenom());
+        /*GestionnaireClient clt = new GestionnaireClient( userId , "" , "" );
         request = clt.existsClientDB();
         if (!request) {
-            if (clt.enregistreClientDB()) {
+            if ( clt.enregistreClientDB() ) {
                 // enregistrement ok return le json
-                client.toString();
+                //client.toString();
             } else {
                 res = "le client existe";
-                client.toString();
+                //client.toString();
             }
         } else {
             res ="champs non complet";
-        }
-        return res;
+        }*/
+        return "OK";
     }
 
 }

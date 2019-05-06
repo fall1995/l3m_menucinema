@@ -1,6 +1,5 @@
 package l3m;
 
-
 import classesgen.client.Client;
 import database.GestionnaireClient;
 import java.io.IOException;
@@ -36,19 +35,19 @@ public class UpdateClientServlet extends HttpServlet {
         response.addHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, PUT, DELETE, HEAD");
         response.addHeader("Access-Control-Allow-Headers", "X-PINGOTHER, Origin, X-Requested-With, Content-Type, Accept");
         response.addHeader("Access-Control-Max-Age", "1728000");
-        
+
         Enumeration<String> P = request.getParameterNames();
         HashMap<String, String> parametres = new HashMap();
         Client client = new Client();
-        
+
         while (P.hasMoreElements()) {
             String p = P.nextElement();
             parametres.put(p, request.getParameter((String) p));
         }
-        
+
         response.setContentType("application/json");
         response.setStatus(HttpServletResponse.SC_OK);
-         response.getWriter().println(client.toString());
+        response.getWriter().println(client.toString());
     }
 
     @Override
@@ -59,7 +58,7 @@ public class UpdateClientServlet extends HttpServlet {
     @Override
     protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         /**
-         * authorisation de la connection avec les plateformes exterieur 
+         * authorisation de la connection avec les plateformes exterieur
          */
         response.setContentType("application/json");
         response.addHeader("Access-Control-Allow-Origin", "*");
@@ -72,7 +71,8 @@ public class UpdateClientServlet extends HttpServlet {
         Client client = new Client();
 
         /**
-         * Parcours les paramètres de la requete et construit une structure clé-valeur
+         * Parcours les paramètres de la requete et construit une structure
+         * clé-valeur
          */
         while (P.hasMoreElements()) {
             String p = P.nextElement();
@@ -83,13 +83,13 @@ public class UpdateClientServlet extends HttpServlet {
         client.setPrenom(parametres.get(prenom));
         client.setEmail(parametres.get(email));
         client.setPhoto(parametres.get(photo));
-        client.setTelephone(parametres.get(tel));
+        client.setTel(parametres.get(tel));
         client.setAdresse(parametres.get(adresse));
-        
+
         /**
-         * try :si toute les valeurs sont ok modification ok et reponse du serveur ok,
-         * catch : si non le serveur return le msg d'erreur
-         * else : parametre non complets
+         * try :si toute les valeurs sont ok modification ok et reponse du
+         * serveur ok, catch : si non le serveur return le msg d'erreur else :
+         * parametre non complets
          */
         if (putValide(parametres)) {
             try {
@@ -97,7 +97,7 @@ public class UpdateClientServlet extends HttpServlet {
                 GestionnaireClient gestionClient = new GestionnaireClient(client.getId(), client.getNom(), client.getPrenom());
                 gestionClient.editClientDB();
                 response.setStatus(HttpServletResponse.SC_OK);
-                response.getWriter().println( gestionClient.ClientToJson() );
+                response.getWriter().println(gestionClient.ClientToJson());
             } catch (SQLException ex) {
                 response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
                 response.getWriter().println(ex.getMessage());
@@ -111,10 +111,12 @@ public class UpdateClientServlet extends HttpServlet {
         }
 
     }
+
     /**
-     * renvoie vraie si les clefs valeur sont correct 
+     * renvoie vraie si les clefs valeur sont correct
+     *
      * @param parametres
-     * @return 
+     * @return
      */
     boolean putValide(HashMap<String, String> parametres) {
         boolean res = false;

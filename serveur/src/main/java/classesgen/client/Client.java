@@ -1,6 +1,3 @@
-
-
-
 package classesgen.client;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -12,7 +9,7 @@ import javax.xml.bind.annotation.XmlType;
 /**
  * <p>Classe Java pour Client complex type.
  * 
- * <p>Le fragment de schéma suivant indique le contenu attendu figurant dans cette classe.
+ * <p>Le fragment de sch�ma suivant indique le contenu attendu figurant dans cette classe.
  * 
  * <pre>
  * &lt;complexType name="Client">
@@ -22,7 +19,7 @@ import javax.xml.bind.annotation.XmlType;
  *         &lt;element name="id" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *         &lt;element name="nom" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *         &lt;element name="prenom" type="{http://www.w3.org/2001/XMLSchema}string"/>
- *         &lt;element name="telephone" type="{http://www.w3.org/2001/XMLSchema}string"/>
+ *         &lt;element name="tel" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *         &lt;element name="adresse" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *         &lt;element name="photo" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *         &lt;element name="email" type="{http://www.w3.org/2001/XMLSchema}string"/>
@@ -39,7 +36,7 @@ import javax.xml.bind.annotation.XmlType;
     "id",
     "nom",
     "prenom",
-    "telephone",
+    "tel",
     "adresse",
     "photo",
     "email"
@@ -53,7 +50,7 @@ public class Client {
     @XmlElement(required = true)
     protected String prenom;
     @XmlElement(required = true)
-    protected String telephone;
+    protected String tel;
     @XmlElement(required = true)
     protected String adresse;
     @XmlElement(required = true)
@@ -62,7 +59,7 @@ public class Client {
     protected String email;
 
     /**
-     * Obtient la valeur de la propriété id.
+     * Obtient la valeur de la propri�t� id.
      * 
      * @return
      *     possible object is
@@ -74,7 +71,7 @@ public class Client {
     }
 
     /**
-     * Définit la valeur de la propriété id.
+     * D�finit la valeur de la propri�t� id.
      * 
      * @param value
      *     allowed object is
@@ -86,7 +83,7 @@ public class Client {
     }
 
     /**
-     * Obtient la valeur de la propriété nom.
+     * Obtient la valeur de la propri�t� nom.
      * 
      * @return
      *     possible object is
@@ -98,7 +95,7 @@ public class Client {
     }
 
     /**
-     * Définit la valeur de la propriété nom.
+     * D�finit la valeur de la propri�t� nom.
      * 
      * @param value
      *     allowed object is
@@ -110,7 +107,7 @@ public class Client {
     }
 
     /**
-     * Obtient la valeur de la propriété prenom.
+     * Obtient la valeur de la propri�t� prenom.
      * 
      * @return
      *     possible object is
@@ -122,7 +119,7 @@ public class Client {
     }
 
     /**
-     * Définit la valeur de la propriété prenom.
+     * D�finit la valeur de la propri�t� prenom.
      * 
      * @param value
      *     allowed object is
@@ -134,31 +131,31 @@ public class Client {
     }
 
     /**
-     * Obtient la valeur de la propriété telephone.
+     * Obtient la valeur de la propri�t� tel.
      * 
      * @return
      *     possible object is
      *     {@link String }
      *     
      */
-    public String getTelephone() {
-        return telephone;
+    public String getTel() {
+        return tel;
     }
 
     /**
-     * Définit la valeur de la propriété telephone.
+     * D�finit la valeur de la propri�t� tel.
      * 
      * @param value
      *     allowed object is
      *     {@link String }
      *     
      */
-    public void setTelephone(String value) {
-        this.telephone = value;
+    public void setTel(String value) {
+        this.tel = value;
     }
 
     /**
-     * Obtient la valeur de la propriété adresse.
+     * Obtient la valeur de la propri�t� adresse.
      * 
      * @return
      *     possible object is
@@ -170,7 +167,7 @@ public class Client {
     }
 
     /**
-     * Définit la valeur de la propriété adresse.
+     * D�finit la valeur de la propri�t� adresse.
      * 
      * @param value
      *     allowed object is
@@ -182,7 +179,7 @@ public class Client {
     }
 
     /**
-     * Obtient la valeur de la propriété photo.
+     * Obtient la valeur de la propri�t� photo.
      * 
      * @return
      *     possible object is
@@ -194,7 +191,7 @@ public class Client {
     }
 
     /**
-     * Définit la valeur de la propriété photo.
+     * D�finit la valeur de la propri�t� photo.
      * 
      * @param value
      *     allowed object is
@@ -206,7 +203,7 @@ public class Client {
     }
 
     /**
-     * Obtient la valeur de la propriété email.
+     * Obtient la valeur de la propri�t� email.
      * 
      * @return
      *     possible object is
@@ -218,7 +215,7 @@ public class Client {
     }
 
     /**
-     * Définit la valeur de la propriété email.
+     * D�finit la valeur de la propri�t� email.
      * 
      * @param value
      *     allowed object is
@@ -228,20 +225,5 @@ public class Client {
     public void setEmail(String value) {
         this.email = value;
     }
-    
-       public String toString() {
-        String res = "{\n";
-        res += "\"id\" :\""+ this.id + "\",\n ";
-        res += "\"nom\" :\""+ this.nom + "\",\n ";
-        res += "\"prenom\" :\""+ this.prenom + "\",\n ";
-        res += "\"photoUrl\" :\""+ this.photo + "\",\n ";
-        res += "\"email\" :\""+ this.email + "\",\n ";
-        res += "\"tel\" :\""+ this.telephone + "\", \n";
-        res += "\"adresse\" :\""+ this.adresse + "\"\n";
-        res += "}";
-        return res;
-    }
-    
-    
 
 }

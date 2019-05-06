@@ -13,7 +13,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.json.simple.JSONArray;
 
 /**
  * @author Groupe6 ClientServlet est une classe qui permet
@@ -32,15 +31,15 @@ public class ClientServlet extends HttpServlet {
         try {
             GestionnaireClient gc = new GestionnaireClient( idClient , "" , "" );            
             List<String> listeCommandes = gc.getListeCommandes();
-            Commande[] commande = new Commande[ listeCommandes.size() ];
+            Commande[] commandes = new Commande[ listeCommandes.size() ];
 
             for ( int i = 0 ; i < listeCommandes.size() ; i++ ) {
-               commande[i] = GestionnaireCommande.getCommande( listeCommandes.get(i) );
+               commandes[i] = GestionnaireCommande.getCommande( listeCommandes.get(i) );
             }
 
             response.setContentType("application/json");
             response.setStatus(HttpServletResponse.SC_OK);
-            response.getWriter().println( new Gson().toJson(commande) );
+            response.getWriter().println( new Gson().toJson(commandes) );
 
         } catch (SQLException ex) {
             Logger.getLogger(ClientServlet.class.getName()).log(Level.SEVERE, null, ex);
