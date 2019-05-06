@@ -1,4 +1,9 @@
-
+//
+// Ce fichier a été généré par l'implémentation de référence JavaTM Architecture for XML Binding (JAXB), v2.2.8-b130911.1802 
+// Voir <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
+// Toute modification apportée à ce fichier sera perdue lors de la recompilation du schéma source. 
+// Généré le : 2019.05.06 à 12:12:24 AM CEST 
+//
 
 
 package classesgen.client;
@@ -12,7 +17,7 @@ import javax.xml.bind.annotation.XmlType;
 /**
  * <p>Classe Java pour Client complex type.
  * 
- * <p>Le fragment de schÃ©ma suivant indique le contenu attendu figurant dans cette classe.
+ * <p>Le fragment de schéma suivant indique le contenu attendu figurant dans cette classe.
  * 
  * <pre>
  * &lt;complexType name="Client">
@@ -22,7 +27,7 @@ import javax.xml.bind.annotation.XmlType;
  *         &lt;element name="id" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *         &lt;element name="nom" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *         &lt;element name="prenom" type="{http://www.w3.org/2001/XMLSchema}string"/>
- *         &lt;element name="telephone" type="{http://www.w3.org/2001/XMLSchema}string"/>
+ *         &lt;element name="tel" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *         &lt;element name="adresse" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *         &lt;element name="photo" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *         &lt;element name="email" type="{http://www.w3.org/2001/XMLSchema}string"/>
@@ -39,7 +44,7 @@ import javax.xml.bind.annotation.XmlType;
     "id",
     "nom",
     "prenom",
-    "telephone",
+    "tel",
     "adresse",
     "photo",
     "email"
@@ -53,7 +58,7 @@ public class Client {
     @XmlElement(required = true)
     protected String prenom;
     @XmlElement(required = true)
-    protected String telephone;
+    protected String tel;
     @XmlElement(required = true)
     protected String adresse;
     @XmlElement(required = true)
@@ -62,7 +67,7 @@ public class Client {
     protected String email;
 
     /**
-     * Obtient la valeur de la propriÃ©tÃ© id.
+     * Obtient la valeur de la propriété id.
      * 
      * @return
      *     possible object is
@@ -74,7 +79,7 @@ public class Client {
     }
 
     /**
-     * DÃ©finit la valeur de la propriÃ©tÃ© id.
+     * Définit la valeur de la propriété id.
      * 
      * @param value
      *     allowed object is
@@ -86,7 +91,7 @@ public class Client {
     }
 
     /**
-     * Obtient la valeur de la propriÃ©tÃ© nom.
+     * Obtient la valeur de la propriété nom.
      * 
      * @return
      *     possible object is
@@ -98,7 +103,7 @@ public class Client {
     }
 
     /**
-     * DÃ©finit la valeur de la propriÃ©tÃ© nom.
+     * Définit la valeur de la propriété nom.
      * 
      * @param value
      *     allowed object is
@@ -110,7 +115,7 @@ public class Client {
     }
 
     /**
-     * Obtient la valeur de la propriÃ©tÃ© prenom.
+     * Obtient la valeur de la propriété prenom.
      * 
      * @return
      *     possible object is
@@ -122,7 +127,7 @@ public class Client {
     }
 
     /**
-     * DÃ©finit la valeur de la propriÃ©tÃ© prenom.
+     * Définit la valeur de la propriété prenom.
      * 
      * @param value
      *     allowed object is
@@ -134,31 +139,31 @@ public class Client {
     }
 
     /**
-     * Obtient la valeur de la propriÃ©tÃ© telephone.
+     * Obtient la valeur de la propriété tel.
      * 
      * @return
      *     possible object is
      *     {@link String }
      *     
      */
-    public String getTelephone() {
-        return telephone;
+    public String getTel() {
+        return tel;
     }
 
     /**
-     * DÃ©finit la valeur de la propriÃ©tÃ© telephone.
+     * Définit la valeur de la propriété tel.
      * 
      * @param value
      *     allowed object is
      *     {@link String }
      *     
      */
-    public void setTelephone(String value) {
-        this.telephone = value;
+    public void setTel(String value) {
+        this.tel = value;
     }
 
     /**
-     * Obtient la valeur de la propriÃ©tÃ© adresse.
+     * Obtient la valeur de la propriété adresse.
      * 
      * @return
      *     possible object is
@@ -170,7 +175,7 @@ public class Client {
     }
 
     /**
-     * DÃ©finit la valeur de la propriÃ©tÃ© adresse.
+     * Définit la valeur de la propriété adresse.
      * 
      * @param value
      *     allowed object is
@@ -182,7 +187,7 @@ public class Client {
     }
 
     /**
-     * Obtient la valeur de la propriÃ©tÃ© photo.
+     * Obtient la valeur de la propriété photo.
      * 
      * @return
      *     possible object is
@@ -194,7 +199,7 @@ public class Client {
     }
 
     /**
-     * DÃ©finit la valeur de la propriÃ©tÃ© photo.
+     * Définit la valeur de la propriété photo.
      * 
      * @param value
      *     allowed object is
@@ -206,7 +211,7 @@ public class Client {
     }
 
     /**
-     * Obtient la valeur de la propriÃ©tÃ© email.
+     * Obtient la valeur de la propriété email.
      * 
      * @return
      *     possible object is
@@ -218,7 +223,7 @@ public class Client {
     }
 
     /**
-     * DÃ©finit la valeur de la propriÃ©tÃ© email.
+     * Définit la valeur de la propriété email.
      * 
      * @param value
      *     allowed object is
@@ -228,20 +233,5 @@ public class Client {
     public void setEmail(String value) {
         this.email = value;
     }
-    
-       public String toString() {
-        String res = "{\n";
-        res += "\"id\" :\""+ this.id + "\",\n ";
-        res += "\"nom\" :\""+ this.nom + "\",\n ";
-        res += "\"prenom\" :\""+ this.prenom + "\",\n ";
-        res += "\"photoUrl\" :\""+ this.photo + "\",\n ";
-        res += "\"email\" :\""+ this.email + "\",\n ";
-        res += "\"tel\" :\""+ this.telephone + "\", \n";
-        res += "\"adresse\" :\""+ this.adresse + "\"\n";
-        res += "}";
-        return res;
-    }
-    
-    
 
 }

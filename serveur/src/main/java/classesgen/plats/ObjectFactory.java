@@ -2,11 +2,11 @@
 // Ce fichier a été généré par l'implémentation de référence JavaTM Architecture for XML Binding (JAXB), v2.2.8-b130911.1802 
 // Voir <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
 // Toute modification apportée à ce fichier sera perdue lors de la recompilation du schéma source. 
-// Généré le : 2019.05.06 à 12:12:24 AM CEST 
+// Généré le : 2019.05.05 à 04:57:11 PM CEST 
 //
 
 
-package classesgen.commande;
+package classesgen.plats;
 
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.annotation.XmlElementDecl;
@@ -17,7 +17,7 @@ import javax.xml.namespace.QName;
 /**
  * This object contains factory methods for each 
  * Java content interface and Java element interface 
- * generated in the classesgen.commande package. 
+ * generated in the classesgen.plats package. 
  * <p>An ObjectFactory allows you to programatically 
  * construct new instances of the Java representation 
  * for XML content. The Java representation of XML 
@@ -31,30 +31,30 @@ import javax.xml.namespace.QName;
 @XmlRegistry
 public class ObjectFactory {
 
-    private final static QName _Commande_QNAME = new QName("http://classesGen/commande", "commande");
+    private final static QName _Plats_QNAME = new QName("http://classesGen/plats", "plats");
 
     /**
-     * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: classesgen.commande
+     * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: classesgen.plats
      * 
      */
     public ObjectFactory() {
     }
 
     /**
-     * Create an instance of {@link Commande }
+     * Create an instance of {@link Plats }
      * 
      */
-    public Commande createCommande() {
-        return new Commande();
+    public Plats createPlats() {
+        return new Plats();
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link Commande }{@code >}}
+     * Create an instance of {@link JAXBElement }{@code <}{@link Plats }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "http://classesGen/commande", name = "commande")
-    public JAXBElement<Commande> createCommande(Commande value) {
-        return new JAXBElement<Commande>(_Commande_QNAME, Commande.class, null, value);
+    @XmlElementDecl(namespace = "http://classesGen/plats", name = "plats")
+    public JAXBElement<Plats> createPlats(Plats value) {
+        return new JAXBElement<Plats>(_Plats_QNAME, Plats.class, null, value);
     }
 
 }

@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -26,9 +25,11 @@ public class CommandeServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
         response.setContentType("application/json");
         String idCommande = request.getParameter("idCommande");
         Commande commande;
+        
         try {
             commande = GestionnaireCommande.getCommande(idCommande);
             
@@ -50,30 +51,26 @@ public class CommandeServlet extends HttpServlet {
         Commande commande = new Commande();
         commande.setIdClient( request.getParameter("idClient") );
         commande.setAdresseLivraison(request.getParameter("adresseLivraison") );
-        List<String> idPlats = new ArrayList<String>();
-        List<String> idFilms = new ArrayList<String>();
         
-        String[] tabPlats = (String[] )request.getParameterValues("idPlats");
-
-        for ( int i = 0 ; i < tabPlats.length ; i ++ ){
-            idPlats.add(tabPlats[i]);
+        String[] plats = (String[] )request.getParameterValues("idPlats");
+        for ( int i = 0 ; i < plats.length ; i ++ ){
+            commande.getIdPlats().add(plats[i]);
         }
         
-        String[] tabFilms = request.getParameterValues("idFilms");
-        for ( int i = 0 ; i < tabFilms.length ; i ++ ){
-            idFilms.add(tabFilms[i]);
+        String[] films = request.getParameterValues("idFilms");
+        for ( int i = 0 ; i < films.length ; i ++ ){
+            commande.getIdFilms().add(films[i]);
         }
         
-        commande.setIdPlat(idPlats);
-        commande.setIdFilm(idFilms);
-
         GestionnaireCommande gc;
+        
         try {
             gc = new GestionnaireCommande(  commande.getIdClient(),
-                                            commande.getIdPlat(),
-                                            commande.getFilm(),
+                                            commande.getIdPlats(),
+                                            commande.getIdFilms(),
                                             commande.getAdresseLivraison()
                                          );
+            
             gc.enregistrerCommandeDB();
             
             response.setContentType("application/json");

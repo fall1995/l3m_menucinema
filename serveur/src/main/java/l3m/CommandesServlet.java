@@ -72,38 +72,45 @@ public class CommandesServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
         Commande commande = new Commande();
-        // recuperation des donnes
-        idClient = request.getParameter("idClient");
-        String[] tabP = request.getParameterValues("idPlat");
-        for ( int i = 0 ; i < tabP.length ; i ++ ){
-            idPlats.add(tabP[i]);
+        commande.setIdClient( request.getParameter("idClient") );
+        commande.setAdresseLivraison(request.getParameter("adresseLivraison") );
+        
+        String[] plats = (String[] )request.getParameterValues("idPlats");
+        for ( int i = 0 ; i < plats.length ; i ++ ){
+            commande.getIdPlats().add(plats[i]);
         }
-        String[] tabF = request.getParameterValues("idFilms");
-        for ( int i = 0 ; i < tabF.length ; i ++ ){
-            idFilms.add(tabF[i]);
+        
+        String[] films = request.getParameterValues("idFilms");
+        for ( int i = 0 ; i < films.length ; i ++ ){
+            commande.getIdFilms().add(films[i]);
         }
-        adresseLivraison = request.getParameter("adresseLivraison");
-        /*
-        List<String> listeplat = (ArrayList<String>) toArrayList(idplats);
-        List<String> listeFilms = (ArrayList<String>) toArrayList(idFilms);
-        */
-        commande.setIdClient(idClient);
-        commande.setIdPlat(idFilms);
-        commande.setIdFilm(idFilms);
-        commande.setAdresseLivraison(adresseLivraison);
-        //insertion dans la base de donnes
-        GestionnaireCommande addCommande;
+        
+        GestionnaireCommande gc;
+        
         try {
-            addCommande = new GestionnaireCommande(idClient, idFilms, idFilms, adresseLivraison);
-            commande.setPrix(prix);
-            addCommande.enregistrerCommandeDB();
+            gc = new GestionnaireCommande(  commande.getIdClient(),
+                                            commande.getIdPlats(),
+                                            commande.getIdFilms(),
+                                            commande.getAdresseLivraison()
+                                         );
+            
+            gc.enregistrerCommandeDB();
+            
+            response.setContentType("application/json");
+            response.setStatus(HttpServletResponse.SC_OK);
+            response.getWriter().println( gc.CommandeToJson() );
+            
         } catch (SQLException ex) {
-            Logger.getLogger(CommandesServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CommandeServlet.class.getName()).log(Level.SEVERE, null, ex);
         } catch (Exception ex) {
-            Logger.getLogger(CommandesServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CommandeServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
+
+
 
     /**
      * Methode pour modifier une commande 
@@ -113,6 +120,7 @@ public class CommandesServlet extends HttpServlet {
      * @throws IOException
      */
     // AJOUTER PLAT A UNE COMMANDE EXISTANTE
+    /**
     @Override
     protected void doPut(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -136,6 +144,7 @@ public class CommandesServlet extends HttpServlet {
         
 
     }
+    */
       
 
     @Override
