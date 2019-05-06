@@ -27,7 +27,7 @@ public class Test extends XMLAble {
      * @param args the command line arguments
      */
     public static void main(String[] args) throws JAXBException, IOException {
-     
+     /*
         GestionnaireMenu m = new GestionnaireMenu();
       m.getCartesDB();
       System.out.println("=============");
@@ -55,7 +55,7 @@ public class Test extends XMLAble {
          
          tf.saveAsXml("testFacture.xml");
       // System.out.print(conn);
-        // TODO code application logic here
+        // TODO code application logic here*/
     }
     
 }

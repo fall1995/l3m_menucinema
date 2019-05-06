@@ -83,7 +83,7 @@ public class UpdateClientServlet extends HttpServlet {
         client.setPrenom(parametres.get(prenom));
         client.setEmail(parametres.get(email));
         client.setPhoto(parametres.get(photo));
-        client.setTelephone(parametres.get(tel));
+        client.setTel(parametres.get(tel));
         client.setAdresse(parametres.get(adresse));
         
         /**

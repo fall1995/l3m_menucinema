@@ -10,21 +10,21 @@
     <xsd:element name="ingredient" type="Ingredient"/> 
     <xsd:simpleType name="Ingredient">
         <xsd:restriction base="xsd:string">
-            <xsd:enumeration value="jambon"/>
-            <xsd:enumeration value="saumon"/>
-            <xsd:enumeration value="thon"/>
-            <xsd:enumeration value="poulet"/>
-            <xsd:enumeration value="mozza"/>
-            <xsd:enumeration value="chèvre"/>
-            <xsd:enumeration value="roquefort"/>
-            <xsd:enumeration value="gruyère"/>
-            <xsd:enumeration value="champignons"/>
-            <xsd:enumeration value="poivrons"/>
-            <xsd:enumeration value="aubergine"/>
-            <xsd:enumeration value="ananas"/>
-            <xsd:enumeration value="coca"/>
-            <xsd:enumeration value="bananes"/>
-            <xsd:enumeration value="melon"/>
+            <xsd:enumeration value="Jambon"/>
+            <xsd:enumeration value="Saumon"/>
+            <xsd:enumeration value="Thon"/>
+            <xsd:enumeration value="Poulet"/>
+            <xsd:enumeration value="Mozza"/>
+            <xsd:enumeration value="Chevre"/>
+            <xsd:enumeration value="Roquefort"/>
+            <xsd:enumeration value="Gruyere"/>
+            <xsd:enumeration value="Champignons"/>
+            <xsd:enumeration value="Poivrons"/>
+            <xsd:enumeration value="Aubergine"/>
+            <xsd:enumeration value="Ananas"/>
+            <xsd:enumeration value="Coca"/>
+            <xsd:enumeration value="Bananes"/>
+            <xsd:enumeration value="Melon"/>
         </xsd:restriction>
     </xsd:simpleType>
 </xsd:schema>

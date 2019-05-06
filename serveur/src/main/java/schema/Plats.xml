@@ -14,7 +14,7 @@
     
     <ns1:plat>
         <ns2:id>des1</ns2:id>
-        <ns2:image>https://i2.wp.com/www.recette-pour-diabetique.com/wp-content/uploads/2017/03/tomate-mozzarella-basilic.jpg?resize=620%2C376&ssl=1</ns2:image>
+        <ns2:image>https://i2.wp.com/www.recette-pour-diabetique.com/wp-content/uploads/2017/03/tomate-mozzarella-basilic.jpg</ns2:image>
         <ns2:type>dessert</ns2:type>
         <ns2:prix>7.5</ns2:prix>
         <ns2:ingredients>ananas</ns2:ingredients>
@@ -30,7 +30,7 @@
     </ns1:plat>
     
     <ns1:plat>
-        <ns2:id>de3</ns2:id>
+        <ns2:id>des3</ns2:id>
         <ns2:image>http://p9.storage.canalblog.com/99/14/1118309/89578201_o.jpg</ns2:image>
         <ns2:type>dessert</ns2:type>
         <ns2:prix>2.5</ns2:prix>
@@ -80,11 +80,11 @@
         <ns2:ingredients>mozza</ns2:ingredients> 
         <ns2:ingredients>aubergine</ns2:ingredients>
         <ns2:ingredients>roquefort</ns2:ingredients>  
-        <ns2:ingredients>chèvre</ns2:ingredients> 
+        <ns2:ingredients>chevre</ns2:ingredients> 
                  
     </ns1:plat>
     <ns1:plat>
-        <ns2:id>bois2</ns2:id>
+        <ns2:id>bois1</ns2:id>
         <ns2:image>http://www.prunier.com/wp-content/uploads/2013/03/ananas-victoria.jpg</ns2:image>
         <ns2:type>boisson</ns2:type>
         <ns2:prix>4.5</ns2:prix>
@@ -92,7 +92,7 @@
         <ns2:ingredients>ananas</ns2:ingredients>
     </ns1:plat>
     <ns1:plat>
-        <ns2:id>bois3</ns2:id>
+        <ns2:id>bois2</ns2:id>
         <ns2:image>https://sf1.viepratique.fr/wp-content/uploads/sites/2/2014/10/soupiere-melon.jpg</ns2:image>
         <ns2:type>boisson</ns2:type>
         <ns2:prix>2.5</ns2:prix>

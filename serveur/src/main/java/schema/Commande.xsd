@@ -13,15 +13,15 @@
     <xsd:import namespace="classesGen/client" schemaLocation="Client.xsd"/>
     <xsd:element name="commande" type="Commande"/>
     <xsd:complexType name="Commande">
-        <xsd:sequence>   
-        <xsd:element name="client" type="clt:Client"/>
-        <xsd:element name="idPlat"  type="xsd:string" minOccurs="1" maxOccurs="unbounded"/>
-        <xsd:element name="film"  type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
+        <xsd:sequence>  
+            <xsd:element name="id"                  type="xsd:string"/> 
+            <xsd:element name="idClient"            type="xsd:string"/>
+            <xsd:element name="idPlats"             type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
+            <xsd:element name="idFilms"             type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
+            <xsd:element name="adresseLivraison"    type="xsd:string"/>
+            <xsd:element name="date"                type="xsd:string"/>
+            <xsd:element name="prix"                type="xsd:double"/>
         </xsd:sequence>
-        <xsd:attribute name="adresseLivraison" type="xsd:string"/>
-        <xsd:attribute name="date"   type="xsd:string"/>
-        <xsd:attribute name="id"   type="xsd:string"/>
-        <xsd:attribute name="prix"   type="xsd:double"/>
     </xsd:complexType>
 
 </xsd:schema>

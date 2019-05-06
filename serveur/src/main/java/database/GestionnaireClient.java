@@ -56,7 +56,7 @@ public class GestionnaireClient extends SQLAble {
 
 
     public void editTel(String tel) {
-        client.setTelephone(tel);
+        client.setTel(tel);
     }
 
 
@@ -124,7 +124,7 @@ public class GestionnaireClient extends SQLAble {
             gc.client.setAdresse(rset.getString("adresse"));
             gc.client.setEmail(rset.getString("email"));
             gc.client.setPhoto(rset.getString("photo"));
-            gc.client.setTelephone(rset.getString("tel"));
+            gc.client.setTel(rset.getString("tel"));
             rset.close();
         }else{
             throw new Exception("Client inexistant dans la BD!");
@@ -144,7 +144,7 @@ public class GestionnaireClient extends SQLAble {
             cstmt.setString(1, client.getId());
             cstmt.setString(2, client.getPhoto());
             cstmt.setString(3, client.getEmail());
-            cstmt.setString(4, client.getTelephone());
+            cstmt.setString(4, client.getTel());
             cstmt.setString(5, client.getAdresse());
             cstmt.execute();
             cstmt.close();

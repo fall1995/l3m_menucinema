@@ -1,8 +1,8 @@
 //
-// Ce fichier a Ã©tÃ© gÃ©nÃ©rÃ© par l'implÃ©mentation de rÃ©fÃ©rence JavaTM Architecture for XML Binding (JAXB), v2.2.8-b130911.1802 
+// Ce fichier a été généré par l'implémentation de référence JavaTM Architecture for XML Binding (JAXB), v2.2.8-b130911.1802 
 // Voir <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
-// Toute modification apportÃ©e Ã  ce fichier sera perdue lors de la recompilation du schÃ©ma source. 
-// GÃ©nÃ©rÃ© le : 2019.04.30 Ã  01:32:10 PM CEST 
+// Toute modification apportée à ce fichier sera perdue lors de la recompilation du schéma source. 
+// Généré le : 2019.05.05 à 04:57:11 PM CEST 
 //
 
 
@@ -16,7 +16,7 @@ import javax.xml.bind.annotation.XmlType;
 /**
  * <p>Classe Java pour Ingredient.
  * 
- * <p>Le fragment de schÃ©ma suivant indique le contenu attendu figurant dans cette classe.
+ * <p>Le fragment de schéma suivant indique le contenu attendu figurant dans cette classe.
  * <p>
  * <pre>
  * &lt;simpleType name="Ingredient">
@@ -26,9 +26,9 @@ import javax.xml.bind.annotation.XmlType;
  *     &lt;enumeration value="thon"/>
  *     &lt;enumeration value="poulet"/>
  *     &lt;enumeration value="mozza"/>
- *     &lt;enumeration value="chÃ¨vre"/>
+ *     &lt;enumeration value="chevre"/>
  *     &lt;enumeration value="roquefort"/>
- *     &lt;enumeration value="gruyÃ¨re"/>
+ *     &lt;enumeration value="gruyere"/>
  *     &lt;enumeration value="champignons"/>
  *     &lt;enumeration value="poivrons"/>
  *     &lt;enumeration value="aubergine"/>
@@ -55,12 +55,12 @@ public enum Ingredient {
     POULET("poulet"),
     @XmlEnumValue("mozza")
     MOZZA("mozza"),
-    @XmlEnumValue("ch\u00e8vre")
-    CHÃˆVRE("ch\u00e8vre"),
+    @XmlEnumValue("chevre")
+    CHEVRE("chevre"),
     @XmlEnumValue("roquefort")
     ROQUEFORT("roquefort"),
-    @XmlEnumValue("gruy\u00e8re")
-    GRUYÃˆRE("gruy\u00e8re"),
+    @XmlEnumValue("gruyere")
+    GRUYERE("gruyere"),
     @XmlEnumValue("champignons")
     CHAMPIGNONS("champignons"),
     @XmlEnumValue("poivrons")
