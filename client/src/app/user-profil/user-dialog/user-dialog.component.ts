@@ -34,7 +34,7 @@ export class UserDialogComponent implements OnInit {
             photo : params.photo,
             email : params.email,
             tel : params.tel,
-            adresse: params.adress,
+            adresse: params.adresse,
         }).then(res =>{
             localStorage.setItem('adresse', params.adresse);
             this.afficherDialog = false;
