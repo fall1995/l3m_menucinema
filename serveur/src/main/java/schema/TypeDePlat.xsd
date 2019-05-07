@@ -12,10 +12,11 @@ Le schema du  type de plat
     <xsd:element name="typeDePlat" type="TypeDePlat"/> 
     <xsd:simpleType name="TypeDePlat">
         <xsd:restriction base="xsd:string">
-            <xsd:enumeration value="Entree"/>
-            <xsd:enumeration value="Plat"/>
-            <xsd:enumeration value="Dessert"/>
-            <xsd:enumeration value="Boisson"/>
+            <xsd:enumeration value="entree"/>
+            <xsd:enumeration value="plat"/>
+            <xsd:enumeration value="dessert"/>
+            <xsd:enumeration value="boisson"/>
+            <xsd:enumeration value="hors-d'oeuvre"/>
         </xsd:restriction>
     </xsd:simpleType>
 </xsd:schema>
