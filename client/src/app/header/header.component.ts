@@ -43,8 +43,8 @@ export class HeaderComponent implements OnInit {
     onSignOut() {
         this.afAuth.auth.signOut();
         this.message.add({severity:'info',
-            summary:'',
-            detail:'Vous êtes deconneté 🙁'});
+            summary:'A très bientot',
+            detail:'Vous êtes deconneté !'});
         this.route.navigate(['/films']);
         this.init();
 

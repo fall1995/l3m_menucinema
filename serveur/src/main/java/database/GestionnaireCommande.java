@@ -55,11 +55,17 @@ public class GestionnaireCommande extends SQLAble {
 
         double prixPlats = 0;
         double prixFilms = 0;
+        double prixPlat = 0;
 
         prixFilms = 3.79 * commande.getIdFilms().size();
 
         for (String idPlat : commande.getIdPlats()) {
-            prixPlats += GestionnaireMenu.getPrixPlat(idPlat);
+            prixPlat = GestionnaireMenu.getPrixPlat(idPlat);
+            if (prixPlat != -1 ){
+                prixPlats += prixPlat;
+            }else{
+                throw new Exception("Le plat avec id " + idPlat + " n'est pas dans la carte !");
+            }  
         }
 
         commande.setPrix(prixFilms + prixPlats);

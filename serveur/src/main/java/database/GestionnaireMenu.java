@@ -100,12 +100,12 @@ public class GestionnaireMenu  extends XMLAble{
      * @return menu
      */
 
-    public List<Plat> getMenu() {
-        return menu;
+    public ArrayList<Plat> getMenu() {
+        return (ArrayList<Plat>) menu;
     }
     
     public static double getPrixPlat(String idPlat){
-        List<Plat> plats = getCartesDB();
+        ArrayList<Plat> plats = (ArrayList<Plat>) getCartesDB();
         int i = 0;
         while(i < plats.size()){
             if(plats.get(i).getId().equals(idPlat)){

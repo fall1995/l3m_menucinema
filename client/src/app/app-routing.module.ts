@@ -14,8 +14,8 @@ import {PanierComponent} from './panier/panier.component';
 const routes: Routes = [
     {path: 'authentification/signin', component: SigninComponent},
     {path: 'authentification/signup', component: SignupComponent},
-    {path: 'films', canActivate: [AuthGuardService], component: FilmsComponent},
-    {path: 'menus', canActivate: [AuthGuardService], component: MenusComponent},
+    {path: 'films', component: FilmsComponent},
+    {path: 'menus', component: MenusComponent},
     {path: 'user/dashbord', component: UserProfilComponent },
     {path: 'user/commande', component: CommandeComponent },
     {path: 'user/panier', component: PanierComponent },

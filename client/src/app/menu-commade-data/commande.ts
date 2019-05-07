@@ -1,8 +1,14 @@
 export interface CommandeData {
     idCommade?: number;
-    idClient?: string;
-    idPlat?: string;
+    idClient?: any[];
+    idPlat?: any[];
     date?: any;
     prix?: number;
-    adresse?: string;
+    adresseLivraison?: string;
+}
+export interface Commande {
+    idClient?: string;
+    idPlats?: any[];
+    idFilms?: any[];
+    adresseLivraison?: string;
 }
