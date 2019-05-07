@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletResponse;
  * FilmsPlusVueServlet est la classe qui permet d'affiche les films plus vue 
  * 
  */
+@Deprecated
 public class FilmsPlusVueServlet extends HttpServlet{
     
     /**
