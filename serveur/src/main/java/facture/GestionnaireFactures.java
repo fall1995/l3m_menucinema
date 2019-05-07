@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.List;
+import javax.xml.parsers.SAXParserFactory;
 import javax.xml.stream.XMLEventReader;
 import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamConstants;
@@ -33,6 +34,8 @@ public class GestionnaireFactures {
          String json = new Gson().toJson(platsPreferencePourFilm(idFilm));
          return json;
     }
+    
+
     
     /******************* FILMS POUR PLAT
      * @param plat

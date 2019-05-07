@@ -3,6 +3,7 @@ package l3m;
 import classesgen.commande.Commande;
 import com.google.gson.Gson;
 import database.GestionnaireCommande;
+import facture.SauvegarderFacture;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -76,7 +77,13 @@ public class CommandeServlet extends HttpServlet {
             );
 
             gc.enregistrerCommandeDB();
-
+            
+            
+            
+            SauvegarderFacture.saveFacture( 
+                    commande.getAdresseLivraison(), commande.getDate(), commande.getId(),commande.getPrix(), 
+                    commande.getIdClient(), films, plats);
+            
             response.setContentType("application/json");
             response.setStatus(HttpServletResponse.SC_OK);
             response.getWriter().println(gc.CommandeToJson());

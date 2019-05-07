@@ -116,14 +116,18 @@ public class GestionnaireCommande extends SQLAble {
 
             for (Map.Entry<String, Integer> mapPlat : mapIdPlats.entrySet()) {
                 String idPlat = mapPlat.getKey();
-                int quantite = mapPlat.getValue();
-                ajouterPlatQtDB(commande.getId(), idPlat, quantite);
-                nbInsertions++;
+                if ( idPlat.length() > 1 ){
+                    int quantite = mapPlat.getValue();
+                    ajouterPlatQtDB(commande.getId(), idPlat, quantite);
+                    nbInsertions++;
+                }
             }
 
             for (String idFilm : commande.getIdFilms()) {
-                ajouterFilmDB(commande.getId(), idFilm);
-                nbInsertions++;
+                if ( idFilm.length() > 1 ){
+                    ajouterFilmDB(commande.getId(), idFilm);
+                    nbInsertions++;
+                }
             }
 
             if (nbInsertions > 1) {
