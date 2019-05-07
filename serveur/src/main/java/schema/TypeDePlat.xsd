@@ -10,6 +10,7 @@ Le schema du  type de plat
             xmlns="http://classesGen/typeDePlat"
             elementFormDefault="qualified">
     <xsd:element name="typeDePlat" type="TypeDePlat"/> 
+    
     <xsd:simpleType name="TypeDePlat">
         <xsd:restriction base="xsd:string">
             <xsd:enumeration value="Entree"/>
