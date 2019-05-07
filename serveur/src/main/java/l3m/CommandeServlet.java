@@ -53,14 +53,14 @@ public class CommandeServlet extends HttpServlet {
 
         String buffer = "";
         buffer = request.getParameter("idPlats");
-        buffer = buffer.replaceAll("[\\[\\]]", "");
+        buffer = buffer.replaceAll("[\\[\\]\"]", "");
         String[] plats = buffer.split(",");
 
         for (int i = 0; i < plats.length; i++) {
             commande.getIdPlats().add(plats[i]);
         }
         buffer = request.getParameter("idFilms");
-        buffer = buffer.replaceAll("[\\[\\]]", "");
+        buffer = buffer.replaceAll("[\\[\\]\"]", "");
         String[] films = buffer.split(",");
         for (int i = 0; i < films.length; i++) {
             commande.getIdFilms().add(films[i]);
