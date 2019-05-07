@@ -5,6 +5,7 @@ import * as firebase from 'firebase';
 import {AngularFireDatabase} from '@angular/fire/database';
 import {FirebaseObjectObservable} from '@angular/fire/database-deprecated';
 import {AuthService} from '../service/auth.service';
+import {StorageService} from '../service/storage.service';
 
 @Component({
     selector: 'app-user-profil',
@@ -13,9 +14,10 @@ import {AuthService} from '../service/auth.service';
 })
 export class UserProfilComponent implements OnInit {
 
-    constructor(private afAuth: AngularFireAuth, private authService: AuthService) {
+    constructor(private afAuth: AngularFireAuth, private authService: AuthService,private storageService: StorageService) {
     }
-
+    panier: any[]; // variable qui stocke le tableaux de plat
+    movie: any[]; // variable qui stock les films selectionnées
     afficherDialog = false; // boolean pour ouvrir et fermer le dialogue pop up
     user: User; // l'utilisateur courant
     userPhoto : User = { // je stock la photo de profil recuperer dans firebase
@@ -23,6 +25,7 @@ export class UserProfilComponent implements OnInit {
     };
     ngOnInit() {
         this.init();
+        this.initPanier();
     }
 
     /**
@@ -42,6 +45,11 @@ export class UserProfilComponent implements OnInit {
         });
     }
 
+    initPanier() {
+        this.panier = this.storageService.getMenu();
+        this.movie = this.storageService.getMieuNote();
+    }
+
     /**
      * bouton qui affiche le dialog pop up
      */
@@ -54,6 +62,24 @@ export class UserProfilComponent implements OnInit {
      */
     onHideProfilDialog(): void {
         this.afficherDialog = false;
+    }
+
+    /**
+     * effacer l'élément sélectionné(plat)
+     * @param index
+     */
+    deleteMenusSelected(index: number) {
+        this.storageService.delete(index);
+        this.initPanier();
+    }
+
+    /**
+     * effacer l'élément selectionné(movie)
+     * @param index
+     */
+    deleteMovieSelected(index: number) {
+        this.storageService.deleteMovie(index);
+        this.initPanier();
     }
 
 }
