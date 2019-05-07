@@ -3,101 +3,373 @@
     xmlns:ns1='http://classesGen/plats'
     xmlns:ns2='http://classesGen/plat'
     xsi:schemaLocation='http://classesGen/plats Plats.xsd'>
-    <ns1:plat>
-        <ns2:id>plat1</ns2:id>
-        <ns2:image>https://circulairehttps-smisolutionsmark.netdna-ssl.com/wp-content/uploads/poulet-aux-nnoix-de-cajou-thai.jpg</ns2:image>
-        <ns2:type>Entree</ns2:type>
+<!--====SALADS===-->
 
-        <ns2:prix>10.3</ns2:prix>
-        <ns2:ingredients>Poulet</ns2:ingredients>
-        <ns2:ingredients>Poivrons</ns2:ingredients>
+    <ns1:plat>
+        <ns2:id>Joie printanière</ns2:id>
+        <ns2:image>https://marketplace.canva.com/MADGwDbEktY/5/screen/canva-assorted-sliced-fruits-and-vegetables-on-blue-ceramic-plate-MADGwDbEktY.jpg</ns2:image>
+        <ns2:type>entree</ns2:type>
+        <ns2:prix>10.5</ns2:prix>
+        <ns2:ingredients>salade</ns2:ingredients>
+        <ns2:ingredients>olives</ns2:ingredients>
+        <ns2:ingredients>mangue</ns2:ingredients>
+    </ns1:plat>
+
+    <ns1:plat>
+        <ns2:id>Salade César</ns2:id>
+        <ns2:image>https://images.unsplash.com/photo-1512852939750-1305098529bf?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=1350&amp;q=80</ns2:image>
+        <ns2:type>entree</ns2:type>
+        <ns2:prix>5</ns2:prix>
+        <ns2:ingredients>salade</ns2:ingredients>
+        <ns2:ingredients>pain</ns2:ingredients>
+        <ns2:ingredients>poulet</ns2:ingredients>
+        <ns2:ingredients>fromage</ns2:ingredients>
+    </ns1:plat>
+
+
+    <ns1:plat>
+        <ns2:id>Pâtes au pesto</ns2:id>
+        <ns2:image>https://images.unsplash.com/photo-1473093295043-cdd812d0e601?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=1350&amp;q=80</ns2:image>
+        <ns2:type>plat</ns2:type>
+        <ns2:prix>8</ns2:prix>
+        <ns2:ingredients>salade</ns2:ingredients>
+        <ns2:ingredients>tomates</ns2:ingredients>
+        <ns2:ingredients>poulet</ns2:ingredients>
+        <ns2:ingredients>pâtes</ns2:ingredients>
+    </ns1:plat>
+
+
+<!--====PIZZAS====-->
+    <ns1:plat>
+        <ns2:id>Pizza au pepperoni</ns2:id>
+        <ns2:image>https://images.unsplash.com/photo-1506354666786-959d6d497f1a?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=1350&amp;q=80</ns2:image>
+        <ns2:type>plat</ns2:type>
+        <ns2:prix>12</ns2:prix>
+        <ns2:ingredients>pain</ns2:ingredients>
+        <ns2:ingredients>fromage</ns2:ingredients>
+        <ns2:ingredients>tomates</ns2:ingredients>
+        <ns2:ingredients>viande</ns2:ingredients>
+    </ns1:plat>
+    <ns1:plat>
+        <ns2:id>Pizza aux champignons</ns2:id>
+        <ns2:image>https://marketplace.canva.com/MACV3kkp-mE/1/screen/canva-pizza%2C-drink%2C-food-MACV3kkp-mE.jpg</ns2:image>
+        <ns2:type>plat</ns2:type>
+        <ns2:prix>13</ns2:prix>
+        <ns2:ingredients>pain</ns2:ingredients>
+        <ns2:ingredients>fromage</ns2:ingredients>
+        <ns2:ingredients>olives</ns2:ingredients>
+        <ns2:ingredients>viande</ns2:ingredients>
+        <ns2:ingredients>champignons</ns2:ingredients>
+    </ns1:plat>
+    <ns1:plat>
+        <ns2:id>Pizza aux légumes</ns2:id>
+        <ns2:image>https://marketplace.canva.com/MADGyFhdRpc/4/screen/canva-baked-pizza-on-top-of-black-surface-near-filled-glass-tankard-MADGyFhdRpc.jpg</ns2:image>
+        <ns2:type>plat</ns2:type>
+        <ns2:prix>8</ns2:prix>
+        <ns2:ingredients>pain</ns2:ingredients>
+        <ns2:ingredients>fromage</ns2:ingredients>
+        <ns2:ingredients>tomates</ns2:ingredients>
+        <ns2:ingredients>oignons</ns2:ingredients>
+        <ns2:ingredients>olives</ns2:ingredients>
+    </ns1:plat>
+    <ns1:plat>
+        <ns2:id>Pizza aux olives</ns2:id>
+        <ns2:image>https://marketplace.canva.com/MACZiee5G2o/1/screen/canva-pizza%2C-baking%2C-fast-food%2C-lunch%2C-business-lunch-MACZiee5G2o.jpg</ns2:image>
+        <ns2:type>plat</ns2:type>
+        <ns2:prix>8</ns2:prix>
+        <ns2:ingredients>pain</ns2:ingredients>
+        <ns2:ingredients>fromage</ns2:ingredients>
+        <ns2:ingredients>olives</ns2:ingredients>
+        <ns2:ingredients>viande</ns2:ingredients>
+    </ns1:plat>
+
+<!--====JUS=====-->
+    <ns1:plat>
+        <ns2:id>Jus de mangue</ns2:id>
+        <ns2:image>https://images.unsplash.com/photo-1546173159-315724a31696?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=634&amp;q=80</ns2:image>
+        <ns2:type>boisson</ns2:type>
+        <ns2:prix>5</ns2:prix>
+        <ns2:ingredients>mangue</ns2:ingredients>
+        <ns2:ingredients>citron</ns2:ingredients>
+    </ns1:plat>
+    <ns1:plat>
+        <ns2:id>Jus d'orange</ns2:id>
+        <ns2:image>https://images.unsplash.com/photo-1522427088495-81d38b91befb?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=646&amp;q=80</ns2:image>
+        <ns2:type>boisson</ns2:type>
+        <ns2:prix>3</ns2:prix>
+        <ns2:ingredients>orange</ns2:ingredients>
+        <ns2:ingredients>citron</ns2:ingredients>
     </ns1:plat>
     
     <ns1:plat>
-        <ns2:id>des1</ns2:id>
-        <ns2:image>https://i2.wp.com/www.recette-pour-diabetique.com/wp-content/uploads/2017/03/tomate-mozzarella-basilic.jpg</ns2:image>
-        <ns2:type>Dessert</ns2:type>
-        <ns2:prix>7.5</ns2:prix>
-        <ns2:ingredients>Ananas</ns2:ingredients>
-        <ns2:ingredients>Mozza</ns2:ingredients>
-    </ns1:plat>
-    
-    <ns1:plat>
-        <ns2:id>des2</ns2:id>
-        <ns2:image></ns2:image>
-        <ns2:type>Dessert</ns2:type>
-        <ns2:prix>1.5</ns2:prix>
-        <ns2:ingredients>Mozza</ns2:ingredients>
-    </ns1:plat>
-    
-    <ns1:plat>
-        <ns2:id>des3</ns2:id>
-        <ns2:image>http://p9.storage.canalblog.com/99/14/1118309/89578201_o.jpg</ns2:image>
-        <ns2:type>Dessert</ns2:type>
-        <ns2:prix>2.5</ns2:prix>
-        <ns2:ingredients>Ananas</ns2:ingredients>
-    </ns1:plat>
-    
-    <ns1:plat>
-        <ns2:id>plat2</ns2:id>
-        <ns2:image>https://images.ricardocuisine.com/services/recipes/1074x1074_3089-background.jpg</ns2:image>
-        <ns2:type>Plat</ns2:type>
-        <ns2:prix>10.0</ns2:prix>
-        <ns2:ingredients>Saumon</ns2:ingredients>
-        <ns2:ingredients>Champignons</ns2:ingredients>
-        <ns2:ingredients>Poivrons</ns2:ingredients>
-    </ns1:plat>
-    
-    <ns1:plat>
-        <ns2:id>plat3</ns2:id>
-        <ns2:image>https://p7.storage.canalblog.com/77/30/1052250/86288983_o.jpg</ns2:image>
-        <ns2:type>Plat</ns2:type>
-        <ns2:prix>12.5</ns2:prix>
-        <ns2:ingredients>Thon</ns2:ingredients>
-        <ns2:ingredients>Champignons</ns2:ingredients>   
-        <ns2:ingredients>Mozza</ns2:ingredients> 
-        <ns2:ingredients>Aubergine</ns2:ingredients>           
-    </ns1:plat>
-    
-    <ns1:plat>
-        <ns2:id>plat4</ns2:id>
-        <ns2:image>https://assets.afcdn.com/recipe/20170614/69388_w800h600c1cx3000cy2000.jpg</ns2:image>
-        <ns2:type>Plat</ns2:type>
-        <ns2:prix>13.5</ns2:prix>
-        <ns2:ingredients>Thon</ns2:ingredients>
-        <ns2:ingredients>Champignons</ns2:ingredients>   
-        <ns2:ingredients>Mozza</ns2:ingredients> 
-        <ns2:ingredients>Aubergine</ns2:ingredients>
-        <ns2:ingredients>Roquefort</ns2:ingredients>           
-    </ns1:plat>
-    
-    <ns1:plat>
-        <ns2:id>plat5</ns2:id>
-        <ns2:image>https://www.atelierdeschefs.com/media/recette-e17221-crepe-jambon-champignons.jpg</ns2:image>
-        <ns2:type>Plat</ns2:type>
-        <ns2:prix>13.5</ns2:prix>
-        <ns2:ingredients>Jambon</ns2:ingredients>
-        <ns2:ingredients>Champignons</ns2:ingredients>   
-        <ns2:ingredients>Mozza</ns2:ingredients> 
-        <ns2:ingredients>Aubergine</ns2:ingredients>
-        <ns2:ingredients>Roquefort</ns2:ingredients>  
-        <ns2:ingredients>Chevre</ns2:ingredients> 
-                 
+        <ns2:id>Jus de framboise</ns2:id>
+        <ns2:image>https://images.unsplash.com/photo-1507120366498-4656eaece7fa?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=1351&amp;q=80</ns2:image>
+        <ns2:type>boisson</ns2:type>
+        <ns2:prix>5</ns2:prix>
+        <ns2:ingredients>framboise</ns2:ingredients>
+        <ns2:ingredients>pomme</ns2:ingredients>
     </ns1:plat>
     <ns1:plat>
-        <ns2:id>bois1</ns2:id>
-        <ns2:image>http://www.prunier.com/wp-content/uploads/2013/03/ananas-victoria.jpg</ns2:image>
-        <ns2:type>Boisson</ns2:type>
-        <ns2:prix>4.5</ns2:prix>
-        <ns2:ingredients>Bananes</ns2:ingredients>
-        <ns2:ingredients>Ananas</ns2:ingredients>
+        <ns2:id>Jus de fraise</ns2:id>
+        <ns2:image>https://images.unsplash.com/photo-1513169639596-cf0480fe1bb9?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=1350&amp;q=80</ns2:image>
+        <ns2:type>boisson</ns2:type>
+        <ns2:prix>5.5</ns2:prix>
+        <ns2:ingredients>fraise</ns2:ingredients>
+        <ns2:ingredients>kiwi</ns2:ingredients>
+    </ns1:plat>
+<!--=====THÉ=====-->
+    <ns1:plat>
+        <ns2:id>Thé noir</ns2:id>
+        <ns2:image>https://images.unsplash.com/photo-1491720731493-223f97d92c21?ixlib=rb-1.2.1&amp;auto=format&amp;fit=crop&amp;w=930&amp;q=80</ns2:image>
+        <ns2:type>boisson</ns2:type>
+        <ns2:prix>1</ns2:prix>
+        <ns2:ingredients>thé</ns2:ingredients>
     </ns1:plat>
     <ns1:plat>
-        <ns2:id>bois2</ns2:id>
-        <ns2:image>https://sf1.viepratique.fr/wp-content/uploads/sites/2/2014/10/soupiere-melon.jpg</ns2:image>
-        <ns2:type>Boisson</ns2:type>
-        <ns2:prix>2.5</ns2:prix>
-        <ns2:ingredients>Melon</ns2:ingredients>
-        
+        <ns2:id>Thé vert</ns2:id>
+        <ns2:image>https://marketplace.canva.com/MADGx1gNugo/4/screen/canva-teacup-on-table-MADGx1gNugo.jpg</ns2:image>
+        <ns2:type>boisson</ns2:type>
+        <ns2:prix>1</ns2:prix>
+        <ns2:ingredients>thé</ns2:ingredients>
+    </ns1:plat>
+    <ns1:plat>
+        <ns2:id>Thé au thym</ns2:id>
+        <ns2:image>https://marketplace.canva.com/MADGv96nneQ/6/screen/canva-photo-of-white-pink-and-yellow-ceramic-mug-and-saucer-MADGv96nneQ.jpg</ns2:image>
+        <ns2:type>boisson</ns2:type>
+        <ns2:prix>2</ns2:prix>
+        <ns2:ingredients>thé</ns2:ingredients>
+    </ns1:plat>
+    <ns1:plat>
+        <ns2:id>Thé à la menthe</ns2:id>
+        <ns2:image>https://marketplace.canva.com/MADGx0o_hTQ/4/screen/canva-clear-drinking-glass-filled-with-brown-liquid-MADGx0o_hTQ.jpg</ns2:image>
+        <ns2:type>boisson</ns2:type>
+        <ns2:prix>1</ns2:prix>
+        <ns2:ingredients>thé</ns2:ingredients>
+    </ns1:plat>
+    <ns1:plat>
+        <ns2:id>Thé à la camomille</ns2:id>
+        <ns2:image>https://images.unsplash.com/photo-1549582031-a73b5eccdf89?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=654&amp;q=80</ns2:image>
+        <ns2:type>boisson</ns2:type>
+        <ns2:prix>2</ns2:prix>
+        <ns2:ingredients>thé</ns2:ingredients>
+    </ns1:plat>
+<!--=====CAFÉ=====-->
+    <ns1:plat>
+        <ns2:id>Café latte</ns2:id>
+        <ns2:image>https://marketplace.canva.com/MADGwBZuxWA/5/screen/canva-coffee-latte-in-cup-MADGwBZuxWA.jpg</ns2:image>
+        <ns2:type>boisson</ns2:type>
+        <ns2:prix>3</ns2:prix>
+        <ns2:ingredients>espresso</ns2:ingredients>
+        <ns2:ingredients>lait</ns2:ingredients>
+    </ns1:plat>
+    <ns1:plat>
+        <ns2:id>Espresso</ns2:id>
+        <ns2:image>https://marketplace.canva.com/MACV-ndTRAg/1/screen/canva-coffee%2C-cup%2C-espresso%2C-breakfast%2C-coffee-spoon-MACV-ndTRAg.jpg</ns2:image>
+        <ns2:type>boisson</ns2:type>
+        <ns2:prix>3</ns2:prix>
+        <ns2:ingredients>espresso</ns2:ingredients>
+    </ns1:plat>
+<!--=====DESSERT====-->
+    <ns1:plat>
+        <ns2:id>Sponge cake</ns2:id>
+        <ns2:image>https://marketplace.canva.com/MACV9M2P9wQ/1/screen/canva-sponge-cake%2C-suites%2C-sweet%2C-cake%2C-dessert%2C-sugar-MACV9M2P9wQ.jpg</ns2:image>
+        <ns2:type>dessert</ns2:type>
+        <ns2:prix>7</ns2:prix>
+        <ns2:ingredients>sucre</ns2:ingredients>
+        <ns2:ingredients>amande</ns2:ingredients>
+    </ns1:plat>
+    <ns1:plat>
+        <ns2:id>Esterházy torte</ns2:id>
+        <ns2:image>https://marketplace.canva.com/MACZWaB2mKE/1/screen/canva-eszterhazyschnitte%2C-cream-slice%2C-dessert-MACZWaB2mKE.jpg</ns2:image>
+        <ns2:type>dessert</ns2:type>
+        <ns2:prix>12</ns2:prix>
+        <ns2:ingredients>sucre</ns2:ingredients>
+    </ns1:plat>
+    <ns1:plat>
+        <ns2:id>Gâteau au caramel</ns2:id>
+        <ns2:image>https://images.unsplash.com/photo-1511911063855-2bf39afa5b2e?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=634&amp;q=80</ns2:image>
+        <ns2:type>dessert</ns2:type>
+        <ns2:prix>8</ns2:prix>
+        <ns2:ingredients>caramel</ns2:ingredients>
+    </ns1:plat>
+    <ns1:plat>
+        <ns2:id>Macaron</ns2:id>
+        <ns2:image>https://images.unsplash.com/photo-1489069313310-63735a4f3010?ixlib=rb-1.2.1&amp;auto=format&amp;fit=crop&amp;w=966&amp;q=80</ns2:image>
+        <ns2:type>dessert</ns2:type>
+        <ns2:prix>7</ns2:prix>
+        <ns2:ingredients>sucre</ns2:ingredients>
+        <ns2:ingredients>amande</ns2:ingredients>
+    </ns1:plat>
+    <ns1:plat>
+        <ns2:id>4 Donuts</ns2:id>
+        <ns2:image>https://images.unsplash.com/photo-1514517220017-8ce97a34a7b6?ixlib=rb-1.2.1&amp;auto=format&amp;fit=crop&amp;w=634&amp;q=80</ns2:image>
+        <ns2:type>dessert</ns2:type>
+        <ns2:prix>8</ns2:prix>
+        <ns2:ingredients>sucre</ns2:ingredients>
+        <ns2:ingredients>chocolat</ns2:ingredients>
+    </ns1:plat>
+    <ns1:plat>
+        <ns2:id>Pot de bonbons</ns2:id>
+        <ns2:image>https://marketplace.canva.com/MACZiZaEGYs/1/screen/canva-candy%2C-sweetmeats%2C-sweets%2C-caramel%2C-dessert%2C-food-MACZiZaEGYs.jpg</ns2:image>
+        <ns2:type>dessert</ns2:type>
+        <ns2:prix>4</ns2:prix>
+        <ns2:ingredients>sucre</ns2:ingredients>
+    </ns1:plat>
+    <ns1:plat>
+        <ns2:id>Gâteau au café</ns2:id>
+        <ns2:image>https://marketplace.canva.com/MADGvz7rHP0/6/screen/canva-cake-on-plate-MADGvz7rHP0.jpg</ns2:image>
+        <ns2:type>dessert</ns2:type>
+        <ns2:prix>5</ns2:prix>
+        <ns2:ingredients>sucre</ns2:ingredients>
+        <ns2:ingredients>café</ns2:ingredients>
+        <ns2:ingredients>chocolat</ns2:ingredients>
+    </ns1:plat>
+    <ns1:plat>
+        <ns2:id>Cookies au chocolat</ns2:id>
+        <ns2:image>https://marketplace.canva.com/MADGyX9Wcw4/4/screen/canva-cookies-on-square-white-ceramic-plate-MADGyX9Wcw4.jpg</ns2:image>
+        <ns2:type>dessert</ns2:type>
+        <ns2:prix>4</ns2:prix>
+        <ns2:ingredients>sucre</ns2:ingredients>
+        <ns2:ingredients>chocolat</ns2:ingredients>
+    </ns1:plat>
+    <ns1:plat>
+        <ns2:id>Rouleau de vanille</ns2:id>
+        <ns2:image>https://marketplace.canva.com/MAC4tm7jZtY/1/screen/canva-dessert%2C-jam%2C-dough%2C-sugar%2C-coffee-and-cake-MAC4tm7jZtY.jpg</ns2:image>
+        <ns2:type>dessert</ns2:type>
+        <ns2:prix>13</ns2:prix>
+        <ns2:ingredients>sucre</ns2:ingredients>
+        <ns2:ingredients>vanille</ns2:ingredients>
+    </ns1:plat>
+    <ns1:plat>
+        <ns2:id>Gateau au chocolat</ns2:id>
+        <ns2:image>https://marketplace.canva.com/MAC4hPIHap0/1/screen/canva-chocolate%2C-cake%2C-dessert%2C-food%2C-chocolate-cake%2C-slice-MAC4hPIHap0.jpg</ns2:image>
+        <ns2:type>dessert</ns2:type>
+        <ns2:prix>10</ns2:prix>
+        <ns2:ingredients>sucre</ns2:ingredients>
+        <ns2:ingredients>chocolat</ns2:ingredients>
+    </ns1:plat>
+<!--=====BURGERS====-->
+
+    <ns1:plat>
+        <ns2:id>Burger</ns2:id>
+        <ns2:image>https://images.unsplash.com/photo-1548946522-4a313e8972a4?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=1340&amp;q=80</ns2:image>
+        <ns2:type>plat</ns2:type>
+        <ns2:prix>6</ns2:prix>
+        <ns2:ingredients>pain</ns2:ingredients>
+        <ns2:ingredients>salade</ns2:ingredients>
+        <ns2:ingredients>fromage</ns2:ingredients>
+        <ns2:ingredients>viande</ns2:ingredients>
+        <ns2:ingredients>tomates</ns2:ingredients>
+        <ns2:ingredients>oignons</ns2:ingredients>
+    </ns1:plat>
+    <ns1:plat>
+        <ns2:id>Champignons burger</ns2:id>
+        <ns2:image>https://images.unsplash.com/photo-1551987840-f62d9c74ae78?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=888&amp;q=80</ns2:image>
+        <ns2:type>plat</ns2:type>
+        <ns2:prix>6</ns2:prix>
+        <ns2:ingredients>pain</ns2:ingredients>
+        <ns2:ingredients>champignons</ns2:ingredients>
+        <ns2:ingredients>fromage</ns2:ingredients>
+        <ns2:ingredients>viande</ns2:ingredients>
+        <ns2:ingredients>tomates</ns2:ingredients>
+        <ns2:ingredients>oignons</ns2:ingredients>
+    </ns1:plat>
+    <ns1:plat>
+        <ns2:id>Burger rustique</ns2:id>
+        <ns2:image>https://images.unsplash.com/photo-1541618530-bd0a83a67f76?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=697&amp;q=80</ns2:image>
+        <ns2:type>plat</ns2:type>
+        <ns2:prix>4</ns2:prix>
+        <ns2:ingredients>pain</ns2:ingredients>
+        <ns2:ingredients>salade</ns2:ingredients>
+        <ns2:ingredients>viande</ns2:ingredients>
+    </ns1:plat>
+    <ns1:plat>
+        <ns2:id>Cheeseburger</ns2:id>
+        <ns2:image>https://images.unsplash.com/photo-1542574271-7f3b92e6c821?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=634&amp;q=80</ns2:image>
+        <ns2:type>plat</ns2:type>
+        <ns2:prix>4</ns2:prix>
+        <ns2:ingredients>pain</ns2:ingredients>
+        <ns2:ingredients>salade</ns2:ingredients>
+        <ns2:ingredients>fromage</ns2:ingredients>
+        <ns2:ingredients>viande</ns2:ingredients>
+        <ns2:ingredients>tomates</ns2:ingredients>
+        <ns2:ingredients>oignons</ns2:ingredients>
+    </ns1:plat>
+<!--=====SANDWICH=====-->
+    <ns1:plat>
+        <ns2:id>Sandwich campagnard</ns2:id>
+        <ns2:image>https://images.unsplash.com/photo-1485451456034-3f9391c6f769?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=1350&amp;q=80</ns2:image>
+        <ns2:type>entree</ns2:type>
+        <ns2:prix>7</ns2:prix>
+        <ns2:ingredients>pain</ns2:ingredients>
+        <ns2:ingredients>salade</ns2:ingredients>
+        <ns2:ingredients>viande</ns2:ingredients>
+        <ns2:ingredients>fromage</ns2:ingredients>
+        <ns2:ingredients>tomates</ns2:ingredients>
+    </ns1:plat>
+    <ns1:plat>
+        <ns2:id>Sandwich bio</ns2:id>
+        <ns2:image>https://images.unsplash.com/photo-1534352211968-8d25dbe0e951?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=670&amp;q=80</ns2:image>
+        <ns2:type>entree</ns2:type>
+        <ns2:prix>15</ns2:prix>
+        <ns2:ingredients>pain</ns2:ingredients>
+        <ns2:ingredients>salade</ns2:ingredients>
+        <ns2:ingredients>viande</ns2:ingredients>
+        <ns2:ingredients>fromage</ns2:ingredients>
+        <ns2:ingredients>avocat</ns2:ingredients>
+    </ns1:plat>
+    <ns1:plat>
+        <ns2:id>Sandwich végétarien</ns2:id>
+        <ns2:image>https://images.unsplash.com/photo-1537494792426-7c8526686fb9?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=689&amp;q=80</ns2:image>
+        <ns2:type>entree</ns2:type>
+        <ns2:prix>15</ns2:prix>
+        <ns2:ingredients>pain</ns2:ingredients>
+        <ns2:ingredients>salade</ns2:ingredients>
+    </ns1:plat>
+<!--=====SNACKS=====-->
+    <ns1:plat>
+        <ns2:id>Chips</ns2:id>
+        <ns2:image>https://images.unsplash.com/photo-1528751014936-863e6e7a319c?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=633&amp;q=80</ns2:image>
+        <ns2:type>hors-d'oeuvre</ns2:type>
+        <ns2:prix>5</ns2:prix>
+        <ns2:ingredients>sel</ns2:ingredients>
+    </ns1:plat>
+    <ns1:plat>
+        <ns2:id>Nachos</ns2:id>
+        <ns2:image>https://images.unsplash.com/photo-1523634700860-90d0ef74f137?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=925&amp;q=80</ns2:image>
+        <ns2:type>hors-d'oeuvre</ns2:type>
+        <ns2:prix>6</ns2:prix>
+        <ns2:ingredients>sel</ns2:ingredients>
+    </ns1:plat>
+    <ns1:plat>
+        <ns2:id>Pop corn</ns2:id>
+        <ns2:image>https://images.unsplash.com/photo-1548867688-231911e4ba3c?ixlib=rb-1.2.1&amp;auto=format&amp;fit=crop&amp;w=1350&amp;q=80</ns2:image>
+        <ns2:type>hors-d'oeuvre</ns2:type>
+        <ns2:prix>4</ns2:prix>
+        <ns2:ingredients>sel</ns2:ingredients>
+    </ns1:plat>
+    <ns1:plat>
+        <ns2:id>Frites</ns2:id>
+        <ns2:image>https://images.unsplash.com/photo-1518013431117-eb1465fa5752?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=1350&amp;q=80</ns2:image>
+        <ns2:type>hors-d'oeuvre</ns2:type>
+        <ns2:prix>7</ns2:prix>
+        <ns2:ingredients>sel</ns2:ingredients>
+    </ns1:plat>
+    <ns1:plat>
+        <ns2:id>Assorti de noix</ns2:id>
+        <ns2:image>https://images.unsplash.com/photo-1543158181-1274e5362710?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=1350&amp;q=80</ns2:image>
+        <ns2:type>hors-d'oeuvre</ns2:type>
+        <ns2:prix>3</ns2:prix>
+        <ns2:ingredients>sel</ns2:ingredients>
+    </ns1:plat>
+<!--====VIANDES=====-->
+
+    <ns1:plat>
+        <ns2:id>Boulettes de viande</ns2:id>
+        <ns2:image>https://images.unsplash.com/photo-1529042410759-befb1204b468?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=633&amp;q=80</ns2:image>
+        <ns2:type>plat</ns2:type>
+        <ns2:prix>8</ns2:prix>
+        <ns2:ingredients>sel</ns2:ingredients>
+        <ns2:ingredients>viande</ns2:ingredients>
     </ns1:plat>
 </ns1:plats>
