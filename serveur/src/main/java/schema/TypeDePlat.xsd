@@ -20,4 +20,5 @@ Le schema du  type de plat
             <xsd:enumeration value="Hors-d'oeuvre"/>
         </xsd:restriction>
     </xsd:simpleType>
+    
 </xsd:schema>
