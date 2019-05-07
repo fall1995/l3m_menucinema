@@ -54,7 +54,6 @@ public class CommandeServlet extends HttpServlet {
         
         String buffer = (request.getParameter("idPlats")).toString();
         buffer = buffer.replaceAll("[", "");
-        buffer = buffer.replaceAll("]", "");
         String[] plats = buffer.split(",");
         
         System.out.println((request.getParameter("idPlats")).toString());
@@ -64,7 +63,6 @@ public class CommandeServlet extends HttpServlet {
         
         buffer = (request.getParameter("idFilms")).toString();
         buffer = buffer.replaceAll("[", "");
-        buffer = buffer.replaceAll("]", "");
         String[] films = buffer.split(",");
         
         for ( int i = 0 ; i < films.length ; i ++ ){
