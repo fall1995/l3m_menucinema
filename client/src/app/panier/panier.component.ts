@@ -5,6 +5,7 @@ import {Router} from '@angular/router';
 import {CommandeService} from '../service/commande.service';
 import {Commande} from '../menu-commade-data/commande';
 import {AngularFireAuth} from '@angular/fire/auth';
+import {MessageService} from 'primeng/api';
 
 @Component({
     selector: 'app-panier',
@@ -13,7 +14,7 @@ import {AngularFireAuth} from '@angular/fire/auth';
 })
 export class PanierComponent implements OnInit {
 
-    constructor(private storageService: StorageService, private route: Router,
+    constructor(private storageService: StorageService, private route: Router, private message: MessageService,
                 private commandeService: CommandeService, private afAuth: AngularFireAuth) {
     }
 
@@ -65,9 +66,7 @@ export class PanierComponent implements OnInit {
     validationCommande() {
         let idClient = localStorage.getItem('UserData');
         let idPlat = localStorage.getItem('platId');
-        console.log('contenu de idPlat' + idPlat);
         let idFilm = localStorage.getItem('movieId');
-        console.log('contenu de idPlat' + idFilm);
         let adresse = localStorage.getItem('adresse');
         if (this.isAuth){
             this.commandeService.sendCmd({
@@ -77,7 +76,9 @@ export class PanierComponent implements OnInit {
                 idFilms: idFilm,
                 adresseLivraison: adresse,
             }).then(data => {
-                console.log('envoie après verification au serveur ok');
+                this.message.add({severity:'success',
+                    summary:`Commande Confirmer avec succes `,
+                    detail:'Merci d\'avoir commandé sur MenuCinema à bientot'});
             });
         } else {
             this.route.navigate(['/authentification/signin']);

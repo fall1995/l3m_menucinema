@@ -51,9 +51,10 @@ import {TableModule} from 'primeng/table';
 
 import 'hammerjs';
 import { UserDialogComponent } from './user-profil/user-dialog/user-dialog.component';
-import {OverlayPanelModule} from 'primeng/primeng';
+import {FieldsetModule, OverlayPanelModule} from 'primeng/primeng';
 import { CommandeComponent } from './commande/commande.component';
 import { PanierComponent } from './panier/panier.component';
+
 @NgModule({
     declarations: [
         AppComponent,
@@ -92,6 +93,7 @@ import { PanierComponent } from './panier/panier.component';
         ButtonModule,
         MatIconModule,
         OverlayPanelModule,
+        FieldsetModule,
         ToastModule,
         DataViewModule,
         DropdownModule,
