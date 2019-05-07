@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * @author Groupe6
  LaCarteServlet est une classe qui permet d'afficher les plats stocker dans 
- la base donnee Xml
+ la base donnee xml dans une forme json
  * 
  */
 public class LaCarteServlet extends HttpServlet {

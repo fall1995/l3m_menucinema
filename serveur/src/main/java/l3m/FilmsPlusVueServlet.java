@@ -1,3 +1,5 @@
+/******A ENLEVER ******/
+
 package l3m;
 
 import classesgen.commande.Commande;
@@ -11,8 +13,10 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  * @author Groupe6
- * FilmsPlusVueServlet est la classe qui permet d'affiche les films 
+ * FilmsPlusVueServlet est la classe qui permet d'affiche les films plus vue 
+ * 
  */
+@Deprecated
 public class FilmsPlusVueServlet extends HttpServlet{
     
     /**

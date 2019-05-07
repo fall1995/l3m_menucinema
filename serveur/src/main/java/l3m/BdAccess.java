@@ -6,7 +6,11 @@ import classesgen.client.Client;
 import database.GestionnaireClient;
 import java.sql.SQLException;
 
-// Je suis passé par l'itération 0 de la BD...
+
+/**
+ * @author Groupe6 BdAccess est une classe qui
+ * gere l'authentification de utilisateur
+ */
 public class BdAccess {
 
     static String authentifyUser(Client client) throws SQLException, Exception {

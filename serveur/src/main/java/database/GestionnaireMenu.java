@@ -181,6 +181,7 @@ public class GestionnaireMenu  extends XMLAble{
                }
                if(bIngredient) {
                    ingre.add(Ingredient.fromValue(characters.getData()));
+                   target.getIngredients().add(Ingredient.fromValue(characters.getData()));
                   bIngredient = false;
                }
                break;
@@ -193,10 +194,6 @@ public class GestionnaireMenu  extends XMLAble{
                   System.out.println("End Element : plat");
                   System.out.println();
                   res.add(target);
-               }else if(endElement.getName().getLocalPart().equalsIgnoreCase("ingredients")){
-                   target.getIngredients().clear();
-                   ingre.clear();
-                   target.getIngredients().addAll(ingre);
                }
                break;
             } 
