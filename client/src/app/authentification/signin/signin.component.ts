@@ -105,6 +105,7 @@ export class SigninComponent implements OnInit {
                     photo: utilisateur.photoURL,
                 }).then(data =>{
                     console.log("envoie après verification au serveur ok");
+
                 });
                 console.log("verification avec le serveur", utilisateur.emailVerified);
             }

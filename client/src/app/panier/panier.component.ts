@@ -67,7 +67,7 @@ export class PanierComponent implements OnInit {
         let idPlat = localStorage.getItem('platId');
         console.log('contenu de idPlat' + idPlat);
         let idFilm = localStorage.getItem('movieId');
-        console.log('contenu de idPlat' + idFilm);
+        console.log('contenu de idIdfilm' + idFilm);
         let adresse = localStorage.getItem('adresse');
         if (this.isAuth){
             this.commandeService.sendCmd({
