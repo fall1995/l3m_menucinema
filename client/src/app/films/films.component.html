@@ -3,7 +3,7 @@
         <mat-tab label="Films mieux notés">
             <br>
             <div *ngFor="let f of listeMovieHightRatet?.results" class="col-md-4" style="margin-bottom: 20px">
-                <p-card header={{f.title}} [style]="{width: '360px'}" styleClass="ui-card-shadow"
+                <p-card header={{f.title}} [style]="{width: '300px'}" styleClass="ui-card-shadow" [styleClass]="{height:'100px'}"
                     style="display: inline-block">
                     <p-header>
                         <img src="Card" src="{{this.tmdbService.host+f?.poster_path}}">

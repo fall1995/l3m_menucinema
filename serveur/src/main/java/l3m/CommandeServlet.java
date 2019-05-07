@@ -52,12 +52,21 @@ public class CommandeServlet extends HttpServlet {
         commande.setIdClient( request.getParameter("idClient") );
         commande.setAdresseLivraison(request.getParameter("adresseLivraison") );
         
-        String[] plats = (String[] )request.getParameterValues("idPlats");
+        String buffer = (request.getParameter("idPlats")).toString();
+        buffer = buffer.replaceAll("[", "");
+        buffer = buffer.replaceAll("]", "");
+        String[] plats = buffer.split(",");
+        
+        System.out.println((request.getParameter("idPlats")).toString());
         for ( int i = 0 ; i < plats.length ; i ++ ){
             commande.getIdPlats().add(plats[i]);
         }
         
-        String[] films = request.getParameterValues("idFilms");
+        buffer = (request.getParameter("idFilms")).toString();
+        buffer = buffer.replaceAll("[", "");
+        buffer = buffer.replaceAll("]", "");
+        String[] films = buffer.split(",");
+        
         for ( int i = 0 ; i < films.length ; i ++ ){
             commande.getIdFilms().add(films[i]);
         }
