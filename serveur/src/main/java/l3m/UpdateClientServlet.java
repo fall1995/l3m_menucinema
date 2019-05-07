@@ -13,9 +13,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+
+
 /**
- *
- * @author idrisssagara
+ * @author Groupe6 SuggestionFilmsServlet est une classe qui 
+ * permet de modifier le client quelconque
  */
 public class UpdateClientServlet extends HttpServlet {
 

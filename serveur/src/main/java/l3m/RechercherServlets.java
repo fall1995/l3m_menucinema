@@ -16,9 +16,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+
 /**
- *
- * @author kadidiatou
+ * @author Groupe6 RechercherServlets est une classe qui 
+ * permet de rechercher un ingredient
  */
 public class RechercherServlets extends HttpServlet {
 
@@ -29,7 +30,6 @@ public class RechercherServlets extends HttpServlet {
             throws ServletException, IOException {
         Enumeration<String> P = request.getParameterNames();
         HashMap<String, String> parametres = new HashMap();
-        //Client client = new Client();
 
         while (P.hasMoreElements()) {
             String p = P.nextElement();
@@ -41,7 +41,6 @@ public class RechercherServlets extends HttpServlet {
 
         response.setContentType("application/json");
         response.setStatus(HttpServletResponse.SC_OK);
-        //response.getWriter().println(new Gson().toJson(laCarte));
 
     }
 

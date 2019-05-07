@@ -6,11 +6,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import facture.GestionnaireFactures;
-/**
 
 /**
- *
- * @author firsovol
+ * @author Groupe6 SuggestionFilmsServlet est une classe qui 
+ * permet d'envoyer un liste de couples (film, nombre d'occurance) dans 
+ * format json pour une plat quelconque
  */
 public class SuggestionFilmsServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;

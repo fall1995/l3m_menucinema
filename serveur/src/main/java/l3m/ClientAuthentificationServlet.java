@@ -14,7 +14,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-// Je suis passé par l'itération 0 du serveur...
 /**
  * @author Groupe6 ClientAuthentificationServlet est une classe qui permet d'
  * assurre la connexion d'un client
