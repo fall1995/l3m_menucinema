@@ -7,9 +7,11 @@ package testClass;
 
 import classesgen.client.Client;
 import classesgen.plat.Plat;
+import com.google.gson.Gson;
 import database.GestionnaireMenu;
 import database.SQLAble;
 import database.XMLAble;
+import facture.SauvegarderFacture;
 import facture.TransformationFacture;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -27,6 +29,20 @@ public class Test extends XMLAble {
      * @param args the command line arguments
      */
     public static void main(String[] args) throws JAXBException, IOException {
+        GestionnaireMenu m = new GestionnaireMenu();
+        List<Plat> p = m.getCartesDB();
+        
+        
+        
+        System.out.println( "================" );
+        System.out.println(  p );
+        System.out.println( "================" );
+        System.out.println( new Gson().toJson( p) );
+        
+        
+        
+        SauvegarderFacture.saveFacture("adresse", "date", "id", 0, "idClient", new String[]{"foo", "bar"}, new String[]{"foo2", "bar2"});
+
      /*
         GestionnaireMenu m = new GestionnaireMenu();
       m.getCartesDB();
