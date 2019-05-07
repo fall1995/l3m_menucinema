@@ -92,20 +92,7 @@ public class CommandeServlet extends HttpServlet {
     
         Enumeration<String> P = request.getParameterNames();
         HashMap<String, String> parametres = new HashMap();
-        /*Client client = new Client();
 
-            try {
-                //mise à jour
-                GestionnaireClient gc = new GestionnaireClient(client.getId(), client.getNom(), client.getPrenom());
-                gestionClient.editClientDB();
-                
-                response.setStatus(HttpServletResponse.SC_OK);
-                response.getWriter().println(client.toString());
-            } catch (SQLException ex) {
-                response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-                response.getWriter().println(ex.getMessage());
-            }
-            */
 
     }
       

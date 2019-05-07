@@ -1,3 +1,5 @@
+/*** A VERIFIER SI ENLEVER ****/
+
 package l3m;
 
 import javax.servlet.ServletException;
