@@ -26,26 +26,50 @@ public class ClientServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        String idClient = request.getParameter("idClient");
 
-        try {
-            GestionnaireClient gc = new GestionnaireClient( idClient , "" , "" );            
-            List<String> listeCommandes = gc.getListeCommandes();
-            Commande[] commandes = new Commande[ listeCommandes.size() ];
+        if (request.getServletPath().equals("/api/client")) {
+            
+            String idClient = request.getParameter("userId");
+            System.out.println(idClient);
+            try {
+                GestionnaireClient gc = new GestionnaireClient(idClient, "", "");
+                List<String> listeCommandes = gc.getListeCommandes();
+                Commande[] commandes = new Commande[listeCommandes.size()];
 
-            for ( int i = 0 ; i < listeCommandes.size() ; i++ ) {
-               commandes[i] = GestionnaireCommande.getCommande( listeCommandes.get(i) );
+                for (int i = 0; i < listeCommandes.size(); i++) {
+                    commandes[i] = GestionnaireCommande.getCommande(listeCommandes.get(i));
+                }
+
+                response.setContentType("application/json");
+                response.setStatus(HttpServletResponse.SC_OK);
+                response.getWriter().println(new Gson().toJson(commandes));
+
+            } catch (SQLException ex) {
+                Logger.getLogger(ClientServlet.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (Exception ex) {
+                Logger.getLogger(ClientServlet.class.getName()).log(Level.SEVERE, null, ex);
             }
-
-            response.setContentType("application/json");
-            response.setStatus(HttpServletResponse.SC_OK);
-            response.getWriter().println( new Gson().toJson(commandes) );
-
-        } catch (SQLException ex) {
-            Logger.getLogger(ClientServlet.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (Exception ex) {
-            Logger.getLogger(ClientServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
+  
+        else if (request.getServletPath().equals("/api/derniercommande")) {
+            
+            String idClient = request.getParameter("userId");
+            System.out.println(idClient);
+            try {
+
+                Commande commande = GestionnaireCommande.getLastCommande(idClient);
+
+                response.setContentType("application/json");
+                response.setStatus(HttpServletResponse.SC_OK);
+                response.getWriter().println(new Gson().toJson(commande));
+
+            } catch (SQLException ex) {
+                Logger.getLogger(ClientServlet.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (Exception ex) {
+                Logger.getLogger(ClientServlet.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        
     }
 
 
