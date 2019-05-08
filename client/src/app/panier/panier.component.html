@@ -1,93 +1,106 @@
 <div class="container">
-    <div class="page-header">
-        <h1 class="text-center">
-            <i class="fa fa-shopping-cart"></i>
-            Votre Panier
-        </h1>
+    <div class="col-md-3">
+        <h5 style="color: green">
+            <i class="fa fa-map-marker"></i>
+            {{user?.adresse}}
+        </h5>
+        <button (click)="afficherDialogProfil()" pButton type="button" label="Modifier l'adresse de livraison"
+                class="ui-button-rounded"></button>
     </div>
-    <div class="row">
-        <div class="col-md-10 col-md-offset-1">
-            <div class="panel panel-primary">
-                <div class=" panel-heading">
-                    <h3 class=" panel-title">
-                        <i class="fa fa-shopping-cart"></i>
-                        Contenu actuel de votre panier
-                    </h3>
-                </div>
-                <div class="panel-body">
-                    <div>
-                        <div class="table-responsive" *ngIf="panier.length != 0 || movie.length != 0;else content">
-                            <p-table [value]="panier" *ngIf="panier.length != 0 ">
-                                <ng-template pTemplate="header">
-                                    <tr>
-                                        <th>Nom du plat</th>
-                                        <th>Type de plat</th>
-                                        <th>Prix du plat</th>
-                                        <th>Action</th>
-                                    </tr>
-                                </ng-template>
-                                <ng-template pTemplate="body" let-p>
-                                    <tr>
-                                        <td>{{p.id}}</td>
-                                        <td>{{p.type}}</td>
-                                        <td>{{p.prix}}</td>
-                                        <td>
-                                            <button type="button" (click)="deleteMenusSelected(p)"
-                                                    class="btn btn-danger btn-sm"><i class="fa fa-trash"></i>
+    <div class="col-md-12">
+        <div class="page-header">
+            <h1 class="text-center">
+                <i class="fa fa-shopping-cart"></i>
+                Votre Panier
+            </h1>
+        </div>
+        <div class="row">
+            <div class="col-md-10 col-md-offset-1">
+                <div class="panel panel-primary">
+                    <div class=" panel-heading">
+                        <h3 class=" panel-title">
+                            <i class="fa fa-shopping-cart"></i>
+                            Contenu actuel de votre panier
+                        </h3>
+                    </div>
+                    <div class="panel-body">
+                        <div>
+                            <div class="table-responsive" *ngIf="panier.length != 0 || movie.length != 0;else content">
+                                <p-table [value]="panier" *ngIf="panier.length != 0 ">
+                                    <ng-template pTemplate="header">
+                                        <tr>
+                                            <th>Nom du plat</th>
+                                            <th>Type de plat</th>
+                                            <th>Prix du plat</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </ng-template>
+                                    <ng-template pTemplate="body" let-p>
+                                        <tr>
+                                            <td>{{p.id}}</td>
+                                            <td>{{p.type}}</td>
+                                            <td>{{p.prix}}</td>
+                                            <td>
+                                                <button type="button" (click)="deleteMenusSelected(p)"
+                                                        class="btn btn-danger btn-sm"><i class="fa fa-trash"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </ng-template>
+                                </p-table>
+                                <br>
+                                <p-table [value]="movie" *ngIf="movie.length != 0">
+                                    <ng-template pTemplate="header">
+                                        <tr>
+                                            <th>Titre du film</th>
+                                            <th>Date du film</th>
+                                            <th>Langue du film</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </ng-template>
+                                    <ng-template pTemplate="body" let-m>
+                                        <tr>
+                                            <td>{{m.original_title}}</td>
+                                            <td>{{m.release_date}}</td>
+                                            <td>{{m.original_language}}</td>
+                                            <td>
+                                                <button type="button" (click)="deleteMovieSelected(m)"
+                                                        class="btn btn-danger btn-sm"><i class="fa fa-trash"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </ng-template>
+                                </p-table>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="text-right">
+                                            <button (click)="retour()" class="btn btn-info">
+                                                <i class="fa fa-shopping-cart"></i>
+                                                CONTINUER A MAGASINER
                                             </button>
-                                        </td>
-                                    </tr>
-                                </ng-template>
-                            </p-table>
-                            <br>
-                            <p-table [value]="movie" *ngIf="movie.length != 0">
-                                <ng-template pTemplate="header">
-                                    <tr>
-                                        <th>Titre du film</th>
-                                        <th>Date du film</th>
-                                        <th>Langue du film</th>
-                                        <th>Action</th>
-                                    </tr>
-                                </ng-template>
-                                <ng-template pTemplate="body" let-m>
-                                    <tr>
-                                        <td>{{m.original_title}}</td>
-                                        <td>{{m.release_date}}</td>
-                                        <td>{{m.original_language}}</td>
-                                        <td>
-                                            <button type="button" (click)="deleteMovieSelected(m)"
-                                                    class="btn btn-danger btn-sm"><i class="fa fa-trash"></i>
+                                            <span> </span>
+                                            <button (click)="validationCommande()" class="btn btn-success btn-shadow"
+                                                    id="payer">
+                                                <i class="fa fa-credit-card"></i>
+                                                PAYER MAINTENANT
                                             </button>
-                                        </td>
-                                    </tr>
-                                </ng-template>
-                            </p-table>
-                            <br>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="text-right">
-                                        <button (click)="retour()" class="btn btn-info">
-                                            <i class="fa fa-shopping-cart"></i>
-                                            CONTINUER A MAGASINER
-                                        </button>
-                                        <span> </span>
-                                        <button (click)="validationCommande()" class="btn btn-success btn-shadow" id="payer">
-                                            <i class="fa fa-credit-card"></i> 
-                                            PAYER MAINTENANT
-                                        </button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
+                            <ng-template #content>
+                                <b style="text-align: center; color: #3b5998">Vous n'avez pas ajouter de contenue
+                                    dans votre panier</b>
+                            </ng-template>
                         </div>
-                        <ng-template #content>
-                            <b style="text-align: center; color: #3b5998">Vous n'avez pas ajouter de contenue dans votre
-                                panier</b>
-                        </ng-template>
+
                     </div>
+
                 </div>
-
             </div>
-
         </div>
+        <app-adresse-update-dialog [afficherDialog]="afficherDialog" *ngIf="afficherDialog"
+                                   (onDialogHide)="onHideProfilDialog()" [user]="user">
+        </app-adresse-update-dialog>
+
     </div>
-</div>

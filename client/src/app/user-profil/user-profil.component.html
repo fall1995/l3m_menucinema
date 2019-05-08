@@ -11,8 +11,7 @@
                 <div class="panel-heading">
                     <h3 class="panel-title">
                         <i class="fa fa-book"></i>
-                            Commande en cours
-
+                        Commande en cours
                     </h3>
                 </div>
                 <div class="panel-body">
@@ -79,7 +78,26 @@
                     </h3>
                 </div>
                 <div class="panel-body">
-                    <b>Data table de commande</b>
+                    <p-table [value]="commade">
+                        <ng-template pTemplate="header">
+                            <tr>
+                                <th>Commande #</th>
+                                <th>Nom films & Plats</th>
+                                <th>Date</th>
+                                <th>Prix</th>
+                                <th>Adresse de livraison</th>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body" let-c>
+                            <tr>
+                                <td>{{c.id}}</td>
+                                <td>{{c.idFilms}} {{c.idPlats}}</td>
+                                <td>{{c.date}}</td>
+                                <td>{{c.prix}}</td>
+                                <td>{{c.adresseLivraison}}</td>
+                            </tr>
+                        </ng-template>
+                    </p-table>
                 </div>
             </div>
         </div>
@@ -92,9 +110,9 @@
                 </div>
                 <div class="panel-body" *ngIf="user">
                     <p>
-                        <img  src="{{userPhoto?.photo}}" class="img-rounded img-thumbnail" alt="profile">
+                        <img height="150" width="150" src="{{userPhoto?.photo}}" alt="profile">
                     </p>
-                    <h4>{{user?.nom}}</h4>
+                    <h4>{{user?.nom}} {{user?.prenom}}</h4>
                     <p>
                         <button type="button" class="btn btn-success" (click)="afficherDialogProfil()">
                             <i class="fa fa-user"></i>
@@ -120,7 +138,7 @@
             </div>
         </div>
         <app-user-dialog [afficherDialog]="afficherDialog" *ngIf="afficherDialog"
-         (onDialogHide)="onHideProfilDialog()" [user]="user"></app-user-dialog>
+                         (onDialogHide)="onHideProfilDialog()" [user]="user"></app-user-dialog>
     </div>
 
 </div>

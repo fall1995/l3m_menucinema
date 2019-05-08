@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpParams, HttpResponse} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import { ListePlats} from '../menu-commade-data/Menu';
+import { Plats} from '../menu-commade-data/Menu';
 import {MovieQuery, MovieResponse} from '../tmdb-data/Movie';
 
 function AlxToObjectString(data?: object): { [key: string]: string } {
@@ -30,9 +30,9 @@ export class MenuService {
     constructor(private http: HttpClient) {
     }
 
-    async getAllMenu( options?: MovieQuery): Promise<ListePlats[]> {
+    async getAllMenu( options?: MovieQuery): Promise<Plats[]> {
         const url = `/api/plats`;
-        const res = await this.get<ListePlats[]>(url, options);
+        const res = await this.get<Plats[]>(url, options);
         return res.body;
     }
 
