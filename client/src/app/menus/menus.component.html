@@ -1,11 +1,11 @@
 <div class="container">
-    <p-dataView [value]="listePlats" [paginator]="true" [rows]="5" [sortField]="sortField" [sortOrder]="sortOrder"
+    <p-dataView [value]="plats" [paginator]="true" [rows]="8" [sortField]="sortField" [sortOrder]="sortOrder"
                 filterBy="type" [loading]="loading">
         <p-header>
             <div class="ui-helper-clearfix">
                 <div class="ui-g">
                     <div class="ui-g-12 ui-md-4">
-                        <p-dropdown [options]="sortOptions" [(ngModel)]="sortKey" placeholder="Sort By"
+                        <p-dropdown [options]="sortOptions" [(ngModel)]="sortKey" placeholder="Trier par"
                                     (onChange)="onSortChange($event)" [style]="{'min-width':'15em'}"></p-dropdown>
                     </div>
                     <div class="ui-g-6 ui-md-4 filter-container">
@@ -22,7 +22,7 @@
         <ng-template let-plat pTemplate="listItem">
             <div class="ui-g" style="padding: 2em;border-bottom: 1px solid #d9d9d9">
                 <div class="ui-g-12 ui-md-3" style="text-align:center">
-                    <img height="150" width="150" src="{{plat.image}}">
+                    <img height="200" width="200" src="{{plat.image}}">
                 </div>
                 <div class="ui-g-12 ui-md-8 car-details">
                     <div class="ui-g">
@@ -39,18 +39,24 @@
                         <div class="ui-g-10 ui-sm-6"><b>{{plat.ingredients}}</b></div>
                     </div>
                 </div>
-                <div class="ui-g-12 ui-md-1 search-icon">
-                    <button pButton type="button" icon="fa fa-plus" (click)="addMenus(plat.id)"></button>
+                <div class="ui-g-12 ui-md-1 ">
+                    <button style="margin-bottom: 10px" pButton type="button" icon="fa fa-cart-plus"
+                            (click)="addMenus(plat.id)" class="ui-button-success"></button>
+                    <br>
+                    <button pButton type="button" icon="pi pi-search" (click)="selectCar(plat)"
+                            style="margin-top:0"></button>
                 </div>
             </div>
         </ng-template>
         <ng-template let-plat pTemplate="gridItem">
             <div style="padding:.5em" class="ui-g-12 ui-md-3">
                 <p-panel [header]="plat.id" [style]="{'text-align':'center'}">
-                    <img src="{{plat.image}}" width="60">
+                    <img src="{{plat.image}}" width="240" height="200">
                     <div class="car-detail">{{plat.type}} - {{plat.prix}}</div>
                     <hr class="ui-widget-content" style="border-top:0">
-                    <button pButton type="button" icon="pi pi-search" (click)="selectCar($event, car)"
+                    <button style="margin-right: 10px" pButton type="button" icon="fa fa-cart-plus"
+                            (click)="addMenus(plat.id)" class="ui-button-success"></button>
+                    <button pButton type="button" icon="pi pi-search" (click)="selectCar(plat)"
                             style="margin-top:0"></button>
                 </p-panel>
             </div>
@@ -62,5 +68,21 @@
             <button type="button" pButton icon="fa-cloud-upload"></button>
         </ng-template>
     </p-dataView>
+    <p-dialog header="Plat detail" [(visible)]="displayDialog" [responsive]="true" [modal]="true"
+              [style]="{width: '350px'}">
+        <div class="ui-g" *ngIf="selectedPlat">
+            <div class="ui-g-12" style="text-align:center">
+                <img height="300" width="300" src="{{selectedPlat.image}}">
+            </div>
+            <div class="ui-g-4">Nom :</div>
+            <div class="ui-g-8">{{selectedPlat.id}}</div>
+            <div class="ui-g-4">Type :</div>
+            <div class="ui-g-8">{{selectedPlat.type}}</div>
+            <div class="ui-g-4">Prix :</div>
+            <div class="ui-g-8">{{selectedPlat.prix}}</div>
+            <div class="ui-g-4">Ingredient:</div>
+            <div class="ui-g-8">{{selectedPlat.ingredients}}</div>
+        </div>
+    </p-dialog>
 </div>
 <p-toast position="top-right"></p-toast>

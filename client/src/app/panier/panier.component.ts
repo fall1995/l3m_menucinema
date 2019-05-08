@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {StorageService} from '../service/storage.service';
-import {ListePlats} from '../menu-commade-data/Menu';
+import {Plats} from '../menu-commade-data/Menu';
 import {Router} from '@angular/router';
 import {CommandeService} from '../service/commande.service';
 import {Commande} from '../menu-commade-data/commande';

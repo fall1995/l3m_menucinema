@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {MenuService} from '../service/menu.service';
-import {ListePlats} from '../menu-commade-data/Menu';
+import {Plats} from '../menu-commade-data/Menu';
 import {MovieResponse} from '../tmdb-data/Movie';
 import {MessageService, SelectItem} from 'primeng/api';
 import {StorageService} from '../service/storage.service';
@@ -15,10 +15,13 @@ export class MenusComponent implements OnInit {
     /**
      *variable dans le quel on stock les plats après les avoirs récupéré
      */
-    listePlats: ListePlats[];
+    plats: Plats[];
+    selectedPlat: Plats; // plat selectionner
     aff = false;
 
     sortOptions: SelectItem[];
+
+    displayDialog: boolean;
 
     sortKey: string;
 
@@ -33,10 +36,16 @@ export class MenusComponent implements OnInit {
     ngOnInit() {
         this.init();
         this.sortOptions = [
-            {label: 'id', value: 'id'},
+            {label: 'Nom', value: 'id'},
             {label: 'Type plat', value: 'type'},
-            {label: 'Prix', value: 'prix'}
+            {label: 'Prix', value: 'prix'},
         ];
+    }
+
+    selectCar(plat: Plats) {
+        this.selectedPlat = plat;
+        this.displayDialog = true;
+        event.preventDefault();
     }
 
     /**
@@ -57,9 +66,9 @@ export class MenusComponent implements OnInit {
 
     async init() {
         await this.menuService.getAllMenu().then(res => {
-            this.listePlats = res;
+            this.plats = res;
             this.aff = true;
-            console.log(this.listePlats);
+            console.log(this.plats);
         }, err => {
             console.log('error de recup');
         });
@@ -70,7 +79,7 @@ export class MenusComponent implements OnInit {
      * @param id
      */
     addMenus(id: string) {
-        let plat = this.listePlats.find(plats => plats.id === id);
+        let plat = this.plats.find(plats => plats.id === id);
         this.storageService.addMenu(plat);
         this.message.add({severity:'success',
             summary:`Ajout de ${plat.id} `,
