@@ -24,47 +24,39 @@ import javax.xml.stream.events.XMLEvent;
 //TODO: Deplacer tous les methodes dans XMLAble?
 public class GestionnaireMenu  extends XMLAble{
     
-    ArrayList<Plat> menu;
+    List<Plat> menu;
 
-    /**
-     * Constructeur par defaut
-     */
+
     public GestionnaireMenu() {
         // PAR DEFAUT MENU EST VIDE
         this.menu = new ArrayList<Plat>();
     }
 
-    /**
-     * Constructeur qui initialise les id plats
-     * @param idPlats
-     */
-    public GestionnaireMenu(List<String> idPlats) {
+
+    public GestionnaireMenu(List<String> idPlats) throws Exception {
         // RECUPERER TOUS LES PLATS AVEC id DANS idPlats
-        ArrayList<Plat> plats = (ArrayList<Plat>) getCartesDB();
+        List<Plat> laCarte = getCartesDB();
         this.menu = new ArrayList<Plat>();
         int i = 0;
         for(String id : idPlats){
-            if(existPlatDB(id)){
-            i = 0;
-            while(!id.equals(plats.get(i).getId()) || i < plats.size()){
-                i++;
-            }
-            if(id.equals(plats.get(i).getId())){
-                menu.add(plats.get(i));
-            }
+            if (existPlatDB(id)) {
+                i = 0;
+                while ( !id.equals(laCarte.get(i).getId()) ) {
+                    i++;
+                }
+
+                menu.add(laCarte.get(i));
+
+            }else{
+                throw new Exception("id "+ id + " n'est pas dans la carte des Plats");
             }
         }
-
     }
+    
 
-    /**
-     * Methode qui permet de verifier si plat existe dans la base en prenant en
-     * id du plat
-     * @param id
-     * @return res
-     */
+
     protected boolean existPlatDB(String id) {
-        for (Plat p : getCartesDB()) {
+        for ( Plat p : getCartesDB() ) {
             if (p.getId().equals(id)) {
                 return true;
             }
@@ -72,22 +64,40 @@ public class GestionnaireMenu  extends XMLAble{
         return false;
     }
 
-    /**
-     * Methode qui permet d'ajouter un menu en prenant en parametre id du menu
-     * @param id
-     */
-    public void ajouterAuMenu(String id) {
-        //???AJOUTER this.menu a XML AVEC id = id
+
+    public void ajouterAuMenu(String id) throws Exception {
+        
+        List<Plat> laCarte = getCartesDB();
+        int i = 0;
+        if (existPlatDB(id)) {
+            while (  !id.equals(laCarte.get(i).getId())  ) {
+                i++;
+            }
+
+            menu.add(laCarte.get(i));
+
+        } else {
+            throw new Exception("id " + id + " n'est pas dans la carte des Plats");
+        }
     }
+    
 
     /**
-     * Methode qui permet enlever un menu en prenant en paramtre id du menu
-     *
+     * Methode qui permet enlever un plat du menu
      * @param id
      */
-    public void enleverDuMenu(String id) {
-        //???ENLEVER DANS  XML
+    public void enleverDuMenu(String id) throws Exception {
+        int i = 0;
+        while (    !id.equals(menu.get(i).getId())     &&     i < menu.size()    ){
+            i++;
+        }
+        if ( i < menu.size() ){
+            menu.remove(i);
+        }else{
+            throw new Exception("Le plat avec id " + id + " n'est pas dans la liste des plats choisis !)");
+        }
     }
+    
     
     public String platsToJson(){
          String json = new Gson().toJson(getCartesDB());
@@ -100,20 +110,27 @@ public class GestionnaireMenu  extends XMLAble{
      * @return menu
      */
 
-    public ArrayList<Plat> getMenu() {
-        return (ArrayList<Plat>) menu;
+    public List<Plat> getMenu() {
+        return menu;
     }
     
-    public static double getPrixPlat(String idPlat){
-        ArrayList<Plat> plats = (ArrayList<Plat>) getCartesDB();
+    public static double getPrixPlat(String idPlat) throws Exception{
+        List<Plat> laCarte = getCartesDB();
+        boolean trouve = false;
+        double prixPlat = 0;
         int i = 0;
-        while(i < plats.size()){
-            if(plats.get(i).getId().equals(idPlat)){
-                return plats.get(i).getPrix();
+        while( !trouve  &&  i < laCarte.size() ){
+            if( laCarte.get(i).getId().equals(idPlat) ){
+                prixPlat = laCarte.get(i).getPrix(); 
+                trouve = true; 
             }
             i++;
         }
-        return -1.0;
+        if ( !trouve ){
+            throw new Exception("Le plat avec id " + idPlat + " n'est pas dans la carte !");
+        }
+        
+        return prixPlat;
     }
 
     /**
@@ -124,7 +141,7 @@ public class GestionnaireMenu  extends XMLAble{
     public static List<Plat> getCartesDB() {
         List<Plat> res = new ArrayList<Plat>();
         Plat target = new Plat();
-        List<Ingredient> ingre = new ArrayList<Ingredient>();
+        //List<Ingredient> ingre = new ArrayList<Ingredient>();
         boolean bId = false;
         boolean bImage = false;
         boolean bType = false;
@@ -180,7 +197,7 @@ public class GestionnaireMenu  extends XMLAble{
                   bPrix = false;
                }
                if(bIngredient) {
-                   ingre.add(Ingredient.fromValue(characters.getData()));
+                   //ingre.add(Ingredient.fromValue(characters.getData()));
                    target.getIngredients().add(Ingredient.fromValue(characters.getData()));
                   bIngredient = false;
                }
@@ -205,7 +222,7 @@ public class GestionnaireMenu  extends XMLAble{
         }
 
         for (Plat p : res) {
-            System.out.print(p.getId());
+            System.out.print(p.getId() + "      ");
         }
         return res;
     }
