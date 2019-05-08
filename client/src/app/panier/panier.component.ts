@@ -90,7 +90,7 @@ export class PanierComponent implements OnInit {
         let idFilm = localStorage.getItem('movieId');
         let adresse = localStorage.getItem('adresse');
         if (this.isAuth){
-            this.commandeService.sendCmd({
+            this.commandeService.sendCommande({
                 // variable que le serveur s'attend a recevoir
                 idClient: idClient,
                 idPlats: idPlat,
