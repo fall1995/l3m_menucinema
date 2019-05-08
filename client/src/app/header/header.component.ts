@@ -13,6 +13,8 @@ import {Router} from '@angular/router';
 export class HeaderComponent implements OnInit {
     isAuth: boolean;
     user: any;
+    adresse: any;
+
 
     constructor(private afAuth: AngularFireAuth, private authService: AuthService,
     private message: MessageService, private route: Router) {
@@ -21,7 +23,7 @@ export class HeaderComponent implements OnInit {
     init() {
         this.afAuth.user.subscribe(u => {
             if (u) {
-                this.user = u.email;
+                this.user = u.displayName;
             }
         });
     }
@@ -29,6 +31,7 @@ export class HeaderComponent implements OnInit {
     ngOnInit() {
         this.init();
         this.afAuth.auth.onAuthStateChanged(
+
             (user) => {
                 if (user) {
                     this.isAuth = true;

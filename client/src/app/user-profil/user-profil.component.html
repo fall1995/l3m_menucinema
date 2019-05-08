@@ -11,8 +11,7 @@
                 <div class="panel-heading">
                     <h3 class="panel-title">
                         <i class="fa fa-book"></i>
-                            Commande en cours
-
+                        Commande en cours
                     </h3>
                 </div>
                 <div class="panel-body">
@@ -92,9 +91,9 @@
                 </div>
                 <div class="panel-body" *ngIf="user">
                     <p>
-                        <img  src="{{userPhoto?.photo}}" class="img-rounded img-thumbnail" alt="profile">
+                        <img height="150" width="150" src="{{userPhoto?.photo}}" alt="profile">
                     </p>
-                    <h4>{{user?.nom}}</h4>
+                    <h4>{{user?.nom}} {{user?.prenom}}</h4>
                     <p>
                         <button type="button" class="btn btn-success" (click)="afficherDialogProfil()">
                             <i class="fa fa-user"></i>
@@ -120,7 +119,7 @@
             </div>
         </div>
         <app-user-dialog [afficherDialog]="afficherDialog" *ngIf="afficherDialog"
-         (onDialogHide)="onHideProfilDialog()" [user]="user"></app-user-dialog>
+                         (onDialogHide)="onHideProfilDialog()" [user]="user"></app-user-dialog>
     </div>
 
 </div>

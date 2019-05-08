@@ -54,6 +54,7 @@ import { UserDialogComponent } from './user-profil/user-dialog/user-dialog.compo
 import {FieldsetModule, OverlayPanelModule} from 'primeng/primeng';
 import { CommandeComponent } from './commande/commande.component';
 import { PanierComponent } from './panier/panier.component';
+import { AdresseUpdateDialogComponent } from './panier/adresse-update-dialog/adresse-update-dialog.component';
 
 @NgModule({
     declarations: [
@@ -69,6 +70,7 @@ import { PanierComponent } from './panier/panier.component';
         UserDialogComponent,
         CommandeComponent,
         PanierComponent,
+        AdresseUpdateDialogComponent,
     ],
     imports: [
         BrowserModule,
