@@ -16,7 +16,7 @@
                         <button pButton type="button" label="Details" icon="fa fa-info"
                                 style="margin-right: .25em"></button>
                         <button pButton type="button" label="Ajouter" icon="fa fa-shopping-cart" (click)="addFilmNote(f.id)"
-                                class="ui-button-secondary"></button>
+                                class="ui-button-secondary pull-right" id="ajouter"></button>
 
                     </p-footer>
                 </p-card>
@@ -35,7 +35,7 @@
                         <button pButton type="button" label="Details" icon="fa fa-info"
                             style="margin-right: .25em"></button>
                         <button pButton type="button" label="Ajouter" icon="fa fa-shopping-cart"
-                            class="ui-button-secondary"></button>
+                            class="ui-button-secondary pull-right" id="ajouter" ></button>
                     </p-footer>
                 </p-card>
             </div>
@@ -54,7 +54,7 @@
                         <button pButton type="button" label="Details" icon="fa fa-info" style="margin-right: .25em"
                             (click)="op1.toggle($event)"></button>
                         <button pButton type="button" label="Ajouter" icon="fa fa-shopping-cart"
-                            class="ui-button-secondary"></button>
+                            class="ui-button-secondary pull-right" id="ajouter"></button>
                         <div>
                             <p-overlayPanel #op1 [dismissable]="true" [showCloseIcon]="true" [autoZIndex]="true">
                                 <p> {{f.overview}} </p>
