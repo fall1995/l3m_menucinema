@@ -32,24 +32,6 @@ public class UpdateClientServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        response.setContentType("application/json");
-        response.addHeader("Access-Control-Allow-Origin", "*");
-        response.addHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, PUT, DELETE, HEAD");
-        response.addHeader("Access-Control-Allow-Headers", "X-PINGOTHER, Origin, X-Requested-With, Content-Type, Accept");
-        response.addHeader("Access-Control-Max-Age", "1728000");
-
-        Enumeration<String> P = request.getParameterNames();
-        HashMap<String, String> parametres = new HashMap();
-        Client client = new Client();
-
-        while (P.hasMoreElements()) {
-            String p = P.nextElement();
-            parametres.put(p, request.getParameter((String) p));
-        }
-
-        response.setContentType("application/json");
-        response.setStatus(HttpServletResponse.SC_OK);
-        response.getWriter().println(client.toString());
     }
 
     @Override
@@ -70,7 +52,6 @@ public class UpdateClientServlet extends HttpServlet {
 
         Enumeration<String> P = request.getParameterNames();
         HashMap<String, String> parametres = new HashMap();
-        Client client = new Client();
 
         /**
          * Parcours les paramètres de la requete et construit une structure
@@ -78,15 +59,8 @@ public class UpdateClientServlet extends HttpServlet {
          */
         while (P.hasMoreElements()) {
             String p = P.nextElement();
-            parametres.put(p, request.getParameter((String) p));
+            parametres.put(p, request.getParameter( p ));
         }
-        client.setId(parametres.get(id));
-        client.setNom(parametres.get(nom));
-        client.setPrenom(parametres.get(prenom));
-        client.setEmail(parametres.get(email));
-        client.setPhoto(parametres.get(photo));
-        client.setTel(parametres.get(tel));
-        client.setAdresse(parametres.get(adresse));
 
         /**
          * try :si toute les valeurs sont ok modification ok et reponse du
@@ -96,13 +70,20 @@ public class UpdateClientServlet extends HttpServlet {
         if (putValide(parametres)) {
             try {
                 //mise à jour
-                GestionnaireClient gestionClient = new GestionnaireClient(client.getId(), client.getNom(), client.getPrenom());
-                gestionClient.setClient(client);
-                gestionClient.editClientDB();
+                GestionnaireClient gc = new GestionnaireClient(parametres.get(id), 
+                                                                parametres.get(nom),
+                                                                parametres.get(prenom)
+                                        );
+
+                gc.editEmail( parametres.get(email) );
+                gc.editAdresse( parametres.get(adresse) );
+                gc.editPhoto(parametres.get(photo));
+                gc.editTel(parametres.get(tel));
+                gc.editClientDB();
                 
                 response.setStatus(HttpServletResponse.SC_OK);
 
-                response.getWriter().println(client.toString());
+                response.getWriter().println( gc.ClientToJson() );
 
             } catch (SQLException ex) {
                 response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);

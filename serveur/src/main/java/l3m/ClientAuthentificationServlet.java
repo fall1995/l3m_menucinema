@@ -42,14 +42,13 @@ public class ClientAuthentificationServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String idClient = request.getParameter("idClient");
-        GestionnaireClient gestonClient;
-        gestonClient = new GestionnaireClient(idClient, "", "");
-        Client client_trouve;
+
+        Client client;
         try {
-            client_trouve = gestonClient.getClient(idClient);
+            client = GestionnaireClient.getClientDB(idClient);
             response.setContentType("application/json");
             response.setStatus(HttpServletResponse.SC_OK);
-            response.getWriter().println(new Gson().toJson(client_trouve));
+            response.getWriter().println(new Gson().toJson(client));
         } catch (Exception ex) {
             Logger.getLogger(ClientAuthentificationServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -97,7 +96,13 @@ public class ClientAuthentificationServlet extends HttpServlet {
                 client.setId(parametres.get("idClient"));
                 client.setNom(parametres.get("nom"));
                 client.setPrenom(parametres.get("prenom"));
+              
                 res = BdAccess.authentifyUser(client);
+                
+                if ( res.equals("client") ){
+                    client = GestionnaireClient.getClientDB(parametres.get("idClient"));
+                }
+                
                 response.setStatus(HttpServletResponse.SC_OK);
                 response.getWriter().println(new Gson().toJson(client));
             } // CAS HTTP code 500

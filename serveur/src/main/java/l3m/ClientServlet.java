@@ -6,6 +6,8 @@ import database.GestionnaireClient;
 import database.GestionnaireCommande;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.Enumeration;
+import java.util.HashMap;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -28,7 +30,6 @@ public class ClientServlet extends HttpServlet {
         
 
         if (request.getServletPath().equals("/api/client")) {
-            
             String idClient = request.getParameter("idClient");
             System.out.println(idClient);
             try {
@@ -50,9 +51,9 @@ public class ClientServlet extends HttpServlet {
                 Logger.getLogger(ClientServlet.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
+        
   
-        else if (request.getServletPath().equals("/api/derniercommande")) {
-            
+        else if (request.getServletPath().equals("/api/client/dernierecommande")) {
             String idClient = request.getParameter("idClient");
             System.out.println(idClient);
             try {
@@ -78,7 +79,6 @@ public class ClientServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        String userPath = request.getServletPath();
         
         String idClient = request.getParameter("idClient");
         String nom = request.getParameter("nom");
@@ -127,26 +127,36 @@ public class ClientServlet extends HttpServlet {
     protected void doPut(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        String idClient = request.getParameter("idClient");
-        String nom = request.getParameter("nom");
-        String prenom = request.getParameter("prenom");
-        String photo = request.getParameter("photo");
-        String email = request.getParameter("email");
-        String tel = request.getParameter("tel");
-        String adresse = request.getParameter("adresse");
+        
+        Enumeration<String> P = request.getParameterNames();
+        HashMap<String, String> parametres = new HashMap();
+        
+        while (P.hasMoreElements()) {
+            String p = P.nextElement();
+            parametres.put(p, request.getParameter( p ));
+        }
+        
         try {
-            GestionnaireClient gestionClient = new GestionnaireClient(idClient,
-                    nom, prenom);
-            gestionClient.editPhoto(photo);
-            gestionClient.editEmail(email);
-            gestionClient.enregistreClientDB();
-            gestionClient.editAdresse(adresse);
+            //mise à jour
+            GestionnaireClient gc = new GestionnaireClient( parametres.get("id"),
+                                                            parametres.get("nom"),
+                                                            parametres.get("prenom")
+                                        );
 
-            gestionClient.editClientDB();
+            gc.editEmail(parametres.get("email"));
+            gc.editAdresse(parametres.get("adresse"));
+            gc.editPhoto(parametres.get("photo"));
+            gc.editTel(parametres.get("tel"));
+            gc.editClientDB();
+
+            response.setStatus(HttpServletResponse.SC_OK);
+            response.getWriter().println(gc.ClientToJson());
+
         } catch (SQLException ex) {
-            Logger.getLogger(ClientServlet.class.getName()).log(Level.SEVERE, null, ex);
+            response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            response.getWriter().println(ex.getMessage());
         } catch (Exception ex) {
-            Logger.getLogger(ClientServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(UpdateClientServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

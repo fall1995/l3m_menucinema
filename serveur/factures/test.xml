@@ -1,1 +1,7 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><facture adresseLivraison="bamako mali" date="" id="bamako mali" prix="bamako mali"><idClient>rVW6CbIoocM6ScRErGZ6XDrBH4U2</idClient><idPlat>Joie printanière</idPlat><idPlat>Joie printanière</idPlat><film/></facture>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<facture adresseLivraison="6 Montée Saint Marcel" date="" id="" prix="0.0">
+	<idClient>P47guaE9EPUoewVOCc9XwLv5Htr2</idClient>
+	<idPlat/>
+	<film>508</film>
+	<film>75174</film>
+</facture>
