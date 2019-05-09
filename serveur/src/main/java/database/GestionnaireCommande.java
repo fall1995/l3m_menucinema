@@ -5,8 +5,6 @@ import com.google.gson.Gson;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -81,8 +79,6 @@ public class GestionnaireCommande extends SQLAble {
     public void enregistrerCommandeDB() throws SQLException, Exception {
         try {
             connectToDatabase();
-            String pattern = "DD-MM-YYYY HH:MM:SS";
-            DateFormat dateFormat = new SimpleDateFormat(pattern);
 
             PreparedStatement pstmt;
             pstmt = conn.prepareStatement(
@@ -104,7 +100,7 @@ public class GestionnaireCommande extends SQLAble {
             ResultSet rset = (ResultSet) (ocstmt.getObject(1));
             if (rset != null && rset.next()) {
                 commande.setId(rset.getString("idCommande"));
-                commande.setDate(dateFormat.format(rset.getDate("dateCommande")));
+                commande.setDate( rset.getString("dateCommande"));
             }
             rset.close();
             ocstmt.close();
@@ -152,9 +148,8 @@ public class GestionnaireCommande extends SQLAble {
     public static Commande getCommande(String id) throws SQLException {
         GestionnaireCommande gc = new GestionnaireCommande(id);
         gc.connectToDatabase();
-
-        String pattern = "DD-MM-YYYY HH:MM:SS";
-        DateFormat dateFormat = new SimpleDateFormat(pattern);
+        
+        Commande commande = new Commande();
 
         OracleCallableStatement ocstmt;
         ocstmt = (OracleCallableStatement) conn.prepareCall("{ = call getcommande(?,?,?,?) }");
@@ -166,10 +161,10 @@ public class GestionnaireCommande extends SQLAble {
 
         ResultSet rset = (ResultSet) (ocstmt.getObject(2));
         if (rset != null && rset.next()) {
-            gc.commande.setId(rset.getString("idCommande"));
-            gc.commande.setDate(dateFormat.format(rset.getDate("dateCommande")));
-            gc.commande.setPrix(rset.getDouble("prix"));
-            gc.commande.setAdresseLivraison(rset.getString("adresseLivraison"));
+            commande.setId(rset.getString("idCommande"));
+            commande.setDate( rset.getString("dateCommande") );
+            commande.setPrix(rset.getDouble("prix"));
+            commande.setAdresseLivraison(rset.getString("adresseLivraison"));
         }
         rset.close();
 
@@ -177,19 +172,19 @@ public class GestionnaireCommande extends SQLAble {
         while (rset != null && rset.next()) {
             int quantite = rset.getInt("quantite");
             for (int i = 0; i < quantite; i++) {
-                gc.commande.getIdPlats().add(rset.getString("idPlat"));
+                commande.getIdPlats().add(rset.getString("idPlat"));
             }
         }
         rset.close();
 
         rset = (ResultSet) (ocstmt.getObject(4));
         while (rset != null && rset.next()) {
-            gc.commande.getIdFilms().add(rset.getString("idFilm"));
+            commande.getIdFilms().add(rset.getString("idFilm"));
         }
         rset.close();
         ocstmt.close();
 
-        return gc.commande;
+        return commande;
     }
 
     /**
