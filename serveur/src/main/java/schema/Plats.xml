@@ -124,7 +124,7 @@
         <ns2:type>Boisson</ns2:type>
         <ns2:prix>1</ns2:prix>
         <ns2:ingredients>thé</ns2:ingredients>
-    </ns1:plat>
+    </ns1:plat>    
     <ns1:plat>
         <ns2:id>Thé vert</ns2:id>
         <ns2:image>https://marketplace.canva.com/MADGx1gNugo/4/screen/canva-teacup-on-table-MADGx1gNugo.jpg</ns2:image>
@@ -138,22 +138,22 @@
         <ns2:type>Boisson</ns2:type>
         <ns2:prix>2</ns2:prix>
         <ns2:ingredients>thé</ns2:ingredients>
-    </ns1:plat>
+    </ns1:plat>     
     <ns1:plat>
         <ns2:id>Thé à la menthe</ns2:id>
         <ns2:image>https://marketplace.canva.com/MADGx0o_hTQ/4/screen/canva-clear-drinking-glass-filled-with-brown-liquid-MADGx0o_hTQ.jpg</ns2:image>
         <ns2:type>Boisson</ns2:type>
         <ns2:prix>1</ns2:prix>
         <ns2:ingredients>thé</ns2:ingredients>
-    </ns1:plat>
+    </ns1:plat>         
     <ns1:plat>
         <ns2:id>Thé à la camomille</ns2:id>
         <ns2:image>https://images.unsplash.com/photo-1549582031-a73b5eccdf89?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=654&amp;q=80</ns2:image>
         <ns2:type>Boisson</ns2:type>
         <ns2:prix>2</ns2:prix>
         <ns2:ingredients>thé</ns2:ingredients>
-    </ns1:plat>
-<!--=====CAFÉ=====-->
+    </ns1:plat>             
+<!--=====CAFÉ=====-->       
     <ns1:plat>
         <ns2:id>Café latte</ns2:id>
         <ns2:image>https://marketplace.canva.com/MADGwBZuxWA/5/screen/canva-coffee-latte-in-cup-MADGwBZuxWA.jpg</ns2:image>
@@ -161,7 +161,7 @@
         <ns2:prix>3</ns2:prix>
         <ns2:ingredients>espresso</ns2:ingredients>
         <ns2:ingredients>lait</ns2:ingredients>
-    </ns1:plat>
+    </ns1:plat>         -->
     <ns1:plat>
         <ns2:id>Espresso</ns2:id>
         <ns2:image>https://marketplace.canva.com/MACV-ndTRAg/1/screen/canva-coffee%2C-cup%2C-espresso%2C-breakfast%2C-coffee-spoon-MACV-ndTRAg.jpg</ns2:image>
@@ -223,7 +223,7 @@
         <ns2:ingredients>sucre</ns2:ingredients>
         <ns2:ingredients>café</ns2:ingredients>
         <ns2:ingredients>chocolat</ns2:ingredients>
-    </ns1:plat>
+    </ns1:plat>         
     <ns1:plat>
         <ns2:id>Cookies au chocolat</ns2:id>
         <ns2:image>https://marketplace.canva.com/MADGyX9Wcw4/4/screen/canva-cookies-on-square-white-ceramic-plate-MADGyX9Wcw4.jpg</ns2:image>

@@ -58,7 +58,7 @@ public class GestionnaireCommande extends SQLAble {
         prixFilms = 3.79 * commande.getIdFilms().size();
 
         for (String idPlat : commande.getIdPlats()) {
-            if ( idPlat.length() > 2 ){
+            if ( idPlat.length() > 1 ){
                 prixPlat = GestionnaireMenu.getPrixPlat(idPlat);
                 if (prixPlat != -1 ){
                     prixPlats += prixPlat;
@@ -129,11 +129,17 @@ public class GestionnaireCommande extends SQLAble {
             if (nbInsertions > 1) {
                 conn.commit();
             } else {
+                if ( conn.isClosed() || conn == null ){
+                    throw new Exception("Echec rollback, il n'y a pas de connection ");
+                }
                 conn.rollback();
                 throw new Exception("Les listes des plats et des films sont vides");
             }
 
         } catch (SQLException e) {
+            if ( conn.isClosed() || conn == null ){
+                throw new Exception("Echec rollback, il n'y a pas de connection ");
+            }
             conn.rollback();
             throw new SQLException(e);
         }
@@ -148,7 +154,6 @@ public class GestionnaireCommande extends SQLAble {
     public static Commande getCommande(String id) throws SQLException {
         GestionnaireCommande gc = new GestionnaireCommande(id);
         gc.connectToDatabase();
-        
         Commande commande = new Commande();
 
         OracleCallableStatement ocstmt;
