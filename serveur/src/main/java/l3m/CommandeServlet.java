@@ -30,7 +30,7 @@ public class CommandeServlet extends HttpServlet {
         response.setContentType("application/json");
         String idCommande = request.getParameter("idCommande");
         Commande commande;
-
+        System.out.println(idCommande);
         try {
             commande = GestionnaireCommande.getCommande(idCommande);
 
@@ -51,7 +51,7 @@ public class CommandeServlet extends HttpServlet {
         Commande commande = new Commande();
         commande.setIdClient(request.getParameter("idClient"));
         commande.setAdresseLivraison(request.getParameter("adresseLivraison"));
-
+        System.out.println(commande.getIdClient());
         String buffer = "";
         buffer = request.getParameter("idPlats");
         buffer = buffer.replaceAll("[\\[\\]\"]", "");
