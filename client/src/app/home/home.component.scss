@@ -403,7 +403,6 @@ a:focus {
 /* dots styles */
 .dots_commands  {
 	position: relative;
-	top: 32px;
 	padding:0; margin:0;
 	text-align:center;
 }
@@ -524,10 +523,6 @@ a:focus {
 .dots_commands li:first-child a:before {
 	display:none;
 }
-
-
-
-
 /* need a stop ! */
 
 /* actions when target ! */
@@ -584,22 +579,13 @@ a:focus {
 #sl_i4:target ~ #slideshow .dots_commands li:first-child a:before	{ left:54px; }
 
 
-
-footer {
-    display: flex;
-    justify-content: center;
-  
-    background-color: #45a1ff;
-    color: #fff;
-	
-	position: fixed;
-	left: 0;
-	bottom: 5px;
-	width: 100%;
-}
 figcaption{
     text-shadow: 3px 2px red;
     color: rgb(7, 7, 7);
     font-size: 35px;
     font-family: italic;
+}
+.container{
+	width: auto;
+	height: auto;
 }
