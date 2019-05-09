@@ -4,6 +4,7 @@ import {MovieResponse} from '../tmdb-data/Movie';
 import {TmdbService} from '../service/tmdb.service';
 import {StorageService} from '../service/storage.service';
 import {MessageService} from 'primeng/api';
+import {Plats} from '../menu-commade-data/Menu';
 @Component({
   selector: 'app-films',
   templateUrl: './films.component.html',
@@ -18,6 +19,8 @@ export class FilmsComponent implements OnInit {
     afficherDialog = false;
     detail_afficher='Detail';
     detail_cacher='Afficher detail';
+    selectedMovie: MovieResponse; // movie selectionner
+    displayDialog: boolean; // Dialog pour les movie
 
     detail:string= this.detail_afficher;
 
@@ -51,6 +54,12 @@ export class FilmsComponent implements OnInit {
       );
   }
   */
+
+    selectMovie(movie: MovieResponse) {
+        this.selectedMovie = movie;
+        this.displayDialog = true;
+        event.preventDefault();
+    }
  afficher():void{
      if(this.detail=this.detail_cacher){
 

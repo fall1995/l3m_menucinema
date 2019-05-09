@@ -51,14 +51,19 @@ public class Test extends XMLAble {
         
         
         // TEST CRITERES
+        /*
         GestionnaireFactures gf = new GestionnaireFactures();
         Map<String, String> op = new HashMap<String, String>();
         op.put("film", "e");
         for(Commande c : gf.commandesAvecCriteres(op, "test.x")){
             System.out.println(c.getId());
         };
+<<<<<<< HEAD
         
         System.out.println(gf.recupererFacture("idClient", "date", "id"));
+=======
+        */
+>>>>>>> 51d023a41860731e6f3ff1da5ae8e39dafad16c5
 
      /*
         GestionnaireMenu m = new GestionnaireMenu();

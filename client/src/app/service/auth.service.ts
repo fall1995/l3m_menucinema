@@ -74,7 +74,6 @@ export class AuthService {
             );
         }));
     }
-
   
     /**
      * modification des données

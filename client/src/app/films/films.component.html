@@ -11,7 +11,7 @@
                     </p-header>
                     <p></p>
                     <p-footer>
-                        <button pButton type="button" label="Details" icon="fa fa-info"
+                        <button pButton type="button" label="Details" icon="fa fa-info" (click)="selectMovie(f)"
                             style="margin-right: .25em"></button>
                         <button pButton type="button" label="Ajouter" icon="fa fa-shopping-cart"
                             (click)="addFilmNote(f.id)" class="ui-button-secondary pull-right" id="ajouter"></button>
@@ -30,7 +30,7 @@
                     </p-header>
                     <p></p>
                     <p-footer>
-                        <button pButton type="button" label="Details" icon="fa fa-info"
+                        <button pButton type="button" label="Details" icon="fa fa-info" (click)="selectMovie(f)"
                             style="margin-right: .25em"></button>
                         <button pButton type="button" label="Ajouter" icon="fa fa-shopping-cart"
                             class="ui-button-secondary pull-right" id="ajouter"></button>
@@ -48,9 +48,8 @@
                     </p-header>
                     <p></p>
                     <p-footer>
-
                         <button pButton type="button" label="Details" icon="fa fa-info" style="margin-right: .25em"
-                            (click)="op1.toggle($event)"></button>
+                                (click)="selectMovie(f)"></button>
                         <button pButton type="button" label="Ajouter" icon="fa fa-shopping-cart"
                             class="ui-button-secondary pull-right" id="ajouter"></button>
                         <div>
@@ -58,12 +57,19 @@
                                 <p> {{f.overview}} </p>
                             </p-overlayPanel>
                         </div>
-
                     </p-footer>
                 </p-card>
             </div>
         </mat-tab>
     </mat-tab-group>
+    <p-dialog header="Movie detail" [(visible)]="displayDialog" [responsive]="true" [modal]="true" style="color: #c32f10"
+              [style]="{width: '350px'}">
+        <div class="ui-g" *ngIf="selectedMovie">
+            <div class="ui-g-12" style="text-align:center">
+                {{selectedMovie.overview}}
+            </div>
+        </div>
+    </p-dialog>
 </div>
 <p-toast position="top-right"></p-toast>
 <!--
