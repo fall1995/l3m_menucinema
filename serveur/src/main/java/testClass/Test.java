@@ -6,17 +6,21 @@
 package testClass;
 
 import classesgen.client.Client;
+import classesgen.commande.Commande;
 import classesgen.plat.Plat;
 import com.google.gson.Gson;
 import database.GestionnaireMenu;
 import database.SQLAble;
 import database.XMLAble;
+import facture.GestionnaireFactures;
 import facture.SauvegarderFacture;
 import facture.TransformationFacture;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.xml.bind.JAXBException;
 
 /**
@@ -29,7 +33,8 @@ public class Test extends XMLAble {
      * @param args the command line arguments
      */
     public static void main(String[] args) throws JAXBException, IOException {
-        GestionnaireMenu m = new GestionnaireMenu();
+        
+        /*GestionnaireMenu m = new GestionnaireMenu();
         List<Plat> p = m.getCartesDB();
         
         
@@ -41,17 +46,19 @@ public class Test extends XMLAble {
         
         
         
-        SauvegarderFacture.saveFacture("adresse", "date", "id", 0, "idClient", new String[]{"foo", "bar"}, new String[]{"foo2", "bar2"});
+        SauvegarderFacture.saveFacture("adresse", "date", "id", 0, "idClient", new String[]{"foo", "bar"}, new String[]{"foo2", "bar2"});*/
+        
         
         
         // TEST CRITERES
         GestionnaireFactures gf = new GestionnaireFactures();
-        System.out.print(gf.suggestionPlatToJson("Die Hard"));
-        List<ObjectPreference> op = new ArrayList<ObjectPreference>();
-        op.add(new ObjectPreference("film", "e"));
+        Map<String, String> op = new HashMap<String, String>();
+        op.put("film", "e");
         for(Commande c : gf.commandesAvecCriteres(op, "test.x")){
             System.out.println(c.getId());
         };
+        
+        System.out.println(gf.recupererFacture("idClient", "date", "id"));
 
      /*
         GestionnaireMenu m = new GestionnaireMenu();
