@@ -30,8 +30,7 @@ public class SauvegarderFacture {
 		Element rootElement = doc.createElement("facture");
 		doc.appendChild(rootElement);
                 
-                
-		// attributs de facture
+	// attributs de facture
 		Attr attr = doc.createAttribute("adresseLivraison");
 		attr.setValue(addresseLivraison);
 		rootElement.setAttributeNode(attr);
@@ -41,11 +40,11 @@ public class SauvegarderFacture {
 		rootElement.setAttributeNode(attr2);
                 
 		Attr attr3 = doc.createAttribute("id");
-		attr3.setValue(addresseLivraison);
+		attr3.setValue(id);
 		rootElement.setAttributeNode(attr3);
                 
 		Attr attr4 = doc.createAttribute("prix");
-		attr4.setValue(addresseLivraison);
+		attr4.setValue(""+prix);
 		rootElement.setAttributeNode(attr4);
                 
 
