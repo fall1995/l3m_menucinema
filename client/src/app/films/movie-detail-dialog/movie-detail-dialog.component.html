@@ -1,0 +1,7 @@
+<p-dialog header="Information du film" [(visible)]="afficherDialog" [modal]="true" [responsive]="true"
+          [style]="{width: '400px', minWidth: '250px'}" [minY]="190"
+          [maximizable]="true" [baseZIndex]="10000" (onHide)="onHide()">
+  <div *ngFor="let f of listeMovieHightRatet?.results" >
+  <p>{{f.overview}}</p>
+  </div>
+</p-dialog>

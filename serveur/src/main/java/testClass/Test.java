@@ -45,6 +45,7 @@ public class Test extends XMLAble {
         
         
         // TEST CRITERES
+        /*
         GestionnaireFactures gf = new GestionnaireFactures();
         System.out.print(gf.suggestionPlatToJson("Die Hard"));
         List<ObjectPreference> op = new ArrayList<ObjectPreference>();
@@ -52,6 +53,7 @@ public class Test extends XMLAble {
         for(Commande c : gf.commandesAvecCriteres(op, "test.x")){
             System.out.println(c.getId());
         };
+        */
 
      /*
         GestionnaireMenu m = new GestionnaireMenu();
