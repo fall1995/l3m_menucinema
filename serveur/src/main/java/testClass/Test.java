@@ -42,6 +42,16 @@ public class Test extends XMLAble {
         
         
         SauvegarderFacture.saveFacture("adresse", "date", "id", 0, "idClient", new String[]{"foo", "bar"}, new String[]{"foo2", "bar2"});
+        
+        
+        // TEST CRITERES
+        GestionnaireFactures gf = new GestionnaireFactures();
+        System.out.print(gf.suggestionPlatToJson("Die Hard"));
+        List<ObjectPreference> op = new ArrayList<ObjectPreference>();
+        op.add(new ObjectPreference("film", "e"));
+        for(Commande c : gf.commandesAvecCriteres(op, "test.x")){
+            System.out.println(c.getId());
+        };
 
      /*
         GestionnaireMenu m = new GestionnaireMenu();
