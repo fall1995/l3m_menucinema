@@ -99,28 +99,10 @@ public class CommandeServlet extends HttpServlet {
     protected void doPut(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        Enumeration<String> P = request.getParameterNames();
-        HashMap<String, String> parametres = new HashMap();
-
     }
 
     @Override
     protected void doDelete(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        String idClient = request.getParameter("idCommande");
+            throws ServletException, IOException { }
 
-    }
-
-    /**
-     * Methode qui permet de convertir un tableau de string en liste
-     *
-     * @param Tableau
-     */
-    static <T> List<T> toArrayList(T[] Tableau) {
-        List<T> al = new ArrayList<>();
-        for (T obj : Tableau) {
-            al.add(obj);
-        }
-        return al;
-    }
 }
