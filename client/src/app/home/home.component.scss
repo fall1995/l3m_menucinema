@@ -1,4 +1,9 @@
 /* CSS pour l'image d'entête*/
+.container{
+    margin: auto;
+	width:auto;
+	margin-bottom:20px; 
+  }
 figure { 
 	display: inline-block; 
 }
@@ -15,7 +20,7 @@ a:focus {
 #slideshow {
 	position: relative;
 	width: 1100px;
-	height: 496px;
+	height: 500px;
 	padding: 5px;
 	border: 1px solid #ddd;
 	margin: 0 auto 2em;
@@ -237,7 +242,7 @@ a:focus {
 
 #slideshow .container {
 	position:relative;
-	width: 1100px;
+	width: 1090px;
 	height: 490px;
 	overflow: hidden;
 }
