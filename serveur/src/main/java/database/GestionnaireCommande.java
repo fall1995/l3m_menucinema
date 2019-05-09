@@ -5,9 +5,6 @@ import com.google.gson.Gson;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -103,7 +100,7 @@ public class GestionnaireCommande extends SQLAble {
             ResultSet rset = (ResultSet) (ocstmt.getObject(1));
             if (rset != null && rset.next()) {
                 commande.setId(rset.getString("idCommande"));
-                commande.setDate( rset.getString("dateCommande") );
+                commande.setDate( rset.getString("dateCommande"));
             }
             rset.close();
             ocstmt.close();

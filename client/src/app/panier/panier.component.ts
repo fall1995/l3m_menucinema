@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {StorageService} from '../service/storage.service';
-import {ListePlats} from '../menu-commade-data/Menu';
+import {Plats} from '../menu-commade-data/Menu';
 import {Router} from '@angular/router';
 import {CommandeService} from '../service/commande.service';
 import {Commande} from '../menu-commade-data/commande';
@@ -90,7 +90,7 @@ export class PanierComponent implements OnInit {
         let idFilm = localStorage.getItem('movieId');
         let adresse = localStorage.getItem('adresse');
         if (this.isAuth){
-            this.commandeService.sendCmd({
+            this.commandeService.sendCommande({
                 // variable que le serveur s'attend a recevoir
                 idClient: idClient,
                 idPlats: idPlat,

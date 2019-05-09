@@ -1,32 +1,11 @@
-
 <div class="container">
 
     <mat-tab-group mat-stretch-tabs class="example-stretched-tabs mat-elevation-z4">
         <mat-tab label="Films mieux notés">
             <br>
-            <div *ngFor="let f of listeMovieHightRatet?.results" class="col-md-4" style="margin-bottom: 20px">
-                <p-card header={{f.title}} [style]="{width: '300px'}" styleClass="ui-card-shadow" [styleClass]="{height:'100px'}"
-
-                    style="display: inline-block">
-                    <p-header>
-                        <img src="Card"  src="{{this.tmdbService.host+f?.poster_path}}">
-                    </p-header>
-                    <p></p>
-                    <p-footer>
-                        <button pButton type="button" label="Details" icon="fa fa-info"
-                                style="margin-right: .25em"></button>
-                        <button pButton type="button" label="Ajouter" icon="fa fa-shopping-cart" (click)="addFilmNote(f.id)"
-                                class="ui-button-secondary pull-right" id="ajouter"></button>
-
-                    </p-footer>
-                </p-card>
-            </div>
-        </mat-tab>
-        <mat-tab label="Films 2019">
-            <br>
-            <div *ngFor="let f of listeMovie?.results" class="col-md-4" style="margin-bottom: 20px">
-                <p-card header={{f.title}} [style]="{width: '360px'}" styleClass="ui-card-shadow"
-                    style="display: inline-block">
+            <div *ngFor="let f of listeMovieHightRatet?.results" class="col-md-3" style="margin-bottom: 20px" >
+                <p-card id="card1">
+                    <p>{{f.title}}</p>
                     <p-header>
                         <img src="Card" src="{{this.tmdbService.host+f?.poster_path}}">
                     </p-header>
@@ -35,16 +14,35 @@
                         <button pButton type="button" label="Details" icon="fa fa-info"
                             style="margin-right: .25em"></button>
                         <button pButton type="button" label="Ajouter" icon="fa fa-shopping-cart"
-                            class="ui-button-secondary pull-right" id="ajouter" ></button>
+                            (click)="addFilmNote(f.id)" class="ui-button-secondary pull-right" id="ajouter"></button>
+
+                    </p-footer>
+                </p-card>
+            </div>
+        </mat-tab>
+        <mat-tab label="Films 2019">
+            <br>
+            <div *ngFor="let f of listeMovie?.results" class="col-md-3" style="margin-bottom: 20px">
+                <p-card id="card1">
+                    <p>{{f.title}}</p>
+                    <p-header>
+                        <img src="Card" src="{{this.tmdbService.host+f?.poster_path}}">
+                    </p-header>
+                    <p></p>
+                    <p-footer>
+                        <button pButton type="button" label="Details" icon="fa fa-info"
+                            style="margin-right: .25em"></button>
+                        <button pButton type="button" label="Ajouter" icon="fa fa-shopping-cart"
+                            class="ui-button-secondary pull-right" id="ajouter"></button>
                     </p-footer>
                 </p-card>
             </div>
         </mat-tab>
         <mat-tab label="Films dramatique">
             <br>
-            <div *ngFor="let f of listeMovieDram?.results" class="col-md-4" style="margin-bottom: 20px">
-                <p-card header={{f.title}} [style]="{width: '360px'}" styleClass="ui-card-shadow"
-                    style="display: inline-block">
+            <div *ngFor="let f of listeMovieDram?.results" class="col-md-3" style="margin-bottom: 20px">
+                <p-card id="card1">
+                    <p>{{f.title}}</p>
                     <p-header>
                         <img src="Card" src="{{this.tmdbService.host+f?.poster_path}}">
                     </p-header>

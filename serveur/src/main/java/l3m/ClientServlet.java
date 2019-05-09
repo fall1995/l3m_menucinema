@@ -29,7 +29,7 @@ public class ClientServlet extends HttpServlet {
 
         if (request.getServletPath().equals("/api/client")) {
             
-            String idClient = request.getParameter("userId");
+            String idClient = request.getParameter("idClient");
             System.out.println(idClient);
             try {
                 GestionnaireClient gc = new GestionnaireClient(idClient, "", "");
@@ -53,7 +53,7 @@ public class ClientServlet extends HttpServlet {
   
         else if (request.getServletPath().equals("/api/derniercommande")) {
             
-            String idClient = request.getParameter("userId");
+            String idClient = request.getParameter("idClient");
             System.out.println(idClient);
             try {
 

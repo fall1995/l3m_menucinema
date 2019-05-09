@@ -141,7 +141,6 @@ public class GestionnaireMenu  extends XMLAble{
     public static List<Plat> getCartesDB() {
         List<Plat> res = new ArrayList<Plat>();
         Plat target = new Plat();
-        //List<Ingredient> ingre = new ArrayList<Ingredient>();
         boolean bId = false;
         boolean bImage = false;
         boolean bType = false;
@@ -197,7 +196,6 @@ public class GestionnaireMenu  extends XMLAble{
                   bPrix = false;
                }
                if(bIngredient) {
-                   //ingre.add(Ingredient.fromValue(characters.getData()));
                    target.getIngredients().add(Ingredient.fromValue(characters.getData()));
                   bIngredient = false;
                }

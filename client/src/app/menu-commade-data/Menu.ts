@@ -1,5 +1,5 @@
 
-export interface ListePlats {
+export interface Plats {
     id?: string;
     image?: string;
     type?: string;

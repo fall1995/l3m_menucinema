@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {ListePlats} from '../menu-commade-data/Menu';
+import {Plats} from '../menu-commade-data/Menu';
 import {MovieResponse} from '../tmdb-data/Movie';
 
 @Injectable({
@@ -15,10 +15,10 @@ export class StorageService {
      * ajout des plat le localStorage avant l'utilisation
      * @param plat
      */
-    addMenu(plat: ListePlats) {
+    addMenu(plat: Plats) {
         let dataMenuId: string[] = [];
         if (localStorage.getItem('plat') == null) {
-            let data: ListePlats[] = [];
+            let data: Plats[] = [];
             data.push(plat);
             for (let p of data) {
                 dataMenuId.push(p.id);
@@ -26,7 +26,7 @@ export class StorageService {
             localStorage.setItem('platId', JSON.stringify(dataMenuId));
             localStorage.setItem('plat', JSON.stringify(data));
         } else {
-            let data: ListePlats[] = JSON.parse(localStorage.getItem('plat'));
+            let data: Plats[] = JSON.parse(localStorage.getItem('plat'));
             data.push(plat);
             for (let p of data) {
                 dataMenuId.push(p.id);
@@ -74,7 +74,7 @@ export class StorageService {
     /**
      * recuperation des menus pour l'afficher dans le panier
      */
-    getMenu(): ListePlats[] {
+    getMenu(): Plats[] {
         if (localStorage.getItem('plat') != null) {
             return JSON.parse(localStorage.getItem('plat'));
         }
@@ -88,7 +88,7 @@ export class StorageService {
      */
     delete(index: number): void {
         let dataMenuId: string[] = JSON.parse(localStorage.getItem('platId')); // je supprime aussi l'id ajouter lors de l'insertion
-        let data: ListePlats[] = JSON.parse(localStorage.getItem('plat'));
+        let data: Plats[] = JSON.parse(localStorage.getItem('plat'));
         data.splice(index, 1);
         dataMenuId.splice(index, 1);
         localStorage.setItem('plat', JSON.stringify(data));
