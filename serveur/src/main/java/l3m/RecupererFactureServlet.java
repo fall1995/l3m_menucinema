@@ -35,13 +35,12 @@ public class RecupererFactureServlet extends HttpServlet {
         response.setContentType("application/json");
         idClient = request.getParameter("idClient");
         id = request.getParameter("id");
-        date = request.getParameter("date");
         GestionnaireFactures gf;
         gf = new GestionnaireFactures();
         
         response.setContentType("application/json");
         response.setStatus(HttpServletResponse.SC_OK);
         response.getWriter().println(
-        gf.recupererFacture(idClient, date, id));
+        gf.recupererFacture(idClient, id));
     }
 }

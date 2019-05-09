@@ -57,13 +57,11 @@ public class Test extends XMLAble {
         op.put("film", "e");
         for(Commande c : gf.commandesAvecCriteres(op, "test.x")){
             System.out.println(c.getId());
-        };
-<<<<<<< HEAD
+        };*/
         
-        System.out.println(gf.recupererFacture("idClient", "date", "id"));
-=======
-        */
->>>>>>> 51d023a41860731e6f3ff1da5ae8e39dafad16c5
+        GestionnaireFactures gf = new GestionnaireFactures();
+        System.out.println(gf.recupererFacture("idClient", "id"));
+        
 
      /*
         GestionnaireMenu m = new GestionnaireMenu();

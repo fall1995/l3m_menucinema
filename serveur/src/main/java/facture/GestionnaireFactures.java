@@ -144,7 +144,7 @@ public class GestionnaireFactures {
     
     
     /************RECUPERER FACTURE**************/
-    public String recupererFacture(String idClient, String date, String id){
+    public String recupererFacture(String idClient, String id){
         
         
 
@@ -152,6 +152,7 @@ public class GestionnaireFactures {
             List<String> films = new ArrayList<String>();
             String prix = "";
             String adresseLivraison = "";
+            String date = "";
 
             boolean matchingCommand = false;
             boolean bCommande = false;
@@ -159,11 +160,18 @@ public class GestionnaireFactures {
             boolean bIdClient = false;
             boolean bFilm = false;
                                     Commande commande = new Commande();
+                                    
+                                            List<String> targetFactures = new ArrayList<String>();
+        for (String f : nomsFactures()) {
+            if (f.contains(idClient) && f.contains("-"+id)) {
+                targetFactures.add(f);
+            }
+        };
         
         try {
                 XMLInputFactory factory = XMLInputFactory.newInstance();
                 XMLEventReader eventReader
-                        = factory.createXMLEventReader(new FileReader("factures/"+idClient+"-"+date+"-"+id+".xml"));
+                        = factory.createXMLEventReader(new FileReader("factures/"+targetFactures.get(0)));
 
                 while (eventReader.hasNext()) {
                     XMLEvent event = eventReader.nextEvent();
@@ -178,6 +186,8 @@ public class GestionnaireFactures {
 
                                     prix = startElement.getAttributeByName(QName.valueOf("prix")).getValue();
                                     adresseLivraison = startElement.getAttributeByName(QName.valueOf("adresseLivraison")).getValue();
+                                    date = startElement.getAttributeByName(QName.valueOf("date")).getValue();
+                                    
                                     bCommande = true;
                                 } else if (qName.equalsIgnoreCase("idClient")) {
 
