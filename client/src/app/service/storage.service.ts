@@ -14,7 +14,6 @@ export class StorageService {
      * @param plat
      */
     addMenu(plat: Plats) {
-        let total = 0.0;
         let dataPrix: number[] = [];
         let dataMenuId: string[] = [];
         if (localStorage.getItem('plat') == null) {
@@ -23,7 +22,6 @@ export class StorageService {
             for (let p of data) {
                 dataMenuId.push(p.id);
                 dataPrix.push(p.prix);
-                //total += parseFloat(String(p.prix)); // somme des elements du Array
             }
             localStorage.setItem('totalMenu', JSON.stringify(dataPrix)); // modification dans le storage
             localStorage.setItem('platId', JSON.stringify(dataMenuId)); //
@@ -34,7 +32,6 @@ export class StorageService {
             for (let p of data) {
                 dataMenuId.push(p.id);
                 dataPrix.push(p.prix);
-                //dataPrix += parseFloat(String(p.prix));
             }
             localStorage.setItem('totalMenu', JSON.stringify(dataPrix));
             localStorage.setItem('platId', JSON.stringify(dataMenuId));
@@ -47,7 +44,6 @@ export class StorageService {
      * @param film
      */
     addMovieNote(film: MovieResponse) {
-        let total = 0.0;
         let dataTotal: number[] = [];
         let dataMovieId: number[] = [];
         if (localStorage.getItem('filmNote') == null) {
@@ -55,7 +51,6 @@ export class StorageService {
             data.push(film);
             for (let m of data) {
                 dataMovieId.push(m.id);
-                //total += 3.79;
                 dataTotal.push(3.79);
             }
             localStorage.setItem('totalMovie', JSON.stringify(dataTotal));
@@ -66,7 +61,6 @@ export class StorageService {
             data.push(film);
             for (let m of data) {
                 dataMovieId.push(m.id);
-                //total += 3.79;
                 dataTotal.push(3.79);
             }
             localStorage.setItem('totalMovie', JSON.stringify(dataTotal));
@@ -89,13 +83,13 @@ export class StorageService {
      * recuperation des menus pour l'afficher dans le panier
      */
     getMenu(): Plats[] {
-
         if (localStorage.getItem('plat') != null) {
             return JSON.parse(localStorage.getItem('plat'));
 
         }
         return null;
     }
+
     /**
      * effacer le plat dont l'index est passé en parametre
      * @param index
@@ -106,7 +100,7 @@ export class StorageService {
         let data: Plats[] = JSON.parse(localStorage.getItem('plat'));
         data.splice(index, 1);
         dataMenuId.splice(index, 1);
-        dataPrix.splice(index,1);
+        dataPrix.splice(index, 1);
         //total--;
         localStorage.setItem('plat', JSON.stringify(data));
         localStorage.setItem('platId', JSON.stringify(dataMenuId));
@@ -123,7 +117,7 @@ export class StorageService {
         let data: MovieResponse[] = JSON.parse(localStorage.getItem('filmNote'));
         data.splice(index, 1);
         dataMovieId.splice(index, 1);
-        dataTotal.splice(index,1);
+        dataTotal.splice(index, 1);
         localStorage.setItem('filmNote', JSON.stringify(data));
         localStorage.setItem('movieId', JSON.stringify(dataMovieId));
         localStorage.setItem('totalMovie', JSON.stringify(dataTotal));

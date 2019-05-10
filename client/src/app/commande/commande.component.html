@@ -39,8 +39,8 @@
                                     <td>{{c.prix}}</td>
                                     <td>{{c.adresseLivraison}}</td>
                                     <td>
-                                        <a [routerLink]="['/commande/facture/', c.id]"
-                                        class="btn btn-white"><i class="fa fa-eye"></i>
+                                        <a [routerLink]="['/commande/facture/', c.id]" pTooltip="Voir les details de cette facture" tooltipPosition="top"
+                                        class="btn btn-default"><i class="fa fa-eye"></i>
 
                                         </a>
                                     </td>
