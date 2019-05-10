@@ -46,9 +46,8 @@ height: 350px;
 p{
   font-size:20px;
  height: 25px;
- // font-family: italic;
-  color: red;
-  font-style: italic;
+  color: rgb(163, 43, 43);
+  font-family: italic;
   text-align: justified ;
 }
 #content_card{
@@ -56,3 +55,8 @@ p{
 }
 
 
+#dialog {
+  background-image: none;
+  background-color: red;
+  width: 350px;
+}

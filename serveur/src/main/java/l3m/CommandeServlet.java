@@ -3,13 +3,10 @@ package l3m;
 import classesgen.commande.Commande;
 import com.google.gson.Gson;
 import database.GestionnaireCommande;
+import facture.GestionnaireFactures;
 import facture.SauvegarderFacture;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Enumeration;
-import java.util.HashMap;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -83,10 +80,10 @@ public class CommandeServlet extends HttpServlet {
             SauvegarderFacture.saveFacture( 
                     commande.getAdresseLivraison(), commande.getDate(), commande.getId(),commande.getPrix(), 
                     commande.getIdClient(), films, plats);
-            
+            GestionnaireFactures gf=new GestionnaireFactures();
             response.setContentType("application/json");
             response.setStatus(HttpServletResponse.SC_OK);
-            response.getWriter().println(gc.CommandeToJson());
+            response.getWriter().println( gf.recupererFacture(commande.getIdClient(),  commande.getId()) );
 
         } catch (SQLException ex) {
             Logger.getLogger(CommandeServlet.class.getName()).log(Level.SEVERE, null, ex);
