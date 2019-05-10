@@ -34,7 +34,7 @@ export class StorageService {
             for (let p of data) {
                 dataMenuId.push(p.id);
                 dataPrix.push(p.prix);
-                //total += parseFloat(String(p.prix));
+                //dataPrix += parseFloat(String(p.prix));
             }
             localStorage.setItem('totalMenu', JSON.stringify(dataPrix));
             localStorage.setItem('platId', JSON.stringify(dataMenuId));

@@ -28,8 +28,8 @@ export class PanierComponent implements OnInit {
     adresse: any;
     afficherDialog = false;
     user: User; // l'utilisateur courant
-    totalMenu : any;
-    totalMovie : any;
+    totalMenu: any;
+    totalMovie: any;
 
 
     ngOnInit() {
@@ -56,16 +56,21 @@ export class PanierComponent implements OnInit {
 
     totalPanier() {
         //let sum = 0;
-        //let i = 0;
-        let total = localStorage.getItem('totalMenu');
+        this.totalMovie = 0.0;
+        this.totalMenu = 0.0;
+        let i: number;
+        let tabPrixMenu = JSON.parse(localStorage.getItem('totalMenu'));
+        console.log('tableau prix plat' + tabPrixMenu);
+        for (i = 0; i < tabPrixMenu.length; i++) {
+            this.totalMenu += +tabPrixMenu[i];
+        }
+        console.log('total Menu =' + this.totalMenu);
+        let tabPrixMovie = JSON.parse(localStorage.getItem('totalMovie'));
+        for (i = 0; i < tabPrixMovie.length; i++) {
+            this.totalMovie += tabPrixMovie[i];
+        }
+        console.log('total movie' + this.totalMovie);
 
-        console.log("total "+total);
-        // var sum = array.reduce((acc, cur) => acc + cur, 0);
-        //let sum = total.reduce((acc, cur) => acc + cur, 0);
-          //  console.log("sum ="+sum);
-        this.totalMovie = localStorage.getItem('totalMovie');
-
-        console.log("total movie" +this.totalMovie);
 
     }
 
@@ -116,6 +121,7 @@ export class PanierComponent implements OnInit {
                 idFilms: idFilm,
                 adresseLivraison: adresse,
             }).then(data => {
+                localStorage.removeItem('plat');
                 this.message.add({
                     severity: 'success',
                     summary: `Commande Confirmer avec succes `,

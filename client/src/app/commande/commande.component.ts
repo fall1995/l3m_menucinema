@@ -31,4 +31,8 @@ export class CommandeComponent implements OnInit {
         });
     }
 
+    factureSelected(){
+        window.print();
+    }
+
 }

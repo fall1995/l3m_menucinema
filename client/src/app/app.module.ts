@@ -55,6 +55,7 @@ import {FieldsetModule, OverlayPanelModule} from 'primeng/primeng';
 import { CommandeComponent } from './commande/commande.component';
 import { PanierComponent } from './panier/panier.component';
 import { AdresseUpdateDialogComponent } from './panier/adresse-update-dialog/adresse-update-dialog.component';
+import { FactureDetailComponent } from './commande/facture-detail/facture-detail.component';
 
 @NgModule({
     declarations: [
@@ -71,6 +72,7 @@ import { AdresseUpdateDialogComponent } from './panier/adresse-update-dialog/adr
         CommandeComponent,
         PanierComponent,
         AdresseUpdateDialogComponent,
+        FactureDetailComponent,
     ],
     imports: [
         BrowserModule,
