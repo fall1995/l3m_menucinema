@@ -43,7 +43,7 @@ export class CommandeService {
 
     async getLastCommande(id : string): Promise<any> {
         return new Promise<any>(((resolve, reject) => {
-            this.http.get(`/api/derniercommande?idClient=${id}`, {responseType: 'text'}).toPromise().then(
+            this.http.get(`/api/client/dernierecommande?idClient=${id}`, {responseType: 'text'}).toPromise().then(
                 res => {
                     resolve(JSON.parse(res));
                 }, rej => {

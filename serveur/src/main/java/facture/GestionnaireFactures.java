@@ -5,7 +5,14 @@ import com.google.gson.Gson;
 import java.io.File;
 import java.io.FileReader;
 import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.SortedMap;
+import java.util.TreeMap;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import javax.xml.namespace.QName;
 import javax.xml.parsers.SAXParserFactory;
 import javax.xml.stream.XMLEventReader;
@@ -24,7 +31,6 @@ public class GestionnaireFactures {
 
     public String suggestionFilmToJson(String idPlat) {
         String json = new Gson().toJson((PreferencePourPlat(idPlat)));
-        System.out.print("json " + json);
         return json;
     }
 
@@ -34,14 +40,13 @@ public class GestionnaireFactures {
     }
 
     // Permet de trouver tous les commandes qui verifie au moins une critere
-    public List<Commande> commandesAvecCriteres(List<ObjectPreference> criteres, String idClient) {
+    public List<Commande> commandesAvecCriteres(Map<String, String> criteres, String idClient) {
         List<Commande> targetCommandes = new ArrayList<Commande>();
         //Trouver tous les factures correspondants
         List<String> targetFactures = new ArrayList<String>();
         for (String f : nomsFactures()) {
             if (f.contains(idClient)) {
                 targetFactures.add(f);
-                System.out.println(f);
             }
         };
 
@@ -69,7 +74,7 @@ public class GestionnaireFactures {
                 while (eventReader.hasNext()) {
                     XMLEvent event = eventReader.nextEvent();
 
-                    for (ObjectPreference o : criteres) {
+                    for (Map.Entry<String, String> o : criteres.entrySet()) {
                         switch (event.getEventType()) {
 
                             case XMLStreamConstants.START_ELEMENT:
@@ -92,9 +97,6 @@ public class GestionnaireFactures {
                                     bFilm = true;
                                 }
 
-                                if (qName.equalsIgnoreCase((String) o.getL())) {
-                                    targetCritere = criteres.indexOf(o);
-                                }
                                 break;
 
                             case XMLStreamConstants.CHARACTERS:
@@ -111,9 +113,6 @@ public class GestionnaireFactures {
                                     bIdClient = false;
                                 }
 
-                                if (targetCritere == criteres.indexOf(o)) {
-                                    matchingCommand = true;
-                                }
                                 break;
 
                             case XMLStreamConstants.END_ELEMENT:
@@ -121,17 +120,15 @@ public class GestionnaireFactures {
 
                                 if (endElement.getName().getLocalPart().equalsIgnoreCase("facture")) {
 
-                                    if (matchingCommand) {
-                                        Commande commande = new Commande();
-                                        commande.setAdresseLivraison(adresseLivraison);
-                                        commande.setDate(date);
-                                        commande.setId(id);
-                                        commande.setPrix(Double.parseDouble(prix));
-                                        commande.setIdClient(idClientStr);
-                                        commande.getIdFilms().addAll(films);
-                                        commande.getIdPlats().addAll(plats);
-                                        targetCommandes.add(commande);
-                                    }
+                                    Commande commande = new Commande();
+                                    commande.setAdresseLivraison(adresseLivraison);
+                                    commande.setDate(date);
+                                    commande.setId(id);
+                                    commande.setPrix(Double.parseDouble(prix));
+                                    commande.setIdClient(idClientStr);
+                                    commande.getIdFilms().addAll(films);
+                                    commande.getIdPlats().addAll(plats);
+                                    targetCommandes.add(commande);
                                 }
                                 break;
                         }
@@ -144,6 +141,102 @@ public class GestionnaireFactures {
         }
         return targetCommandes;
     }
+    
+    
+    /************RECUPERER FACTURE**************/
+    public String recupererFacture(String idClient, String id){
+        
+        
+
+            List<String> plats = new ArrayList<String>();
+            List<String> films = new ArrayList<String>();
+            String prix = "";
+            String adresseLivraison = "";
+            String date = "";
+
+            boolean matchingCommand = false;
+            boolean bCommande = false;
+            boolean bIdPlat = false;
+            boolean bIdClient = false;
+            boolean bFilm = false;
+                                    Commande commande = new Commande();
+                                    
+                                            List<String> targetFactures = new ArrayList<String>();
+        for (String f : nomsFactures()) {
+            if (f.contains(idClient) && f.contains("-"+id)) {
+                targetFactures.add(f);
+            }
+        };
+        
+        try {
+                XMLInputFactory factory = XMLInputFactory.newInstance();
+                XMLEventReader eventReader
+                        = factory.createXMLEventReader(new FileReader("factures/"+targetFactures.get(0)));
+
+                while (eventReader.hasNext()) {
+                    XMLEvent event = eventReader.nextEvent();
+
+                        switch (event.getEventType()) {
+
+                            case XMLStreamConstants.START_ELEMENT:
+                                StartElement startElement = event.asStartElement();
+                                String qName = startElement.getName().getLocalPart();
+
+                                if (qName.equalsIgnoreCase("facture")) {
+
+                                    prix = startElement.getAttributeByName(QName.valueOf("prix")).getValue();
+                                    adresseLivraison = startElement.getAttributeByName(QName.valueOf("adresseLivraison")).getValue();
+                                    date = startElement.getAttributeByName(QName.valueOf("date")).getValue();
+                                    
+                                    bCommande = true;
+                                } else if (qName.equalsIgnoreCase("idClient")) {
+
+                                    bIdClient = true;
+                                } else if (qName.equalsIgnoreCase("idPlat")) {
+                                    bIdPlat = true;
+                                } else if (qName.equalsIgnoreCase("film")) {
+                                    bFilm = true;
+                                }
+
+                                break;
+
+                            case XMLStreamConstants.CHARACTERS:
+                                Characters characters = event.asCharacters();
+
+                                if (bIdPlat) {
+                                    plats.add(characters.getData());
+                                    bIdPlat = false;
+                                } else if (bFilm) {
+                                    films.add(characters.getData());
+                                    bFilm = false;
+                                } else if (bIdClient) {
+                                    bIdClient = false;
+                                }
+
+                                break;
+
+                            case XMLStreamConstants.END_ELEMENT:
+                                EndElement endElement = event.asEndElement();
+
+                                if (endElement.getName().getLocalPart().equalsIgnoreCase("facture")) {
+
+                                    commande.setAdresseLivraison(adresseLivraison);
+                                    commande.setDate(date);
+                                    commande.setId(id);
+                                    commande.setPrix(Double.parseDouble(prix));
+                                    commande.setIdClient(idClient);
+                                    commande.getIdFilms().addAll(films);
+                                    commande.getIdPlats().addAll(plats);
+                                }
+                                break;
+                        }
+                }
+
+            } catch (Exception e) {
+                System.out.println("Exception: " + e);
+            }
+        return new Gson().toJson(commande);
+    }
 
     /**
      * ***************** FILMS POUR PLAT
@@ -152,30 +245,45 @@ public class GestionnaireFactures {
      * @return *******************
      */
     // Afficher couples (film, preference) pour plat
-    public List<ObjectPreference> PreferencePourPlat(String plat) {
-        List<ObjectPreference> filmsPourPlat = new ArrayList<ObjectPreference>();
+    public Map<String, Integer> PreferencePourPlat(String plat) {
+        Map<String, Integer> filmsPourPlat = new HashMap<String, Integer>();
 
         for (String film : filmsAvecPlat(plat)) {
             boolean added = false;
 
-            for (ObjectPreference op : filmsPourPlat) {
-                String nomFilm = (String) op.getL();
+            for (Map.Entry<String, Integer> op : filmsPourPlat.entrySet()) {
+                String nomFilm = (String) op.getKey();
                 if (nomFilm.equals(film)) {
                     added = true;
-                    op.setR((Integer) op.getR() + 1);
+                    op.setValue((Integer) op.getValue() + 1);
                 }
             }
             if (!added) {
-                filmsPourPlat.add(new ObjectPreference(film, 1));
+                filmsPourPlat.put(film, 1);
             }
         }
 
         // Affichage
-        for (ObjectPreference op : filmsPourPlat) {
-            System.out.println(op.getL() + " " + op.getR());
+
+        ValueComparator bvc = new ValueComparator(filmsPourPlat);
+        TreeMap<String, Integer> sorted_map = new TreeMap<String, Integer>(bvc);
+        TreeMap<String, Integer> map5 = new TreeMap<String, Integer>(bvc);
+
+        // Affichage
+        sorted_map.putAll(filmsPourPlat);
+        for (Map.Entry<String, Integer> op : sorted_map.entrySet()) {
         }
 
-        return filmsPourPlat;
+        if (sorted_map.entrySet().size() > 5) {
+            for (int i = 0; i < 5; i++) {
+                map5.put(sorted_map.firstEntry().getKey(), sorted_map.firstEntry().getValue());
+                sorted_map.remove(sorted_map.firstKey());
+            }
+
+            return map5;
+        } else {
+            return sorted_map;
+        }
     }
 
     // Afficher tous les films achetes avec plat
@@ -188,7 +296,6 @@ public class GestionnaireFactures {
             List<String> filmsFacture = getFilmsFromFacture(plat, facture);
             for (String film : filmsFacture) {
                 films.add(film);
-                System.out.print(film);
             }
 
         }
@@ -235,14 +342,11 @@ public class GestionnaireFactures {
                     case XMLStreamConstants.CHARACTERS:
                         Characters characters = event.asCharacters();
                         if (bIdPlat) {
-                            System.out.println("plat" + characters.getData());
-                            System.out.println(plat);
                             if (plat.equals(characters.getData())) {
                                 targetAudience = true;
                             }
                             bIdPlat = false;
                         } else if (bFilm) {
-                            System.out.println(characters.getData());
                             films.add(characters.getData());
                             bFilm = false;
                         } else if (bClient) {
@@ -254,9 +358,7 @@ public class GestionnaireFactures {
                         EndElement endElement = event.asEndElement();
 
                         if (endElement.getName().getLocalPart().equalsIgnoreCase("facture")) {
-                            System.out.println("targetAudience " + targetAudience);
                             if (targetAudience) {
-                                System.out.println("--------");
                                 for (String p : films) {
                                     res.add(p);
                                     System.out.println(p);
@@ -281,30 +383,49 @@ public class GestionnaireFactures {
      * @return ********************
      */
     // Afficher couples (plats, preference) pour film
-    public List<ObjectPreference> platsPreferencePourFilm(String film) {
-        List<ObjectPreference> platsPourFilm = new ArrayList<ObjectPreference>();
+    public Map<String, Integer> platsPreferencePourFilm(String film) {
+        Map<String, Integer> platsPourFilm = new HashMap<String, Integer>();
 
         for (String plat : platsAvecFilm(film)) {
             boolean added = false;
 
-            for (ObjectPreference op : platsPourFilm) {
-                String nomPlat = (String) op.getL();
+            for (Map.Entry<String, Integer> op : platsPourFilm.entrySet()) {
+                String nomPlat = (String) op.getKey();
                 if (nomPlat.equals(plat)) {
                     added = true;
-                    op.setR((Integer) op.getR() + 1);
+                    op.setValue((Integer) op.getValue() + 1);
                 }
             }
             if (!added) {
-                platsPourFilm.add(new ObjectPreference(plat, 1));
+                platsPourFilm.put(plat, 1);
             }
         }
 
         // Affichage
-        for (ObjectPreference op : platsPourFilm) {
-            System.out.println(op.getL() + " " + op.getR());
+        for (Map.Entry<String, Integer> op : platsPourFilm.entrySet()) {
+            System.out.println(op.getKey() + " " + op.getValue());
         }
 
-        return platsPourFilm;
+        System.out.println(platsPourFilm.entrySet().stream().sorted(Map.Entry.comparingByValue()));
+
+        ValueComparator bvc = new ValueComparator(platsPourFilm);
+        TreeMap<String, Integer> sorted_map = new TreeMap<String, Integer>(bvc);
+        TreeMap<String, Integer> map5 = new TreeMap<String, Integer>(bvc);
+
+        // Affichage
+        sorted_map.putAll(platsPourFilm);
+
+        if (sorted_map.entrySet().size() > 5) {
+            for (int i = 0; i < 5; i++) {
+                map5.put(sorted_map.firstEntry().getKey(), sorted_map.firstEntry().getValue());
+                sorted_map.remove(sorted_map.firstKey());
+            }
+
+            return map5;
+        } else {
+            return sorted_map;
+        }
+
     }
 
     // Afficher tous les plats achetes avec film
@@ -408,5 +529,24 @@ public class GestionnaireFactures {
             }
         }
         return noms;
+    }
+}
+
+class ValueComparator implements Comparator<String> {
+
+    Map<String, Integer> base;
+
+    public ValueComparator(Map<String, Integer> base) {
+        this.base = base;
+    }
+
+    // Note: this comparator imposes orderings that are inconsistent with
+    // equals.
+    public int compare(String a, String b) {
+        if (base.get(a) >= base.get(b)) {
+            return -1;
+        } else {
+            return 1;
+        } // returning 0 would merge keys
     }
 }

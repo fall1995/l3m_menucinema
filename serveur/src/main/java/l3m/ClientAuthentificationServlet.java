@@ -42,14 +42,13 @@ public class ClientAuthentificationServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String idClient = request.getParameter("idClient");
-        GestionnaireClient gestonClient;
-        gestonClient = new GestionnaireClient(idClient, "", "");
-        Client client_trouve;
+
+        Client client;
         try {
-            client_trouve = gestonClient.getClient(idClient);
+            client = GestionnaireClient.getClientDB(idClient);
             response.setContentType("application/json");
             response.setStatus(HttpServletResponse.SC_OK);
-            response.getWriter().println(new Gson().toJson(client_trouve));
+            response.getWriter().println(new Gson().toJson(client));
         } catch (Exception ex) {
             Logger.getLogger(ClientAuthentificationServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -97,7 +96,13 @@ public class ClientAuthentificationServlet extends HttpServlet {
                 client.setId(parametres.get("idClient"));
                 client.setNom(parametres.get("nom"));
                 client.setPrenom(parametres.get("prenom"));
+              
                 res = BdAccess.authentifyUser(client);
+                
+                if ( res.equals("client") ){
+                    client = GestionnaireClient.getClientDB(parametres.get("idClient"));
+                }
+                
                 response.setStatus(HttpServletResponse.SC_OK);
                 response.getWriter().println(new Gson().toJson(client));
             } // CAS HTTP code 500
@@ -113,6 +118,46 @@ public class ClientAuthentificationServlet extends HttpServlet {
             response.getWriter().println("Parametre non complet");
         }
     }
+    
+    
+    
+     protected void doPut(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+
+        
+        Enumeration<String> P = request.getParameterNames();
+        HashMap<String, String> parametres = new HashMap();
+        
+        while (P.hasMoreElements()) {
+            String p = P.nextElement();
+            parametres.put(p, request.getParameter( p ));
+        }
+        
+        try {
+            //mise à jour
+            GestionnaireClient gc = new GestionnaireClient( parametres.get("id"),
+                                                            parametres.get("nom"),
+                                                            parametres.get("prenom")
+                                        );
+
+            gc.editEmail(parametres.get("email"));
+            gc.editAdresse(parametres.get("adresse"));
+            gc.editPhoto(parametres.get("photo"));
+            gc.editTel(parametres.get("tel"));
+            gc.editClientDB();
+
+            response.setStatus(HttpServletResponse.SC_OK);
+            response.getWriter().println(gc.ClientToJson());
+
+        } catch (SQLException ex) {
+            response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            response.getWriter().println(ex.getMessage());
+        } catch (Exception ex) {
+            Logger.getLogger(ClientServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+     
+     
 
     private String processQueryTest(HttpServletRequest request) {
         String res = "{";
@@ -135,18 +180,6 @@ public class ClientAuthentificationServlet extends HttpServlet {
         }
 
         return res;
-    }
-
-    private boolean getClientinfo(HashMap<String, String> parametres) {
-        boolean valide = false;
-
-        if (parametres.containsKey(id)) {
-            //verification si les valeurs ne sont pas null
-            if (parametres.get(id) != null) {
-                valide = true;
-            }
-        }
-        return valide;
     }
 
 }

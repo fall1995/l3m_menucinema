@@ -1,0 +1,1 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><facture adresseLivraison="adresse" date="date" id="adresse" prix="adresse"><Client>idClient</Client><idPlat>foo2</idPlat><idPlat>bar2</idPlat><film>foo</film><film>bar</film></facture>

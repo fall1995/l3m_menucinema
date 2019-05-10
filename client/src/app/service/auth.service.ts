@@ -81,7 +81,7 @@ export class AuthService {
      */
     modification(params: {[key: string]: string}): Promise<HttpResponse<string>> {
         const P = new HttpParams( {fromObject: params} );
-        return this.http.put( `/api/updateClient`, P, {
+        return this.http.put( `/api/authentification`, P, {
             observe: 'response',
             responseType: 'text',
             headers: {'content-type': 'application/x-www-form-urlencoded'}
