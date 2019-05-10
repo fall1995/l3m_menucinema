@@ -123,7 +123,7 @@ public class GestionnaireClient extends SQLAble {
      * @return
      * @throws SQLException
      */
-    public boolean existsClientDB() throws SQLException {
+    protected boolean existsClientDB() throws SQLException {
         boolean res = false;
 
         connectToDatabase();
@@ -150,34 +150,32 @@ public class GestionnaireClient extends SQLAble {
      * @throws Exception
      */
 
-   public Client getClient(String id) {
-        //client = new Client();
-        //client.setId(id);
-        try {
-            connectToDatabase();
-            OracleCallableStatement ocstmt;
-            ocstmt = (OracleCallableStatement) conn.prepareCall("{ ? = call getClient(?) }");
-            ocstmt.registerOutParameter(1, OracleTypes.CURSOR);
-            ocstmt.setString(2, id);
-            ocstmt.execute();
-            ResultSet rset = (ResultSet) (ocstmt.getObject(1));
+   public static Client getClientDB(String id) throws SQLException, Exception {
+        GestionnaireClient gc = new GestionnaireClient( id , "" , ""); 
+        gc.connectToDatabase();
+       
+        Client client = new Client();
 
-            if (rset != null && rset.next()) {
-                client.setId(rset.getString("idClient"));
-                client.setNom(rset.getString("nom"));
-                client.setPrenom(rset.getString("prenom"));
-                client.setAdresse(rset.getString("adresse"));
-                client.setEmail(rset.getString("email"));
-                client.setPhoto(rset.getString("photo"));
-                client.setTel(rset.getString("tel"));
-            } else {
-                System.out.println("le resultSet est null");
-            }
-            ocstmt.close();
+        OracleCallableStatement ocstmt;
+        ocstmt = (OracleCallableStatement) conn.prepareCall("{ ? = call getClient(?) }");
+        ocstmt.registerOutParameter(1, OracleTypes.CURSOR);
+        ocstmt.setString(2, id);
+        ocstmt.execute();
+        ResultSet rset = (ResultSet) (ocstmt.getObject(1));
 
-        } catch (Exception e) {
-            System.out.println("erreur lors de la recuperation: " + e.getMessage());
+        if (rset != null && rset.next()) {
+            client.setId(rset.getString("idClient"));
+            client.setNom(rset.getString("nom"));
+            client.setPrenom(rset.getString("prenom"));
+            client.setAdresse(rset.getString("adresse"));
+            client.setEmail(rset.getString("email"));
+            client.setPhoto(rset.getString("photo"));
+            client.setTel(rset.getString("tel"));
+        } else {
+            throw new Exception("Il n'y a pas de client avec id " + id);
         }
+
+        ocstmt.close();
 
         return client;
     }
@@ -308,11 +306,5 @@ public class GestionnaireClient extends SQLAble {
         String json = new Gson().toJson(this.client);
         return json;
     }
-    
-     public void setClient(Client client) {
-        this.client = client;
-    }
-
-    
 
 }
