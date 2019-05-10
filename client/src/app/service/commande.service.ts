@@ -11,6 +11,18 @@ export class CommandeService {
     constructor(private http: HttpClient) {
     }
 
+    async getFacture(idClient : string, id: string): Promise<any> {
+        return new Promise<any>(((resolve, reject) => {
+            this.http.get(`${id}`, {responseType: 'text'}).toPromise().then(
+                res => {
+                    resolve(JSON.parse(res));
+                }, rej => {
+                    reject(rej);
+                }
+            );
+        }));
+    }
+
     /**
      * service qui nous permet d'envoyer la commande
      * nous allons inserer les informations dans le corp de la requete
@@ -41,6 +53,11 @@ export class CommandeService {
         }));
     }
 
+
+    /**
+     * recuperation de la dernière commande
+     * @param id
+     */
     async getLastCommande(id : string): Promise<any> {
         return new Promise<any>(((resolve, reject) => {
             this.http.get(`/api/client/dernierecommande?idClient=${id}`, {responseType: 'text'}).toPromise().then(

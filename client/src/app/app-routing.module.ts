@@ -10,6 +10,7 @@ import {UserProfilComponent} from './user-profil/user-profil.component';
 import {HomeComponent} from './home/home.component';
 import {CommandeComponent} from './commande/commande.component';
 import {PanierComponent} from './panier/panier.component';
+import {FactureDetailComponent} from './commande/facture-detail/facture-detail.component';
 
 const routes: Routes = [
     {path: 'authentification/signin', component: SigninComponent},
@@ -20,8 +21,9 @@ const routes: Routes = [
     {path: 'user/commande', component: CommandeComponent },
     {path: 'user/panier', component: PanierComponent },
     {path: '', component: HomeComponent },
-    {path: 'films/view/:id', component: SingleMovieComponent},
+    {path: 'commande/facture/:id', component: FactureDetailComponent},
     {path: '', redirectTo: 'films', pathMatch: 'full'},
+
     //{path: '**', redirectTo: 'films'}
 ];
 

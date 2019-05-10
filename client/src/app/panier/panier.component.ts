@@ -28,6 +28,9 @@ export class PanierComponent implements OnInit {
     adresse: any;
     afficherDialog = false;
     user: User; // l'utilisateur courant
+    totalMenu: any;
+    totalMovie: any;
+
 
     ngOnInit() {
         this.init();
@@ -43,6 +46,7 @@ export class PanierComponent implements OnInit {
         );
         this.adresse = localStorage.getItem('adresse');
         this.initDialog();
+        this.totalPanier();
     }
 
     init() {
@@ -50,14 +54,34 @@ export class PanierComponent implements OnInit {
         this.movie = this.storageService.getMieuNote();
     }
 
+    totalPanier() {
+        //let sum = 0;
+        this.totalMovie = 0.0;
+        this.totalMenu = 0.0;
+        let i: number;
+        let tabPrixMenu = JSON.parse(localStorage.getItem('totalMenu'));
+        console.log('tableau prix plat' + tabPrixMenu);
+        for (i = 0; i < tabPrixMenu.length; i++) {
+            this.totalMenu += +tabPrixMenu[i];
+        }
+        console.log('total Menu =' + this.totalMenu);
+        let tabPrixMovie = JSON.parse(localStorage.getItem('totalMovie'));
+        for (i = 0; i < tabPrixMovie.length; i++) {
+            this.totalMovie += tabPrixMovie[i];
+        }
+        console.log('total movie' + this.totalMovie);
+
+
+    }
+
     async initDialog() {
-        await this.afAuth.user.subscribe( u =>{
-            if (u){
-                this.authService.getUser( u.uid).then(res =>{
+        await this.afAuth.user.subscribe(u => {
+            if (u) {
+                this.authService.getUser(u.uid).then(res => {
                     this.user = res;
                     console.log(this.user);
-                }, r =>{
-                    console.log("errr"+r);
+                }, r => {
+                    console.log('errr' + r);
                 });
             }
         });
@@ -89,7 +113,7 @@ export class PanierComponent implements OnInit {
         let idPlat = localStorage.getItem('platId');
         let idFilm = localStorage.getItem('movieId');
         let adresse = localStorage.getItem('adresse');
-        if (this.isAuth){
+        if (this.isAuth) {
             this.commandeService.sendCommande({
                 // variable que le serveur s'attend a recevoir
                 idClient: idClient,
@@ -97,9 +121,12 @@ export class PanierComponent implements OnInit {
                 idFilms: idFilm,
                 adresseLivraison: adresse,
             }).then(data => {
-                this.message.add({severity:'success',
-                    summary:`Commande Confirmer avec succes `,
-                    detail:'Merci d\'avoir commandé sur MenuCinema à bientot'});
+                localStorage.removeItem('plat');
+                this.message.add({
+                    severity: 'success',
+                    summary: `Commande Confirmer avec succes `,
+                    detail: 'Merci d\'avoir commandé sur MenuCinema à bientot'
+                });
             });
         } else {
             this.route.navigate(['/authentification/signin']);

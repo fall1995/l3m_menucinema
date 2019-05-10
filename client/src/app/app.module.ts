@@ -55,7 +55,9 @@ import {FieldsetModule, OverlayPanelModule} from 'primeng/primeng';
 import { CommandeComponent } from './commande/commande.component';
 import { PanierComponent } from './panier/panier.component';
 import { AdresseUpdateDialogComponent } from './panier/adresse-update-dialog/adresse-update-dialog.component';
-import { FilmsPlusCommandeComponent } from './films-plus-commande/films-plus-commande.component';
+
+import { FactureDetailComponent } from './commande/facture-detail/facture-detail.component';
+
 
 @NgModule({
     declarations: [
@@ -72,7 +74,9 @@ import { FilmsPlusCommandeComponent } from './films-plus-commande/films-plus-com
         CommandeComponent,
         PanierComponent,
         AdresseUpdateDialogComponent,
-        FilmsPlusCommandeComponent,
+
+        FactureDetailComponent,
+
     ],
     imports: [
         BrowserModule,
