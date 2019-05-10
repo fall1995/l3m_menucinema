@@ -30,7 +30,7 @@ export class PanierComponent implements OnInit {
     user: User; // l'utilisateur courant
     totalMenu: any;
     totalMovie: any;
-
+    initRemove: any;
 
     ngOnInit() {
         this.init();
@@ -55,21 +55,17 @@ export class PanierComponent implements OnInit {
     }
 
     totalPanier() {
-        //let sum = 0;
         this.totalMovie = 0.0;
         this.totalMenu = 0.0;
         let i: number;
         let tabPrixMenu = JSON.parse(localStorage.getItem('totalMenu'));
-        console.log('tableau prix plat' + tabPrixMenu);
         for (i = 0; i < tabPrixMenu.length; i++) {
             this.totalMenu += +tabPrixMenu[i];
         }
-        console.log('total Menu =' + this.totalMenu);
         let tabPrixMovie = JSON.parse(localStorage.getItem('totalMovie'));
         for (i = 0; i < tabPrixMovie.length; i++) {
             this.totalMovie += tabPrixMovie[i];
         }
-        console.log('total movie' + this.totalMovie);
 
 
     }
@@ -121,7 +117,9 @@ export class PanierComponent implements OnInit {
                 idFilms: idFilm,
                 adresseLivraison: adresse,
             }).then(data => {
-                localStorage.removeItem('plat');
+                this.route.navigate(['user/commande']);
+                //localStorage.removeItem('plat');
+                //localStorage.removeItem('filmNote');
                 this.message.add({
                     severity: 'success',
                     summary: `Commande Confirmer avec succes `,
