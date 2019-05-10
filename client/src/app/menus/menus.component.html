@@ -40,10 +40,10 @@
                     </div>
                 </div>
                 <div class="ui-g-12 ui-md-1 ">
-                    <button style="margin-bottom: 10px" pButton type="button" icon="fa fa-cart-plus"
+                    <button style="margin-bottom: 10px" pButton type="button" icon="fa fa-cart-plus" pTooltip="Ajouter dans votre panier" tooltipPosition="top"
                             (click)="addMenus(plat.id)" class="ui-button-success"></button>
                     <br>
-                    <button pButton type="button" icon="pi pi-search" (click)="selectCar(plat)"
+                    <button pButton type="button" icon="fa fa-eye" (click)="selectCar(plat)" pTooltip="Voir les details du plat" tooltipPosition="top"
                             style="margin-top:0"></button>
                 </div>
             </div>
@@ -54,10 +54,10 @@
                     <img src="{{plat.image}}" width="240" height="200">
                     <div class="car-detail">{{plat.type}} - {{plat.prix}}</div>
                     <hr class="ui-widget-content" style="border-top:0">
-                    <button style="margin-right: 10px" pButton type="button" icon="fa fa-cart-plus"
-                            (click)="addMenus(plat.id)" class="ui-button-success"></button>
-                    <button pButton type="button" icon="pi pi-search" (click)="selectCar(plat)"
-                            style="margin-top:0"></button>
+                    <button style="margin-right: 10px" pButton type="button" icon="fa fa-cart-plus" pTooltip="Ajouter dans le panier"
+                            (click)="addMenus(plat.id)" class="ui-button-success" tooltipPosition="top"></button>
+                    <button pButton type="button" icon="pi pi-eye" (click)="selectCar(plat)"
+                            style="margin-top:0" pTooltip="Voir les details" tooltipPosition="top"></button>
                 </p-panel>
             </div>
         </ng-template>
@@ -85,4 +85,3 @@
         </div>
     </p-dialog>
 </div>
-<p-toast position="top-right"></p-toast>

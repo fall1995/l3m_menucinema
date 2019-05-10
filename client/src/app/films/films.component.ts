@@ -16,21 +16,15 @@ export class FilmsComponent implements OnInit {
     listeMovie: MovieResponse;
     listeMovieDram : MovieResponse;
     listeMovieHightRatet : MovieResponse;
-    afficherDialog = false;
-    detail_afficher='Detail';
-    detail_cacher='Afficher detail';
     selectedMovie: MovieResponse; // movie selectionner
     displayDialog: boolean; // Dialog pour les movie
 
-    detail:string= this.detail_afficher;
 
   constructor(private tmdbService: TmdbService, private storage: StorageService,
                 private message: MessageService) { }
   ngOnInit() {
       this.init();
   }
-
-
     /**
      * méthode d'ajout dans le panier
      * @param id
@@ -43,33 +37,12 @@ export class FilmsComponent implements OnInit {
             detail:'Votre choix a bien été ajouter dans votre panier'});
 
     }
-    /*
-    async getMovies(){
-      this.tmdbService.getAllMovie().then(
-          data =>{
-              this.films = data;
-          }, error => {
-              console.log(error);
-      }
-      );
-  }
-  */
 
     selectMovie(movie: MovieResponse) {
         this.selectedMovie = movie;
         this.displayDialog = true;
-        event.preventDefault();
     }
- afficher():void{
-     if(this.detail=this.detail_cacher){
 
-         this.detail=this.detail_afficher;
-     }
-     else{
-        this.detail=this.detail_cacher;
-     }
-
- }
     async init() {
         this.tmdbService.init( environment.tmdbKey );
         this.idFilm = await this.tmdbService.getMovie(14);

@@ -1,3 +1,84 @@
-<p>
-  facture-detail works!
-</p>
+<br>
+<h1 class="text-center">{{commande?.id}}</h1>
+<div>
+    <div class="container">
+        <p-table [value]="commande">
+            <ng-template pTemplate="body" let-c>
+                <br>
+                <h1 class="text-center"> Commande N° : #{{c?.id}}</h1>
+                <p class="text-center">Passée le {{c.date}}</p>
+                <br>
+                <div class="row">
+                    <div class="col-md-8 col-md-offset-2">
+                        <div class="panel panel-primary">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">
+                                    <i class="fa fa-file-text"></i>
+                                    Facture
+                                    <a href=""  class="pull-right hidden-print" (click)="imprimer()"
+                                     style="color: white">
+                                        <i class="fa fa-print"></i>
+                                        Imprimer
+                                    </a>
+                                </h3>
+                            </div>
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <h4><b>Béneficiaires</b></h4>
+                                        <ul>
+                                            <li>
+                                                {{user.prenom}} {{user.nom}}
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <h4><b>Articles commandés</b></h4>
+                                        <ul>
+                                            <li>
+                                                <p><b>{{c?.idPlats}}</b></p>
+                                                <p><b>{{c?.idFilms}}</b></p>
+                                            </li>
+                                        </ul>
+                                        <hr>
+                                        <p>Sous-Total: €{{c?.prix}}</p>
+                                        <p>Taxes: €0.00</p>
+                                        <h4>
+                                            <span class="label label-success">
+                                                Montant payé: €{{c?.prix}}
+                                            </span>
+                                        </h4>
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <h4><b>Détails de facturation</b></h4>
+                                        <p>{{user.nom}}-{{user.prenom}}</p>
+                                        <a>{{user.email}}</a>
+                                        <br>
+                                        <b> {{user.tel}}</b>
+                                        <br>
+                                    </div>
+                                    <hr>
+                                    <div class="col-md-6">
+                                        <h4>Site Saint Martin d'hères </h4>
+                                        Menu Cinema
+                                        <br>
+                                        UFR Im2ag
+                                        <br>
+                                        France, Grenoble
+                                        <br>
+                                        <abbr title="Téléphone">P:</abbr>
+                                        + (223) 578-23 55
+                                        <br>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </ng-template>
+        </p-table>
+    </div>
+</div>

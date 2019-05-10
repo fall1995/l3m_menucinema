@@ -74,8 +74,8 @@
                                 <br>
                                 <div>
                                     <div class="text-primary">
-                                        <h4>
-                                            Total: {{totalMenu+totalMovie}} €
+                                        <h4  style="text-align: right">
+                                            Total: €{{totalMenu+totalMovie}}
                                         </h4>
                                         <br>
                                     </div>
@@ -83,13 +83,13 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="text-right">
-                                            <button (click)="retour()" class="btn btn-info">
+                                            <button (click)="retour()" class="btn btn-info" pTooltip="Retour pour acheter" tooltipPosition="top">
                                                 <i class="fa fa-shopping-cart"></i>
-                                                CONTINUER A MAGASINER
+                                                CONTINUER A ACHETER
                                             </button>
                                             <span> </span>
                                             <button (click)="validationCommande()" class="btn btn-success btn-shadow"
-                                                    id="payer">
+                                                    id="payer" pTooltip="Valider la commande" tooltipPosition="top">
                                                 <i class="fa fa-credit-card"></i>
                                                 PAYER MAINTENANT
                                             </button>

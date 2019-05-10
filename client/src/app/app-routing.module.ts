@@ -21,7 +21,7 @@ const routes: Routes = [
     {path: 'user/commande', component: CommandeComponent },
     {path: 'user/panier', component: PanierComponent },
     {path: '', component: HomeComponent },
-    {path: 'commande/facture/:id', component: FactureDetailComponent},
+    {path: 'commande/facture/:idCommande', component: FactureDetailComponent},
     {path: '', redirectTo: 'films', pathMatch: 'full'},
 
     //{path: '**', redirectTo: 'films'}

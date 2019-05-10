@@ -37,6 +37,7 @@ import {MatCardModule} from '@angular/material/card';
 import {MatTabsModule} from '@angular/material/tabs';
 
 // importation des module de primeng
+import {TooltipModule} from 'primeng/tooltip';
 import {CardModule} from 'primeng/card';
 import {ButtonModule} from 'primeng/button';
 import {DialogModule} from 'primeng/dialog';
@@ -74,7 +75,6 @@ import { FactureDetailComponent } from './commande/facture-detail/facture-detail
         CommandeComponent,
         PanierComponent,
         AdresseUpdateDialogComponent,
-
         FactureDetailComponent,
 
     ],
@@ -106,7 +106,8 @@ import { FactureDetailComponent } from './commande/facture-detail/facture-detail
         DataViewModule,
         DropdownModule,
         PanelModule,
-        TableModule
+        TableModule,
+        TooltipModule
 
     ],
     providers: [TmdbService, MessageService,AuthService,MenuService, AuthGuardService, StorageService],

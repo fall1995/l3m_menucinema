@@ -44,7 +44,6 @@ export class PanierComponent implements OnInit {
                 }
             }
         );
-        this.adresse = localStorage.getItem('adresse');
         this.initDialog();
         this.totalPanier();
     }
@@ -52,6 +51,7 @@ export class PanierComponent implements OnInit {
     init() {
         this.panier = this.storageService.getMenu();
         this.movie = this.storageService.getMieuNote();
+        this.adresse = localStorage.getItem('adresse');
     }
 
     totalPanier() {

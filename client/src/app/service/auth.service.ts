@@ -32,17 +32,6 @@ export class AuthService {
     // Authentification ________________________________________________________________________________________________________________________________
     // _______________________________________________________________________________________________________________________________________
 
-    async login(userId : string, nom : string, prenom : string): Promise<any>{
-        // variable que le serveur s'attend a recevoir
-        let data = {
-            idClient : userId,
-            nom : nom,
-            prenom : prenom,
-        };
-        console.log("dans service client " + data.prenom + " - " + data.nom+" - "+data.idClient);
-        const res = await this.http.post(`/api/enregistreNouveauClient`, data);
-        return res;
-    }
 
     /**
      * envoie des données de connexion au serveur
