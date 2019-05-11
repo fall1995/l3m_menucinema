@@ -1,12 +1,4 @@
 <div class="container">
-    <div class="col-md-3">
-        <h5 style="color: green">
-            <i class="fa fa-map-marker"></i>
-            {{user?.adresse}}
-        </h5>
-        <button (click)="afficherDialogProfil()" pButton type="button" label="Modifier l'adresse de livraison"
-                class="ui-button-rounded"></button>
-    </div>
     <div class="col-md-12">
         <div class="page-header">
             <h1 class="text-center">
@@ -88,7 +80,7 @@
                                                 CONTINUER A ACHETER
                                             </button>
                                             <span> </span>
-                                            <button (click)="validationCommande()" class="btn btn-success btn-shadow"
+                                            <button (click)="afficherDialogProfil()" class="btn btn-success btn-shadow"
                                                     id="payer" pTooltip="Valider la commande" tooltipPosition="top">
                                                 <i class="fa fa-credit-card"></i>
                                                 PAYER MAINTENANT

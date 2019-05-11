@@ -58,14 +58,15 @@ export class PanierComponent implements OnInit {
         this.totalMovie = 0.0;
         this.totalMenu = 0.0;
         let i: number;
-        let tabPrixMenu = JSON.parse(localStorage.getItem('totalMenu'));
-        for (i = 0; i < tabPrixMenu.length; i++) {
-            this.totalMenu += +tabPrixMenu[i];
-        }
         let tabPrixMovie = JSON.parse(localStorage.getItem('totalMovie'));
         for (i = 0; i < tabPrixMovie.length; i++) {
             this.totalMovie += +tabPrixMovie[i];
         }
+        let tabPrixMenu = JSON.parse(localStorage.getItem('totalMenu'));
+        for (i = 0; i < tabPrixMenu.length; i++) {
+            this.totalMenu += +tabPrixMenu[i];
+        }
+
 
 
     }
@@ -90,6 +91,8 @@ export class PanierComponent implements OnInit {
     deleteMenusSelected(index: number) {
         this.storageService.delete(index);
         this.init();
+        this.totalPanier();
+
     }
 
     /**
@@ -99,6 +102,7 @@ export class PanierComponent implements OnInit {
     deleteMovieSelected(index: number) {
         this.storageService.deleteMovie(index);
         this.init();
+        this.totalPanier();
     }
 
     /**
@@ -109,9 +113,8 @@ export class PanierComponent implements OnInit {
         let idFilm = localStorage.getItem('movieId');
         let adresse = localStorage.getItem('adresse');
         await this.afAuth.user.subscribe(u => {
-            if (u) {
+            if (this.isAuth) {
                 this.commandeService.sendCommande({
-                    // variable que le serveur s'attend a recevoir
                     idClient: u.uid,
                     idPlats: idPlat,
                     idFilms: idFilm,
@@ -122,6 +125,9 @@ export class PanierComponent implements OnInit {
                     localStorage.removeItem('filmNote');
                     localStorage.removeItem('totalMovie');
                     localStorage.removeItem('totalMenu');
+                    localStorage.removeItem('movieId');
+                    localStorage.removeItem('platId');
+
                     this.message.add({
                         severity: 'success',
                         summary: `Commande Confirmer avec succes `,

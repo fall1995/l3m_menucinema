@@ -45,12 +45,12 @@ export class StorageService {
      */
     addMovieNote(film: MovieResponse) {
         let dataTotal: number[] = [];
-        let dataMovieId: number[] = [];
+        let dataMovieId: string[] = [];
         if (localStorage.getItem('filmNote') == null) {
             let data: MovieResponse[] = [];
             data.push(film);
             for (let m of data) {
-                dataMovieId.push(m.id);
+                dataMovieId.push(m.title);
                 dataTotal.push(3.79);
             }
             localStorage.setItem('totalMovie', JSON.stringify(dataTotal));
@@ -60,7 +60,7 @@ export class StorageService {
             let data: MovieResponse[] = JSON.parse(localStorage.getItem('filmNote'));
             data.push(film);
             for (let m of data) {
-                dataMovieId.push(m.id);
+                dataMovieId.push(m.title);
                 dataTotal.push(3.79);
             }
             localStorage.setItem('totalMovie', JSON.stringify(dataTotal));

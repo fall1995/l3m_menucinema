@@ -1,0 +1,72 @@
+<!--
+<p-dialog header="Chosisez votre emplacement" [(visible)]="afficherDialog" [modal]="true" [responsive]="true"
+          [style]="{width: '400px', minWidth: '250px'}" [minY]="90"
+          [maximizable]="true" [baseZIndex]="10000" (onHide)="onHide()">
+  <p>Sélectionnez votre lieu de livraison pour pouvoir etre livré  </p>
+  <br>
+  <form>
+    <div class="input-group">
+      <span class="input-group-addon"><i class="fa fa-map-marker"></i></span>
+      <input type="text" class="form-control" id="adresse"
+             name="adresse" placeholder="Adresse" [(ngModel)]="user.adresse">
+    </div>
+
+    <span class="help-block"></span>
+    <br>
+    <p-footer>
+      <button type="button" pButton icon="pi pi-pencil" (click)="updateProfile(user)" label="Actualiser"
+              class="ui-button-rounded" style="margin-right: 10px"></button>
+      <button type="button" pButton icon="fa fa-close" (click)="afficherDialog=false" label="Annuler"
+              class="ui-button-secondary ui-button-rounded"></button>
+    </p-footer>
+  </form>
+</p-dialog>
+-->
+<p-dialog header="Validation de votre commande" [(visible)]="afficherDialog" [modal]="true" [responsive]="true"
+          [style]="{width: '900px', minWidth: '250px'}" [minY]="90"
+          [maximizable]="true" [baseZIndex]="10000" (onHide)="onHide()">
+
+<mat-horizontal-stepper [linear]="isLinear" #stepper *ngIf="isAuth; else loggedOut">
+  <mat-step >
+    <form >
+      <ng-template matStepLabel>Votre adresse</ng-template>
+      <div class="input-group">
+        <span class="input-group-addon"><i class="fa fa-map-marker"></i></span>
+        <input type="text" class="form-control" id="adresse" style="width:300px;"
+               name="adresse" placeholder="Adresse" [(ngModel)]="user.adresse">
+      </div>
+      <div>
+        <button mat-button matStepperNext >Suivant</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step >
+    <form >
+      <ng-template matStepLabel>N° Téléphone</ng-template>
+      <div class="input-group">
+        <span class="input-group-addon"><i class="fa fa-phone"></i></span>
+        <input type="number" class="form-control" id="phone" style="width:300px;"
+               name="phone" placeholder="Téléphone" [(ngModel)]="user.tel">
+      </div>
+      <div>
+        <button mat-button matStepperPrevious>Retour</button>
+        <button mat-button matStepperNext (click)="updateProfile(user)" >Suivant</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step>
+    <ng-template matStepLabel>Validation de la commande</ng-template>
+    You are now done.
+    <div>
+      <button mat-button matStepperPrevious>Retour</button>
+      <button mat-button (click)="validationCommande()" >Valider</button>
+    </div>
+  </mat-step>
+</mat-horizontal-stepper>
+  <ng-template #loggedOut >
+    <br>
+    <button style="position: center" type="button" pButton icon="fa fa-sign-in" (click)="retourSignin()" label="Connexion"
+            class="ui-button-rounded" style="margin-right: 10px"></button>
+  </ng-template>
+  <br>
+</p-dialog>

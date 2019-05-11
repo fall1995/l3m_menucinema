@@ -32,9 +32,10 @@ import { HomeComponent } from './home/home.component';
 
 // importation des modules de material design
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {MatButtonModule, MatCheckboxModule, MatIconModule,} from '@angular/material';
+import {MatButtonModule, MatCheckboxModule, MatFormFieldModule, MatIconModule,} from '@angular/material';
 import {MatCardModule} from '@angular/material/card';
 import {MatTabsModule} from '@angular/material/tabs';
+import {MatStepperModule} from '@angular/material/stepper';
 
 // importation des module de primeng
 import {TooltipModule} from 'primeng/tooltip';
@@ -55,9 +56,8 @@ import { UserDialogComponent } from './user-profil/user-dialog/user-dialog.compo
 import {FieldsetModule, OverlayPanelModule} from 'primeng/primeng';
 import { CommandeComponent } from './commande/commande.component';
 import { PanierComponent } from './panier/panier.component';
-import { AdresseUpdateDialogComponent } from './panier/adresse-update-dialog/adresse-update-dialog.component';
-
 import { FactureDetailComponent } from './commande/facture-detail/facture-detail.component';
+import {ValidationCommandeDialogComponent} from './panier/validation-commande-dialog/validation-commande-dialog.component';
 
 
 @NgModule({
@@ -74,7 +74,7 @@ import { FactureDetailComponent } from './commande/facture-detail/facture-detail
         UserDialogComponent,
         CommandeComponent,
         PanierComponent,
-        AdresseUpdateDialogComponent,
+        ValidationCommandeDialogComponent,
         FactureDetailComponent,
 
     ],
@@ -107,7 +107,9 @@ import { FactureDetailComponent } from './commande/facture-detail/facture-detail
         DropdownModule,
         PanelModule,
         TableModule,
-        TooltipModule
+        TooltipModule,
+        MatStepperModule,
+        MatFormFieldModule
 
     ],
     providers: [TmdbService, MessageService,AuthService,MenuService, AuthGuardService, StorageService],

@@ -23,7 +23,6 @@ export class CommandeComponent implements OnInit {
      * je recupere ici les données de la commande
      */
     async init() {
-        let idClient = localStorage.getItem('UserData');
         await this.afAuth.user.subscribe(u =>{
                 this.commandeService.getCommande(u.uid).then(res => {
                     this.commade = res;
