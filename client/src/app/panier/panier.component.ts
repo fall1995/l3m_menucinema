@@ -30,7 +30,6 @@ export class PanierComponent implements OnInit {
     user: User; // l'utilisateur courant
     totalMenu: any;
     totalMovie: any;
-    initRemove: any;
 
     ngOnInit() {
         this.init();
@@ -104,44 +103,7 @@ export class PanierComponent implements OnInit {
         this.init();
         this.totalPanier();
     }
-
-    /**
-     * méthode de validation de la commande
-     */
-    async validationCommande() {
-        let idPlat = localStorage.getItem('platId');
-        let idFilm = localStorage.getItem('movieId');
-        let adresse = localStorage.getItem('adresse');
-        await this.afAuth.user.subscribe(u => {
-            if (this.isAuth) {
-                this.commandeService.sendCommande({
-                    idClient: u.uid,
-                    idPlats: idPlat,
-                    idFilms: idFilm,
-                    adresseLivraison: adresse,
-                }).then(data => {
-                    this.route.navigate(['user/commande']);
-                    localStorage.removeItem('plat');
-                    localStorage.removeItem('filmNote');
-                    localStorage.removeItem('totalMovie');
-                    localStorage.removeItem('totalMenu');
-                    localStorage.removeItem('movieId');
-                    localStorage.removeItem('platId');
-
-                    this.message.add({
-                        severity: 'success',
-                        summary: `Commande Confirmer avec succes `,
-                        detail: 'Merci d\'avoir commandé sur MenuCinema à bientot'
-                    });
-                });
-            } else {
-                this.route.navigate(['/authentification/signin']);
-            }
-
-        });
-
-    }
-
+    
 
     /**
      * bouton de retour vers le menu
