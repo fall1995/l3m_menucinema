@@ -37,13 +37,15 @@ export class UserProfilComponent implements OnInit {
      * recuperation de la dernière commande
      */
     async initCommande() {
-        let idClient = localStorage.getItem('UserData');
-        this.commandeService.getLastCommande(idClient).then(res => {
-            this.commade = res;
-            this.commade = Array.of(res);
-        }, r => {
-            console.log('errr' + r);
+        await this.afAuth.user.subscribe( u =>{
+            this.commandeService.getLastCommande(u.uid).then(res => {
+                this.commade = res;
+                this.commade = Array.of(res);
+            }, r => {
+                console.log('errr' + r);
+            });
         });
+
     }
 
     /**

@@ -64,7 +64,7 @@ export class PanierComponent implements OnInit {
         }
         let tabPrixMovie = JSON.parse(localStorage.getItem('totalMovie'));
         for (i = 0; i < tabPrixMovie.length; i++) {
-            this.totalMovie += tabPrixMovie[i];
+            this.totalMovie += +tabPrixMovie[i];
         }
 
 
@@ -104,33 +104,38 @@ export class PanierComponent implements OnInit {
     /**
      * méthode de validation de la commande
      */
-    validationCommande() {
-        let idClient = localStorage.getItem('UserData');
+    async validationCommande() {
         let idPlat = localStorage.getItem('platId');
         let idFilm = localStorage.getItem('movieId');
         let adresse = localStorage.getItem('adresse');
-        if (this.isAuth) {
-            this.commandeService.sendCommande({
-                // variable que le serveur s'attend a recevoir
-                idClient: idClient,
-                idPlats: idPlat,
-                idFilms: idFilm,
-                adresseLivraison: adresse,
-            }).then(data => {
-                this.route.navigate(['user/commande']);
-                //localStorage.removeItem('plat');
-                //localStorage.removeItem('filmNote');
-                this.message.add({
-                    severity: 'success',
-                    summary: `Commande Confirmer avec succes `,
-                    detail: 'Merci d\'avoir commandé sur MenuCinema à bientot'
+        await this.afAuth.user.subscribe(u => {
+            if (u) {
+                this.commandeService.sendCommande({
+                    // variable que le serveur s'attend a recevoir
+                    idClient: u.uid,
+                    idPlats: idPlat,
+                    idFilms: idFilm,
+                    adresseLivraison: adresse,
+                }).then(data => {
+                    this.route.navigate(['user/commande']);
+                    localStorage.removeItem('plat');
+                    localStorage.removeItem('filmNote');
+                    localStorage.removeItem('totalMovie');
+                    localStorage.removeItem('totalMenu');
+                    this.message.add({
+                        severity: 'success',
+                        summary: `Commande Confirmer avec succes `,
+                        detail: 'Merci d\'avoir commandé sur MenuCinema à bientot'
+                    });
                 });
-            });
-        } else {
-            this.route.navigate(['/authentification/signin']);
-        }
+            } else {
+                this.route.navigate(['/authentification/signin']);
+            }
+
+        });
 
     }
+
 
     /**
      * bouton de retour vers le menu

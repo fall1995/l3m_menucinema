@@ -57,7 +57,6 @@ export class SigninComponent implements OnInit {
     loginGoogle() {
         this.afAuth.auth.signInWithPopup(new auth.GoogleAuthProvider()).then(
             u => {
-                localStorage.setItem('UserData', u.user.uid);
                 this.route.navigate(['/user/dashbord']);
                 this.message.add({severity:'success',
                     summary:`Bienvenue ${u.user.displayName}`,
@@ -78,7 +77,7 @@ export class SigninComponent implements OnInit {
      */
     loginFacebook(){
         this.afAuth.auth.signInWithPopup(new auth.FacebookAuthProvider()).then(u =>{
-                this.route.navigate(['/dashbord']);
+                this.route.navigate(['/user/dashbord']);
                 this.message.add({severity:'success',
                     summary:`Bienvenue ${u.user.displayName} 😁`,
                     detail:'Vous pouvez commander vos films et plats !'});
@@ -91,10 +90,13 @@ export class SigninComponent implements OnInit {
                     detail:'Une erreur est survenue l\'ors de la connexion !'});
             });
     }
+
+    /**
+     * envoie les information du client au serveur il s'atend a recevoir (id, nom, prenom)
+     */
     sendServeur(){
-        let i;
         this.afAuth.user.subscribe(utilisateur =>{
-            i = utilisateur.displayName.indexOf(" "); // couper en 2 displayname pour avoir le prenom et le nom
+            let i = utilisateur.displayName.indexOf(" "); // couper en 2 displayname pour avoir le prenom et le nom
             if (utilisateur.uid){
                 this.authService.authentificate({
                     // variable que le serveur s'attend a recevoir
@@ -111,6 +113,7 @@ export class SigninComponent implements OnInit {
             }
         });
     }
+    // formGroup pour la connexion avec email et le passwod
     initForm() {
         this.signInForm = this.formBuilder.group({
             email: ['', [Validators.required, Validators.email]],
@@ -125,7 +128,7 @@ export class SigninComponent implements OnInit {
         const password = this.signInForm.get('password').value;
         this.afAuth.auth.signInWithEmailAndPassword(email,password).then(
             u => {
-                this.route.navigate(['/user/dashbord']);
+                this.route.navigate(['films']);
                 this.message.add({severity:'success',
                     summary:`Bienvenue `,
                     detail:'Vous pouvez commander vos films et plats 😁!'});
