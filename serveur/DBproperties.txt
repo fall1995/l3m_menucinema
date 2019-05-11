@@ -1,0 +1,17 @@
+##########################################################
+
+# Les données pour l'accès à la base de données
+
+##########################################################
+
+# JDBC driver
+jdbcDriver =oracle.jdbc.OracleDriver
+
+
+# Database URL
+dbUrl =jdbc:oracle:thin:@im2ag-oracle.e.ujf-grenoble.fr:1521:im2ag
+
+
+# User name and password to access the database
+username =hasdit
+password =az1ER2t3

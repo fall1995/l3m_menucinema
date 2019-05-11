@@ -123,7 +123,7 @@ public class GestionnaireClient extends SQLAble {
      * @return
      * @throws SQLException
      */
-    protected boolean existsClientDB() throws SQLException {
+    protected boolean existsClientDB() throws SQLException, Exception {
         boolean res = false;
 
         connectToDatabase();
@@ -209,7 +209,7 @@ public class GestionnaireClient extends SQLAble {
      * @return
      * @throws SQLException
      */
-    public static String getClientIdDB(String nom, String prenom) throws SQLException {
+    public static String getClientIdDB(String nom, String prenom) throws SQLException, Exception {
         GestionnaireClient gc = new GestionnaireClient("","","");
         gc.connectToDatabase();
         String idClient = "";

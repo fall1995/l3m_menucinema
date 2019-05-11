@@ -32,6 +32,7 @@ public class RecupererFactureServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) 
             throws ServletException, IOException {
+        System.out.println( "=====================================================================================================" );
         response.setContentType("application/json");
         idClient = request.getParameter("idClient");
         id = request.getParameter("id");

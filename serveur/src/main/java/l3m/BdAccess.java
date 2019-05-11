@@ -29,8 +29,10 @@ public class BdAccess {
         nouveau = gc.enregistreClientDB();
         if ( nouveau ){
             res = "nouveau";
+            System.out.println("Creation d'un nouveau client avec succès !");//print pour le scénario de la démo
         }else{
             res = "client";
+            System.out.println("Le client " + client.getId() + " existe déja dans la DB");//print pour le scénario de la démo
         }
         
         return res;

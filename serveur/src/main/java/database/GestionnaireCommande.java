@@ -58,6 +58,7 @@ public class GestionnaireCommande extends SQLAble {
         prixFilms = 3.79 * commande.getIdFilms().size();
 
         for (String idPlat : commande.getIdPlats()) {
+            
             if ( idPlat.length() > 2 ){
                 prixPlat = GestionnaireMenu.getPrixPlat(idPlat);
                 if (prixPlat != -1 ){
@@ -67,7 +68,7 @@ public class GestionnaireCommande extends SQLAble {
                 }
             }
         }
-
+        
         commande.setPrix(prixFilms + prixPlats);
     }
 
@@ -102,7 +103,9 @@ public class GestionnaireCommande extends SQLAble {
                 commande.setId(rset.getString("idCommande"));
                 commande.setDate( rset.getString("dateCommande"));
             }
-            rset.close();
+            if ( rset != null ){
+                rset.close();
+            }
             ocstmt.close();
 
             int nbInsertions = 1;
@@ -112,7 +115,7 @@ public class GestionnaireCommande extends SQLAble {
 
             for (Map.Entry<String, Integer> mapPlat : mapIdPlats.entrySet()) {
                 String idPlat = mapPlat.getKey();
-                if ( idPlat.length() > 1 ){
+                if ( idPlat.length() > 2 ){
                     int quantite = mapPlat.getValue();
                     ajouterPlatQtDB(commande.getId(), idPlat, quantite);
                     nbInsertions++;
@@ -120,7 +123,7 @@ public class GestionnaireCommande extends SQLAble {
             }
 
             for (String idFilm : commande.getIdFilms()) {
-                if ( idFilm.length() > 1 && !idFilm.equals("null") ){
+                if ( idFilm.length() > 2 ){
                     ajouterFilmDB(commande.getId(), idFilm);
                     nbInsertions++;
                 }
@@ -151,7 +154,7 @@ public class GestionnaireCommande extends SQLAble {
      * @return
      * @throws SQLException
      */
-    public static Commande getCommande(String id) throws SQLException {
+    public static Commande getCommande(String id) throws SQLException, Exception {
         GestionnaireCommande gc = new GestionnaireCommande(id);
         gc.connectToDatabase();
         Commande commande = new Commande();
@@ -171,7 +174,9 @@ public class GestionnaireCommande extends SQLAble {
             commande.setPrix(rset.getDouble("prix"));
             commande.setAdresseLivraison(rset.getString("adresseLivraison"));
         }
-        rset.close();
+        if (rset != null){
+            rset.close();
+        }
 
         rset = (ResultSet) (ocstmt.getObject(3));
         while (rset != null && rset.next()) {
@@ -180,13 +185,18 @@ public class GestionnaireCommande extends SQLAble {
                 commande.getIdPlats().add(rset.getString("idPlat"));
             }
         }
-        rset.close();
+        if (rset != null){
+            rset.close();
+        }
 
         rset = (ResultSet) (ocstmt.getObject(4));
         while (rset != null && rset.next()) {
             commande.getIdFilms().add(rset.getString("idFilm"));
         }
-        rset.close();
+        if (rset != null){
+            rset.close();
+        }
+        
         ocstmt.close();
 
         return commande;
@@ -221,12 +231,11 @@ public class GestionnaireCommande extends SQLAble {
         if (rset != null) {
             rset.close();
         }
+        
         ocstmt.close();
 
         if (trouve) {
             commande = getCommande(idCommande);
-        } else {
-            throw new Exception("Il n'y a aucune commande pour ce client !");
         }
 
         return commande;
@@ -236,7 +245,7 @@ public class GestionnaireCommande extends SQLAble {
      *
      * @return @throws SQLException
      */
-    public static List<String> getPlatsLesPlusCommandes() throws SQLException {
+    public static List<String> getPlatsLesPlusCommandes() throws SQLException, Exception {
         GestionnaireCommande gc = new GestionnaireCommande("0");
         List<String> listIdPlatsPC = new ArrayList<String>();
 
@@ -250,8 +259,12 @@ public class GestionnaireCommande extends SQLAble {
         while (rset != null && rset.next()) {
             listIdPlatsPC.add(rset.getString("idPlat"));
         }
-        rset.close();
+        if (rset != null){
+            rset.close();
+        }
 
+        ocstmt.close();
+        
         return listIdPlatsPC;
     }
 
@@ -259,7 +272,7 @@ public class GestionnaireCommande extends SQLAble {
      *
      * @return @throws SQLException
      */
-    public static List<String> getFilmsLesPlusVus() throws SQLException {
+    public static List<String> getFilmsLesPlusVus() throws SQLException, Exception {
         GestionnaireCommande gc = new GestionnaireCommande("0");
         List<String> listIdFilmPV = new ArrayList<String>();
 
@@ -273,8 +286,12 @@ public class GestionnaireCommande extends SQLAble {
         while (rset != null && rset.next()) {
             listIdFilmPV.add(rset.getString("idFilm"));
         }
-        rset.close();
-
+        if (rset != null){
+            rset.close();
+        }
+        
+        ocstmt.close();
+        
         return listIdFilmPV;
     }
 
@@ -284,7 +301,7 @@ public class GestionnaireCommande extends SQLAble {
      * @return
      * @throws SQLException
      */
-    public static List<String> getPlatsLesPlusCommandesAvec(String idFilm) throws SQLException {
+    public static List<String> getPlatsLesPlusCommandesAvec(String idFilm) throws SQLException, Exception {
         GestionnaireCommande gc = new GestionnaireCommande("0");
         List<String> listIdPlatsPCA = new ArrayList<String>();
 
@@ -299,7 +316,10 @@ public class GestionnaireCommande extends SQLAble {
         while (rset != null && rset.next()) {
             listIdPlatsPCA.add(rset.getString("idPlat"));
         }
-        rset.close();
+        if (rset != null){
+            rset.close();
+        }
+        
         ocstmt.close();
 
         return listIdPlatsPCA;
@@ -310,26 +330,27 @@ public class GestionnaireCommande extends SQLAble {
      * @param idPlat
      * @return
      */
-    public static List<String> getFilmsLesPlusVusAvec(String idPlat) {
+    public static List<String> getFilmsLesPlusVusAvec(String idPlat) throws SQLException, Exception {
         GestionnaireCommande gc = new GestionnaireCommande("0");
         List<String> listIdFilmPVA = new ArrayList<String>();
-        try {
-            gc.connectToDatabase();
-            OracleCallableStatement ocstmt;
-            ocstmt = (OracleCallableStatement) conn.prepareCall("{ ? = call filmslesplusVusAvec( ? ) }");
-            ocstmt.registerOutParameter(1, OracleTypes.CURSOR);
-            ocstmt.setString(2, idPlat);
-            ocstmt.execute();
 
-            ResultSet rset = (ResultSet) (ocstmt.getObject(1));
-            while (rset != null && rset.next()) {
-                listIdFilmPVA.add(rset.getString("idFilm"));
-            }
-            rset.close();
+        gc.connectToDatabase();
+        OracleCallableStatement ocstmt;
+        ocstmt = (OracleCallableStatement) conn.prepareCall("{ ? = call filmslesplusVusAvec( ? ) }");
+        ocstmt.registerOutParameter(1, OracleTypes.CURSOR);
+        ocstmt.setString(2, idPlat);
+        ocstmt.execute();
 
-        } catch (SQLException e) {
-            e.printStackTrace();
+        ResultSet rset = (ResultSet) (ocstmt.getObject(1));
+        while (rset != null && rset.next()) {
+            listIdFilmPVA.add(rset.getString("idFilm"));
         }
+        if (rset != null){
+            rset.close();
+        }
+
+        ocstmt.close();
+        
         return listIdFilmPVA;
     }
 
@@ -338,7 +359,7 @@ public class GestionnaireCommande extends SQLAble {
      * @param idPlat
      * @return
      */
-    private void ajouterPlatQtDB(String idCommande, String idPlat, int quantite) throws SQLException {
+    private void ajouterPlatQtDB(String idCommande, String idPlat, int quantite) throws SQLException, Exception {
         connectToDatabase();
         PreparedStatement pstmt;
         pstmt = conn.prepareStatement(
@@ -356,7 +377,7 @@ public class GestionnaireCommande extends SQLAble {
      * @param idPlat
      * @return
      */
-    private void ajouterFilmDB(String idCommande, String idFilm) throws SQLException {
+    private void ajouterFilmDB(String idCommande, String idFilm) throws SQLException, Exception {
         connectToDatabase();
         PreparedStatement pstmt;
         pstmt = conn.prepareStatement(
