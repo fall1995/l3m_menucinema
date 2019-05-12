@@ -30,6 +30,7 @@ export class PanierComponent implements OnInit {
     user: User; // l'utilisateur courant
     totalMenu: any;
     totalMovie: any;
+    total: number;
 
     ngOnInit() {
         this.init();
@@ -65,9 +66,7 @@ export class PanierComponent implements OnInit {
         for (i = 0; i < tabPrixMenu.length; i++) {
             this.totalMenu += +tabPrixMenu[i];
         }
-
-
-
+        this.total = this.totalMenu+this.totalMovie;
     }
 
     async initDialog() {
