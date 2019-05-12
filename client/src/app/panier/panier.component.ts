@@ -31,7 +31,6 @@ export class PanierComponent implements OnInit {
     totalMenu: any;
     totalMovie: any;
 
-
     ngOnInit() {
         this.init();
         this.afAuth.auth.onAuthStateChanged(
@@ -44,7 +43,6 @@ export class PanierComponent implements OnInit {
                 }
             }
         );
-        this.adresse = localStorage.getItem('adresse');
         this.initDialog();
         this.totalPanier();
     }
@@ -52,24 +50,22 @@ export class PanierComponent implements OnInit {
     init() {
         this.panier = this.storageService.getMenu();
         this.movie = this.storageService.getMieuNote();
+        this.adresse = localStorage.getItem('adresse');
     }
 
     totalPanier() {
-        //let sum = 0;
         this.totalMovie = 0.0;
         this.totalMenu = 0.0;
         let i: number;
+        let tabPrixMovie = JSON.parse(localStorage.getItem('totalMovie'));
+        for (i = 0; i < tabPrixMovie.length; i++) {
+            this.totalMovie += +tabPrixMovie[i];
+        }
         let tabPrixMenu = JSON.parse(localStorage.getItem('totalMenu'));
-        console.log('tableau prix plat' + tabPrixMenu);
         for (i = 0; i < tabPrixMenu.length; i++) {
             this.totalMenu += +tabPrixMenu[i];
         }
-        console.log('total Menu =' + this.totalMenu);
-        let tabPrixMovie = JSON.parse(localStorage.getItem('totalMovie'));
-        for (i = 0; i < tabPrixMovie.length; i++) {
-            this.totalMovie += tabPrixMovie[i];
-        }
-        console.log('total movie' + this.totalMovie);
+
 
 
     }
@@ -94,6 +90,8 @@ export class PanierComponent implements OnInit {
     deleteMenusSelected(index: number) {
         this.storageService.delete(index);
         this.init();
+        this.totalPanier();
+
     }
 
     /**
@@ -103,36 +101,9 @@ export class PanierComponent implements OnInit {
     deleteMovieSelected(index: number) {
         this.storageService.deleteMovie(index);
         this.init();
+        this.totalPanier();
     }
-
-    /**
-     * méthode de validation de la commande
-     */
-    validationCommande() {
-        let idClient = localStorage.getItem('UserData');
-        let idPlat = localStorage.getItem('platId');
-        let idFilm = localStorage.getItem('movieId');
-        let adresse = localStorage.getItem('adresse');
-        if (this.isAuth) {
-            this.commandeService.sendCommande({
-                // variable que le serveur s'attend a recevoir
-                idClient: idClient,
-                idPlats: idPlat,
-                idFilms: idFilm,
-                adresseLivraison: adresse,
-            }).then(data => {
-                localStorage.removeItem('plat');
-                this.message.add({
-                    severity: 'success',
-                    summary: `Commande Confirmer avec succes `,
-                    detail: 'Merci d\'avoir commandé sur MenuCinema à bientot'
-                });
-            });
-        } else {
-            this.route.navigate(['/authentification/signin']);
-        }
-
-    }
+    
 
     /**
      * bouton de retour vers le menu

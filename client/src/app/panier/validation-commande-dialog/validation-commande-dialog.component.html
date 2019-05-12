@@ -1,0 +1,52 @@
+
+<p-dialog header="Validation de votre commande" [(visible)]="afficherDialog" [modal]="true" [responsive]="true"
+          [style]="{width: '900px', minWidth: '250px'}" [minY]="90"
+          [maximizable]="true" [baseZIndex]="10000" (onHide)="onHide()">
+
+<mat-horizontal-stepper [linear]="isLinear" #stepper *ngIf="isAuth; else loggedOut">
+  <mat-step >
+    <form >
+      <ng-template matStepLabel>Votre adresse</ng-template>
+      <div class="input-group">
+        <span class="input-group-addon"><i class="fa fa-map-marker"></i></span>
+        <input type="text" class="form-control" id="adresse" style="width:300px;"
+               name="adresse" placeholder="Adresse" [(ngModel)]="user.adresse">
+      </div>
+      <div>
+        <button mat-button matStepperNext >Suivant</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step >
+    <form >
+      <ng-template matStepLabel>N° Téléphone</ng-template>
+      <div class="input-group">
+        <span class="input-group-addon"><i class="fa fa-phone"></i></span>
+        <input type="number" class="form-control" id="phone" style="width:300px;"
+               name="phone" placeholder="Téléphone" [(ngModel)]="user.tel">
+      </div>
+      <div>
+        <button mat-button matStepperPrevious>Retour</button>
+        <button mat-button matStepperNext (click)="updateProfile(user)" >Suivant</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step>
+    <ng-template matStepLabel>Validation de la commande</ng-template>
+    You are now done.
+    <div>
+      <button mat-button matStepperPrevious>Retour</button>
+      <button mat-button (click)="validationCommande()" >Valider</button>
+    </div>
+  </mat-step>
+</mat-horizontal-stepper>
+  <ng-template #loggedOut >
+    <b style="margin-left: 250px">Merci de vous connecter avant de valider votre commande</b>
+    <br>
+    <br>
+    <button type="button" pButton icon="fa fa-sign-in" (click)="retourSignin()" label="Connexion"
+            class="ui-button-rounded" style="margin-left: 400px"></button>
+    <br>
+  </ng-template>
+  <br>
+</p-dialog>

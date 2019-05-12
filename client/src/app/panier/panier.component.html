@@ -1,12 +1,4 @@
 <div class="container">
-    <div class="col-md-3">
-        <h5 style="color: green">
-            <i class="fa fa-map-marker"></i>
-            {{user?.adresse}}
-        </h5>
-        <button (click)="afficherDialogProfil()" pButton type="button" label="Modifier l'adresse de livraison"
-                class="ui-button-rounded"></button>
-    </div>
     <div class="col-md-12">
         <div class="page-header">
             <h1 class="text-center">
@@ -25,8 +17,8 @@
                     </div>
                     <div class="panel-body">
                         <div>
-                            <div class="table-responsive" *ngIf="panier.length != 0 || movie.length != 0;else content">
-                                <p-table [value]="panier" *ngIf="panier.length != 0 ">
+                            <div class="table-responsive" >
+                                <p-table [value]="panier" >
                                     <ng-template pTemplate="header">
                                         <tr>
                                             <th>Nom du plat</th>
@@ -49,7 +41,7 @@
                                     </ng-template>
                                 </p-table>
                                 <br>
-                                <p-table [value]="movie" *ngIf="movie.length != 0">
+                                <p-table [value]="movie" >
                                     <ng-template pTemplate="header">
                                         <tr>
                                             <th>Titre du film</th>
@@ -74,8 +66,8 @@
                                 <br>
                                 <div>
                                     <div class="text-primary">
-                                        <h4>
-                                            Total: {{totalMenu+totalMovie}} €
+                                        <h4  style="text-align: right">
+                                            Total: €{{totalMenu+totalMovie}}
                                         </h4>
                                         <br>
                                     </div>
@@ -83,13 +75,13 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="text-right">
-                                            <button (click)="retour()" class="btn btn-info">
+                                            <button (click)="retour()" class="btn btn-info" pTooltip="Retour pour acheter" tooltipPosition="top">
                                                 <i class="fa fa-shopping-cart"></i>
-                                                CONTINUER A MAGASINER
+                                                CONTINUER A ACHETER
                                             </button>
                                             <span> </span>
-                                            <button (click)="validationCommande()" class="btn btn-success btn-shadow"
-                                                    id="payer">
+                                            <button (click)="afficherDialogProfil()" class="btn btn-success btn-shadow"
+                                                    id="payer" pTooltip="Valider la commande" tooltipPosition="top">
                                                 <i class="fa fa-credit-card"></i>
                                                 PAYER MAINTENANT
                                             </button>
@@ -111,5 +103,5 @@
         <app-adresse-update-dialog [afficherDialog]="afficherDialog" *ngIf="afficherDialog"
                                    (onDialogHide)="onHideProfilDialog()" [user]="user">
         </app-adresse-update-dialog>
-
     </div>
+</div>

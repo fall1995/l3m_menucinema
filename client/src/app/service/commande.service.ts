@@ -11,10 +11,11 @@ export class CommandeService {
     constructor(private http: HttpClient) {
     }
 
-    async getFacture(idClient : string, id: string): Promise<any> {
+    async getCommandeById(idCommande : string): Promise<any> {
         return new Promise<any>(((resolve, reject) => {
-            this.http.get(`${id}`, {responseType: 'text'}).toPromise().then(
+            this.http.get(`/api/commande?idCommande=${idCommande}`, {responseType: 'text'}).toPromise().then(
                 res => {
+                    console.log("l'id commande"+idCommande);
                     resolve(JSON.parse(res));
                 }, rej => {
                     reject(rej);

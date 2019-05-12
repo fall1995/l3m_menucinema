@@ -4,7 +4,6 @@ import {MovieResponse} from '../tmdb-data/Movie';
 import {TmdbService} from '../service/tmdb.service';
 import {StorageService} from '../service/storage.service';
 import {MessageService} from 'primeng/api';
-import {Plats} from '../menu-commade-data/Menu';
 @Component({
   selector: 'app-films',
   templateUrl: './films.component.html',
@@ -12,25 +11,18 @@ import {Plats} from '../menu-commade-data/Menu';
 })
 export class FilmsComponent implements OnInit {
 
-    idFilm: MovieResponse;
-    listeMovie: MovieResponse;
-    listeMovieDram : MovieResponse;
-    listeMovieHightRatet : MovieResponse;
-    afficherDialog = false;
-    detail_afficher='Detail';
-    detail_cacher='Afficher detail';
+    listeMovie: MovieResponse; // movie de 2019
+    listeMovieDram : MovieResponse; // movie les dramatique
+    listeMovieHightRatet : MovieResponse; // movie les mieux notés
     selectedMovie: MovieResponse; // movie selectionner
     displayDialog: boolean; // Dialog pour les movie
 
-    detail:string= this.detail_afficher;
 
   constructor(private tmdbService: TmdbService, private storage: StorageService,
                 private message: MessageService) { }
   ngOnInit() {
       this.init();
   }
-
-
     /**
      * méthode d'ajout dans le panier
      * @param id
@@ -43,45 +35,48 @@ export class FilmsComponent implements OnInit {
             detail:'Votre choix a bien été ajouter dans votre panier'});
 
     }
-    /*
-    async getMovies(){
-      this.tmdbService.getAllMovie().then(
-          data =>{
-              this.films = data;
-          }, error => {
-              console.log(error);
-      }
-      );
-  }
-  */
 
+    /**
+     * recuperation des movies
+     */
+    async init() {
+        this.tmdbService.init( environment.tmdbKey );
+        this.listeMovie = await  this.tmdbService.getAllMovie();
+        this.listeMovieDram = await this.tmdbService.getAllDrama();
+        this.listeMovieHightRatet = await this.tmdbService.getAllHightRated();
+    }
+
+    /**
+     * ajout des films dramatiques dans le panier
+     * @param id
+     */
+    ajoutFilmDramatique(id: number){
+        let filmdrama = this.listeMovieDram.results.find(film => film.id === id);
+        this.storage.addMovieNote(filmdrama);
+        this.message.add({severity:'success',
+            summary:`Ajout du Film ${filmdrama.title} `,
+            detail:'Votre choix a bien été ajouter dans votre panier'});
+    }
+
+    /**
+     * reference vers  le film choisi pour voir le detail
+     * @param movie
+     */
     selectMovie(movie: MovieResponse) {
         this.selectedMovie = movie;
         this.displayDialog = true;
-        event.preventDefault();
     }
- afficher():void{
-     if(this.detail=this.detail_cacher){
 
-         this.detail=this.detail_afficher;
-     }
-     else{
-        this.detail=this.detail_cacher;
-     }
-
- }
-    async init() {
-        this.tmdbService.init( environment.tmdbKey );
-        this.idFilm = await this.tmdbService.getMovie(14);
-        this.tmdbService.getAllMovie().then(
-            data =>{
-                this.listeMovie = data;
-            }, error =>{
-                console.log(error);
-            }
-        );
-        this.listeMovieDram = await this.tmdbService.getAllDrama();
-        this.listeMovieHightRatet = await this.tmdbService.getAllHightRated();
+    /**
+     * ajout des films recent dans le panier
+     * @param id
+     */
+    ajoutFilmRecent(id: number){
+        let film2019 = this.listeMovie.results.find(film => film.id === id);
+        this.storage.addMovieNote(film2019);
+        this.message.add({severity:'success',
+            summary:`Ajout du Film ${film2019.title} `,
+            detail:'Votre choix a bien été ajouter dans votre panier'});
     }
 
 
