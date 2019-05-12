@@ -94,9 +94,9 @@ public class GestionnaireClient extends SQLAble {
         client.setPhoto(photo);
     }
 
-
     /**
-     *Methode qui permet d'enregistrer  un client  dans la base
+     * Methode qui permet d'enregistrer un client dans la base
+     *
      * @return
      * @throws SQLException
      * @throws Exception
@@ -105,21 +105,22 @@ public class GestionnaireClient extends SQLAble {
         boolean exist = existsClientDB();
         boolean res = false;
         if (!exist) {
-                connectToDatabase();
-                CallableStatement cstmt;
-                cstmt = conn.prepareCall("{ = call enregistrerClient(?,?,?) }");
-                cstmt.setString(1, client.getId());
-                cstmt.setString(2, client.getNom());
-                cstmt.setString(3, client.getPrenom());
-                cstmt.execute();
-                cstmt.close();
-                res = true;
+            connectToDatabase();
+            CallableStatement cstmt;
+            cstmt = conn.prepareCall("{ = call enregistrerClient(?,?,?) }");
+            cstmt.setString(1, client.getId());
+            cstmt.setString(2, client.getNom());
+            cstmt.setString(3, client.getPrenom());
+            cstmt.execute();
+            cstmt.close();
+            res = true;
         }
         return res;
     }
 
     /**
-     *Methode qui permet de verifie si un client existe dans la base
+     * Methode qui permet de verifie si un client existe dans la base
+     *
      * @return
      * @throws SQLException
      */
@@ -140,7 +141,6 @@ public class GestionnaireClient extends SQLAble {
 
         return res;
     }
-    
 
     /**
      *
@@ -149,11 +149,10 @@ public class GestionnaireClient extends SQLAble {
      * @throws SQLException
      * @throws Exception
      */
-
-   public static Client getClientDB(String id) throws SQLException, Exception {
-        GestionnaireClient gc = new GestionnaireClient( id , "" , ""); 
+    public static Client getClientDB(String id) throws SQLException, Exception {
+        GestionnaireClient gc = new GestionnaireClient(id, "", "");
         gc.connectToDatabase();
-       
+
         Client client = new Client();
 
         OracleCallableStatement ocstmt;
@@ -171,18 +170,18 @@ public class GestionnaireClient extends SQLAble {
             client.setEmail(rset.getString("email"));
             client.setPhoto(rset.getString("photo"));
             client.setTel(rset.getString("tel"));
-        } else {
-            throw new Exception("Il n'y a pas de client avec id " + id);
         }
-
+        if (rset != null) {
+            rset.close();
+        }
         ocstmt.close();
 
         return client;
     }
 
-
     /**
-     *Methode qui permet de modifier un client
+     * Methode qui permet de modifier un client
+     *
      * @throws SQLException
      * @throws Exception
      */
@@ -204,17 +203,18 @@ public class GestionnaireClient extends SQLAble {
 
     /**
      * Methode qui permet de retoune id du client
+     *
      * @param nom
      * @param prenom
      * @return
      * @throws SQLException
      */
-    public static String getClientIdDB(String nom, String prenom) 
+    public static String getClientIdDB(String nom, String prenom)
             throws SQLException, Exception {
-        GestionnaireClient gc = new GestionnaireClient("","","");
+        GestionnaireClient gc = new GestionnaireClient("", "", "");
         gc.connectToDatabase();
         String idClient = "";
-        
+
         CallableStatement cstmt;
         cstmt = conn.prepareCall("{ ? = call getClientIdDB(?,?) }");
         cstmt.registerOutParameter(1, OracleTypes.VARCHAR);
@@ -229,16 +229,17 @@ public class GestionnaireClient extends SQLAble {
     }
 
     /**
-     *Methode qui permet de supprimer un client
+     * Methode qui permet de supprimer un client
+     *
      * @param id
      * @return
      * @throws SQLException
      * @throws Exception
      */
-    public static boolean deleteClientId(String id) 
+    public static boolean deleteClientId(String id)
             throws SQLException, Exception {
-        
-        GestionnaireClient gc = new GestionnaireClient( id , "" , "" );
+
+        GestionnaireClient gc = new GestionnaireClient(id, "", "");
         boolean exist = false;
         boolean res = false;
 
@@ -263,7 +264,7 @@ public class GestionnaireClient extends SQLAble {
             cstmt.execute();
             res = true;
             cstmt.close();
-        }else{
+        } else {
             throw new Exception("Client inexistant !");
         }
 
@@ -271,7 +272,8 @@ public class GestionnaireClient extends SQLAble {
     }
 
     /**
-     *Methode qui affiche les commandes d'un client
+     * Methode qui affiche les commandes d'un client
+     *
      * @return
      * @throws SQLException
      * @throws Exception
@@ -294,18 +296,19 @@ public class GestionnaireClient extends SQLAble {
             }
             rset.close();
             ocstmt.close();
-        }else{
-             throw new Exception("Client inexistant dans la BD !");
+        } else {
+            throw new Exception("Client inexistant dans la BD !");
         }
 
         return list;
     }
-    
+
     /**
-     *Methode qui convervit les donnees d'un client en json
+     * Methode qui convervit les donnees d'un client en json
+     *
      * @return
      */
-    public String ClientToJson(){
+    public String ClientToJson() {
         String json = new Gson().toJson(this.client);
         return json;
     }
