@@ -80,6 +80,9 @@ export class ValidationCommandeDialogComponent implements OnInit {
         this.onDialogHide.emit();
     }
 
+    /**
+     * Validation de la commande
+     */
     async validationCommande() {
         let idPlat = localStorage.getItem('platId');
         let idFilm = localStorage.getItem('movieId');
@@ -114,8 +117,15 @@ export class ValidationCommandeDialogComponent implements OnInit {
 
     }
 
+    /**
+     * Quand il n'est pas connecter on le ramene à la page de connexion
+     */
     retourSignin(){
         this.route.navigate(['/authentification/signin']);
+    }
+
+    DialogHide(){
+        this.afficherDialog = false;
     }
 
 

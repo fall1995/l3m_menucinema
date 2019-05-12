@@ -30,7 +30,7 @@ export class PanierComponent implements OnInit {
     user: User; // l'utilisateur courant
     totalMenu: any;
     totalMovie: any;
-    total: number;
+    total: number = 0;
 
     ngOnInit() {
         this.init();
