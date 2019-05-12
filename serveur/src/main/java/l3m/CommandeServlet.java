@@ -38,6 +38,8 @@ public class CommandeServlet extends HttpServlet {
 
         } catch (SQLException ex) {
             Logger.getLogger(CommandeServlet.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            Logger.getLogger(CommandeServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }
