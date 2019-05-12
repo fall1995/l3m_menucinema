@@ -260,19 +260,19 @@ a:focus {
 	0%, 20%, 100%	{ left: 0 }
 	25%, 45%		{ left: -100% }
 	50%, 70%		{ left: -200% }
-	75%, 95%		{ left: -300% }
+	
 }
 @-moz-keyframes slider {
 	0%, 20%, 100%	{ left: 0 }
 	25%, 45%		{ left: -100% }
 	50%, 70%		{ left: -200% }
-	75%, 95%		{ left: -300% }
+
 }
 @keyframes slider {
 	0%, 20%, 100%	{ left: 0 }
 	25%, 45%		{ left: -100% }
 	50%, 70%		{ left: -200% }
-	75%, 95%		{ left: -300% }
+
 }
 
 #slideshow .slider {
@@ -298,9 +298,12 @@ a:focus {
 #slideshow .c_slider {
 	position: absolute;
 	left:0; top:0;
-	width: 400%;
-	height: 350px;
-//	background: url(../img/poster.jpg) 0 0 no-repeat, url(../img/pawari.jpg) 900px 0 no-repeat, url(../img/mylmo.jpeg) 1800px 0 no-repeat, url(../img/oumou_sangare.jpg) 2700px 0 no-repeat;
+	width: 1100px;
+	height: 490px;
+/*	background: url(https://www.obernairestaurantleresto.fr/ressources/images/e4fe12f0ec9a.jpg.jpg) 0 0 no-repeat,
+	 url(http://assets.kraftfoods.com/recipe_images/opendeploy/166304_MXM_K64679V1_OR1_CR_640x428.jpg) 900px 0 no-repeat, 
+	 url(http://www.letribunaldunet.fr/wp-content/uploads/2019/03/films-series-streaming.jpg) 800px 0 no-repeat, 
+	 url(https://42info.fr/wp-content/uploads/2018/03/PIZZA.jpg) 700px 0 no-repeat;*/
 }
 .sl_i:target ~ #slideshow .c_slider {
 	-webkit-transition: background 1s;
@@ -451,9 +454,7 @@ a:focus {
 	73%			{ opacity: 0; left: 54px;	}
 	75%			{ opacity: 1; left: 54px;	}
 	
-	95%			{ opacity: 1; left: 54px;	}
-	97%			{ opacity: 0; left: 54px;	}
-	98%			{ opacity: 0; left: 0;	}
+
 }
 @-webkit-keyframes dotser {
 	0%, 100% 	{ opacity: 1; left: 0; 		}
@@ -473,9 +474,7 @@ a:focus {
 	73%			{ opacity: 0; left: 54px;	}
 	75%			{ opacity: 1; left: 54px;	}
 	
-	95%			{ opacity: 1; left: 54px;	}
-	97%			{ opacity: 0; left: 54px;	}
-	98%			{ opacity: 0; left: 0;	}
+
 }
 @keyframes dotser {
 	0%, 100% 	{ opacity: 1; left: 0; 		}
@@ -495,9 +494,6 @@ a:focus {
 	73%			{ opacity: 0; left: 54px;	}
 	75%			{ opacity: 1; left: 54px;	}
 	
-	95%			{ opacity: 1; left: 54px;	}
-	97%			{ opacity: 0; left: 54px;	}
-	98%			{ opacity: 0; left: 0;	}
 }
 .dots_commands li:first-child a:after,
 .dots_commands li:first-child a:before {
@@ -573,10 +569,7 @@ a:focus {
 #sl_i3:target ~ #slideshow .c_slider								{ background-position: -1800px 0, -900px 0, 0 0, 900px 0; }
 #sl_i3:target ~ #slideshow .dots_commands li:first-child a:before	{ left:36px; }
 
-#sl_i4:target ~ #slideshow .commands								{ display: none; }
-#sl_i4:target ~ #slideshow .commands4								{ display: block; }
-#sl_i4:target ~ #slideshow .c_slider								{ background-position: -2700px 0, -1800px 0, -900px 0, 0 0; }
-#sl_i4:target ~ #slideshow .dots_commands li:first-child a:before	{ left:54px; }
+
 
 
 figcaption{
