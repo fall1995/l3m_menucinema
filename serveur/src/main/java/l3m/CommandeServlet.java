@@ -25,19 +25,17 @@ public class CommandeServlet extends HttpServlet {
             throws ServletException, IOException {
         
         System.out.println( "========================================================== CommandeServlet [doGet] ==========================================================" );
+        System.out.print("Récupération de la commande ...");
         response.setContentType("application/json");
         String idCommande = request.getParameter("idCommande");
         Commande commande;
-        System.out.println(idCommande);
         try {
             commande = GestionnaireCommande.getCommande(idCommande);
-
             response.setContentType("application/json");
             response.setStatus(HttpServletResponse.SC_OK);
             response.getWriter().println(new Gson().toJson(commande));
-
-        } catch (SQLException ex) {
-            Logger.getLogger(CommandeServlet.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("la récupération est effectuée avec succès !");
+        
         } catch (Exception ex) {
             Logger.getLogger(CommandeServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -48,10 +46,10 @@ public class CommandeServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         System.out.println( "========================================================= CommandeServlet [doPost] =========================================================" );
+        System.out.print("Enregistrement de la commande ...");
         Commande commande = new Commande();
         commande.setIdClient(request.getParameter("idClient"));
         commande.setAdresseLivraison(request.getParameter("adresseLivraison"));
-        System.out.println(commande.getIdClient());
         String buffer = "";
         buffer = request.getParameter("idPlats");
         buffer = buffer.replaceAll("[\\[\\]\"]", "");
@@ -78,8 +76,6 @@ public class CommandeServlet extends HttpServlet {
 
             gc.enregistrerCommandeDB();
             
-            
-            
             SauvegarderFacture.saveFacture( 
                     commande.getAdresseLivraison(), commande.getDate(), commande.getId(),commande.getPrix(), 
                     commande.getIdClient(), films, plats);
@@ -87,7 +83,8 @@ public class CommandeServlet extends HttpServlet {
             response.setContentType("application/json");
             response.setStatus(HttpServletResponse.SC_OK);
             response.getWriter().println( gf.recupererFacture(commande.getIdClient(),  commande.getId()) );
-
+            System.out.println("l'enregistrement est éffectué avec succès !");
+            
         } catch (SQLException ex) {
             Logger.getLogger(CommandeServlet.class.getName()).log(Level.SEVERE, null, ex);
         } catch (Exception ex) {

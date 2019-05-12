@@ -55,4 +55,3 @@ start GestionnaireClient.sql;
 start GestionnaireCommande.sql;
 start sequences.sql;
 start Triggers.sql;
-start data.sql;
