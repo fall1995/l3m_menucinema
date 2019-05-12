@@ -27,6 +27,8 @@ public class LaCarteServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) 
             throws ServletException, IOException {
         
+        System.out.println( "========================================================== LaCarteServlet [doGet] =========================================================" );
+        System.out.print("Récupération de la carte des plats ...");
         response.setContentType("application/json");
         json = request.getParameter("json");
         
@@ -35,6 +37,6 @@ public class LaCarteServlet extends HttpServlet {
         response.setContentType("application/json");
         response.setStatus(HttpServletResponse.SC_OK);
         response.getWriter().println( new Gson().toJson(laCarte) );
-
+        System.out.println("la carte est récupérée !");
     }
 }

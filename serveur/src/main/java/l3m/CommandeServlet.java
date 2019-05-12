@@ -23,7 +23,8 @@ public class CommandeServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+        
+        System.out.println( "========================================================== CommandeServlet [doGet] ==========================================================" );
         response.setContentType("application/json");
         String idCommande = request.getParameter("idCommande");
         Commande commande;
@@ -44,7 +45,7 @@ public class CommandeServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+        System.out.println( "========================================================= CommandeServlet [doPost] =========================================================" );
         Commande commande = new Commande();
         commande.setIdClient(request.getParameter("idClient"));
         commande.setAdresseLivraison(request.getParameter("adresseLivraison"));

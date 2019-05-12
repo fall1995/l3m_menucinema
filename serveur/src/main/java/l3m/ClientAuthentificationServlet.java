@@ -41,14 +41,16 @@ public class ClientAuthentificationServlet extends HttpServlet {
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        System.out.println( "================================================== ClientAuthentificationServlet [doGet] ==================================================" );
+        System.out.print( "Récupération des informations du client ...");
         String idClient = request.getParameter("idClient");
-
         Client client;
         try {
             client = GestionnaireClient.getClientDB(idClient);
             response.setContentType("application/json");
             response.setStatus(HttpServletResponse.SC_OK);
             response.getWriter().println(new Gson().toJson(client));
+            System.out.println( "la récupération des informations est éffectuée avec succès !");
         } catch (Exception ex) {
             Logger.getLogger(ClientAuthentificationServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -71,7 +73,8 @@ public class ClientAuthentificationServlet extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        System.out.println( "================================================== ClientAuthentificationServlet [doPsot] ==================================================" );
+        System.out.print("L'identification du client ...");
         response.setContentType("application/json");
         response.addHeader("Access-Control-Allow-Origin", "*");
         response.addHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, PUT, DELETE, HEAD");
@@ -100,7 +103,9 @@ public class ClientAuthentificationServlet extends HttpServlet {
                 res = BdAccess.authentifyUser(client);
                 
                 if ( res.equals("client") ){
-                    client = GestionnaireClient.getClientDB(parametres.get("idClient"));
+                    System.out.println("le client est identifié avec succès !");
+                }else{
+                    System.out.println("le client est logé avec succès !");
                 }
                 
                 response.setStatus(HttpServletResponse.SC_OK);
@@ -124,7 +129,8 @@ public class ClientAuthentificationServlet extends HttpServlet {
      protected void doPut(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        
+        System.out.println( "================================================== ClientAuthentificationServlet [doPut] ==================================================" );
+        System.out.print("Modification des données du client ..." );
         Enumeration<String> P = request.getParameterNames();
         HashMap<String, String> parametres = new HashMap();
         
