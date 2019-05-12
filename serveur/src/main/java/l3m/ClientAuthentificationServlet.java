@@ -51,6 +51,9 @@ public class ClientAuthentificationServlet extends HttpServlet {
             response.setStatus(HttpServletResponse.SC_OK);
             response.getWriter().println(new Gson().toJson(client));
             System.out.println( "la récupération des informations est éffectuée avec succès !");
+        
+        } catch (SQLException ex) {
+            Logger.getLogger(ClientAuthentificationServlet.class.getName()).log(Level.SEVERE, null, ex);
         } catch (Exception ex) {
             Logger.getLogger(ClientAuthentificationServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -73,7 +76,7 @@ public class ClientAuthentificationServlet extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        System.out.println( "================================================== ClientAuthentificationServlet [doPsot] ==================================================" );
+        System.out.println( "================================================== ClientAuthentificationServlet [doPost] ==================================================" );
         System.out.print("L'identification du client ...");
         response.setContentType("application/json");
         response.addHeader("Access-Control-Allow-Origin", "*");
@@ -154,12 +157,13 @@ public class ClientAuthentificationServlet extends HttpServlet {
 
             response.setStatus(HttpServletResponse.SC_OK);
             response.getWriter().println(gc.ClientToJson());
-
+            System.out.println("la modification des informations est éffectuée avec succès !");
+            
         } catch (SQLException ex) {
             response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
             response.getWriter().println(ex.getMessage());
         } catch (Exception ex) {
-            Logger.getLogger(ClientServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ClientAuthentificationServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
      

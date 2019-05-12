@@ -58,7 +58,7 @@ public class GestionnaireCommande extends SQLAble {
         prixFilms = 3.79 * commande.getIdFilms().size();
 
         for (String idPlat : commande.getIdPlats()) {
-            if ( idPlat.length() > 2 ){
+            if (  idPlat.length() > 1  &&  !idPlat.equals("null") ){
                 prixPlat = GestionnaireMenu.getPrixPlat(idPlat);
                 if (prixPlat != -1 ){
                     prixPlats += prixPlat;
@@ -114,7 +114,7 @@ public class GestionnaireCommande extends SQLAble {
 
             for (Map.Entry<String, Integer> mapPlat : mapIdPlats.entrySet()) {
                 String idPlat = mapPlat.getKey();
-                if ( idPlat.length() > 1 ){
+                if ( idPlat.length() > 1 && !idPlat.equals("null") ){
                     int quantite = mapPlat.getValue();
                     ajouterPlatQtDB(commande.getId(), idPlat, quantite);
                     nbInsertions++;
