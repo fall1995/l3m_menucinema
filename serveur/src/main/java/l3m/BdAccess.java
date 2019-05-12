@@ -19,12 +19,7 @@ public class BdAccess {
         GestionnaireClient gc = new GestionnaireClient( client.getId(), 
                                                         client.getNom(),
                                                         client.getPrenom()
-                                );
-        
-        System.out.println("idClient "+client.getId());
-        System.out.println("nom "+client.getNom());
-        System.out.println("prenom "+client.getPrenom());
-        
+                                );     
 
         nouveau = gc.enregistreClientDB();
         if ( nouveau ){

@@ -19,8 +19,8 @@ public abstract class SQLAble implements DataBaseAble {
     public void connectToDatabase() throws SQLException {
         if (conn == null || conn != null && conn.isClosed()) {
             String CONN_URL = "jdbc:oracle:thin:@im2ag-oracle.e.ujf-grenoble.fr:1521:im2ag";
-            String USER = "hasdit";
-            String PASSWD = "az1ER2t3";
+            String USER = "coulibka";
+            String PASSWD = "Yah123456";
             System.out.print("Loading Oracle driver... ");
             DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
             System.out.println("loaded");

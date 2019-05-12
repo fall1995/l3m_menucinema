@@ -162,7 +162,6 @@ public class GestionnaireMenu  extends XMLAble{
                   
 
                if (qName.equalsIgnoreCase("plat")) {
-                  System.out.println("Start Element : plat");
                   target = new Plat();
                } else if(qName.equalsIgnoreCase("id")){
                    bId = true;
@@ -206,8 +205,6 @@ public class GestionnaireMenu  extends XMLAble{
                   EndElement endElement = event.asEndElement();
                   
                if(endElement.getName().getLocalPart().equalsIgnoreCase("plat")) {
-                  System.out.println("End Element : plat");
-                  System.out.println();
                   res.add(target);
                }
                break;
@@ -219,9 +216,6 @@ public class GestionnaireMenu  extends XMLAble{
             System.out.println("Exception: " + e);
         }
 
-        for (Plat p : res) {
-            System.out.print(p.getId() + "      ");
-        }
         return res;
     }
 

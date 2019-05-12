@@ -28,7 +28,7 @@ public class ClientServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-
+        System.out.println( "=========================================================== ClientServlet [doGet] ===========================================================" );
         if (request.getServletPath().equals("/api/client")) {
             String idClient = request.getParameter("idClient");
             System.out.println(idClient);
