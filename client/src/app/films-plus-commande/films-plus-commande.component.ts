@@ -15,11 +15,6 @@ export class FilmsPlusCommandeComponent implements OnInit {
     listeMovie: MovieResponse;
     listeMovieDram : MovieResponse;
     listeMovieHightRatet : MovieResponse;
-    afficherDialog = false;
-    detail_afficher='Detail';
-    detail_cacher='Afficher detail';
-    selectedMovie: MovieResponse; // movie selectionner
-    displayDialog: boolean; // Dialog pour les movie
     movie: any[];
     idPlat: string;
 
