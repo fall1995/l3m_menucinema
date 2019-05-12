@@ -45,6 +45,8 @@ public class FactureCommandeServlet extends HttpServlet {
 
         } catch (SQLException ex) {
             Logger.getLogger(FactureCommandeServlet.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            Logger.getLogger(FactureCommandeServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }

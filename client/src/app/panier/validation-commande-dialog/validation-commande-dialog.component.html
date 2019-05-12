@@ -13,6 +13,8 @@
                name="adresse" placeholder="Adresse" [(ngModel)]="user.adresse">
       </div>
       <div>
+        <br>
+        <button mat-button matStepperNext (click)="DialogHide()" >Quitter</button>
         <button mat-button matStepperNext >Suivant</button>
       </div>
     </form>
@@ -26,6 +28,7 @@
                name="phone" placeholder="Téléphone" [(ngModel)]="user.tel">
       </div>
       <div>
+        <br>
         <button mat-button matStepperPrevious>Retour</button>
         <button mat-button matStepperNext (click)="updateProfile(user)" >Suivant</button>
       </div>
@@ -33,8 +36,9 @@
   </mat-step>
   <mat-step>
     <ng-template matStepLabel>Validation de la commande</ng-template>
-    You are now done.
+    Terminer l'action.
     <div>
+      <br>
       <button mat-button matStepperPrevious>Retour</button>
       <button mat-button (click)="validationCommande()" >Valider</button>
     </div>

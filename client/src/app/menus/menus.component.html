@@ -9,9 +9,6 @@
                                     (onChange)="onSortChange($event)" [style]="{'min-width':'15em'}"></p-dropdown>
                     </div>
                     <div class="ui-g-6 ui-md-4 filter-container">
-                        <div style="position:relative">
-                            <input type="search" pInputText placeholder="Recherche un plat" (keyup)="dv._sortField">
-                        </div>
                     </div>
                     <div class="ui-g-6 ui-md-4" style="text-align:right">
                         <p-dataViewLayoutOptions></p-dataViewLayoutOptions>
@@ -22,24 +19,24 @@
         <ng-template let-plat pTemplate="listItem">
             <div class="ui-g" style="padding: 2em;border-bottom: 1px solid #d9d9d9">
                 <div class="ui-g-12 ui-md-3" style="text-align:center">
-                    <img height="200" width="200" src="{{plat.image}}">
+                    <img height="250" width="310" src="{{plat.image}}">
                 </div>
-                <div class="ui-g-12 ui-md-8 car-details">
-                    <div class="ui-g">
+                <div class="ui-g-12 ui-md-8 car-details" style="text-align: center">
+                    <div class="ui-g" style="padding-left: 200px; padding-top: 20px">
                         <div class="ui-g-2 ui-sm-6">Nom:</div>
-                        <div class="ui-g-10 ui-sm-6"><b>{{plat.id}}</b></div>
+                        <div class="ui-g-10 ui-sm-6" style="padding-right: 300px"><b>{{plat.id}}</b></div>
 
                         <div class="ui-g-2 ui-sm-6">type:</div>
-                        <div class="ui-g-10 ui-sm-6"><b>{{plat.type}}</b></div>
+                        <div class="ui-g-10 ui-sm-6" style="padding-right: 300px"><b>{{plat.type}}</b></div>
 
                         <div class="ui-g-2 ui-sm-6">Prix:</div>
-                        <div class="ui-g-10 ui-sm-6"><b>{{plat.prix}}</b></div>
+                        <div class="ui-g-10 ui-sm-6" style="padding-right: 300px"><b>{{plat.prix}}</b></div>
 
                         <div class="ui-g-2 ui-sm-6">Ingredients:</div>
-                        <div class="ui-g-10 ui-sm-6"><b>{{plat.ingredients}}</b></div>
+                        <div class="ui-g-10 ui-sm-6" style="padding-right: 300px"><b>{{plat.ingredients}}</b></div>
                     </div>
                 </div>
-                <div class="ui-g-12 ui-md-1 ">
+                <div class="ui-g-12 ui-md-1" style="padding-top: 50px">
                     <button style="margin-bottom: 10px" pButton type="button" icon="fa fa-cart-plus" pTooltip="Ajouter dans votre panier" tooltipPosition="top"
                             (click)="addMenus(plat.id)" class="ui-button-success"></button>
                     <br>
@@ -69,19 +66,19 @@
         </ng-template>
     </p-dataView>
     <p-dialog header="Plat detail" [(visible)]="displayDialog" [responsive]="true" [modal]="true"
-              [style]="{width: '350px'}">
+              [style]="{width: '450px'}">
         <div class="ui-g" *ngIf="selectedPlat">
             <div class="ui-g-12" style="text-align:center">
-                <img height="300" width="300" src="{{selectedPlat.image}}">
+                <img height="300" width="320" src="{{selectedPlat.image}}">
             </div>
             <div class="ui-g-4">Nom :</div>
-            <div class="ui-g-8">{{selectedPlat.id}}</div>
+            <div class="ui-g-8"><b>{{selectedPlat.id}}</b></div>
             <div class="ui-g-4">Type :</div>
-            <div class="ui-g-8">{{selectedPlat.type}}</div>
+            <div class="ui-g-8"><b>{{selectedPlat.type}}</b></div>
             <div class="ui-g-4">Prix :</div>
-            <div class="ui-g-8">{{selectedPlat.prix}}</div>
+            <div class="ui-g-8"><b>{{selectedPlat.prix}}</b></div>
             <div class="ui-g-4">Ingredient:</div>
-            <div class="ui-g-8">{{selectedPlat.ingredients}}</div>
+            <div class="ui-g-8"><b>{{selectedPlat.ingredients}}</b></div>
         </div>
     </p-dialog>
 </div>

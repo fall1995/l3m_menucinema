@@ -16,20 +16,20 @@ public abstract class SQLAble implements DataBaseAble {
     static Connection conn;
 
     @Override
-    public void connectToDatabase() throws SQLException {
+    public void connectToDatabase() throws SQLException, ClassNotFoundException {
         if (conn == null || conn != null && conn.isClosed()) {
-            String CONN_URL = "jdbc:oracle:thin:@im2ag-oracle.e.ujf-grenoble.fr:1521:im2ag";
-            String USER = "coulibka";
-            String PASSWD = "Yah123456";
-            System.out.print("Loading Oracle driver... ");
-            DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
+            DatabaseAccesProperties dap = new DatabaseAccesProperties("DBproperties.txt"); 
+            String conn_url = dap.getDbUrl();
+            String jdbcDriver = dap.getJdbcDriver();
+            String user = dap.getUsername();
+            String password = dap.getPassword();
+            System.out.print("\nLoading jdbc driver... ");
+            Class.forName(jdbcDriver);
             System.out.println("loaded");
-
-            // Etablissement de la connection
             System.out.print("Connecting to the database... ");
-            conn = DriverManager.getConnection(CONN_URL, USER, PASSWD);
+            conn = DriverManager.getConnection( conn_url , user , password );
             conn.setAutoCommit(false);
-            System.out.println("connected");
+            System.out.println("connected \"" + user + "\"" );
         }
     }
     
