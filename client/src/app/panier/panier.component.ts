@@ -19,6 +19,7 @@ export class PanierComponent implements OnInit {
     constructor(private storageService: StorageService, private route: Router, private message: MessageService,
                 private commandeService: CommandeService, private afAuth: AngularFireAuth,
                 private authService: AuthService) {
+
     }
 
     panier: any[]; // variable qui stocke le tableaux de plat

@@ -14,8 +14,6 @@ import {MessageService} from 'primeng/api';
 })
 export class UserDialogComponent implements OnInit {
 
-    //user: User;
-
     constructor(private afAuth: AngularFireAuth, private afDatabase : AngularFireDatabase,
                 private route: Router, private authService: AuthService, private message : MessageService) {
         this.afAuth.authState.subscribe(user =>{
@@ -54,7 +52,6 @@ export class UserDialogComponent implements OnInit {
 
     }
 
-    // user = {} as User;
 
     /**
      * reference vers l'utilisateur
@@ -81,12 +78,6 @@ export class UserDialogComponent implements OnInit {
      */
     onHide(): void {
         this.onDialogHide.emit();
-    }
-
-    /**
-     * Méthode appelée lors de l'ouverture du dialogue
-     */
-    onShow(): void {
     }
 
 

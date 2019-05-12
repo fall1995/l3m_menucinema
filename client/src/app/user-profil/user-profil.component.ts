@@ -16,17 +16,19 @@ import {CommandeData} from '../menu-commade-data/commande';
 })
 export class UserProfilComponent implements OnInit {
 
-    constructor(private afAuth: AngularFireAuth, private authService: AuthService,private storageService: StorageService,
+    constructor(private afAuth: AngularFireAuth, private authService: AuthService, private storageService: StorageService,
                 private commandeService: CommandeService) {
     }
+
     commade: any; // variable qui stock la dernière commande
     panier: any[]; // variable qui stocke le tableaux de plat
     movie: any[]; // variable qui stock les films selectionnées
     afficherDialog = false; // boolean pour ouvrir et fermer le dialogue pop up
     user: User; // l'utilisateur courant
-    userPhoto : User = { // je stock la photo de profil recuperer dans firebase
+    userPhoto: User = { // je stock la photo de profil recuperer dans firebase
         photo: '',
     };
+
     ngOnInit() {
         this.init();
         this.initPanier();
@@ -37,7 +39,7 @@ export class UserProfilComponent implements OnInit {
      * recuperation de la dernière commande
      */
     async initCommande() {
-        await this.afAuth.user.subscribe( u =>{
+        await this.afAuth.user.subscribe(u => {
             this.commandeService.getLastCommande(u.uid).then(res => {
                 this.commade = res;
                 this.commade = Array.of(res);
@@ -51,15 +53,15 @@ export class UserProfilComponent implements OnInit {
     /**
      * recuperation des informations de l'utilisateur
      */
-     async init() {
-         await this.afAuth.user.subscribe( u =>{
-            if (u){
-                 this.authService.getUser( u.uid).then(res =>{
-                     this.user = res;
-                     this.userPhoto.photo = u.photoURL;
+    async init() {
+        await this.afAuth.user.subscribe(u => {
+            if (u) {
+                this.authService.getUser(u.uid).then(res => {
+                    this.user = res;
+                    this.userPhoto.photo = u.photoURL;
                     console.log(this.user);
-                }, r =>{
-                    console.log("errr"+r);
+                }, r => {
+                    console.log('errr' + r);
                 });
             }
         });

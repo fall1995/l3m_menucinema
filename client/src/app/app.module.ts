@@ -17,7 +17,6 @@ import {TmdbService} from './service/tmdb.service';
 import {AuthService} from './service/auth.service';
 import {MenuService} from './service/menu.service';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import { SingleMovieComponent } from './single-movie/single-movie.component';
 // importation de firebase
 import {AngularFireAuthModule} from '@angular/fire/auth';
 import {AngularFireDatabaseModule} from '@angular/fire/database';
@@ -48,8 +47,7 @@ import {DataViewModule} from 'primeng/dataview';
 import {DropdownModule} from 'primeng/dropdown';
 import {PanelModule} from 'primeng/panel';
 import {TableModule} from 'primeng/table';
-
-
+import {CarouselModule} from 'primeng/carousel';
 
 import 'hammerjs';
 import { UserDialogComponent } from './user-profil/user-dialog/user-dialog.component';
@@ -59,7 +57,6 @@ import { PanierComponent } from './panier/panier.component';
 import { FactureDetailComponent } from './commande/facture-detail/facture-detail.component';
 import {ValidationCommandeDialogComponent} from './panier/validation-commande-dialog/validation-commande-dialog.component';
 
-
 @NgModule({
     declarations: [
         AppComponent,
@@ -68,7 +65,6 @@ import {ValidationCommandeDialogComponent} from './panier/validation-commande-di
         FilmsComponent,
         MenusComponent,
         HeaderComponent,
-        SingleMovieComponent,
         UserProfilComponent,
         HomeComponent,
         UserDialogComponent,
@@ -109,7 +105,8 @@ import {ValidationCommandeDialogComponent} from './panier/validation-commande-di
         TableModule,
         TooltipModule,
         MatStepperModule,
-        MatFormFieldModule
+        MatFormFieldModule,
+        CarouselModule
 
     ],
     providers: [TmdbService, MessageService,AuthService,MenuService, AuthGuardService, StorageService],
