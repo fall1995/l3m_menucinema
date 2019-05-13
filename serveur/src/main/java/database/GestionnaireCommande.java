@@ -54,9 +54,16 @@ public class GestionnaireCommande extends SQLAble {
         double prixPlats = 0;
         double prixFilms = 0;
         double prixPlat = 0;
+        int nbEffectFilms = 0;
 
-        prixFilms = 3.79 * commande.getIdFilms().size();
-
+        for ( String idFilm : commande.getIdFilms() ){
+            if ( idFilm.length() > 1  &&  !idFilm.equals("null") ){
+                nbEffectFilms++;
+            }
+        }
+        
+        prixFilms = 3.79 * nbEffectFilms;
+         
         for (String idPlat : commande.getIdPlats()) {
             if (  idPlat.length() > 1  &&  !idPlat.equals("null") ){
                 prixPlat = GestionnaireMenu.getPrixPlat(idPlat);

@@ -4,7 +4,6 @@ import {SigninComponent} from './authentification/signin/signin.component';
 import {SignupComponent} from './authentification/signup/signup.component';
 import {FilmsComponent} from './films/films.component';
 import {MenusComponent} from './menus/menus.component';
-import {SingleMovieComponent} from './single-movie/single-movie.component';
 import {AuthGuardService} from './service/auth-guard.service';
 import {UserProfilComponent} from './user-profil/user-profil.component';
 import {HomeComponent} from './home/home.component';
