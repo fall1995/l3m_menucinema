@@ -1,9 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {StorageService} from '../service/storage.service';
-import {Plats} from '../menu-commade-data/Menu';
 import {Router} from '@angular/router';
 import {CommandeService} from '../service/commande.service';
-import {Commande} from '../menu-commade-data/commande';
 import {AngularFireAuth} from '@angular/fire/auth';
 import {MessageService} from 'primeng/api';
 import {User} from '../tmdb-data/user';
@@ -31,7 +29,7 @@ export class PanierComponent implements OnInit {
     user: User; // l'utilisateur courant
     totalMenu: any;
     totalMovie: any;
-    total: number = 0;
+    total: number = 0.0;
 
     ngOnInit() {
         this.init();
@@ -54,7 +52,9 @@ export class PanierComponent implements OnInit {
         this.movie = this.storageService.getMieuNote();
         this.adresse = localStorage.getItem('adresse');
     }
-
+    /*
+    ici on calcul le total du panier
+     */
     totalPanier() {
         this.totalMovie = 0.0;
         this.totalMenu = 0.0;

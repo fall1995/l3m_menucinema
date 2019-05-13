@@ -12,7 +12,7 @@ export class CommandeComponent implements OnInit {
 
     commade: CommandeData; // variable qui va stocker les commande
 
-    constructor(private commandeService: CommandeService,private afAuth: AngularFireAuth) {
+    constructor(private commandeService: CommandeService, private afAuth: AngularFireAuth) {
     }
 
     ngOnInit() {
@@ -23,20 +23,17 @@ export class CommandeComponent implements OnInit {
      * je recupere ici les données de la commande
      */
     async init() {
-        await this.afAuth.user.subscribe(u =>{
-                this.commandeService.getCommande(u.uid).then(res => {
-                    this.commade = res;
-                    console.log(res);
-                }, r => {
-                    console.log('errr' + r);
-                });
+        await this.afAuth.user.subscribe(u => {
+            this.commandeService.getCommande(u.uid).then(res => {
+                this.commade = res;
+                console.log(res);
+            }, r => {
+                console.log('errr' + r);
+            });
 
         });
 
     }
 
-    factureSelected(){
-        window.print();
-    }
 
 }

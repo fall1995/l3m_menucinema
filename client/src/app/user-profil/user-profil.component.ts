@@ -1,13 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {AngularFireAuth} from '@angular/fire/auth';
 import {User} from '../tmdb-data/user';
-import * as firebase from 'firebase';
-import {AngularFireDatabase} from '@angular/fire/database';
-import {FirebaseObjectObservable} from '@angular/fire/database-deprecated';
 import {AuthService} from '../service/auth.service';
 import {StorageService} from '../service/storage.service';
 import {CommandeService} from '../service/commande.service';
-import {CommandeData} from '../menu-commade-data/commande';
 
 @Component({
     selector: 'app-user-profil',
@@ -59,7 +55,6 @@ export class UserProfilComponent implements OnInit {
                 this.authService.getUser(u.uid).then(res => {
                     this.user = res;
                     this.userPhoto.photo = u.photoURL;
-                    console.log(this.user);
                 }, r => {
                     console.log('errr' + r);
                 });

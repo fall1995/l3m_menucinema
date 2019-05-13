@@ -34,7 +34,6 @@ export class FactureDetailComponent implements OnInit {
         this.commandeService.getCommandeById(idCommande).then(res => {
             this.commande = res;
             this.commande = Array.of(res);
-            console.log(" La facture"+res);
         }, r => {
             console.log('errr' + r);
         });
@@ -44,11 +43,10 @@ export class FactureDetailComponent implements OnInit {
      * recuperation des informations de l'utilisateur
      */
     async init() {
-        await this.afAuth.user.subscribe( u =>{
+        await this.afAuth.user.subscribe(u => {
             if (u){
                 this.authService.getUser( u.uid).then(res =>{
                     this.user = res;
-                    console.log(this.user);
                 }, r =>{
                     console.log("errr"+r);
                 });
