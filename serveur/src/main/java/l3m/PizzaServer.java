@@ -42,7 +42,6 @@ public class PizzaServer extends HttpServlet {
         servletHandler.addServletWithMapping(LaCarteServlet.class, "/api/plats");
         servletHandler.addServletWithMapping(SuggestionFilmsServlet.class, "/api/suggetionFilm");
         servletHandler.addServletWithMapping(SuggestionPlatsServlet.class, "/api/suggetionPlat");
-        servletHandler.addServletWithMapping(FactureCommandeServlet.class, "/api/facture");
         server.start();
     }
 
