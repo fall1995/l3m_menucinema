@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {MenuService} from '../service/menu.service';
 import {Plats} from '../menu-commade-data/Menu';
-import {MovieResponse} from '../tmdb-data/Movie';
 import {MessageService, SelectItem} from 'primeng/api';
 import {StorageService} from '../service/storage.service';
 
@@ -17,7 +16,6 @@ export class MenusComponent implements OnInit {
      */
     plats: Plats[];
     selectedPlat: Plats; // plat selectionner
-    aff = false;
 
     sortOptions: SelectItem[];
 
@@ -48,10 +46,7 @@ export class MenusComponent implements OnInit {
         event.preventDefault();
     }
 
-    /**
-     *
-     * @param event
-     */
+
     onSortChange(event) {
         let value = event.value;
         if (value.indexOf('!') === 0) {
@@ -67,8 +62,6 @@ export class MenusComponent implements OnInit {
     async init() {
         await this.menuService.getAllMenu().then(res => {
             this.plats = res;
-            this.aff = true;
-            console.log(this.plats);
         }, err => {
             console.log('error de recup');
         });

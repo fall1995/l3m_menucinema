@@ -23,7 +23,6 @@ const routes: Routes = [
     {path: 'commande/facture/:idCommande', component: FactureDetailComponent},
     {path: '', redirectTo: 'films', pathMatch: 'full'},
 
-    //{path: '**', redirectTo: 'films'}
 ];
 
 @NgModule({

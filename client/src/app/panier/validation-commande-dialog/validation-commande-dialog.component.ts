@@ -51,7 +51,6 @@ export class ValidationCommandeDialogComponent implements OnInit {
         }).then(res =>{
             localStorage.setItem('adresse', params.adresse);
             //this.afficherDialog = false;
-            console.log(res);
         }, err =>{
             console.log("err");
         });

@@ -3,7 +3,6 @@ import {User} from '../../tmdb-data/user';
 import {AngularFireAuth} from '@angular/fire/auth';
 import {AngularFireDatabase} from '@angular/fire/database';
 import {Router} from '@angular/router';
-import {FirebaseListObservable} from '@angular/fire/database-deprecated';
 import {AuthService} from '../../service/auth.service';
 import {MessageService} from 'primeng/api';
 
@@ -39,6 +38,7 @@ export class UserDialogComponent implements OnInit {
             this.message.add({severity:'success',
                 summary:`Modification du profil OK `,
                 detail:'Vous avez bien modifié votre profil'});
+
             console.log(res);
         }, err =>{
             console.log("err");
@@ -46,9 +46,6 @@ export class UserDialogComponent implements OnInit {
                 summary:`Erreur de Modification `,
                 detail:'Une erreur est survenue lors de la modification de votre profil'});
         });
-        this.message.add({severity:'success',
-            summary:`Modification du profil OK `,
-            detail:'Vous avez bien modifié votre profil'});
 
     }
 
